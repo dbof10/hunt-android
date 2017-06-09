@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Product Hunt</string>
+    <string name="card_product_comments">Comment</string>
+</resources>
