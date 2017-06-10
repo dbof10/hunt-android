@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.home.ui.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.home.view.HomeActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,10 @@
 
         <activity
             android:name=".ui.web.WebviewActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.comment.view.CommentActivity"
+            android:theme="@style/AppTheme.Translucent.Overlap"/>
 
         <service android:name=".ui.web.support.KeepAliveService" />
     </application>

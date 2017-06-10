@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="windowBackground">#eaeaea</color>
 
+    <color name="scrim">#99323232</color>
+    <color name="overlap_background_light">#fafafa</color>
+
     <color name="divider_color">#50B6B6B6</color>
     <color name="bg_card_product_title">#85000000</color>
     <color name="bg_card_collection_text">#50000000</color>

@@ -1,16 +1,16 @@
-package com.ctech.eaty.ui.home.ui
+package com.ctech.eaty.ui.home.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import butterknife.ButterKnife
-import com.ctech.eaty.R
-import vn.tiki.noadapter2.AbsViewHolder
 import android.widget.TextView
 import butterknife.BindView
+import butterknife.ButterKnife
+import com.ctech.eaty.R
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.util.ImageLoader
+import vn.tiki.noadapter2.AbsViewHolder
 
 
 class ProductViewHolder(view: View, val imageLoader: ImageLoader) : AbsViewHolder(view) {
@@ -36,11 +36,14 @@ class ProductViewHolder(view: View, val imageLoader: ImageLoader) : AbsViewHolde
     @BindView(R.id.ivMenu)
     lateinit var ivMenu: View
 
+    @BindView(R.id.tvComment)
+    lateinit var tvComment: TextView
+
     init {
         ButterKnife.bind(this, view)
         flProductHoder.setOnClickListener(this)
         ivMenu.setOnClickListener(this)
-
+        tvComment.setOnClickListener(this)
     }
 
     companion object {

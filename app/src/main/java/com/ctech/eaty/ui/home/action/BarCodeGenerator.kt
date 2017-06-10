@@ -5,12 +5,11 @@ import com.ctech.eaty.util.DateUtil
 import com.nytimes.android.external.store2.base.impl.BarCode
 import org.joda.time.DateTime
 
-class HomeBarCodeGenerator {
+class BarCodeGenerator {
 
     val currentBarCode = BarCode(Products::class.java.simpleName, DateUtil.getFormattedDate(DateTime.now()))
 
-    fun generateNextBarCode(dayAgo: Int): BarCode {
-        return BarCode(Products::class.java.simpleName, DateUtil.getFormattedPastDate(DateTime.now(),
-                dayAgo))
-    }
+    fun generateNextBarCode(dayAgo: Int): BarCode = BarCode(Products::class.java.simpleName,
+            DateUtil.getFormattedPastDate(DateTime.now(), dayAgo))
+
 }

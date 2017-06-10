@@ -3,7 +3,7 @@ package com.ctech.eaty.ui.home.di
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.HomeRepository
-import com.ctech.eaty.ui.home.action.HomeBarCodeGenerator
+import com.ctech.eaty.ui.home.action.BarCodeGenerator
 import com.ctech.eaty.ui.home.epic.LoadEpic
 import com.ctech.eaty.ui.home.epic.LoadMoreEpic
 import com.ctech.eaty.ui.home.epic.RefreshEpic
@@ -27,13 +27,13 @@ class HomeModule {
     }
 
     @Provides
-    fun provideBarCodeGenerator(): HomeBarCodeGenerator {
-        return HomeBarCodeGenerator()
+    fun provideBarCodeGenerator(): BarCodeGenerator {
+        return BarCodeGenerator()
     }
 
     @ActivityScope
     @Provides
-    fun provideHomeStore(homeRepository: HomeRepository, barCodeGenerator: HomeBarCodeGenerator,
+    fun provideHomeStore(homeRepository: HomeRepository, barCodeGenerator: BarCodeGenerator,
                          threadScheduler: ThreadScheduler): Store<HomeState> {
         return Store<HomeState>(HomeState(), HomeReducer(), arrayOf(LoadEpic(homeRepository, barCodeGenerator, threadScheduler),
                 RefreshEpic(homeRepository, barCodeGenerator, threadScheduler),

@@ -1,6 +1,7 @@
-package com.ctech.eaty.ui.home.ui
+package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,6 @@ import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.ImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
-import com.ctech.eaty.widget.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_products.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -30,7 +30,7 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<HomeState>(), Injectable {
 
     companion object {
-        fun newInstance(): HomeFragment {
+        fun newInstance(): Fragment {
 
             val args = Bundle()
 
@@ -76,11 +76,18 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
                 .onItemClickListener { view, item, _ ->
-                    if (view.id == R.id.flProductHolder) {
-                        if (item is Product) {
-                            navigator.toUrl(item.redirectUrl, customTabActivityHelper.session)
+                    if (item is Product) {
+                        if (view.id == R.id.flProductHolder) {
+                            navigator
+                                    .toUrl(item.redirectUrl, customTabActivityHelper.session)
+                                    .subscribe()
+                        } else if (view.id == R.id.tvComment) {
+                            navigator
+                                    .toComment(item.id)
+                                    .subscribe()
                         }
                     }
+
                 }
                 .viewHolderFactory { viewGroup, type ->
                     when (type) {

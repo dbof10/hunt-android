@@ -1,8 +1,11 @@
 package com.ctech.eaty.di
 
+import com.ctech.eaty.ui.comment.di.CommentFragmentBuilderModule
+import com.ctech.eaty.ui.comment.di.CommentModule
+import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
-import com.ctech.eaty.ui.home.ui.HomeActivity
+import com.ctech.eaty.ui.home.view.HomeActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,5 +14,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(HomeModule::class, HomeFragmentBuilderModule::class))
     abstract fun contributeHomeActivity(): HomeActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(CommentModule::class, CommentFragmentBuilderModule::class))
+    abstract fun contributeCommentActivity(): CommentActivity
 
 }

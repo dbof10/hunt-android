@@ -17,8 +17,8 @@ interface ProductHuntApi {
     @GET("/v1/categories")
     fun getCategories()
 
-    @GET("/posts/{product-id}/comments")
-    fun getComments(@Path("product-id") productId: Int): Observable<Comments>
+    @GET("/v1/posts/{id}/comments")
+    fun getComments(@Path("id") id: String, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
     @GET("/collections?search[featured]=true")
     fun getCollections(): Observable<Collection>

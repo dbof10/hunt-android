@@ -7,4 +7,5 @@ interface ImageLoader {
     fun cancel(imageView: ImageView)
 
     fun downloadInto(url: String, imageView: ImageView)
+
 }

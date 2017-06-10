@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.home.ui
+package com.ctech.eaty.ui.home.view
 
 import android.view.View
 import android.view.ViewGroup

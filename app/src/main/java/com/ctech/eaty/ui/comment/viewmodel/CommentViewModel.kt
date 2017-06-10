@@ -1,24 +1,18 @@
-package com.ctech.eaty.ui.home.viewmodel
+package com.ctech.eaty.ui.comment.viewmodel
 
-import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.entity.Comment
+import com.ctech.eaty.ui.comment.state.CommentState
 import io.reactivex.Observable
 
-class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
-    fun loading(): Observable<HomeState> {
+class CommentViewModel(val stateDispatcher: Observable<CommentState>) {
+    fun loading(): Observable<CommentState> {
         return stateDispatcher
                 .filter {
                     it.loading
                 }
     }
 
-    fun refreshing(): Observable<HomeState> {
-        return stateDispatcher
-                .filter {
-                    it.refreshing
-                }
-    }
-
-    fun loadingMore(): Observable<HomeState> {
+    fun loadingMore(): Observable<CommentState> {
         return stateDispatcher
                 .filter {
                     it.loadingMore
@@ -33,29 +27,21 @@ class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
                 }
     }
 
-    fun refreshError(): Observable<Throwable> {
-        return stateDispatcher
-                .filter { it.refreshError != null }
-                .map {
-                    it.refreshError
-                }
-    }
 
     fun loadMoreError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map(HomeState::loadMoreError)
+                .map(CommentState::loadMoreError)
     }
 
-    fun content(): Observable<List<HomeItemViewModel>> {
+    fun content(): Observable<List<Comment>> {
         return stateDispatcher
                 .filter {
                     !it.loading
-                            && !it.refreshing
                             && !it.loadingMore
                             && it.loadError == null
-                            && it.refreshError == null
                             && it.loadMoreError == null
+
                 }
                 .map {
                     it.content

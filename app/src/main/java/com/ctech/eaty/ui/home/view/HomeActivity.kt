@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.home.ui
+package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

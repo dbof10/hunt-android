@@ -4,4 +4,10 @@
     <dimen name="content_padding_horizontal">16dp</dimen>
     <dimen name="content_padding_vertical">8dp</dimen>
 
+
+    <dimen name="comment_avatar_size">44dp</dimen>
+    <dimen name="drag_dismiss_distance">168dp</dimen>
+    <dimen name="corner">8dp</dimen>
+    <dimen name="space_medium">8dp</dimen>
+
 </resources>
