@@ -1,20 +1,16 @@
-package com.ctech.eaty.ui.home.viewmodel
+package com.ctech.eaty.ui.collection.viewmodel
 
-import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.entity.Collection
+import com.ctech.eaty.ui.collection.state.CollectionState
 import io.reactivex.Observable
 
-class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
-    fun loading(): Observable<HomeState> {
+class CollectionViewModel(val stateDispatcher: Observable<CollectionState>) {
+    fun loading(): Observable<CollectionState> {
         return stateDispatcher
                 .filter { it.loading }
     }
 
-    fun refreshing(): Observable<HomeState> {
-        return stateDispatcher
-                .filter { it.refreshing }
-    }
-
-    fun loadingMore(): Observable<HomeState> {
+    fun loadingMore(): Observable<CollectionState> {
         return stateDispatcher
                 .filter { it.loadingMore }
     }
@@ -25,27 +21,21 @@ class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
                 .map { it.loadError }
     }
 
-    fun refreshError(): Observable<Throwable> {
-        return stateDispatcher
-                .filter { it.refreshError != null }
-                .map { it.refreshError }
-    }
 
     fun loadMoreError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map(HomeState::loadMoreError)
+                .map(CollectionState::loadMoreError)
     }
 
-    fun content(): Observable<List<HomeItemViewModel>> {
+    fun content(): Observable<List<Collection>> {
         return stateDispatcher
                 .filter {
                     !it.loading
-                            && !it.refreshing
                             && !it.loadingMore
                             && it.loadError == null
-                            && it.refreshError == null
                             && it.loadMoreError == null
+
                 }
                 .map { it.content }
     }

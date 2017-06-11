@@ -7,24 +7,18 @@ import io.reactivex.Observable
 class CommentViewModel(val stateDispatcher: Observable<CommentState>) {
     fun loading(): Observable<CommentState> {
         return stateDispatcher
-                .filter {
-                    it.loading
-                }
+                .filter { it.loading }
     }
 
     fun loadingMore(): Observable<CommentState> {
         return stateDispatcher
-                .filter {
-                    it.loadingMore
-                }
+                .filter { it.loadingMore }
     }
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null }
-                .map {
-                    it.loadError
-                }
+                .map { it.loadError }
     }
 
 
@@ -43,8 +37,6 @@ class CommentViewModel(val stateDispatcher: Observable<CommentState>) {
                             && it.loadMoreError == null
 
                 }
-                .map {
-                    it.content
-                }
+                .map { it.content }
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_header"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/content_padding_horizontal"
+        android:layout_marginBottom="@dimen/content_padding_vertical"
+        android:layout_marginTop="@dimen/content_padding_vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/comment_avatar_size"
+            android:layout_height="@dimen/comment_avatar_size"
+            android:background="@android:color/black" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="@string/navigation_header_guest"
+            android:layout_gravity="center"
+            android:id="@+id/tvUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_padding_horizontal"
+            tools:text="Daniel Lee" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

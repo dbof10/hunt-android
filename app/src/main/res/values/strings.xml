@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Product Hunt</string>
     <string name="card_product_comments">Comment</string>
+
+    <string name="navigation_header_guest">Guest</string>
+    <string name="navigation_collection">Collections</string>
+    <string name="navigation_topic">Topic</string>
 </resources>

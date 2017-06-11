@@ -10,5 +10,4 @@ data class Collection(
         @SerializedName("background_image_url")
         val backgroundImageUrl: String,
         @SerializedName("collection_url")
-        val collectionUrl: String,
-        val posts: List<Product>)
+        val collectionUrl: String)

@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.comment.view
+package com.ctech.eaty.ui.collection.view
 
 
 import android.os.Bundle
@@ -13,39 +13,39 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
+import com.ctech.eaty.entity.Collection
 import com.ctech.eaty.entity.Comment
+import com.ctech.eaty.ui.collection.action.CollectionAction
+import com.ctech.eaty.ui.collection.state.CollectionState
+import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
 import com.ctech.eaty.ui.comment.action.CommentAction
-import com.ctech.eaty.ui.comment.state.CommentState
-import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
 import com.ctech.eaty.util.ImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
-import kotlinx.android.synthetic.main.fragment_comments.*
+import kotlinx.android.synthetic.main.fragment_collections.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class CommentFragment : BaseFragment<CommentState>(), Injectable {
+class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
     companion object {
-        val PRODUCT_ID = "productId"
 
-        fun newInstance(id: Int): Fragment {
+        fun newInstance(): Fragment {
 
             val args = Bundle()
 
-            val fragment = CommentFragment()
-            args.putInt(PRODUCT_ID, id)
+            val fragment = CollectionFragment()
             fragment.arguments = args
             return fragment
         }
     }
 
     @Inject
-    lateinit var store: Store<CommentState>
+    lateinit var store: Store<CollectionState>
 
     @Inject
-    lateinit var viewModel: CommentViewModel
+    lateinit var viewModel: CollectionViewModel
 
     @Inject
     lateinit var imageLoader: ImageLoader
@@ -53,8 +53,8 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     private val diffCallback = object : DiffCallback {
 
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            if (oldItem is Comment && newItem is Comment) {
-                return oldItem.id == newItem.id && oldItem.parentCommentId == newItem.parentCommentId
+            if (oldItem is Collection && newItem is Collection) {
+                return oldItem.id == newItem.id
             }
             return false
         }
@@ -69,17 +69,17 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
                 .viewHolderFactory { viewGroup, _ ->
-                    CommentViewHolder.create(viewGroup, imageLoader)
+                    CollectionViewHolder.create(viewGroup, imageLoader)
                 }
                 .build()
     }
 
-    override fun store(): Store<CommentState> {
+    override fun store(): Store<CollectionState> {
         return store
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_comments, container, false)
+        return inflater.inflate(R.layout.fragment_collections, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,12 +91,11 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
-        val id = arguments.getInt(PRODUCT_ID)
-        store.dispatch(CommentAction.Load(id))
+        store.dispatch(CollectionAction.LOAD)
         setupViewModel()
     }
 
-    private fun renderContent(list: List<Comment>) {
+    private fun renderContent(list: List<Collection>) {
         adapter.setItems(list)
     }
 
@@ -130,11 +129,10 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     }
 
     private fun setupRecyclerView() {
-        val id = arguments.getInt(PRODUCT_ID)
         val layoutManager = LinearLayoutManager(context)
-        rvComments.adapter = adapter
-        rvComments.layoutManager = layoutManager
-        rvComments.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
+        rvCollections.adapter = adapter
+        rvCollections.layoutManager = layoutManager
+        rvCollections.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
             store.dispatch(CommentAction.LoadMore(id))
         }))
     }

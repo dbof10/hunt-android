@@ -2,10 +2,8 @@ package com.ctech.eaty.di
 
 import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.entity.Products
-import com.ctech.eaty.repository.AppSettingsManager
-import com.ctech.eaty.repository.CommentRepository
-import com.ctech.eaty.repository.HomeRepository
-import com.ctech.eaty.repository.ProductHuntApi
+import com.ctech.eaty.repository.*
+import com.ctech.eaty.response.CollectionResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
 import com.ctech.eaty.util.rx.ThreadScheduler
@@ -40,6 +38,14 @@ class DataModule {
                                  apiClient: ProductHuntApi,
                                  appSettingsManager: AppSettingsManager): CommentRepository {
         return CommentRepository(store, apiClient, appSettingsManager)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCollectionRepository(store: Store<CollectionResponse, BarCode>,
+                                    apiClient: ProductHuntApi,
+                                    appSettingsManager: AppSettingsManager): CollectionRepository {
+        return CollectionRepository(store, apiClient, appSettingsManager)
     }
 
 }

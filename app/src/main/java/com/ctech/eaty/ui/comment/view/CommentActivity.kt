@@ -4,22 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.activity_comments.*
 import javax.inject.Inject
-import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
-import butterknife.BindView
-import butterknife.ButterKnife
 
 class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
 
-
-    @BindView(R.id.flDraggable)
-    lateinit var draggableFrame: ElasticDragDismissFrameLayout
 
     private var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader? = null
 
@@ -39,11 +34,10 @@ class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
-        ButterKnife.bind(this)
 
         chromeFader = object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
             override fun onDragDismissed() {
-               finishAfterTransition()
+                finishAfterTransition()
             }
         }
 
@@ -61,13 +55,14 @@ class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onResume() {
         super.onResume()
-        draggableFrame.addListener(chromeFader)
+        flDraggable.addListener(chromeFader)
     }
 
     override fun onPause() {
-        draggableFrame.removeListener(chromeFader)
+        flDraggable.removeListener(chromeFader)
         super.onPause()
     }
+
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
     }

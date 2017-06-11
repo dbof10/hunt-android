@@ -1,7 +1,7 @@
 package com.ctech.eaty.di
 
 import com.ctech.eaty.BuildConfig
-import com.ctech.eaty.entity.AccessTokenInterceptor
+import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.util.Constants

@@ -27,6 +27,14 @@
             android:name=".ui.web.WebviewActivity"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".ui.collection.view.CollectionActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.topic.view.TopicActivity"
+            android:theme="@style/AppTheme" />
+
         <activity android:name=".ui.comment.view.CommentActivity"
             android:theme="@style/AppTheme.Translucent.Overlap"/>
 

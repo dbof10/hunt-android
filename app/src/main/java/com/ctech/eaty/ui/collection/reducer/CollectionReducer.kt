@@ -1,15 +1,15 @@
-package com.ctech.eaty.ui.comment.reducer
+package com.ctech.eaty.ui.collection.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.comment.result.LoadMoreResult
-import com.ctech.eaty.ui.comment.result.LoadResult
-import com.ctech.eaty.ui.comment.state.CommentState
+import com.ctech.eaty.ui.collection.result.LoadMoreResult
+import com.ctech.eaty.ui.collection.result.LoadResult
+import com.ctech.eaty.ui.collection.state.CollectionState
 import java.lang.IllegalArgumentException
 
-class CommentReducer : Reducer<CommentState> {
+class CollectionReducer : Reducer<CollectionState> {
 
-    override fun apply(state: CommentState, result: Result): CommentState {
+    override fun apply(state: CollectionState, result: Result): CollectionState {
         when (result) {
             is LoadResult -> {
                 if (result.loading) {
