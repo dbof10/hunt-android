@@ -5,6 +5,7 @@ import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.entity.Products
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.response.CollectionResponse
+import com.ctech.eaty.response.TopicResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.google.gson.Gson
 import com.nytimes.android.external.fs2.SourcePersisterFactory
@@ -23,6 +24,7 @@ class StoreModule {
 
     val COMMENT_LIMIT = 10
     val COLLECTION_LIMIT = 10
+    val TOPIC_LIMIT = 10
 
     @Provides
     @Singleton
@@ -59,6 +61,16 @@ class StoreModule {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, CollectionResponse>()
                 .fetcher { barcode -> apiClient.getCollections(COLLECTION_LIMIT, barcode.key.toInt()).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, CollectionResponse::class.java))
+                .open()
+    }
+
+    @Provides
+    @Singleton
+    fun providePersistedTopicStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<TopicResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, TopicResponse>()
+                .fetcher { barcode -> apiClient.getTopics(COLLECTION_LIMIT, barcode.key.toInt()).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, TopicResponse::class.java))
                 .open()
     }
 }
