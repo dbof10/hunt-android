@@ -4,7 +4,6 @@ package com.ctech.eaty.ui.collection.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Collection
-import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.collection.action.CollectionAction
 import com.ctech.eaty.ui.collection.state.CollectionState
 import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
@@ -96,6 +94,8 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
     }
 
     private fun renderContent(list: List<Collection>) {
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -106,7 +106,8 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
 
     private fun renderLoadError() {
-
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -115,7 +116,8 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
 
     private fun renderLoading() {
-
+        vLottie.playAnimation()
+        vLottie.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

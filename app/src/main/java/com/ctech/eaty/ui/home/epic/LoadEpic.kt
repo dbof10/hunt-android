@@ -23,7 +23,7 @@ class LoadEpic(val homeRepository: HomeRepository,
         }.flatMap {
             homeRepository.getHomePosts(barCodeGenerator.currentBarCode)
                     .map {
-                        LoadResult.success(it)
+                        LoadResult.success(emptyList())
                     }
                     .onErrorReturn {
                         LoadResult.fail(it)

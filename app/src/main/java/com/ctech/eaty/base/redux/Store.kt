@@ -1,5 +1,6 @@
 package com.ctech.eaty.base.redux
 
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
@@ -17,6 +18,7 @@ class Store<State> constructor(initState: State, private val reducer: Reducer<St
                     it.apply(actionDispatcher, state)
                 }
     }
+
 
     fun dispatch(action: Action) {
         actionDispatcher.onNext(action)

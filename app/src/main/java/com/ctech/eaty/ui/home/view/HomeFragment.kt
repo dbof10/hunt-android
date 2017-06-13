@@ -55,6 +55,12 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     @Inject
     lateinit var navigator: HomeNavigation
 
+    private val loadMoreCallback by lazy {
+        InfiniteScrollListener(rvNewFeeds.layoutManager as LinearLayoutManager, 3, Runnable {
+            store.dispatch(HomeAction.LOAD_MORE)
+        })
+    }
+
     private val diffCallback = object : DiffCallback {
 
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
@@ -136,6 +142,8 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
 
     private fun renderContent(list: List<HomeItemViewModel>) {
         sfRefresh.isRefreshing = false
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -150,7 +158,8 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
 
 
     private fun renderLoadError() {
-
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -162,7 +171,8 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     }
 
     private fun renderLoading() {
-
+        vLottie.playAnimation()
+        vLottie.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {
@@ -173,15 +183,19 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
         disposeOnStop(viewModel.refreshError().subscribe { renderRefreshError() })
         disposeOnStop(viewModel.content().subscribe { renderContent(it) })
+        disposeOnStop(viewModel.refreshSuccess().subscribe { loadMoreCallback.resetState() })
     }
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(context)
-        rvProducts.adapter = adapter
-        rvProducts.layoutManager = layoutManager
-        rvProducts.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
-            store.dispatch(HomeAction.LOAD_MORE)
-        }))
+        rvNewFeeds.adapter = adapter
+        rvNewFeeds.layoutManager = layoutManager
+        rvNewFeeds.addOnScrollListener(loadMoreCallback)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        vLottie.cancelAnimation()
     }
 
 }

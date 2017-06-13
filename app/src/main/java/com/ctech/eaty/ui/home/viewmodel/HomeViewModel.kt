@@ -37,6 +37,19 @@ class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
                 .map(HomeState::loadMoreError)
     }
 
+    fun refreshSuccess(): Observable<HomeState> {
+        return stateDispatcher
+                .filter {
+                    !it.loading
+                            && !it.refreshing
+                            && !it.loadingMore
+                            && it.loadError == null
+                            && it.refreshError == null
+                            && it.loadMoreError == null
+                            && it.dayAgo == 0
+                }
+    }
+
     fun content(): Observable<List<HomeItemViewModel>> {
         return stateDispatcher
                 .filter {

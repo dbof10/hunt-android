@@ -97,6 +97,8 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     }
 
     private fun renderContent(list: List<Comment>) {
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -107,7 +109,8 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
 
     private fun renderLoadError() {
-
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -116,7 +119,8 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
 
     private fun renderLoading() {
-
+        vLottie.playAnimation()
+        vLottie.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

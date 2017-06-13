@@ -11,7 +11,6 @@ import com.ctech.eaty.util.DateUtil
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
 
-//TODO: Bug when refresh
 //TODO: Ignore empty
 class HomeReducer : Reducer<HomeState> {
 
@@ -34,7 +33,8 @@ class HomeReducer : Reducer<HomeState> {
                     return state.copy(refreshing = false, refreshError = result.error)
                 } else {
                     return state.copy(refreshing = false, refreshError = null,
-                            content = listOf(SectionViewModel(0, DateUtil.getRelativeTime(result.date))) + result.content)
+                            content = listOf(SectionViewModel(0, DateUtil.getRelativeTime(result.date))) + result.content,
+                            dayAgo = 0)
                 }
             }
             is LoadMoreResult -> {

@@ -93,6 +93,8 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
     }
 
     private fun renderContent(list: List<Topic>) {
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -102,7 +104,8 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
 
 
     private fun renderLoadError() {
-
+        vLottie.cancelAnimation()
+        vLottie.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -111,7 +114,8 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
 
 
     private fun renderLoading() {
-
+        vLottie.playAnimation()
+        vLottie.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

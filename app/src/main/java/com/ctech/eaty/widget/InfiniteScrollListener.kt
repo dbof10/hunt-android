@@ -11,15 +11,15 @@ class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val v
 
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        super.onScrolled(recyclerView, dx, dy);
-        val visibleItemCount = recyclerView.childCount;
+        super.onScrolled(recyclerView, dx, dy)
+        val visibleItemCount = recyclerView.childCount
         val totalItemCount = linearLayoutManager.itemCount
         val firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition()
 
         if (loading) {
             if (totalItemCount > previousTotal || totalItemCount == 0) {
-                loading = false;
-                previousTotal = totalItemCount;
+                loading = false
+                previousTotal = totalItemCount
             }
         }
 
@@ -28,5 +28,10 @@ class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val v
             recyclerView.post(callbacks)
             loading = true
         }
+    }
+
+    fun resetState() {
+        this.previousTotal = 0
+        this.loading = true
     }
 }

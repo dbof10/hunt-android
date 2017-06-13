@@ -22,7 +22,7 @@ class RefreshEpic(val homeRepository: HomeRepository,
         }.flatMap {
             homeRepository.getHomePosts(barCodeGenerator.currentBarCode, true)
                     .map {
-                        RefreshResult.success(it)
+                        RefreshResult.success(emptyList())
                     }
                     .onErrorReturn {
                         RefreshResult.fail(it)
