@@ -29,6 +29,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setupViewPager()
         setupChromeService()
@@ -40,8 +41,8 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
             drawer.openDrawer(START)
         }
         navigation.setNavigationItemSelectedListener {
-                homeNavigation.delegate(it.itemId).subscribe()
-                false
+            homeNavigation.delegate(it.itemId).subscribe()
+            false
         }
     }
 
@@ -54,6 +55,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
         adapter.updateFragments(listOf(HomeFragment.newInstance()))
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
+
     }
 
     override fun onStart() {

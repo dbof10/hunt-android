@@ -17,10 +17,12 @@ import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
+import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.ImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
+import com.facebook.ads.NativeAdsManager
 import kotlinx.android.synthetic.main.fragment_products.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -61,12 +63,19 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         })
     }
 
+    private val adsManager: NativeAdsManager by lazy {
+         NativeAdsManager(context, "1966287263602613_1966287926935880", 5)
+    }
+
+
     private val diffCallback = object : DiffCallback {
 
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
             if (oldItem is SectionViewModel && newItem is SectionViewModel) {
                 return oldItem.id == newItem.id
             } else if (oldItem is Product && newItem is Product) {
+                return oldItem.id == newItem.id
+            } else if (oldItem is HorizontalAdsItemViewModel && newItem is HorizontalAdsItemViewModel){
                 return oldItem.id == newItem.id
             }
             return false
@@ -99,6 +108,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                     when (type) {
                         1 -> SectionViewHolder.create(viewGroup)
                         2 -> ProductViewHolder.create(viewGroup, imageLoader)
+                        3 -> HorizontalAdsViewHolder.create(viewGroup, adsManager)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
                 }
@@ -106,6 +116,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                     when (any) {
                         is Product -> 2
                         is SectionViewModel -> 1
+                        is HorizontalAdsItemViewModel -> 3
                         else -> 0
                     }
                 }
@@ -138,6 +149,11 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         super.onStart()
         store.dispatch(HomeAction.LOAD)
         setupViewModel()
+    }
+
+    override fun onDestroyView() {
+        vLottie.cancelAnimation()
+        super.onDestroyView()
     }
 
     private fun renderContent(list: List<HomeItemViewModel>) {
@@ -193,9 +209,5 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         rvNewFeeds.addOnScrollListener(loadMoreCallback)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        vLottie.cancelAnimation()
-    }
 
 }

@@ -12,5 +12,6 @@
     <dimen name="navigation_header">180dp</dimen>
     <dimen name="collection_background_height">140dp</dimen>
     <dimen name="elevation">4dp</dimen>
+    <dimen name="ad_height">300dp</dimen>
 
 </resources>

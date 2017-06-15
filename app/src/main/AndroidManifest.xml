@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
         <activity
             android:name=".ui.home.view.HomeActivity"
             android:theme="@style/AppTheme">
@@ -35,8 +38,9 @@
             android:name=".ui.topic.view.TopicActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".ui.comment.view.CommentActivity"
-            android:theme="@style/AppTheme.Translucent.Overlap"/>
+        <activity
+            android:name=".ui.comment.view.CommentActivity"
+            android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <service android:name=".ui.web.support.KeepAliveService" />
     </application>

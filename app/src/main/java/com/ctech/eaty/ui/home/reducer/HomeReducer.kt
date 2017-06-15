@@ -6,6 +6,7 @@ import com.ctech.eaty.ui.home.result.LoadMoreResult
 import com.ctech.eaty.ui.home.result.LoadResult
 import com.ctech.eaty.ui.home.result.RefreshResult
 import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
 import com.ctech.eaty.util.DateUtil
 import org.joda.time.DateTime
@@ -44,8 +45,9 @@ class HomeReducer : Reducer<HomeState> {
 
                     return state.copy(loadingMore = false, loadMoreError = result.error)
                 } else {
-                    return state.copy(loadingMore = false, loadError = null, content = state.content +
-                            listOf(SectionViewModel(result.dayAgo, DateUtil.getRelativeTime(DateTime.now(), result.date)))
+                    return state.copy(loadingMore = false, loadError = null, content = state.content
+                            + HorizontalAdsItemViewModel(result.dayAgo)
+                            + listOf(SectionViewModel(result.dayAgo, DateUtil.getRelativeTime(DateTime.now(), result.date)))
                             + result.content, dayAgo = result.dayAgo)
                 }
             }

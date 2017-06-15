@@ -5,4 +5,7 @@
     <string name="navigation_header_guest">Guest</string>
     <string name="navigation_collection">Collections</string>
     <string name="navigation_topic">Topic</string>
+
+    <string name="facebook_app_id">1966287263602613</string>
+
 </resources>

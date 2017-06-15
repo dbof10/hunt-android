@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ErrorViewStyle">
+        <attr name="style" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ErrorView">
+        <attr name="title" format="string" />
+        <attr name="titleColor" format="color" />
+        <attr name="subtitle" format="string" />
+        <attr name="subtitleColor" format="color" />
+        <attr name="errorImage" format="reference" />
+        <attr name="showTitle" format="boolean" />
+        <attr name="showSubtitle" format="boolean" />
+        <attr name="showRetryButton" format="boolean" />
+        <attr name="retryButtonText" format="string" />
+        <attr name="retryButtonBackground" format="reference" />
+        <attr name="retryButtonTextColor" format="color" />
+        <attr name="subtitleAlignment" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
