@@ -13,7 +13,7 @@ class TopicReducer : Reducer<TopicState> {
         when (result) {
             is LoadResult -> {
                 if (result.loading) {
-                    return state.copy(loading = true)
+                    return state.copy(loading = true, loadError = null)
                 } else if (result.error != null) {
                     return state.copy(loading = false, loadError = result.error)
                 } else {

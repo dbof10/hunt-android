@@ -5,18 +5,18 @@
     </declare-styleable>
 
     <declare-styleable name="ErrorView">
-        <attr name="title" format="string" />
-        <attr name="titleColor" format="color" />
-        <attr name="subtitle" format="string" />
-        <attr name="subtitleColor" format="color" />
+        <attr name="reason" format="string" />
+        <attr name="reasonColor" format="color" />
+        <attr name="explain" format="string" />
+        <attr name="explainColor" format="color" />
         <attr name="errorImage" format="reference" />
-        <attr name="showTitle" format="boolean" />
-        <attr name="showSubtitle" format="boolean" />
+        <attr name="showReason" format="boolean" />
+        <attr name="showExplain" format="boolean" />
         <attr name="showRetryButton" format="boolean" />
         <attr name="retryButtonText" format="string" />
         <attr name="retryButtonBackground" format="reference" />
         <attr name="retryButtonTextColor" format="color" />
-        <attr name="subtitleAlignment" format="enum">
+        <attr name="explainAlignment" format="enum">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />

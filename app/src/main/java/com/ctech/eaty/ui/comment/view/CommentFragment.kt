@@ -4,7 +4,6 @@ package com.ctech.eaty.ui.comment.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.comment.state.CommentState
 import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
 import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.widget.ErrorView
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
 import vn.tiki.noadapter2.DiffCallback
@@ -49,6 +49,10 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    val productId by lazy {
+        arguments.getInt(PRODUCT_ID)
+    }
 
     private val diffCallback = object : DiffCallback {
 
@@ -91,26 +95,36 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
-        val id = arguments.getInt(PRODUCT_ID)
-        store.dispatch(CommentAction.Load(id))
+        store.dispatch(CommentAction.Load(productId))
         setupViewModel()
+        setupErrorView()
     }
 
     private fun renderContent(list: List<Comment>) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        vError.visibility = View.GONE
         adapter.setItems(list)
     }
 
+    private fun setupErrorView() {
+        vError.setOnRetryListener(object : ErrorView.RetryListener {
+            override fun onRetry() {
+                store.dispatch(CommentAction.Load(productId))
+            }
+
+        })
+    }
 
     private fun renderLoadMoreError() {
 
     }
 
 
-    private fun renderLoadError() {
+    private fun renderLoadError(error: Throwable) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        vError.visibility = View.VISIBLE
     }
 
     private fun renderLoadingMore() {
@@ -120,26 +134,24 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
     private fun renderLoading() {
         vLottie.playAnimation()
+        vError.visibility = View.GONE
         vLottie.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {
         disposeOnStop(viewModel.loading().subscribe { renderLoading() })
         disposeOnStop(viewModel.loadingMore().subscribe { renderLoadingMore() })
-        disposeOnStop(viewModel.loadError().subscribe {
-            renderLoadError()
-        })
+        disposeOnStop(viewModel.loadError().subscribe { renderLoadError(it) })
         disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
         disposeOnStop(viewModel.content().subscribe { renderContent(it) })
     }
 
     private fun setupRecyclerView() {
-        val id = arguments.getInt(PRODUCT_ID)
         val layoutManager = LinearLayoutManager(context)
         rvComments.adapter = adapter
         rvComments.layoutManager = layoutManager
         rvComments.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
-            store.dispatch(CommentAction.LoadMore(id))
+            store.dispatch(CommentAction.LoadMore(productId))
         }))
     }
 

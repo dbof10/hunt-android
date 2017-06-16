@@ -17,7 +17,7 @@ class TopicViewModel(val stateDispatcher: Observable<TopicState>) {
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
-                .filter { it.loadError != null }
+                .filter { it.loadError != null && !it.loading}
                 .map { it.loadError }
     }
 

@@ -17,6 +17,7 @@ import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
 import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.widget.ErrorView
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
 import vn.tiki.noadapter2.DiffCallback
@@ -84,7 +85,10 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
         ButterKnife.bind(this, view)
         setupViewModel()
         setupRecyclerView()
+        setupErrorView()
     }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -92,9 +96,19 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
         setupViewModel()
     }
 
+    private fun setupErrorView() {
+        vError.setOnRetryListener(object : ErrorView.RetryListener{
+            override fun onRetry() {
+                store.dispatch(TopicAction.LOAD)
+            }
+
+        })
+    }
+
     private fun renderContent(list: List<Topic>) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        vError.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -105,6 +119,7 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
 
     private fun renderLoadError() {
         vLottie.cancelAnimation()
+        vError.visibility = View.VISIBLE
         vLottie.visibility = View.GONE
     }
 
@@ -115,6 +130,7 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
 
     private fun renderLoading() {
         vLottie.playAnimation()
+        vError.visibility = View.GONE
         vLottie.visibility = View.VISIBLE
     }
 

@@ -1,5 +1,6 @@
 package com.ctech.eaty.di
 
+import android.content.Context
 import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
@@ -7,6 +8,7 @@ import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.util.NetworkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -75,5 +77,11 @@ class NetworkModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
         return retrofit.create(servicesClass)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNetworkManager(context: Context): NetworkManager{
+        return NetworkManager.IMPL(context)
     }
 }

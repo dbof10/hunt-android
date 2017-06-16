@@ -17,7 +17,9 @@ import com.ctech.eaty.ui.collection.action.CollectionAction
 import com.ctech.eaty.ui.collection.state.CollectionState
 import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
 import com.ctech.eaty.ui.comment.action.CommentAction
+import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.widget.ErrorView
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_collections.*
 import vn.tiki.noadapter2.DiffCallback
@@ -85,6 +87,7 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
         ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
+        setupErrorView()
     }
 
     override fun onStart() {
@@ -93,8 +96,18 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
         setupViewModel()
     }
 
+    private fun setupErrorView() {
+        vError.setOnRetryListener(object : ErrorView.RetryListener{
+            override fun onRetry() {
+                store.dispatch(CollectionAction.LOAD)
+            }
+
+        })
+    }
+
     private fun renderContent(list: List<Collection>) {
         vLottie.cancelAnimation()
+        vError.visibility = View.GONE
         vLottie.visibility = View.GONE
         adapter.setItems(list)
     }
@@ -107,6 +120,7 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
     private fun renderLoadError() {
         vLottie.cancelAnimation()
+        vError.visibility = View.VISIBLE
         vLottie.visibility = View.GONE
     }
 
@@ -117,6 +131,7 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
     private fun renderLoading() {
         vLottie.playAnimation()
+        vError.visibility = View.GONE
         vLottie.visibility = View.VISIBLE
     }
 

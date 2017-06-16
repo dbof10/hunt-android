@@ -17,7 +17,7 @@ class CommentViewModel(val stateDispatcher: Observable<CommentState>) {
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
-                .filter { it.loadError != null }
+                .filter { it.loadError != null && !it.loading}
                 .map { it.loadError }
     }
 

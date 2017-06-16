@@ -173,7 +173,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     }
 
 
-    private fun renderLoadError() {
+    private fun renderLoadError(error: Throwable) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
     }
@@ -195,7 +195,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         disposeOnStop(viewModel.loading().subscribe { renderLoading() })
         disposeOnStop(viewModel.refreshing().subscribe { renderRefreshing() })
         disposeOnStop(viewModel.loadingMore().subscribe { renderLoadingMore() })
-        disposeOnStop(viewModel.loadError().subscribe { renderLoadError() })
+        disposeOnStop(viewModel.loadError().subscribe { renderLoadError(it) })
         disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
         disposeOnStop(viewModel.refreshError().subscribe { renderRefreshError() })
         disposeOnStop(viewModel.content().subscribe { renderContent(it) })

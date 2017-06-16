@@ -20,6 +20,16 @@
         app:lottie_loop="true"
         app:lottie_autoPlay="false" />
 
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vError"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_gravity="center"
+        app:retryButtonText="@string/retry"
+        app:errorImage="@drawable/network_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>
 
 

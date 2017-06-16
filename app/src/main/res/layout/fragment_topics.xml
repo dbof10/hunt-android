@@ -1,10 +1,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTopic"
+        tools:listitem="@layout/item_topic"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -16,5 +18,15 @@
         app:lottie_autoPlay="false"
         app:lottie_fileName="preloader.json"
         app:lottie_loop="true" />
+
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry"
+        tools:visibility="visible" />
 
 </FrameLayout>
