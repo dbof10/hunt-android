@@ -24,6 +24,7 @@ class AppInjector private constructor() {
         }
     }
 
+
     class ActivityLifeCycleDelegate : Application.ActivityLifecycleCallbacks by EmptyLifeDelegate() {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
             handleActivity(activity)

@@ -5,6 +5,7 @@ import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.entity.Products
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.response.CollectionResponse
+import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.TopicResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.google.gson.Gson
@@ -43,13 +44,24 @@ class StoreModule {
                 .open()
     }
 
+    @Provides
+    @Singleton
+    fun provideProductDetailStore(apiClient: ProductHuntApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
+            : Store<ProductDetailResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, ProductDetailResponse>()
+                .fetcher { barcode -> apiClient.getProductDetail(barcode.key.toInt()).map { it.source() } }
+                .persister(persister)
+                .parser(GsonParserFactory.createSourceParser(gson, ProductDetailResponse::class.java))
+                .open()
+    }
+
 
     @Provides
     @Singleton
     fun providePersistedCommentStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<Comments, CommentBarCode> {
         return StoreBuilder.parsedWithKey<CommentBarCode, BufferedSource, Comments>()
-                .fetcher { barcode -> apiClient.getComments(barcode.id.toString(), COMMENT_LIMIT, barcode.page).map { it.source() } }
+                .fetcher { barcode -> apiClient.getComments(barcode.id, COMMENT_LIMIT, barcode.page).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, Comments::class.java))
                 .open()
     }
@@ -69,7 +81,7 @@ class StoreModule {
     fun providePersistedTopicStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<TopicResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, TopicResponse>()
-                .fetcher { barcode -> apiClient.getTopics(COLLECTION_LIMIT, barcode.key.toInt()).map { it.source() } }
+                .fetcher { barcode -> apiClient.getTopics(TOPIC_LIMIT, barcode.key.toInt()).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, TopicResponse::class.java))
                 .open()
     }

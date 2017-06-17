@@ -29,8 +29,33 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
     </style>
 
+    <style name="Widget.Hunt" parent="android:Widget" />
+
     <style name="TextSection" parent="TextAppearance.AppCompat.Headline">
 
+    </style>
+
+    <!-- Comment -->
+
+    <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
+    <style name="TextAppearance.CommentTimestamp" parent="@android:style/TextAppearance.Material.Caption">
+        <item name="android:textColor">@color/hint_disabled_dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFeatureSettings">onum, smcp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="TextAppearance.CommentAuthor">
+        <item name="android:textColor">@color/comment_author</item>
+    </style>
+
+    <style name="Widget.Hunt.Comment">
+        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
+        <item name="lineHeightHint">24sp</item>
     </style>
 
 </resources>

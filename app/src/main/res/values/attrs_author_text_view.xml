@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AuthorTextView">
+        <attr name="state_original_poster" format="boolean|reference"/>
+    </declare-styleable>
+</resources>

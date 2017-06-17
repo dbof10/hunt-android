@@ -9,9 +9,24 @@
     <dimen name="drag_dismiss_distance">168dp</dimen>
     <dimen name="corner">8dp</dimen>
     <dimen name="space_medium">8dp</dimen>
+    <dimen name="space_large">16dp</dimen>
     <dimen name="navigation_header">180dp</dimen>
     <dimen name="collection_background_height">140dp</dimen>
     <dimen name="elevation">4dp</dimen>
     <dimen name="ad_height">300dp</dimen>
+
+    <!-- Product Detail -->
+    <dimen name="shot_collapsed_app_bar_height">168dp</dimen> <!-- 3 * ?android:actionBarSize -->
+    <dimen name="avatar_ripple_radius">20dp</dimen> <!-- avatar_size / 2 -->
+    <dimen name="comment_actions_height">40dp</dimen>
+    <dimen name="comment_like_margin_adjustment">-8dp</dimen>
+
+
+    <!-- Z-axis elevations -->
+    <dimen name="z_app_bar">4dp</dimen>
+    <dimen name="touch_raise">6dp</dimen>
+    <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
+    <dimen name="z_card">2dp</dimen>
+
 
 </resources>

@@ -35,6 +35,17 @@ class ViewUtils private constructor() {
                     cfg.smallestScreenWidthDp < 600)
             return (!canMove || dm.widthPixels < dm.heightPixels)
         }
+
+        val CIRCULAR_OUTLINE: ViewOutlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setOval(view.paddingLeft,
+                        view.paddingTop,
+                        view.width - view.paddingRight,
+                        view.height - view.paddingBottom)
+            }
+        }
     }
+
+
 
 }

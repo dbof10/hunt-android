@@ -94,7 +94,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                     if (item is Product) {
                         if (view.id == R.id.flProductHolder) {
                             navigator
-                                    .toUrl(item.redirectUrl, customTabActivityHelper.session)
+                                    .toProduct(item.id)
                                     .subscribe()
                         } else if (view.id == R.id.tvComment) {
                             navigator

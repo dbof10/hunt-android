@@ -14,8 +14,11 @@ interface ProductHuntApi {
     @GET("/v1/posts")
     fun getPosts(@Query("day") date: String): Observable<ResponseBody>
 
+    @GET("/v1/posts/{id}")
+    fun getProductDetail(@Path("id") id: Int): Observable<ResponseBody>
+
     @GET("/v1/posts/{id}/comments")
-    fun getComments(@Path("id") id: String, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getComments(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
     @GET("/v1/collections?search[featured]=true")
     fun getCollections(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>

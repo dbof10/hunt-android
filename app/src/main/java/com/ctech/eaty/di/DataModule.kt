@@ -4,6 +4,7 @@ import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.entity.Products
 import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.CollectionResponse
+import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.TopicResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
@@ -27,10 +28,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideHomeRepository(store: Store<Products, BarCode>,
-                              apiClient: ProductHuntApi,
-                              appSettingsManager: AppSettingsManager): HomeRepository {
-        return HomeRepository(store, apiClient, appSettingsManager)
+    fun provideProductRepository(homeStore: Store<Products, BarCode>,
+                                 productStore: Store<ProductDetailResponse, BarCode>,
+                                 apiClient: ProductHuntApi,
+                                 appSettingsManager: AppSettingsManager): ProductRepository {
+        return ProductRepository(homeStore, productStore, apiClient, appSettingsManager)
     }
 
     @Provides

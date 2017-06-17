@@ -10,6 +10,7 @@ import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.ui.collection.view.CollectionActivity
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.web.WebviewFallback
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -29,6 +30,13 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
             CustomTabActivityHelper.openCustomTab(context, intentBuilder.build(), Uri.parse(url), WebviewFallback())
         }
 
+    }
+
+    fun toProduct(id: Int): Completable{
+        return Completable.fromAction {
+            val intent = ProductDetailActivity.newIntent(context, id)
+            context.startActivity(intent)
+        }
     }
 
     fun toComment(id: Int): Completable {

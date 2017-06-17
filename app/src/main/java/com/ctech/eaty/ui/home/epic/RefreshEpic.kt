@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.home.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
-import com.ctech.eaty.repository.HomeRepository
+import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.action.BarCodeGenerator
 import com.ctech.eaty.ui.home.result.RefreshResult
@@ -12,7 +12,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class RefreshEpic(val homeRepository: HomeRepository,
+class RefreshEpic(val productRepository: ProductRepository,
                   val barCodeGenerator: BarCodeGenerator,
                   val threadScheduler: ThreadScheduler) : Epic<HomeState> {
 
@@ -20,7 +20,7 @@ class RefreshEpic(val homeRepository: HomeRepository,
         return action.filter {
             it == HomeAction.REFRESH
         }.flatMap {
-            homeRepository.getHomePosts(barCodeGenerator.currentBarCode, true)
+            productRepository.getHomePosts(barCodeGenerator.currentBarCode, true)
                     .map {
                         RefreshResult.success(emptyList())
                     }

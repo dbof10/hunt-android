@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ParallaxScrimageView">
+        <attr name="scrimColor" format="color" />
+        <attr name="parallaxFactor" format="float"/>
+        <attr name="scrimAlpha" format="float"/>
+        <attr name="maxScrimAlpha" format="float"/>
+    </declare-styleable>
+</resources>
