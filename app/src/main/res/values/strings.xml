@@ -10,5 +10,7 @@
     <string name="retry">Tap to retry</string>
     <string name="no_internet">No connection</string>
     <string name="something_wrong">Something wrong happened</string>
+    <string name="share">Share</string>
+    <string name="view_more">Read more</string>
 
 </resources>

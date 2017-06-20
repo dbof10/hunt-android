@@ -10,6 +10,10 @@ data class ProductDetail(val id: Int, @SerializedName("comments_count") val comm
                          @SerializedName("install_links") val installLinks: List<InstallLink>,
                          val media: List<Media>) {
 
+    companion object {
+        val EMPTY = ProductDetail(-1, 0, "", "", emptyList(), emptyList(), ThumbNail.EMPTY, User.GUEST, 0, emptyList(), emptyList(), emptyList(), emptyList())
+    }
+
     data class InstallLink(@SerializedName("redirect_url") val url: String,
-                           val platform: Platform)
+                           val platform: Platform?)
 }

@@ -32,9 +32,9 @@ class ProductDetailModule {
 
     @ActivityScope
     @Provides
-    fun provideProductDetailViewModel(store: Store<ProductDetailState>): ProductDetailViewModel {
+    fun provideProductDetailViewModel(store: Store<ProductDetailState>, threadScheduler: ThreadScheduler): ProductDetailViewModel {
         val state = store.getState()
-                .observeOn(AndroidSchedulers.mainThread())
-        return ProductDetailViewModel(state)
+                .observeOn(threadScheduler.uiThread())
+        return ProductDetailViewModel(state, threadScheduler)
     }
 }

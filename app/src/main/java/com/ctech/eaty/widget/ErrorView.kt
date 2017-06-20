@@ -30,7 +30,7 @@ class ErrorView : LinearLayout {
     @BindView(R.id.tvRetry)
     lateinit var tvRetry: TextView
 
-    private lateinit var listener: RetryListener
+    private lateinit var retry: () -> Unit
 
     constructor(context: Context) : this(context, null)
 
@@ -55,7 +55,6 @@ class ErrorView : LinearLayout {
         orientation = VERTICAL
         gravity = Gravity.CENTER
 
-        /* Set android:animateLayoutChanges="true" programmatically */
         layoutTransition = LayoutTransition()
 
         ButterKnife.bind(this)
@@ -135,12 +134,12 @@ class ErrorView : LinearLayout {
         }
 
         tvRetry.setOnClickListener {
-            listener.onRetry()
+            retry()
         }
     }
 
-    fun setOnRetryListener(listener: RetryListener) {
-        this.listener = listener
+    fun setOnRetryListener(retry: () -> Unit) {
+        this.retry = retry
     }
 
 
@@ -265,7 +264,4 @@ class ErrorView : LinearLayout {
         }
     }
 
-    interface RetryListener {
-        fun onRetry()
-    }
 }

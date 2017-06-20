@@ -9,12 +9,11 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Collection
-import com.ctech.eaty.entity.Comment
-import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
 
-class CollectionViewHolder(view: View, val imageLoader: ImageLoader) : AbsViewHolder(view) {
+class CollectionViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
 
     @BindView(R.id.ivCollectionBackground)
     lateinit var ivCollectionBackground: ImageView
@@ -30,7 +29,7 @@ class CollectionViewHolder(view: View, val imageLoader: ImageLoader) : AbsViewHo
     }
 
     companion object {
-        fun create(parent: ViewGroup, imageLoader: ImageLoader): AbsViewHolder {
+        fun create(parent: ViewGroup, imageLoader: GlideImageLoader): AbsViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_collection, parent, false)
             return CollectionViewHolder(view, imageLoader)
         }

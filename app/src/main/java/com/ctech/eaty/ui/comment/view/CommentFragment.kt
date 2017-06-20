@@ -16,8 +16,7 @@ import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.comment.state.CommentState
 import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
-import com.ctech.eaty.util.ImageLoader
-import com.ctech.eaty.widget.ErrorView
+import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
 import vn.tiki.noadapter2.DiffCallback
@@ -48,7 +47,7 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     lateinit var viewModel: CommentViewModel
 
     @Inject
-    lateinit var imageLoader: ImageLoader
+    lateinit var imageLoader: GlideImageLoader
 
     val productId by lazy {
         arguments.getInt(PRODUCT_ID)
@@ -108,12 +107,9 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     }
 
     private fun setupErrorView() {
-        vError.setOnRetryListener(object : ErrorView.RetryListener {
-            override fun onRetry() {
-                store.dispatch(CommentAction.Load(productId))
-            }
-
-        })
+        vError.setOnRetryListener {
+            store.dispatch(CommentAction.Load(productId))
+        }
     }
 
     private fun renderLoadMoreError() {

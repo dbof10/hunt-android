@@ -29,13 +29,43 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
     </style>
 
+
     <style name="Widget.Hunt" parent="android:Widget" />
+
+
+    <style name="Widget.Hunt.InlineActionButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textAppearance">@style/TextAppearance.CommentAuthor</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+    </style>
 
     <style name="TextSection" parent="TextAppearance.AppCompat.Headline">
 
     </style>
 
+
+
     <!-- Comment -->
+
+    <style name="TextAppearance.ProductTitle" parent="@android:style/TextAppearance.Material.Headline">
+        <item name="android:textColor">@color/text_primary_dark</item>
+    </style>
+
+    <style name="TextAppearance.ShotDescription" parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">@color/text_tertiary_dark</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="Widget.Hunt.ProductTitle">
+        <item name="android:textAppearance">@style/TextAppearance.ProductTitle</item>
+        <item name="lineHeightHint">32sp</item>
+    </style>
+
+    <style name="Widget.Hunt.ShotDescription">
+        <item name="android:textAppearance">@style/TextAppearance.ShotDescription</item>
+        <item name="lineHeightHint">24sp</item>
+    </style>
 
     <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textSize">15sp</item>
@@ -49,7 +79,7 @@
         <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <style name="TextAppearance.CommentAuthor">
+    <style name="TextAppearance.CommentAuthor" parent="@android:style/TextAppearance.Material.Caption">
         <item name="android:textColor">@color/comment_author</item>
     </style>
 
@@ -58,4 +88,5 @@
         <item name="lineHeightHint">24sp</item>
     </style>
 
+    <dimen name="spacing_small">4dp</dimen>
 </resources>

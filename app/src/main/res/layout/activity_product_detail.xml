@@ -19,7 +19,7 @@
 
 
     <com.ctech.eaty.widget.ParallaxScrimageView
-        android:id="@+id/shot"
+        android:id="@+id/ivProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/shot_collapsed_app_bar_height"
@@ -56,13 +56,9 @@
         android:importantForAccessibility="no" />
 
     <FrameLayout
-        android:id="@+id/fComments"
+        android:id="@+id/fBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:id="@+id/fRecommend"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </com.ctech.eaty.widget.ElasticDragDismissFrameLayout>

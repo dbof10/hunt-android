@@ -20,7 +20,7 @@ import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
-import com.ctech.eaty.util.ImageLoader
+import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
 import com.facebook.ads.NativeAdsManager
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     lateinit var viewModel: HomeViewModel
 
     @Inject
-    lateinit var imageLoader: ImageLoader
+    lateinit var imageLoader: GlideImageLoader
 
     @Inject
     lateinit var navigator: HomeNavigation

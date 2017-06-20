@@ -28,7 +28,7 @@
 
         <activity
             android:name=".ui.productdetail.view.ProductDetailActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <activity
             android:name=".ui.web.WebviewActivity"

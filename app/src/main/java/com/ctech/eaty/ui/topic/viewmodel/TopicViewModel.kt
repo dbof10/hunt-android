@@ -4,7 +4,7 @@ import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.ui.topic.state.TopicState
 import io.reactivex.Observable
 
-class TopicViewModel(val stateDispatcher: Observable<TopicState>) {
+class TopicViewModel(private val stateDispatcher: Observable<TopicState>) {
     fun loading(): Observable<TopicState> {
         return stateDispatcher
                 .filter { it.loading }

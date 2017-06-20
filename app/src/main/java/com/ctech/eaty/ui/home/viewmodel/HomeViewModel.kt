@@ -3,7 +3,7 @@ package com.ctech.eaty.ui.home.viewmodel
 import com.ctech.eaty.ui.home.state.HomeState
 import io.reactivex.Observable
 
-class HomeViewModel(val stateDispatcher: Observable<HomeState>) {
+class HomeViewModel(private val stateDispatcher: Observable<HomeState>) {
     fun loading(): Observable<HomeState> {
         return stateDispatcher
                 .filter { it.loading }

@@ -4,7 +4,7 @@ import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.comment.state.CommentState
 import io.reactivex.Observable
 
-class CommentViewModel(val stateDispatcher: Observable<CommentState>) {
+class CommentViewModel(private val stateDispatcher: Observable<CommentState>) {
     fun loading(): Observable<CommentState> {
         return stateDispatcher
                 .filter { it.loading }

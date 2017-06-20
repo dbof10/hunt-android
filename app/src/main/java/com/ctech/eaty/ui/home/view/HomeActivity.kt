@@ -7,6 +7,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
+import com.ctech.eaty.util.GlideImageLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -26,6 +27,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
 
     @Inject
     lateinit var homeNavigation: HomeNavigation
+
+    @Inject
+    lateinit var imageLoader: GlideImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +74,11 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        imageLoader.clearMemory()
     }
 
     override fun onCustomTabsConnected() {

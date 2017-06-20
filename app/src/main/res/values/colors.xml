@@ -6,11 +6,15 @@
     <color name="colorAccent">#FF4081</color>
     <color name="windowBackground">#eaeaea</color>
 
-    <color name="black_60">#99000000</color> <!-- 60% black-->
+    <color name="black_60">#99000000</color>
+    <color name="black_12">#1f000000</color>
+    <color name="gray_600">#ff757575</color>
 
-
+    <color name="text_primary_dark">#de000000</color> <!-- 87% -->
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
     <color name="text_primary_light">#ffffffff</color>
+    <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
+
     <color name="hunt">#fff06292</color>
     <color name="hunt_link_highlight">#b3f06292</color>
 

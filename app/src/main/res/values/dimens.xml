@@ -14,12 +14,16 @@
     <dimen name="collection_background_height">140dp</dimen>
     <dimen name="elevation">4dp</dimen>
     <dimen name="ad_height">300dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="keyline_1">72dp</dimen>
+
 
     <!-- Product Detail -->
     <dimen name="shot_collapsed_app_bar_height">168dp</dimen> <!-- 3 * ?android:actionBarSize -->
     <dimen name="avatar_ripple_radius">20dp</dimen> <!-- avatar_size / 2 -->
     <dimen name="comment_actions_height">40dp</dimen>
     <dimen name="comment_like_margin_adjustment">-8dp</dimen>
+    <dimen name="avatar_margin">12dp</dimen> <!-- padding_normal - avatar_padding -->
 
 
     <!-- Z-axis elevations -->

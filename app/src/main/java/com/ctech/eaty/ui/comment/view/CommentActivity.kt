@@ -16,7 +16,7 @@ import javax.inject.Inject
 class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
 
 
-    private var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader? = null
+    private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
     companion object {
         val PRODUCT_ID = "productId"

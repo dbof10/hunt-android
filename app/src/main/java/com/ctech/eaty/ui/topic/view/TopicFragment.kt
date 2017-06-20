@@ -16,8 +16,7 @@ import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
-import com.ctech.eaty.util.ImageLoader
-import com.ctech.eaty.widget.ErrorView
+import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
 import vn.tiki.noadapter2.DiffCallback
@@ -45,7 +44,7 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
     lateinit var viewModel: TopicViewModel
 
     @Inject
-    lateinit var imageLoader: ImageLoader
+    lateinit var imageLoader: GlideImageLoader
 
     private val diffCallback = object : DiffCallback {
 
@@ -89,7 +88,6 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
     }
 
 
-
     override fun onStart() {
         super.onStart()
         store.dispatch(TopicAction.LOAD)
@@ -97,12 +95,9 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
     }
 
     private fun setupErrorView() {
-        vError.setOnRetryListener(object : ErrorView.RetryListener{
-            override fun onRetry() {
-                store.dispatch(TopicAction.LOAD)
-            }
-
-        })
+        vError.setOnRetryListener {
+            store.dispatch(TopicAction.LOAD)
+        }
     }
 
     private fun renderContent(list: List<Topic>) {

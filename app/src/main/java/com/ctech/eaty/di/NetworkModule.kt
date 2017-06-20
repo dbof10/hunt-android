@@ -7,7 +7,6 @@ import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.util.ImageLoader
 import com.ctech.eaty.util.NetworkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -63,8 +62,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideImageLoader(): ImageLoader {
-        return GlideImageLoader()
+    fun provideImageLoader(context: Context): GlideImageLoader {
+        return GlideImageLoader(context)
     }
 
     private fun <T> createRestServices(okHttpClient: OkHttpClient, baseUrl: String,

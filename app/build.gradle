@@ -41,7 +41,6 @@ dependencies {
     compile 'com.android.support:design:25.4.0'
     compile 'com.android.support:customtabs:25.4.0'
     compile 'com.android.support:palette-v7:25.4.0'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.airbnb.android:lottie:2.0.0'
 
 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alignmentMode="alignBounds"
+    android:background="@android:color/transparent"
+    android:clipToPadding="false"
+    android:columnCount="3"
+    android:rowCount="7"
+    android:transitionGroup="false"
+    android:useDefaultMargins="false">
+    <!-- transparent background needed for the ripple on the spacer -->
+
+    <!-- spacer for the image -->
+    <com.ctech.eaty.widget.FourThreeImageView
+        android:id="@+id/ivSpacer"
+        android:layout_columnSpan="3"
+        android:background="@drawable/mid_grey_bounded_ripple" />
+
+    <include layout="@layout/item_product_title" />
+
+    <LinearLayout
+        android:id="@+id/llActions"
+        android:layout_width="match_parent"
+        android:layout_columnSpan="3"
+        android:clipToPadding="false"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/space_medium">
+
+        <Button
+            android:id="@+id/btVote"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_heart_solid_grey"
+            tools:text="33 likes" />
+
+        <Button
+            android:id="@+id/btCommentCount"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/ic_comment"
+            tools:text="33 views" />
+
+        <Button
+            android:id="@+id/btShare"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/avd_share"
+            android:text="@string/share" />
+
+    </LinearLayout>
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvHunterName"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/space_medium"
+        android:clickable="false"
+        android:gravity="end"
+        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        tools:text="—Nick B" />
+
+    <com.ctech.eaty.widget.CircularImageView
+        android:id="@+id/ivHunterAvatar"
+        android:layout_width="@dimen/comment_avatar_size"
+        android:layout_height="@dimen/comment_avatar_size"
+        android:layout_marginStart="@dimen/avatar_margin"
+        android:layout_rowSpan="2"
+        android:foreground="@drawable/avatar_ripple"
+        android:gravity="center_horizontal"
+        android:src="@drawable/avatar_placeholder"
+        android:stateListAnimator="@animator/raise"
+        android:textColorHighlight="@color/hunt"
+        android:textColorLink="@color/hunt_links" />
+
+    <!-- can't use a marginEnd on the above image view as it pushes in the whole column so instead
+         add another column to contain the below space element -->
+
+    <Space
+        android:layout_width="@dimen/avatar_margin"
+        android:layout_rowSpan="2" />
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvTimeStamp"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        tools:text="3 hours ago" />
+
+    <!-- GridLayout seems to ignore layout_marginBottom so add another row with a space -->
+
+    <Space
+        android:layout_height="@dimen/avatar_margin"
+        android:layout_columnSpan="3" />
+
+</GridLayout>

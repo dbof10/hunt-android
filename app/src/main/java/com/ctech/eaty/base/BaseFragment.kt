@@ -36,8 +36,8 @@ abstract class BaseFragment<State> : Fragment() {
     }
 
     override fun onStop() {
-        super.onStop()
         lifecycleDelegate.onStop(activity.isFinishing)
         disposables.clear()
+        super.onStop()
     }
 }

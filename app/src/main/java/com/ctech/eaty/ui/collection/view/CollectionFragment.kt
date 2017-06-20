@@ -17,9 +17,7 @@ import com.ctech.eaty.ui.collection.action.CollectionAction
 import com.ctech.eaty.ui.collection.state.CollectionState
 import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
 import com.ctech.eaty.ui.comment.action.CommentAction
-import com.ctech.eaty.ui.topic.action.TopicAction
-import com.ctech.eaty.util.ImageLoader
-import com.ctech.eaty.widget.ErrorView
+import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_collections.*
 import vn.tiki.noadapter2.DiffCallback
@@ -48,7 +46,7 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
     lateinit var viewModel: CollectionViewModel
 
     @Inject
-    lateinit var imageLoader: ImageLoader
+    lateinit var imageLoader: GlideImageLoader
 
     private val diffCallback = object : DiffCallback {
 
@@ -97,12 +95,10 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
     }
 
     private fun setupErrorView() {
-        vError.setOnRetryListener(object : ErrorView.RetryListener{
-            override fun onRetry() {
-                store.dispatch(CollectionAction.LOAD)
-            }
+        vError.setOnRetryListener {
+            store.dispatch(CollectionAction.LOAD)
+        }
 
-        })
     }
 
     private fun renderContent(list: List<Collection>) {

@@ -1,6 +1,6 @@
-<android.support.v7.widget.RecyclerView android:id="@+id/rvComments"
+<android.support.v7.widget.RecyclerView android:id="@+id/rvBody"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
@@ -8,6 +8,4 @@
     android:paddingBottom="@dimen/space_large"
     android:scrollbarStyle="insideOverlay"
     android:scrollbars="vertical"
-    tools:listitem="@layout/item_product_comment"
-    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    xmlns:tools="http://schemas.android.com/tools" />
+    tools:listitem="@layout/item_product_comment" />

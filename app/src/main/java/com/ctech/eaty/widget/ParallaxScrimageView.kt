@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Property
 import com.ctech.eaty.R
 import com.ctech.eaty.util.AnimUtils
@@ -84,7 +85,7 @@ class ParallaxScrimageView(context: Context, attrs: AttributeSet) : FourThreeIma
             setScrimAlpha(Math.min((-newOffset / minimumHeight) * maxScrimAlpha, maxScrimAlpha))
             postInvalidateOnAnimation()
         }
-        setPinned(offset == minOffset)
+        setPinned(newOffset == minOffset)
     }
 
     fun setScrimColor(@ColorInt scrimColor: Int) {
@@ -96,9 +97,9 @@ class ParallaxScrimageView(context: Context, attrs: AttributeSet) : FourThreeIma
 
     fun setScrimAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: Float) {
         if (scrimAlpha != alpha) {
-            scrimAlpha = alpha;
-            scrimPaint.color = ColorUtils.modifyAlpha(scrimColor, scrimAlpha.toInt())
-            postInvalidateOnAnimation();
+            scrimAlpha = alpha
+            scrimPaint.color = ColorUtils.modifyAlpha(scrimColor, scrimAlpha)
+            postInvalidateOnAnimation()
         }
     }
 
@@ -114,11 +115,11 @@ class ParallaxScrimageView(context: Context, attrs: AttributeSet) : FourThreeIma
             val saveCount = canvas.save()
             canvas.translate(0f, imageOffset.toFloat())
             super.onDraw(canvas)
-            canvas.drawRect(0.toFloat(), 0.toFloat(), canvas.width.toFloat(), canvas.height.toFloat(), scrimPaint)
+            canvas.drawRect(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat(), scrimPaint)
             canvas.restoreToCount(saveCount)
         } else {
             super.onDraw(canvas)
-            canvas.drawRect(0.toFloat(), 0.toFloat(), canvas.width.toFloat(), canvas.height.toFloat(), scrimPaint)
+            canvas.drawRect(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat(), scrimPaint)
         }
     }
 

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.ctech.eaty.widget.CircularImageView
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/comment_avatar_size"
             android:layout_height="@dimen/comment_avatar_size"
@@ -48,7 +48,7 @@
 
     <TextView
         android:layout_marginTop="@dimen/space_medium"
-        android:id="@+id/ivComment"
+        android:id="@+id/tvComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

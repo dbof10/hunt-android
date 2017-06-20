@@ -10,9 +10,13 @@ data class User(
         @SerializedName("image_url")
         val imageUrl: ImageUrl) {
 
+    companion object {
+        val GUEST = User(-1, "", "", "", ImageUrl())
+    }
+
     class ImageUrl(@SerializedName("48px")
-                   val smallImgUrl: String,
+                   val smallImgUrl: String = "",
                    @SerializedName("73px")
-                   val largeImgUrl: String)
+                   val largeImgUrl: String = "")
 
 }

@@ -14,7 +14,7 @@
         android:layout_marginBottom="@dimen/content_padding_vertical"
         android:layout_marginTop="@dimen/content_padding_vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.ctech.eaty.widget.CircularImageView
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/comment_avatar_size"
             android:layout_height="@dimen/comment_avatar_size"

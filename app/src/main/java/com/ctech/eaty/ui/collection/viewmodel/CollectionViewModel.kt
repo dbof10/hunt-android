@@ -4,7 +4,7 @@ import com.ctech.eaty.entity.Collection
 import com.ctech.eaty.ui.collection.state.CollectionState
 import io.reactivex.Observable
 
-class CollectionViewModel(val stateDispatcher: Observable<CollectionState>) {
+class CollectionViewModel(private val stateDispatcher: Observable<CollectionState>) {
     fun loading(): Observable<CollectionState> {
         return stateDispatcher
                 .filter { it.loading}

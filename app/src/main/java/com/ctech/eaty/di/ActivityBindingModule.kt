@@ -9,6 +9,7 @@ import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
@@ -36,6 +37,7 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = arrayOf(TopicModule::class, TopicFragmentBuilderModule::class))
     abstract fun contributeTopicActivity(): TopicActivity
 
-    @ContributesAndroidInjector(modules = arrayOf(ProductDetailModule::class))
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(ProductDetailModule::class, ProductDetailFragmentBuilderModule::class))
     abstract fun contributeProductDetailActivity(): ProductDetailActivity
 }
