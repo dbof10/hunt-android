@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/accelerate_quad">
+
+    <!-- beat 1 -->
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1.2"
+        android:duration="100" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1.2"
+        android:duration="100" />
+
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1"
+        android:startOffset="100"
+        android:duration="150" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1"
+        android:startOffset="100"
+        android:duration="150" />
+
+    <!-- beat 2 -->
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1.2"
+        android:startOffset="500"
+        android:duration="100" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1.2"
+        android:startOffset="500"
+        android:duration="100" />
+
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1"
+        android:startOffset="600"
+        android:duration="150" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1"
+        android:startOffset="600"
+        android:duration="150" />
+
+</set>

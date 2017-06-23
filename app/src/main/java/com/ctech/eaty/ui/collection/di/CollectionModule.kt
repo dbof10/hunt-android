@@ -34,7 +34,7 @@ class CollectionModule {
 
     @Provides
     fun provideCommentViewModel(store: Store<CollectionState>): CollectionViewModel {
-        val state = store.getState()
+        val state = store.state
                 .observeOn(AndroidSchedulers.mainThread())
         return CollectionViewModel(state)
     }

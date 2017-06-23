@@ -39,6 +39,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".ui.vote.view.VoteActivity"
+            android:theme="@style/AppTheme.Translucent.Overlap.Vote" />
+
+        <activity
             android:name=".ui.topic.view.TopicActivity"
             android:theme="@style/AppTheme" />
 

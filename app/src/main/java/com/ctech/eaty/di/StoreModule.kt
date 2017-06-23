@@ -7,7 +7,9 @@ import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.response.CollectionResponse
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.TopicResponse
+import com.ctech.eaty.response.VoteResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
+import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.google.gson.Gson
 import com.nytimes.android.external.fs2.SourcePersisterFactory
 import com.nytimes.android.external.store2.base.Persister
@@ -26,6 +28,7 @@ class StoreModule {
     val COMMENT_LIMIT = 10
     val COLLECTION_LIMIT = 10
     val TOPIC_LIMIT = 10
+    val VOTE_LIMIT = 10
 
     @Provides
     @Singleton
@@ -83,6 +86,16 @@ class StoreModule {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, TopicResponse>()
                 .fetcher { barcode -> apiClient.getTopics(TOPIC_LIMIT, barcode.key.toInt()).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, TopicResponse::class.java))
+                .open()
+    }
+
+    @Provides
+    @Singleton
+    fun providePersistedVoteStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<VoteResponse, VoteBarCode> {
+        return StoreBuilder.parsedWithKey<VoteBarCode, BufferedSource, VoteResponse>()
+                .fetcher { barcode -> apiClient.getVotes(barcode.id, VOTE_LIMIT, barcode.page).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, VoteResponse::class.java))
                 .open()
     }
 }

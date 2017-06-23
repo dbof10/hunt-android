@@ -5,7 +5,7 @@ import android.graphics.Paint
 import android.support.annotation.ColorInt
 import android.support.v7.widget.RecyclerView
 
-class InsetDividerDecoration(val dividedViewHolderClass: Class<Any>,
+class InsetDividerDecoration(val dividedViewHolderClass: Class<out Any>,
                              val dividerHeight: Int,
                              val leftInset: Int,
                              @ColorInt val dividerColor: Int) : RecyclerView.ItemDecoration() {

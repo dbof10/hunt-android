@@ -17,12 +17,12 @@
             android:layout_height="240dp"
             android:layout_gravity="center" />
 
-        <TextView
+        <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/bg_card_product_title"
+            android:background="@color/gray_600"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"

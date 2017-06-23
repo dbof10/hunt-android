@@ -180,13 +180,13 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun setupViewModel() {
-        viewModel.content().subscribe {
+        viewModel.header().subscribe {
             renderHeader(it)
         }
     }
 
-    private fun renderHeader(product: ProductDetail) {
-        imageLoader.downloadInto(product.thumbnail.imageUrl, ivProduct, imageLoaderCallback)
+    private fun renderHeader(productUrl: String) {
+        imageLoader.downloadInto(productUrl, ivProduct, imageLoaderCallback)
     }
 
     private fun setupRecommendationFragment() {

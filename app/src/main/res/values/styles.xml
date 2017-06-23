@@ -27,8 +27,15 @@
     <style name="AppTheme.Translucent.Overlap">
         <item name="android:statusBarColor">@android:color/black</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:colorControlActivated">?android:colorAccent</item>
+        <item name="android:navigationBarColor">@color/hunt_super_dark</item>
     </style>
 
+
+    <style name="AppTheme.Translucent.Overlap.Vote">
+        <item name="android:windowEnterTransition">@transition/vote_sheet_enter</item>
+        <item name="android:windowReturnTransition">@transition/vote_sheet_return</item>
+    </style>
 
     <style name="Widget.Hunt" parent="android:Widget" />
 
@@ -36,14 +43,24 @@
     <style name="Widget.Hunt.InlineActionButton" parent="@android:style/Widget.Material.Button">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textAppearance">@style/TextAppearance.CommentAuthor</item>
-        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:drawablePadding">@dimen/space_small</item>
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="Widget.Hunt.DialogTitle">
+        <item name="android:textAppearance">@style/TextAppearance.DialogTitle</item>
+        <item name="lineHeightHint">28sp</item>
+    </style>
+
+    <style name="TextAppearance.DialogTitle" parent="@android:style/TextAppearance.Material.Title">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
     <style name="TextSection" parent="TextAppearance.AppCompat.Headline">
 
     </style>
-
 
 
     <!-- Comment -->
@@ -72,6 +89,11 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
+    <style name="TextAppearance.Headline" parent="@android:style/TextAppearance.Material.Headline">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
     <style name="TextAppearance.CommentTimestamp" parent="@android:style/TextAppearance.Material.Caption">
         <item name="android:textColor">@color/hint_disabled_dark</item>
         <item name="android:textSize">14sp</item>
@@ -88,5 +110,4 @@
         <item name="lineHeightHint">24sp</item>
     </style>
 
-    <dimen name="spacing_small">4dp</dimen>
 </resources>

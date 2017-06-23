@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_close_down">
+
+    <target
+        android:name="root"
+        android:animation="@animator/close_to_down" />
+
+    <target
+        android:name="bottom_left"
+        android:animation="@animator/close_to_down_trim_legs" />
+
+    <target
+        android:name="bottom_right"
+        android:animation="@animator/close_to_down_trim_legs" />
+
+</animated-vector>

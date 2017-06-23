@@ -43,7 +43,7 @@ class HomeModule {
 
     @Provides
     fun provideHomeViewModel(store: Store<HomeState>): HomeViewModel {
-        val state = store.getState()
+        val state = store.state
                 .observeOn(AndroidSchedulers.mainThread())
         return HomeViewModel(state)
     }

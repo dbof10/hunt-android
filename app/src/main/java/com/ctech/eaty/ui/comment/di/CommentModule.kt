@@ -34,7 +34,7 @@ class CommentModule {
 
     @Provides
     fun provideCommentViewModel(store: Store<CommentState>): CommentViewModel {
-        val state = store.getState()
+        val state = store.state
                 .observeOn(AndroidSchedulers.mainThread())
         return CommentViewModel(state)
     }

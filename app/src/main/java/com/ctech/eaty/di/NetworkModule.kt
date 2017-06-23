@@ -6,30 +6,36 @@ import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.util.Constants
+import com.ctech.eaty.util.DateTimeConverter
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.NetworkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.joda.time.DateTime
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import javax.inject.Singleton
 
+
 @Module
 class NetworkModule {
+
+    private val DATE_TIME_TYPE = object : TypeToken<DateTime>() {}.type
 
     @Provides
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder()
+                .registerTypeAdapter(DATE_TIME_TYPE, DateTimeConverter())
                 .create()
     }
-
 
     @Singleton
     @Provides
@@ -80,7 +86,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNetworkManager(context: Context): NetworkManager{
+    fun provideNetworkManager(context: Context): NetworkManager {
         return NetworkManager.IMPL(context)
     }
 }

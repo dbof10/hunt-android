@@ -1,5 +1,7 @@
 package com.ctech.eaty.util
 
+import android.content.Context
+import net.danlew.android.joda.DateUtils
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -41,6 +43,10 @@ class DateUtil private constructor() {
         fun getFormattedPastDate(current: DateTime, dayAgo: Int): String {
             val pastDateTime = current.minusDays(dayAgo)
             return dateFormatter.print(pastDateTime)
+        }
+
+        fun getRelativeTimeSpan(context: Context, time: DateTime): String {
+            return DateUtils.getRelativeTimeSpanString(context, time).toString()
         }
     }
 }

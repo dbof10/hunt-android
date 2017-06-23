@@ -6,7 +6,9 @@ import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.CollectionResponse
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.TopicResponse
+import com.ctech.eaty.response.VoteResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
+import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
 import com.ctech.eaty.util.rx.ThreadScheduler
 import com.nytimes.android.external.store2.base.impl.BarCode
@@ -27,7 +29,6 @@ class DataModule {
 
 
     @Provides
-    @Singleton
     fun provideProductRepository(homeStore: Store<Products, BarCode>,
                                  productStore: Store<ProductDetailResponse, BarCode>,
                                  apiClient: ProductHuntApi,
@@ -36,7 +37,6 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
     fun provideCommentRepository(store: Store<Comments, CommentBarCode>,
                                  apiClient: ProductHuntApi,
                                  appSettingsManager: AppSettingsManager): CommentRepository {
@@ -44,7 +44,6 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
     fun provideCollectionRepository(store: Store<CollectionResponse, BarCode>,
                                     apiClient: ProductHuntApi,
                                     appSettingsManager: AppSettingsManager): CollectionRepository {
@@ -53,11 +52,17 @@ class DataModule {
 
 
     @Provides
-    @Singleton
     fun provideTopicRepository(store: Store<TopicResponse, BarCode>,
                                apiClient: ProductHuntApi,
                                appSettingsManager: AppSettingsManager): TopicRepository {
         return TopicRepository(store, apiClient, appSettingsManager)
+    }
+
+    @Provides
+    fun provideVoteRepository(store: Store<VoteResponse, VoteBarCode>,
+                              apiClient: ProductHuntApi,
+                              appSettingsManager: AppSettingsManager): VoteRepository {
+        return VoteRepository(store, apiClient, appSettingsManager)
     }
 
 

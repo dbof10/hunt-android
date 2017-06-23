@@ -15,6 +15,9 @@ import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
+import com.ctech.eaty.ui.vote.di.VoteFragmentBuilderModule
+import com.ctech.eaty.ui.vote.di.VoteModule
+import com.ctech.eaty.ui.vote.view.VoteActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -40,4 +43,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(ProductDetailModule::class, ProductDetailFragmentBuilderModule::class))
     abstract fun contributeProductDetailActivity(): ProductDetailActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(VoteModule::class, VoteFragmentBuilderModule::class))
+    abstract fun contributeVoteActivity(): VoteActivity
 }

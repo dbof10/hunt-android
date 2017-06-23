@@ -1,6 +1,7 @@
 package com.ctech.eaty.entity
 
 import com.google.gson.annotations.SerializedName
+import org.joda.time.DateTime
 
 
 data class Comment(val id: Int, val body: String,
@@ -8,6 +9,8 @@ data class Comment(val id: Int, val body: String,
                    val parentCommentId: Int,
                    @SerializedName("child_comments_count")
                    val childCommentCount: Int,
+                   @SerializedName("created_at")
+                   val createdAt: DateTime,
                    @SerializedName("maker")
                    val isMaker: Boolean,
                    val user: User,

@@ -9,6 +9,7 @@
     <color name="black_60">#99000000</color>
     <color name="black_12">#1f000000</color>
     <color name="gray_600">#ff757575</color>
+    <color name="gray_50">#fafafa</color>
 
     <color name="text_primary_dark">#de000000</color> <!-- 87% -->
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
@@ -17,13 +18,17 @@
 
     <color name="hunt">#fff06292</color>
     <color name="hunt_link_highlight">#b3f06292</color>
+    <color name="hunt_super_dark">#ff33292d</color>
 
 
     <color name="scrim">#99323232</color>
+    <color name="immersive_bars">#99000000</color>
+    <color name="light_immersive_bars">@color/immersive_bars</color>
     <color name="overlap_background_light">#fafafa</color>
 
+
+
     <color name="divider_color">#50B6B6B6</color>
-    <color name="bg_card_product_title">#85000000</color>
 
     <!-- Error -->
     <color name="error_view_text">#656565</color>
@@ -32,7 +37,6 @@
 
     <color name="content_placeholder">#ffe0e0e0</color>
 
-    <!-- text (most text uses material theme colours) -->
     <color name="hint_disabled_dark">#43000000</color> <!-- 26% black -->
     <color name="text_on_accent">#8f000000</color>
 

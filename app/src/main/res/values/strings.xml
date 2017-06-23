@@ -12,5 +12,6 @@
     <string name="something_wrong">Something wrong happened</string>
     <string name="share">Share</string>
     <string name="view_more">Read more</string>
+    <string name="vote_count">%s votes</string>
 
 </resources>

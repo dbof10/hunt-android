@@ -1,33 +1,55 @@
 package com.ctech.eaty.ui.productdetail.viewmodel
 
-import android.util.Log
+import android.net.Uri
 import com.ctech.eaty.entity.ProductDetail
+import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
+import com.ctech.eaty.util.UrlEncodedQueryString
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-const val MAX_BODY_ITEM = 7
 
-class ProductDetailViewModel(private val stateDispatcher: Observable<ProductDetailState>, private val threadScheduler: ThreadScheduler) {
+class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<ProductDetailState>,
+                             private val navigation: ProductDetailNavigation,
+                             private val threadScheduler: ThreadScheduler) {
+    private val HEADER_IMAGE_SIZE = 500
+    private val MAX_BODY_ITEM = 7
     private var body: List<ProductBodyItemViewModel> = emptyList()
     private val bodySubject: PublishSubject<List<ProductBodyItemViewModel>> = PublishSubject.create()
 
     fun loading(): Observable<ProductDetailState> {
         return stateDispatcher
+                .observeOn(threadScheduler.uiThread())
                 .filter { it.loading }
     }
 
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
+                .observeOn(threadScheduler.uiThread())
                 .filter { it.error != null && !it.loading }
                 .map { it.error }
+
     }
 
+    fun header(): Observable<String> {
+        return content()
+                .map {
+                    handleUrl(it.thumbnail.imageUrl)
+                }
+    }
+
+    private fun handleUrl(url: String): String {
+        val uri = Uri.parse(url)
+        return "${uri.scheme}://${uri.host}${uri.path}?${UrlEncodedQueryString.parse(uri).set("h", HEADER_IMAGE_SIZE)
+                .set("w", HEADER_IMAGE_SIZE)}"
+    }
 
     fun content(): Observable<ProductDetail> {
         return stateDispatcher
+                .observeOn(threadScheduler.uiThread())
                 .filter {
                     !it.loading && it.error == null
                 }
@@ -37,6 +59,7 @@ class ProductDetailViewModel(private val stateDispatcher: Observable<ProductDeta
                     else
                         Observable.just(it.content)
                 }
+
     }
 
     fun comments(): Observable<List<ProductBodyItemViewModel>> {
@@ -56,6 +79,7 @@ class ProductDetailViewModel(private val stateDispatcher: Observable<ProductDeta
                     this.body = body
                     body
                 }
+
     }
 
     fun commentsSelection(): Observable<List<ProductBodyItemViewModel>> {
@@ -81,4 +105,25 @@ class ProductDetailViewModel(private val stateDispatcher: Observable<ProductDeta
     }
 
     private fun mapHeader(productDetail: ProductDetail): ProductHeaderItemViewModel = ProductHeaderItemViewModel(productDetail)
+
+    fun navigateToVote() {
+        val product = stateDispatcher.value.content
+        product?.run {
+            navigation.toVote(id, voteCount).subscribe()
+        }
+    }
+
+    fun navigateComment() {
+        val product = stateDispatcher.value.content
+        product?.run {
+            navigation.toComment(id).subscribe()
+        }
+    }
+
+    fun shareLink() {
+        val product = stateDispatcher.value.content
+        product?.run {
+            navigation.toShare(redirectUrl).subscribe()
+        }
+    }
 }

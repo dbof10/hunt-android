@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ctech.eaty.widget.BottomSheet android:id="@+id/bottomSheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_50"
+        android:elevation="@dimen/elevation"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_50"
+            android:baselineAligned="false"
+            android:minHeight="?android:actionBarSize"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/space_small"
+            android:paddingTop="@dimen/space_small"
+            android:stateListAnimator="@animator/active_raise">
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="@dimen/comment_avatar_size"
+                android:layout_height="@dimen/comment_avatar_size"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/avatar_margin"
+                android:layout_marginStart="@dimen/avatar_margin"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="@dimen/avatar_margin"
+                android:src="@drawable/ic_down"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/Widget.Hunt.DialogTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:paddingEnd="@dimen/space_medium"
+                tools:text="50 Likes" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</com.ctech.eaty.widget.BottomSheet>

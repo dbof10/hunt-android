@@ -1,0 +1,62 @@
+<com.ctech.eaty.widget.ForegroundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/comment_background"
+    android:clipToPadding="false"
+    android:descendantFocusability="blocksDescendants"
+    android:foreground="?android:selectableItemBackground"
+    android:minHeight="?android:listPreferredItemHeight"
+    android:paddingBottom="@dimen/content_padding_vertical"
+    android:paddingEnd="@dimen/content_padding_horizontal"
+    android:paddingStart="@dimen/content_padding_horizontal"
+    android:paddingTop="@dimen/content_padding_vertical"
+    android:stateListAnimator="@animator/comment_selection">
+
+    <com.ctech.eaty.widget.CircularImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/comment_avatar_size"
+        android:layout_height="@dimen/comment_avatar_size"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="@dimen/space_large"
+        android:foreground="@drawable/avatar_ripple"
+        android:src="@drawable/avatar_placeholder"
+        android:stateListAnimator="@animator/raise" />
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvTimeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        tools:text="3 hours ago" />
+
+    <com.ctech.eaty.widget.AuthorTextView
+        android:id="@+id/tvUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:layout_toEndOf="@id/ivAvatar"
+        android:layout_toStartOf="@id/tvTimeStamp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        tools:text="Nick B" />
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvHeadline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:layout_toEndOf="@id/ivAvatar"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toStartOf="@id/tvTimeStamp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.Headline"
+        tools:text="Software Engineer" />
+
+
+</com.ctech.eaty.widget.ForegroundRelativeLayout>

@@ -10,7 +10,6 @@
     android:rowCount="7"
     android:transitionGroup="false"
     android:useDefaultMargins="false">
-    <!-- transparent background needed for the ripple on the spacer -->
 
     <!-- spacer for the image -->
     <com.ctech.eaty.widget.FourThreeImageView
@@ -35,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_heart_solid_grey"
+            android:drawableTop="@drawable/avd_votes"
             tools:text="33 likes" />
 
         <Button

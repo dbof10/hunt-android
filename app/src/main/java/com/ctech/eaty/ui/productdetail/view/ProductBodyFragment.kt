@@ -1,6 +1,8 @@
 package com.ctech.eaty.ui.productdetail.view
 
 import android.content.Context
+import android.graphics.drawable.Animatable2
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.transition.AutoTransition
@@ -14,11 +16,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
-import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
@@ -112,7 +114,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                 .viewHolderFactory { viewGroup, type ->
                     when (type) {
                         1 -> {
-                            headerView = LayoutInflater.from(context).inflate(R.layout.item_product_description, viewGroup, false)
+                            headerView = LayoutInflater.from(context).inflate(R.layout.item_product_header, viewGroup, false)
                             ProductHeaderViewHolder.create(headerView, imageLoader)
                         }
                         2 -> ProductCommentViewHolder.create(viewGroup, imageLoader)
@@ -126,8 +128,39 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                         else -> 0
                     }
                 }
-                .onItemClickListener { _, _, position ->
-                    viewModel.selectCommentAt(position)
+                .onItemClickListener { view, _, position ->
+                    when (view.id) {
+                        R.id.btVote -> {
+                            with(view as Button) {
+                                (compoundDrawables[1] as AnimatedVectorDrawable).start()
+                                viewModel.navigateToVote()
+                            }
+                        }
+                        R.id.btCommentCount -> {
+                            viewModel.navigateComment()
+                        }
+                        R.id.btShare -> {
+                            with(view as Button) {
+                                val drawable = (compoundDrawables[1] as AnimatedVectorDrawable)
+                                drawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
+                                    override fun onAnimationEnd(drawable: Drawable?) {
+                                        super.onAnimationEnd(drawable)
+                                        viewModel.shareLink()
+                                    }
+                                })
+                                drawable.start()
+                            }
+                        }
+                        else -> {
+                            TransitionManager.beginDelayedTransition(rvBody, expandCollapse)
+                            val animator = rvBody.itemAnimator as? CommentAnimator
+                            animator?.run {
+                                setAnimateMoves(false)
+                            }
+                            viewModel.selectCommentAt(position)
+
+                        }
+                    }
                 }
                 .build()
     }
@@ -190,7 +223,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
         rvBody.adapter = adapter
         rvBody.layoutManager = layoutManager
         rvBody.itemAnimator = CommentAnimator()
-        rvBody.addItemDecoration(InsetDividerDecoration(ProductCommentViewHolder.javaClass, resources.getDimensionPixelSize(R.dimen.divider_height),
+        rvBody.addItemDecoration(InsetDividerDecoration(ProductCommentViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_height),
                 resources.getDimensionPixelSize(R.dimen.keyline_1), ContextCompat.getColor(context, R.color.black_12)))
 
         rvBody.addOnScrollListener(scrollListener)

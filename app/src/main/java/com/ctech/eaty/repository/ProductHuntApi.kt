@@ -1,7 +1,7 @@
 package com.ctech.eaty.repository
 
-import com.ctech.eaty.entity.*
-import com.ctech.eaty.entity.Collection
+import com.ctech.eaty.entity.AccessToken
+import com.ctech.eaty.entity.Authentication
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -26,6 +26,7 @@ interface ProductHuntApi {
     @GET("/v1/topics?search[trending]=true")
     fun getTopics(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
-    @GET("/collections/{collection-id}")
-    fun getCollectionPosts(@Path("collection-id") collectionId: Int): Observable<Collection>
+    @GET("/v1/posts/{id}/votes")
+    fun getVotes(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+
 }

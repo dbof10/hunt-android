@@ -8,6 +8,7 @@
     <dimen name="comment_avatar_size">44dp</dimen>
     <dimen name="drag_dismiss_distance">168dp</dimen>
     <dimen name="corner">8dp</dimen>
+    <dimen name="space_small">4dp</dimen>
     <dimen name="space_medium">8dp</dimen>
     <dimen name="space_large">16dp</dimen>
     <dimen name="navigation_header">180dp</dimen>

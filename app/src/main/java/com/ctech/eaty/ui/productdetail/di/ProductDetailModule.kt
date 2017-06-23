@@ -5,6 +5,7 @@ import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.ui.productdetail.action.BarCodeGenerator
 import com.ctech.eaty.ui.productdetail.epic.LoadEpic
+import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.reducer.ProductDetailReducer
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
@@ -32,9 +33,8 @@ class ProductDetailModule {
 
     @ActivityScope
     @Provides
-    fun provideProductDetailViewModel(store: Store<ProductDetailState>, threadScheduler: ThreadScheduler): ProductDetailViewModel {
-        val state = store.getState()
-                .observeOn(threadScheduler.uiThread())
-        return ProductDetailViewModel(state, threadScheduler)
+    fun provideProductDetailViewModel(store: Store<ProductDetailState>, navigation: ProductDetailNavigation,
+                                      threadScheduler: ThreadScheduler): ProductDetailViewModel {
+        return ProductDetailViewModel(store.state, navigation,threadScheduler)
     }
 }
