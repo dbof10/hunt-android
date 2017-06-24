@@ -16,8 +16,8 @@
 
     <com.ctech.eaty.widget.CircularImageView
         android:id="@+id/ivAvatar"
-        android:layout_width="@dimen/comment_avatar_size"
-        android:layout_height="@dimen/comment_avatar_size"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="@dimen/space_large"

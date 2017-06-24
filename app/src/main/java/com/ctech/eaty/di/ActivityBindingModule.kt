@@ -12,6 +12,9 @@ import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.search.di.SearchFragmentBuilderModule
+import com.ctech.eaty.ui.search.di.SearchModule
+import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
@@ -47,4 +50,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(VoteModule::class, VoteFragmentBuilderModule::class))
     abstract fun contributeVoteActivity(): VoteActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(SearchModule::class, SearchFragmentBuilderModule::class))
+    abstract fun contributeSearchActivity(): SearchActivity
 }

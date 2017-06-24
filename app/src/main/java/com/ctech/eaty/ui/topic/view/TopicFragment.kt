@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.topic.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,12 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.ui.comment.action.CommentAction
+import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -66,6 +68,13 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
                 .diffCallback(diffCallback)
                 .viewHolderFactory { viewGroup, _ ->
                     TopicViewHolder.create(viewGroup, imageLoader)
+                }
+                .onItemClickListener { _, item, _ ->
+                    (item as Topic).run {
+                        val intent = SearchActivity.newIntent(context, this)
+                        context.startActivity(intent)
+                    }
+
                 }
                 .build()
     }
@@ -143,6 +152,7 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvTopic.adapter = adapter
         rvTopic.layoutManager = layoutManager
+        rvTopic.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         rvTopic.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
             store.dispatch(CommentAction.LoadMore(id))
         }))

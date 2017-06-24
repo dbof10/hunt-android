@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,7 @@ import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InsetDividerDecoration
+import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration
 import com.ctech.eaty.widget.TransitionListenerAdapter
 import kotlinx.android.synthetic.main.fragment_product_body.*
 import vn.tiki.noadapter2.DiffCallback

@@ -1,6 +1,5 @@
 package com.ctech.eaty.entity
 
-import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.google.gson.annotations.SerializedName
 
 
@@ -14,4 +13,4 @@ data class Product(val id: Int, val name: String, val tagline: String,
                    @SerializedName("redirect_url")
                    val redirectUrl: String,
                    @SerializedName("screenshot_url")
-                   val imageUrl: ImageUrl): HomeItemViewModel
+                   val imageUrl: ImageUrl)

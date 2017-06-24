@@ -17,7 +17,7 @@ import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.comment.state.CommentState
 import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -49,7 +49,7 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     @Inject
     lateinit var imageLoader: GlideImageLoader
 
-    val productId by lazy {
+    private val productId by lazy {
         arguments.getInt(PRODUCT_ID)
     }
 

@@ -2,13 +2,10 @@ package com.ctech.eaty.di
 
 import android.content.Context
 import com.ctech.eaty.entity.Comments
-import com.ctech.eaty.entity.Products
 import com.ctech.eaty.repository.ProductHuntApi
-import com.ctech.eaty.response.CollectionResponse
-import com.ctech.eaty.response.ProductDetailResponse
-import com.ctech.eaty.response.TopicResponse
-import com.ctech.eaty.response.VoteResponse
+import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
+import com.ctech.eaty.ui.search.action.SearchBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.google.gson.Gson
 import com.nytimes.android.external.fs2.SourcePersisterFactory
@@ -20,7 +17,7 @@ import com.nytimes.android.external.store2.middleware.GsonParserFactory
 import dagger.Module
 import dagger.Provides
 import okio.BufferedSource
-import javax.inject.Singleton
+
 
 @Module
 class StoreModule {
@@ -29,26 +26,33 @@ class StoreModule {
     val COLLECTION_LIMIT = 10
     val TOPIC_LIMIT = 10
     val VOTE_LIMIT = 10
+    val SEARCH_LIMIT = 10
 
     @Provides
-    @Singleton
     fun homePersister(context: Context): Persister<BufferedSource, BarCode> {
         return SourcePersisterFactory.create(context.cacheDir)
     }
 
     @Provides
-    @Singleton
     fun providePersistedHomeStore(apiClient: ProductHuntApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
-            : Store<Products, BarCode> {
-        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, Products>()
+            : Store<ProductResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, ProductResponse>()
                 .fetcher { barcode -> apiClient.getPosts(barcode.key).map { it.source() } }
                 .persister(persister)
-                .parser(GsonParserFactory.createSourceParser(gson, Products::class.java))
+                .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
                 .open()
     }
 
     @Provides
-    @Singleton
+    fun providePersistedSearchStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<ProductResponse, SearchBarCode> {
+        return StoreBuilder.parsedWithKey<SearchBarCode, BufferedSource, ProductResponse>()
+                .fetcher { barcode -> apiClient.getProductsByTopic(barcode.id, SEARCH_LIMIT, barcode.page).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
+                .open()
+    }
+
+    @Provides
     fun provideProductDetailStore(apiClient: ProductHuntApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
             : Store<ProductDetailResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, ProductDetailResponse>()
@@ -60,7 +64,6 @@ class StoreModule {
 
 
     @Provides
-    @Singleton
     fun providePersistedCommentStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<Comments, CommentBarCode> {
         return StoreBuilder.parsedWithKey<CommentBarCode, BufferedSource, Comments>()
@@ -70,7 +73,6 @@ class StoreModule {
     }
 
     @Provides
-    @Singleton
     fun providePersistedCollectionStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<CollectionResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, CollectionResponse>()
@@ -80,7 +82,6 @@ class StoreModule {
     }
 
     @Provides
-    @Singleton
     fun providePersistedTopicStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<TopicResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, TopicResponse>()
@@ -90,7 +91,6 @@ class StoreModule {
     }
 
     @Provides
-    @Singleton
     fun providePersistedVoteStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<VoteResponse, VoteBarCode> {
         return StoreBuilder.parsedWithKey<VoteBarCode, BufferedSource, VoteResponse>()

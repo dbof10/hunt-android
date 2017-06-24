@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/collection_background_height">
 
-    <ImageView
+    <com.ctech.eaty.widget.ForegroundImageView
         android:id="@+id/ivCollectionBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:foreground="@color/black_12"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -18,7 +20,7 @@
         android:paddingStart="@dimen/content_padding_horizontal"
         android:paddingTop="@dimen/content_padding_vertical">
 
-        <TextView
+        <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvCollectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,15 +28,17 @@
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:text="WWDC 12" />
 
-        <TextView
+        <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvCollectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="Meet the latest design" />
 
     </LinearLayout>
 

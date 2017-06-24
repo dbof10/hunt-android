@@ -11,7 +11,7 @@
         android:background="@android:color/white"
         android:foreground="?selectableItemBackground">
 
-        <ImageView
+        <com.ctech.eaty.widget.ForegroundImageView
             android:id="@+id/ivProduct"
             android:layout_width="match_parent"
             android:layout_height="240dp"
@@ -33,7 +33,7 @@
             tools:text="Adobe Scan" />
     </FrameLayout>
 
-    <TextView
+    <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:text="@string/card_product_comments"
+            android:text="@string/comment"
             android:textAllCaps="true"
             android:textSize="14sp" />
 

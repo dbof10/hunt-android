@@ -15,13 +15,11 @@ import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
-import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
+import com.ctech.eaty.ui.home.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import com.facebook.ads.NativeAdsManager
 import kotlinx.android.synthetic.main.fragment_products.*
 import vn.tiki.noadapter2.DiffCallback
@@ -73,7 +71,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
             if (oldItem is SectionViewModel && newItem is SectionViewModel) {
                 return oldItem.id == newItem.id
-            } else if (oldItem is Product && newItem is Product) {
+            } else if (oldItem is ProductItemViewModel && newItem is ProductItemViewModel) {
                 return oldItem.id == newItem.id
             } else if (oldItem is HorizontalAdsItemViewModel && newItem is HorizontalAdsItemViewModel){
                 return oldItem.id == newItem.id
@@ -91,7 +89,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
                 .onItemClickListener { view, item, _ ->
-                    if (item is Product) {
+                    if (item is ProductItemViewModel) {
                         if (view.id == R.id.flProductHolder) {
                             navigator
                                     .toProduct(item.id)
@@ -114,7 +112,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                 }
                 .typeFactory { any ->
                     when (any) {
-                        is Product -> 2
+                        is ProductItemViewModel -> 2
                         is SectionViewModel -> 1
                         is HorizontalAdsItemViewModel -> 3
                         else -> 0
@@ -206,6 +204,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvNewFeeds.adapter = adapter
         rvNewFeeds.layoutManager = layoutManager
+        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(ProductViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
         rvNewFeeds.addOnScrollListener(loadMoreCallback)
     }
 

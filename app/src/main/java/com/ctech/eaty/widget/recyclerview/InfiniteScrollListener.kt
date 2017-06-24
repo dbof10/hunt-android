@@ -1,4 +1,4 @@
-package com.ctech.eaty.widget;
+package com.ctech.eaty.widget.recyclerview;
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,7 +10,7 @@ class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val v
     private var loading: Boolean = true // True if we are still waiting for the last set of data to load.
 
 
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: android.support.v7.widget.RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         val visibleItemCount = recyclerView.childCount
         val totalItemCount = linearLayoutManager.itemCount

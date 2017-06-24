@@ -19,7 +19,7 @@ import com.ctech.eaty.ui.vote.action.VoteAction
 import com.ctech.eaty.ui.vote.state.VoteState
 import com.ctech.eaty.ui.vote.viewmodel.VoteViewModel
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_votes.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter

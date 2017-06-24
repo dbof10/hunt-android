@@ -27,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/ivClose"
-                android:layout_width="@dimen/comment_avatar_size"
-                android:layout_height="@dimen/comment_avatar_size"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/avatar_margin"
                 android:layout_marginStart="@dimen/avatar_margin"

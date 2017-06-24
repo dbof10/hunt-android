@@ -71,8 +71,8 @@
 
     <com.ctech.eaty.widget.CircularImageView
         android:id="@+id/ivHunterAvatar"
-        android:layout_width="@dimen/comment_avatar_size"
-        android:layout_height="@dimen/comment_avatar_size"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:layout_marginStart="@dimen/avatar_margin"
         android:layout_rowSpan="2"
         android:foreground="@drawable/avatar_ripple"

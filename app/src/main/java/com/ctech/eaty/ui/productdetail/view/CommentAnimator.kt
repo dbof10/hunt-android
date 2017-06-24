@@ -1,7 +1,7 @@
 package com.ctech.eaty.ui.productdetail.view;
 
 import android.support.v7.widget.RecyclerView
-import com.ctech.eaty.widget.SlideInItemAnimator
+import com.ctech.eaty.widget.recyclerview.SlideInItemAnimator
 
 class CommentAnimator : SlideInItemAnimator() {
 

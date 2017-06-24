@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/flProductHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:foreground="?selectableItemBackground">
+
+        <com.ctech.eaty.widget.ForegroundImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_gravity="center" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/gray_600"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            tools:text="Adobe Scan" />
+    </FrameLayout>
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/flProductHolder"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        tools:text="Adobe's free scan app with text recognition" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvDescription"
+        android:background="@color/divider_color" />
+
+</RelativeLayout>
+

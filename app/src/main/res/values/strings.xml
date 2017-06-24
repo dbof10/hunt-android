@@ -1,15 +1,22 @@
 <resources>
     <string name="app_name">Product Hunt</string>
-    <string name="card_product_comments">Comment</string>
+    <string name="facebook_app_id">1966287263602613</string>
 
+    <!-- Title -->
+    <string name="topic">Topics</string>
+
+    <!-- Message -->
+    <string name="retry">Tap to retry</string>
+    <string name="no_internet">No connection</string>
+    <string name="something_wrong">Something wrong happened</string>
+
+    <!-- Navigation -->
     <string name="navigation_header_guest">Guest</string>
     <string name="navigation_collection">Collections</string>
     <string name="navigation_topic">Topic</string>
 
-    <string name="facebook_app_id">1966287263602613</string>
-    <string name="retry">Tap to retry</string>
-    <string name="no_internet">No connection</string>
-    <string name="something_wrong">Something wrong happened</string>
+
+    <string name="comment">Comment</string>
     <string name="share">Share</string>
     <string name="view_more">Read more</string>
     <string name="vote_count">%s votes</string>

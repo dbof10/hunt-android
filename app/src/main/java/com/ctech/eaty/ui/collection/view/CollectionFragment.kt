@@ -18,7 +18,7 @@ import com.ctech.eaty.ui.collection.state.CollectionState
 import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
 import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.InfiniteScrollListener
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_collections.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter

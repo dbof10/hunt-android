@@ -8,7 +8,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.entity.Product
+import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
@@ -55,13 +55,13 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
 
     override fun bind(item: Any?) {
         super.bind(item)
-        val product = item as Product
+        val product = item as ProductItemViewModel
         with(product) {
             tvProductName.text = name
             tvDescription.text = tagline
-            tvUpvote.text = votesCount.toString()
-            tvCommentCount.text = commentsCount.toString()
-            imageLoader.downloadInto(imageUrl.smallImgUrl, ivProduct)
+            tvUpvote.text = votesCount
+            tvCommentCount.text = commentsCount
+            imageLoader.downloadInto(imageUrl, ivProduct)
         }
 
 

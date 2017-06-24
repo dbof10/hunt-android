@@ -1,13 +1,13 @@
-package com.ctech.eaty.widget;
+package com.ctech.eaty.widget.recyclerview
 
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.annotation.ColorInt
 import android.support.v7.widget.RecyclerView
 
-class InsetDividerDecoration(val dividedViewHolderClass: Class<out Any>,
-                             val dividerHeight: Int,
-                             val leftInset: Int,
+class InsetDividerDecoration(private val dividedViewHolderClass: Class<out Any>,
+                             private val dividerHeight: Int,
+                             private val leftInset: Int,
                              @ColorInt val dividerColor: Int) : RecyclerView.ItemDecoration() {
 
     private var paint: Paint = Paint()
@@ -42,7 +42,7 @@ class InsetDividerDecoration(val dividedViewHolderClass: Class<out Any>,
                 }
                 lines[i * 4] = leftInset + lm.getDecoratedLeft(child).toFloat()
                 lines[(i * 4) + 2] = lm.getDecoratedRight(child).toFloat()
-                val y = lm.getDecoratedBottom(child) + child.translationY - dividerHeight;
+                val y = lm.getDecoratedBottom(child) + child.translationY - dividerHeight
                 lines[(i * 4) + 1] = y
                 lines[(i * 4) + 3] = y
                 hasDividers = true

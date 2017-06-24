@@ -1,4 +1,4 @@
-package com.ctech.eaty.widget;
+package com.ctech.eaty.widget.recyclerview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

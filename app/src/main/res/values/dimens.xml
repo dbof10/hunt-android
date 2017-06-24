@@ -5,7 +5,7 @@
     <dimen name="content_padding_vertical">8dp</dimen>
 
 
-    <dimen name="comment_avatar_size">44dp</dimen>
+    <dimen name="avatar_size">44dp</dimen>
     <dimen name="drag_dismiss_distance">168dp</dimen>
     <dimen name="corner">8dp</dimen>
     <dimen name="space_small">4dp</dimen>
@@ -16,6 +16,7 @@
     <dimen name="elevation">4dp</dimen>
     <dimen name="ad_height">300dp</dimen>
     <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_space">16dp</dimen>
     <dimen name="keyline_1">72dp</dimen>
 
 

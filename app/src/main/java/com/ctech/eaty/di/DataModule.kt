@@ -1,13 +1,14 @@
 package com.ctech.eaty.di
 
 import com.ctech.eaty.entity.Comments
-import com.ctech.eaty.entity.Products
+import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.CollectionResponse
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.TopicResponse
 import com.ctech.eaty.response.VoteResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
+import com.ctech.eaty.ui.search.action.SearchBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
 import com.ctech.eaty.util.rx.ThreadScheduler
@@ -15,6 +16,7 @@ import com.nytimes.android.external.store2.base.impl.BarCode
 import com.nytimes.android.external.store2.base.impl.Store
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -29,11 +31,12 @@ class DataModule {
 
 
     @Provides
-    fun provideProductRepository(homeStore: Store<Products, BarCode>,
+    fun provideProductRepository(homeStore: Store<ProductResponse, BarCode>,
                                  productStore: Store<ProductDetailResponse, BarCode>,
+                                 searchStore: Store<ProductResponse, SearchBarCode>,
                                  apiClient: ProductHuntApi,
                                  appSettingsManager: AppSettingsManager): ProductRepository {
-        return ProductRepository(homeStore, productStore, apiClient, appSettingsManager)
+        return ProductRepository(homeStore, productStore, searchStore, apiClient, appSettingsManager)
     }
 
     @Provides

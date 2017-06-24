@@ -7,6 +7,7 @@ import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.action.BarCodeGenerator
 import com.ctech.eaty.ui.home.result.LoadResult
 import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -23,7 +24,9 @@ class LoadEpic(val productRepository: ProductRepository,
         }.flatMap {
             productRepository.getHomePosts(barCodeGenerator.currentBarCode)
                     .map {
-                        LoadResult.success(emptyList())
+                        LoadResult.success(
+                                it.map { ProductItemViewModel(it) }
+                        )
                     }
                     .onErrorReturn {
                         LoadResult.fail(it)
