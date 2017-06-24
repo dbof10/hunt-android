@@ -33,11 +33,18 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        setupViewPager()
         setupChromeService()
         setupToolbar()
+        var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+
+        if (fragment == null) {
+            fragment = HomeFragment.newInstance()
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit()
+        }
     }
 
     private fun setupToolbar() {
@@ -54,13 +61,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
         customTabActivityHelper.setConnectionCallback(this)
     }
 
-    private fun setupViewPager() {
-        val adapter = PagerAdapter(supportFragmentManager)
-        adapter.updateFragments(listOf(HomeFragment.newInstance()))
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
-
-    }
 
     override fun onStart() {
         super.onStart()

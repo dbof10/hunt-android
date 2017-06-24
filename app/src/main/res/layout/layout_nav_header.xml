@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_header"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:background="@drawable/header_background">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,11 +13,11 @@
         android:layout_marginStart="@dimen/content_padding_horizontal"
         android:layout_marginTop="@dimen/content_padding_vertical">
 
-        <com.ctech.eaty.widget.CircularImageView
+        <ImageView
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
-            android:background="@android:color/black" />
+            android:background="@drawable/ic_account_white" />
 
         <TextView
             android:id="@+id/tvUserName"
