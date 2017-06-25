@@ -33,6 +33,7 @@
     <dimen name="touch_raise">6dp</dimen>
     <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
     <dimen name="z_card">2dp</dimen>
+    <dimen name="collection_detail_background_height">180dp</dimen>
 
 
 </resources>

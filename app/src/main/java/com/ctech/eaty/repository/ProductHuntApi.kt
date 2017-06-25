@@ -26,6 +26,9 @@ interface ProductHuntApi {
     @GET("/v1/collections?search[featured]=true")
     fun getCollections(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
+    @GET("/v1/collections/{id}")
+    fun getCollectionDetail(@Path("id") id: Int): Observable<ResponseBody>
+
     @GET("/v1/topics?search[trending]=true")
     fun getTopics(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 

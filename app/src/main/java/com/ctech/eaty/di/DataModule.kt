@@ -1,12 +1,8 @@
 package com.ctech.eaty.di
 
 import com.ctech.eaty.entity.Comments
-import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.repository.*
-import com.ctech.eaty.response.CollectionResponse
-import com.ctech.eaty.response.ProductDetailResponse
-import com.ctech.eaty.response.TopicResponse
-import com.ctech.eaty.response.VoteResponse
+import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.search.action.SearchBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
@@ -16,7 +12,6 @@ import com.nytimes.android.external.store2.base.impl.BarCode
 import com.nytimes.android.external.store2.base.impl.Store
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -48,9 +43,10 @@ class DataModule {
 
     @Provides
     fun provideCollectionRepository(store: Store<CollectionResponse, BarCode>,
+                                    collectionDetailStore: Store<CollectionDetailResponse, BarCode>,
                                     apiClient: ProductHuntApi,
                                     appSettingsManager: AppSettingsManager): CollectionRepository {
-        return CollectionRepository(store, apiClient, appSettingsManager)
+        return CollectionRepository(store, collectionDetailStore, apiClient, appSettingsManager)
     }
 
 

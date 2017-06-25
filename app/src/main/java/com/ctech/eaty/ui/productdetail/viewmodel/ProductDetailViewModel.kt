@@ -62,7 +62,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     }
 
-    fun comments(): Observable<List<ProductBodyItemViewModel>> {
+    fun body(): Observable<List<ProductBodyItemViewModel>> {
         return content()
                 .map {
                     val body = ArrayList<ProductBodyItemViewModel>(MAX_BODY_ITEM)

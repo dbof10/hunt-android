@@ -13,7 +13,6 @@
 
     </style>
 
-
     <style name="AppTheme.Translucent">
         <item name="android:windowBackground">@color/scrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -35,6 +34,11 @@
     <style name="AppTheme.Translucent.Overlap.Vote">
         <item name="android:windowEnterTransition">@transition/vote_sheet_enter</item>
         <item name="android:windowReturnTransition">@transition/vote_sheet_return</item>
+    </style>
+
+    <style name="AppTheme.NoStatusBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="Widget.Hunt" parent="android:Widget" />

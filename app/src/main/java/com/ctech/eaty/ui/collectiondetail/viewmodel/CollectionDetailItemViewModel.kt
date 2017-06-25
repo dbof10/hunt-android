@@ -1,0 +1,3 @@
+package com.ctech.eaty.ui.collectiondetail.viewmodel
+
+interface CollectionDetailItemViewModel

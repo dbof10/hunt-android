@@ -1,8 +1,9 @@
 package com.ctech.eaty.ui.home.viewmodel;
 
 import com.ctech.eaty.entity.Product
+import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionDetailItemViewModel
 
-data class ProductItemViewModel(private val product: Product) : HomeItemViewModel {
+data class ProductItemViewModel(private val product: Product) : HomeItemViewModel, CollectionDetailItemViewModel {
     val id: Int get() = product.id
     val name: String get() = product.name
     val tagline: String get() = product.tagline

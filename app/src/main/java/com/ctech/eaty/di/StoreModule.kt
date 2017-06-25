@@ -73,6 +73,15 @@ class StoreModule {
     }
 
     @Provides
+    fun providePersistedCollectionDetailStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<CollectionDetailResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, CollectionDetailResponse>()
+                .fetcher { barcode -> apiClient.getCollectionDetail(barcode.key.toInt()).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, CollectionDetailResponse::class.java))
+                .open()
+    }
+
+    @Provides
     fun providePersistedCollectionStore(apiClient: ProductHuntApi, gson: Gson)
             : Store<CollectionResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, CollectionResponse>()

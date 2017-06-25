@@ -3,6 +3,9 @@ package com.ctech.eaty.di
 import com.ctech.eaty.ui.collection.di.CollectionFragmentBuilderModule
 import com.ctech.eaty.ui.collection.di.CollectionModule
 import com.ctech.eaty.ui.collection.view.CollectionActivity
+import com.ctech.eaty.ui.collectiondetail.di.CollectionDetailFragmentBuilderModule
+import com.ctech.eaty.ui.collectiondetail.di.CollectionDetailModule
+import com.ctech.eaty.ui.collectiondetail.view.CollectionDetailActivity
 import com.ctech.eaty.ui.comment.di.CommentFragmentBuilderModule
 import com.ctech.eaty.ui.comment.di.CommentModule
 import com.ctech.eaty.ui.comment.view.CommentActivity
@@ -38,6 +41,9 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = arrayOf(CollectionModule::class, CollectionFragmentBuilderModule::class))
     abstract fun contributeCollectionActivity(): CollectionActivity
 
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(CollectionDetailModule::class, CollectionDetailFragmentBuilderModule::class))
+    abstract fun contributeCollectionDetailActivity(): CollectionDetailActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(TopicModule::class, TopicFragmentBuilderModule::class))

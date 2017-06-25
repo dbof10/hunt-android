@@ -11,9 +11,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
-import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.Topic
-import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.search.action.SearchAction
@@ -86,7 +84,7 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
                 .onItemClickListener { view, item, _ ->
-                    if (item is Product) {
+                    if (item is ProductItemViewModel) {
                         if (view.id == R.id.flProductHolder) {
                             navigator
                                     .toProduct(item.id)
@@ -120,7 +118,6 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
     override fun onStart() {
         super.onStart()
         store.dispatch(SearchAction.Load(topic.id))
-        setupViewModel()
     }
 
     override fun onDestroyView() {

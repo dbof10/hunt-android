@@ -213,7 +213,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.comments().subscribe { adapter.setItems(it) })
+        disposeOnStop(viewModel.body().subscribe { adapter.setItems(it) })
         disposeOnStop(viewModel.commentsSelection().subscribe { adapter.setItems(it) })
     }
 

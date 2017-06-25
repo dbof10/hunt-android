@@ -14,7 +14,7 @@ import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
 
-class VoteViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
+class VoteViewHolder(view: View, private val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
 
     @BindView(R.id.ivAvatar)
     lateinit var ivAvatar: ImageView

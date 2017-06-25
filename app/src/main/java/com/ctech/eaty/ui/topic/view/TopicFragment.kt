@@ -100,7 +100,6 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
     override fun onStart() {
         super.onStart()
         store.dispatch(TopicAction.LOAD)
-        setupViewModel()
     }
 
     private fun setupErrorView() {

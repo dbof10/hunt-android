@@ -16,6 +16,7 @@ import com.ctech.eaty.entity.Collection
 import com.ctech.eaty.ui.collection.action.CollectionAction
 import com.ctech.eaty.ui.collection.state.CollectionState
 import com.ctech.eaty.ui.collection.viewmodel.CollectionViewModel
+import com.ctech.eaty.ui.collectiondetail.view.CollectionDetailActivity
 import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
@@ -69,6 +70,12 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
                 .viewHolderFactory { viewGroup, _ ->
                     CollectionViewHolder.create(viewGroup, imageLoader)
                 }
+                .onItemClickListener { _, item, _ ->
+                    (item as Collection).run {
+                        val intent = CollectionDetailActivity.newIntent(context, id)
+                        context.startActivity(intent)
+                    }
+                }
                 .build()
     }
 
@@ -91,7 +98,6 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
     override fun onStart() {
         super.onStart()
         store.dispatch(CollectionAction.LOAD)
-        setupViewModel()
     }
 
     private fun setupErrorView() {

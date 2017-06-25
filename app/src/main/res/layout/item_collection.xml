@@ -5,7 +5,7 @@
     android:layout_height="@dimen/collection_background_height">
 
     <com.ctech.eaty.widget.ForegroundImageView
-        android:id="@+id/ivCollectionBackground"
+        android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="@color/black_12"
@@ -21,7 +21,7 @@
         android:paddingTop="@dimen/content_padding_vertical">
 
         <com.ctech.eaty.widget.BaselineGridTextView
-            android:id="@+id/tvCollectionName"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
             tools:text="WWDC 12" />
 
         <com.ctech.eaty.widget.BaselineGridTextView
-            android:id="@+id/tvCollectionTitle"
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -146,7 +146,6 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     override fun onStart() {
         super.onStart()
         store.dispatch(HomeAction.LOAD)
-        setupViewModel()
     }
 
     override fun onDestroyView() {

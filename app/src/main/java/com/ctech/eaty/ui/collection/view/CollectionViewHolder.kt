@@ -15,14 +15,14 @@ import vn.tiki.noadapter2.AbsViewHolder
 
 class CollectionViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
 
-    @BindView(R.id.ivCollectionBackground)
-    lateinit var ivCollectionBackground: ImageView
+    @BindView(R.id.ivBackground)
+    lateinit var ivBackground: ImageView
 
-    @BindView(R.id.tvCollectionName)
-    lateinit var tvCollectionName: TextView
+    @BindView(R.id.tvName)
+    lateinit var tvName: TextView
 
-    @BindView(R.id.tvCollectionTitle)
-    lateinit var tvCollectionTitle: TextView
+    @BindView(R.id.tvTitle)
+    lateinit var tvTitle: TextView
 
     init {
         ButterKnife.bind(this, view)
@@ -39,9 +39,9 @@ class CollectionViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsV
         super.bind(item)
         val collection = item as Collection
         with(collection) {
-            tvCollectionName.text = name
-            tvCollectionTitle.text = title
-            imageLoader.downloadInto(backgroundImageUrl, ivCollectionBackground)
+            tvName.text = name
+            tvTitle.text = title
+            imageLoader.downloadInto(backgroundImageUrl, ivBackground)
         }
 
 

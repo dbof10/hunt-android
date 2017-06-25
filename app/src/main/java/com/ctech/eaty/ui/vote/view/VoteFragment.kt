@@ -107,7 +107,6 @@ class VoteFragment : BaseFragment<VoteState>(), Injectable {
         super.onStart()
         store.dispatch(VoteAction.Load(postId))
         setupViewModel()
-        setupErrorView()
     }
 
     private fun renderContent(list: List<Vote>) {
