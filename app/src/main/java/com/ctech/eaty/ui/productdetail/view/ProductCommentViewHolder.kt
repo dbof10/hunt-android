@@ -9,8 +9,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
-import com.ctech.eaty.util.DateUtil
+import com.ctech.eaty.util.DateUtils
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.HtmlUtils
 import com.ctech.eaty.widget.ViewMoreTextView
 import vn.tiki.noadapter2.AbsViewHolder
 
@@ -59,8 +60,8 @@ class ProductCommentViewHolder(view: View, val imageLoader: GlideImageLoader) : 
             ivCommentLike.visibility = commentLikeVisibility
             ivReply.visibility = replyVisibility
             tvUserName.text = userName
-            tvComment.text = body
-            tvTimeStamp.text = DateUtil.getRelativeTimeSpan(itemView.context, comment.createdAt)
+            tvComment.text = HtmlUtils.fromHtml(body)
+            tvTimeStamp.text = DateUtils.getRelativeTimeSpan(itemView.context, comment.createdAt)
             imageLoader.downloadInto(imageUrl, ivAvatar)
         }
 

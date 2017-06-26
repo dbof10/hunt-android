@@ -9,7 +9,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Vote
-import com.ctech.eaty.util.DateUtil
+import com.ctech.eaty.util.DateUtils
 import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
@@ -46,7 +46,7 @@ class VoteViewHolder(view: View, private val imageLoader: GlideImageLoader) : Ab
             tvUserName.text = user.username
             tvHeadline.text = user.headline
             imageLoader.downloadInto(user.imageUrl.smallImgUrl, ivAvatar)
-            tvTimeStamp.text = DateUtil.getRelativeTimeSpan(itemView.context, vote.createAt)
+            tvTimeStamp.text = DateUtils.getRelativeTimeSpan(itemView.context, vote.createAt)
         }
 
 

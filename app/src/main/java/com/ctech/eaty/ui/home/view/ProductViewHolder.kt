@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.home.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,13 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.ResizeImageUrlProvider
 import vn.tiki.noadapter2.AbsViewHolder
 
 
 class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
+
+    private val IMAGE_WIDTH = 300
 
     @BindView(R.id.ivProduct)
     lateinit var ivProduct: ImageView
@@ -61,7 +65,7 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
             tvDescription.text = tagline
             tvUpvote.text = votesCount
             tvCommentCount.text = commentsCount
-            imageLoader.downloadInto(imageUrl, ivProduct)
+            imageLoader.downloadInto(ResizeImageUrlProvider.getNewUrl(imageUrl, IMAGE_WIDTH), ivProduct)
         }
 
 

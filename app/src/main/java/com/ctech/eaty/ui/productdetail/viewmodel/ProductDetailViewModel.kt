@@ -1,10 +1,9 @@
 package com.ctech.eaty.ui.productdetail.viewmodel
 
-import android.net.Uri
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
-import com.ctech.eaty.util.UrlEncodedQueryString
+import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -14,7 +13,7 @@ import io.reactivex.subjects.PublishSubject
 class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<ProductDetailState>,
                              private val navigation: ProductDetailNavigation,
                              private val threadScheduler: ThreadScheduler) {
-    private val HEADER_IMAGE_SIZE = 500
+    private val HEADER_IMAGE_SIZE = 300
     private val MAX_BODY_ITEM = 7
     private var body: List<ProductBodyItemViewModel> = emptyList()
     private val bodySubject: PublishSubject<List<ProductBodyItemViewModel>> = PublishSubject.create()
@@ -37,14 +36,8 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
     fun header(): Observable<String> {
         return content()
                 .map {
-                    handleUrl(it.thumbnail.imageUrl)
+                    ResizeImageUrlProvider.overrideUrl(it.thumbnail.imageUrl, HEADER_IMAGE_SIZE)
                 }
-    }
-
-    private fun handleUrl(url: String): String {
-        val uri = Uri.parse(url)
-        return "${uri.scheme}://${uri.host}${uri.path}?${UrlEncodedQueryString.parse(uri).set("h", HEADER_IMAGE_SIZE)
-                .set("w", HEADER_IMAGE_SIZE)}"
     }
 
     fun content(): Observable<ProductDetail> {

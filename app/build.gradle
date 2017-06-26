@@ -28,71 +28,73 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support:multidex:1.0.1'
 
     //UI
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support:customtabs:25.4.0'
-    compile 'com.android.support:palette-v7:25.4.0'
-    compile 'com.airbnb.android:lottie:2.0.0'
+    implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.android.support:design:25.4.0'
+    implementation 'com.android.support:customtabs:25.4.0'
+    implementation 'com.android.support:palette-v7:25.4.0'
+    implementation 'com.airbnb.android:lottie:2.0.0'
 
 
     //Reactive
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.0.9'
 
-    compile 'vn.tiki.noadapter2:noadapter:2.0.1-SNAPSHOT'
+    implementation 'vn.tiki.noadapter2:noadapter:2.0.1-SNAPSHOT'
 
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 
-    compile 'com.jakewharton:butterknife:8.6.0'
+    implementation 'com.jakewharton:butterknife:8.6.0'
     kapt 'com.jakewharton:butterknife-compiler:8.6.0'
 
     //Dagger
-    compile 'com.google.dagger:dagger:2.11'
-    compile "com.google.dagger:dagger-android-support:2.11"
+    implementation 'com.google.dagger:dagger:2.11'
+    implementation "com.google.dagger:dagger-android-support:2.11"
     kapt 'com.google.dagger:dagger-compiler:2.11'
-    compile 'com.google.dagger:dagger-android:2.11'
+    implementation 'com.google.dagger:dagger-android:2.11'
     kapt 'com.google.dagger:dagger-android-processor:2.11'
 
     //Networking
-    compile "com.squareup.retrofit2:retrofit:2.2.0"
-    compile "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
-    compile "com.squareup.okhttp3:okhttp:3.8.0"
-    compile "com.squareup.okhttp3:logging-interceptor:3.6.0"
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation "com.squareup.retrofit2:retrofit:2.2.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
+    implementation "com.squareup.okhttp3:okhttp:3.8.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.6.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     //Caching
-    compile "com.nytimes.android:store2:0.0.1-SNAPSHOT"
-    compile "com.nytimes.android:cache:2.1.0"
-    compile "com.nytimes.android:middleware2:0.0.1-SNAPSHOT"
-    compile "com.nytimes.android:filesystem2:0.0.1-SNAPSHOT"
+    implementation "com.nytimes.android:store2:0.0.1-SNAPSHOT"
+    implementation "com.nytimes.android:cache:2.1.0"
+    implementation "com.nytimes.android:middleware2:0.0.1-SNAPSHOT"
+    implementation "com.nytimes.android:filesystem2:0.0.1-SNAPSHOT"
 
     //Date
-    compile 'net.danlew:android.joda:2.9.9'
+    implementation 'net.danlew:android.joda:2.9.9'
 
     //Ad
-    compile 'com.facebook.android:audience-network-sdk:4.+'
+    implementation 'com.facebook.android:audience-network-sdk:4.+'
 
-    compile 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
 
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:2.7.22"
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.7.22"
+    testImplementation "org.robolectric:robolectric:3.3.2"
+    testImplementation 'org.jetbrains.spek:spek-api:1.1.2'
 
-    androidTestCompile 'com.android.support:support-annotations:25.4.0'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'org.mockito:mockito-android:2.7.19'
+    androidTestImplementation 'com.android.support:support-annotations:25.4.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'org.mockito:mockito-android:2.7.19'
 
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'

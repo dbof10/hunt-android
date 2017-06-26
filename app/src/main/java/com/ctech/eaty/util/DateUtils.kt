@@ -7,7 +7,7 @@ import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
 
-class DateUtil private constructor() {
+class DateUtils private constructor() {
 
     companion object {
         private val dateFormatter: DateTimeFormatter by lazy {

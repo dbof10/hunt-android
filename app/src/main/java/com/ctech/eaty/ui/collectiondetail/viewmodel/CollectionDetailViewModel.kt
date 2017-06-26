@@ -1,12 +1,14 @@
 package com.ctech.eaty.ui.collectiondetail.viewmodel
 
-import android.util.Log
 import com.ctech.eaty.entity.CollectionDetail
 import com.ctech.eaty.ui.collectiondetail.state.CollectionDetailState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
+import com.ctech.eaty.util.ResizeImageUrlProvider
 import io.reactivex.Observable
 
 class CollectionDetailViewModel(private val stateDispatcher: Observable<CollectionDetailState>) {
+
+    private val IMAGE_BACKGROUND_WIDTH = 600
     fun loading(): Observable<CollectionDetailState> {
         return stateDispatcher
                 .filter { it.loading }
@@ -38,12 +40,8 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
     fun header(): Observable<String> {
         return content()
                 .map {
-                    handleUrl(it.backgroundImageUrl)
+                    ResizeImageUrlProvider.getNewUrl(it.backgroundImageUrl, IMAGE_BACKGROUND_WIDTH )
                 }
-    }
-
-    private fun handleUrl(url: String): String {
-        return url
     }
 
     fun body(): Observable<List<CollectionDetailItemViewModel>> {

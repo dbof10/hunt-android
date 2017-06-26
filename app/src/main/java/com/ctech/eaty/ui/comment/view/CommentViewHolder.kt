@@ -9,7 +9,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Comment
-import com.ctech.eaty.util.DateUtil
+import com.ctech.eaty.util.DateUtils
 import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
@@ -49,7 +49,7 @@ class CommentViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
             tvUserName.text = "${user.username} - ${user.name} "
             tvHeadline.text = user.headline
             tvComment.text = body
-            tvTimeStamp.text = DateUtil.getRelativeTimeSpan(itemView.context, createdAt)
+            tvTimeStamp.text = DateUtils.getRelativeTimeSpan(itemView.context, createdAt)
             imageLoader.downloadInto(user.imageUrl.smallImgUrl, ivAvatar)
         }
 

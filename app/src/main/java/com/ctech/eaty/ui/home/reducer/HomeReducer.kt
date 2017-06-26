@@ -8,7 +8,7 @@ import com.ctech.eaty.ui.home.result.RefreshResult
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
-import com.ctech.eaty.util.DateUtil
+import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
 
@@ -24,7 +24,7 @@ class HomeReducer : Reducer<HomeState> {
                     return state.copy(loading = false, loadError = result.error)
                 } else {
                     return state.copy(loading = false, loadError = null,
-                            content = listOf(SectionViewModel(0, DateUtil.getRelativeTime(result.date))) + result.content)
+                            content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content)
                 }
             }
             is RefreshResult -> {
@@ -34,7 +34,7 @@ class HomeReducer : Reducer<HomeState> {
                     return state.copy(refreshing = false, refreshError = result.error)
                 } else {
                     return state.copy(refreshing = false, refreshError = null,
-                            content = listOf(SectionViewModel(0, DateUtil.getRelativeTime(result.date))) + result.content,
+                            content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content,
                             dayAgo = 0)
                 }
             }
@@ -47,7 +47,7 @@ class HomeReducer : Reducer<HomeState> {
                 } else {
                     return state.copy(loadingMore = false, loadError = null, content = state.content
                             + HorizontalAdsItemViewModel(result.dayAgo)
-                            + listOf(SectionViewModel(result.dayAgo, DateUtil.getRelativeTime(DateTime.now(), result.date)))
+                            + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)))
                             + result.content, dayAgo = result.dayAgo)
                 }
             }
