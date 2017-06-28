@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.entity.Topic
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -15,6 +16,10 @@ import javax.inject.Inject
 
 
 class SearchActivity : BaseActivity(), HasSupportFragmentInjector {
+    override fun getScreenName(): String = "Search"
+
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -46,8 +51,12 @@ class SearchActivity : BaseActivity(), HasSupportFragmentInjector {
         }
     }
 
-    private fun setupToolbar(name: String) {
+    override fun onStart() {
+        super.onStart()
+        trackingManager.trackScreenView(getScreenName())
+    }
 
+    private fun setupToolbar(name: String) {
         toolbar.title = name
         toolbar.setNavigationOnClickListener {
             finish()

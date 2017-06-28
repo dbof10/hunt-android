@@ -106,7 +106,6 @@ class VoteFragment : BaseFragment<VoteState>(), Injectable {
     override fun onStart() {
         super.onStart()
         store.dispatch(VoteAction.Load(postId))
-        setupViewModel()
     }
 
     private fun renderContent(list: List<Vote>) {

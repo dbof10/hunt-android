@@ -7,6 +7,7 @@ import com.ctech.eaty.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebviewActivity : BaseActivity() {
+    override fun getScreenName(): String = "Webview"
 
     companion object {
         val EXTRA_URL = "extra.url"

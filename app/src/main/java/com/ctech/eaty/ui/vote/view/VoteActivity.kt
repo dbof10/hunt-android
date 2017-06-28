@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.util.AnimUtils.getLinearOutSlowInInterpolator
 import com.ctech.eaty.widget.BottomSheet
 import dagger.android.AndroidInjector
@@ -18,7 +19,8 @@ import kotlinx.android.synthetic.main.activity_votes.*
 import javax.inject.Inject
 
 
-class VoteActivity : BaseActivity(), HasSupportFragmentInjector , FragmentContractor{
+class VoteActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContractor {
+    override fun getScreenName(): String = "Vote"
 
     companion object {
         val POST_ID_KEY = "postId"
@@ -36,6 +38,8 @@ class VoteActivity : BaseActivity(), HasSupportFragmentInjector , FragmentContra
     private val DISMISS_CLOSE = 1
     private var dismissState = DISMISS_DOWN
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -55,6 +59,11 @@ class VoteActivity : BaseActivity(), HasSupportFragmentInjector , FragmentContra
         }
         setupHeader()
         setupBottomSheet()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     private fun setupHeader() {
@@ -115,5 +124,5 @@ class VoteActivity : BaseActivity(), HasSupportFragmentInjector , FragmentContra
         return dispatchingAndroidInjector
     }
 
-    override fun getTitleBar(): View  = llTitleBar
+    override fun getTitleBar(): View = llTitleBar
 }

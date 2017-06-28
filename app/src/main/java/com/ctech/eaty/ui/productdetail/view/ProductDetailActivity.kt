@@ -23,6 +23,7 @@ import com.ctech.eaty.annotation.Lightness
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.ProductDetail
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
@@ -42,6 +43,7 @@ const val SCRIM_ADJUSTMENT = 0.075f
 
 
 class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract {
+    override fun getScreenName(): String = "Product Detail"
 
     companion object {
         val PRODUCT_ID = "productId"
@@ -52,6 +54,9 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             return intent
         }
     }
+
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var store: Store<ProductDetailState>
@@ -172,6 +177,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     override fun onStart() {
         super.onStart()
+        trackingManager.trackScreenView(getScreenName())
         store.dispatch(ProductDetailAction.Load(productId))
     }
 

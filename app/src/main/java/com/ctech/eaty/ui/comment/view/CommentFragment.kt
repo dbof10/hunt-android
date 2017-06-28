@@ -4,6 +4,7 @@ package com.ctech.eaty.ui.comment.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,13 +91,12 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
         ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
+        setupErrorView()
     }
 
     override fun onStart() {
         super.onStart()
         store.dispatch(CommentAction.Load(productId))
-        setupViewModel()
-        setupErrorView()
     }
 
     private fun renderContent(list: List<Comment>) {

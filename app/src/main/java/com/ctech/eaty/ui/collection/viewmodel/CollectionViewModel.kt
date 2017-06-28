@@ -7,7 +7,7 @@ import io.reactivex.Observable
 class CollectionViewModel(private val stateDispatcher: Observable<CollectionState>) {
     fun loading(): Observable<CollectionState> {
         return stateDispatcher
-                .filter { it.loading}
+                .filter { it.loading }
     }
 
     fun loadingMore(): Observable<CollectionState> {
@@ -17,7 +17,7 @@ class CollectionViewModel(private val stateDispatcher: Observable<CollectionStat
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
-                .filter { it.loadError != null && !it.loading}
+                .filter { it.loadError != null && !it.loading }
                 .map { it.loadError }
     }
 
@@ -35,6 +35,7 @@ class CollectionViewModel(private val stateDispatcher: Observable<CollectionStat
                             && !it.loadingMore
                             && it.loadError == null
                             && it.loadMoreError == null
+                            && it.content.isNotEmpty()
 
                 }
                 .map { it.content }

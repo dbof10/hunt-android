@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -81,10 +81,19 @@ dependencies {
     implementation 'net.danlew:android.joda:2.9.9'
 
     //Ad
-    implementation 'com.facebook.android:audience-network-sdk:4.+'
+    implementation ('com.facebook.android:audience-network-sdk:4.+'){
+        exclude group: "com.google.android.gms"
+    }
 
     implementation 'com.jakewharton.timber:timber:4.5.1'
 
+    //Tracking
+    implementation ('com.google.firebase:firebase-core:11.0.1')
+
+    //Crash report
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true
+    }
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-core:2.7.22"
@@ -100,3 +109,5 @@ dependencies {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
 }
+apply plugin: 'com.google.gms.google-services'
+

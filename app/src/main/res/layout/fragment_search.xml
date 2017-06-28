@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        tools:visibility="visible"
         app:lottie_autoPlay="false"
         app:lottie_fileName="preloader.json"
         app:lottie_loop="true" />

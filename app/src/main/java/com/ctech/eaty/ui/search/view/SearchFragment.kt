@@ -12,7 +12,6 @@ import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
-import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.search.action.SearchAction
 import com.ctech.eaty.ui.search.navigation.SearchNavigation
@@ -125,9 +124,10 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
         super.onDestroyView()
     }
 
-    private fun renderContent(list: List<HomeItemViewModel>) {
+    private fun renderContent(list: List<ProductItemViewModel>) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        vError.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -139,6 +139,7 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
     private fun renderLoadError(error: Throwable) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        vError.visibility = View.VISIBLE
     }
 
     private fun renderLoadingMore() {
@@ -148,6 +149,7 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
 
     private fun renderLoading() {
         vLottie.playAnimation()
+        vError.visibility = View.GONE
         vLottie.visibility = View.VISIBLE
     }
 

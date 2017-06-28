@@ -12,7 +12,6 @@ import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
 
-//TODO: Ignore empty
 class HomeReducer : Reducer<HomeState> {
 
     override fun apply(state: HomeState, result: Result): HomeState {

@@ -35,6 +35,7 @@ class VoteViewModel(private val stateDispatcher: Observable<VoteState>) {
                             && !it.loadingMore
                             && it.loadError == null
                             && it.loadMoreError == null
+                            && it.content.isNotEmpty()
 
                 }
                 .map { it.content }

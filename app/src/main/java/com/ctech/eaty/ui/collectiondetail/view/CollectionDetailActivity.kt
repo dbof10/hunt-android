@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.collectiondetail.action.CollectionDetailAction
 import com.ctech.eaty.ui.collectiondetail.state.CollectionDetailState
 import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionDetailViewModel
@@ -19,6 +20,11 @@ import javax.inject.Inject
 
 
 class CollectionDetailActivity : BaseActivity(), HasSupportFragmentInjector {
+
+    override fun getScreenName(): String = "Collection Detail"
+
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -65,6 +71,7 @@ class CollectionDetailActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onStart() {
         super.onStart()
+        trackingManager.trackScreenView(getScreenName())
         store.dispatch(CollectionDetailAction.Load(collectionId))
     }
 

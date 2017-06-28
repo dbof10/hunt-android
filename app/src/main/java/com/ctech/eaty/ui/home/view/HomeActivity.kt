@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.Gravity.START
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.GlideImageLoader
@@ -17,7 +18,10 @@ import javax.inject.Inject
 
 
 class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivityHelper.ConnectionCallback {
+    override fun getScreenName() = "Home"
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var customTabActivityHelper: CustomTabActivityHelper
@@ -64,6 +68,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
 
     override fun onStart() {
         super.onStart()
+        trackingManager.trackScreenView(getScreenName())
         customTabActivityHelper.bindCustomTabsService(this)
     }
 

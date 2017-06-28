@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -14,7 +15,10 @@ import kotlinx.android.synthetic.main.activity_comments.*
 import javax.inject.Inject
 
 class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
+    override fun getScreenName(): String = "Comment"
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
@@ -51,6 +55,11 @@ class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
                     .add(R.id.fragmentContainer, fragment)
                     .commit()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun onResume() {

@@ -35,6 +35,7 @@ class SearchViewModel(private val stateDispatcher: Observable<SearchState>) {
                             && !it.loadingMore
                             && it.loadError == null
                             && it.loadMoreError == null
+                            && it.content.isNotEmpty()
                 }
                 .map {
                     it.content

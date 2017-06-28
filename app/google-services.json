@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "163440945427",
+    "firebase_url": "https://daily-hunt.firebaseio.com",
+    "project_id": "daily-hunt",
+    "storage_bucket": "daily-hunt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163440945427:android:54028603d8cc8857",
+        "android_client_info": {
+          "package_name": "com.ctech.eaty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163440945427-r14aah56lptsu6s4uasnp5e2l7gn17nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr7lR2WMwmd9SSts9P9cADLz1sIZfVb_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

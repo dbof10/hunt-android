@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -11,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_collections.*
 import javax.inject.Inject
 
 class TopicActivity : BaseActivity(), HasSupportFragmentInjector {
+    override fun getScreenName(): String = "Topic"
+
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -28,6 +33,11 @@ class TopicActivity : BaseActivity(), HasSupportFragmentInjector {
                     .add(R.id.fragmentContainer, fragment)
                     .commit()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     private fun setupToolbar() {
