@@ -8,12 +8,12 @@
         android:id="@+id/flProductHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:foreground="?selectableItemBackground">
 
         <com.ctech.eaty.widget.ForegroundImageView
             android:id="@+id/ivProduct"
             android:layout_width="match_parent"
+            android:scaleType="fitXY"
             android:layout_height="240dp"
             android:layout_gravity="center" />
 
@@ -22,11 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/gray_600"
-            android:paddingBottom="8dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
+            android:background="@color/black_25"
+            android:paddingBottom="@dimen/content_padding_vertical"
+            android:paddingEnd="@dimen/content_padding_horizontal"
+            android:paddingStart="@dimen/content_padding_horizontal"
+            android:paddingTop="@dimen/content_padding_vertical"
             android:singleLine="true"
             android:textColor="@android:color/white"
             android:textSize="24sp"
@@ -35,16 +35,15 @@
 
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvDescription"
+        style="@style/Widget.Hunt.ShotDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/flProductHolder"
-        android:layout_gravity="start"
         android:background="@android:color/white"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:textSize="16sp"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/space_small"
         tools:text="Adobe's free scan app with text recognition" />
 
     <View
@@ -57,78 +56,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="@dimen/content_padding_vertical"
         android:layout_below="@id/separator"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+      >
 
-        <TextView
+        <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvUpvote"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
+            android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textSize="16sp"
             tools:text="287" />
 
         <ImageView
+            android:id="@+id/ivUpvote"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/ic_votes" />
+            android:layout_marginStart="@dimen/space_small"
+            android:src="@drawable/ic_heart_solid_grey" />
 
-        <TextView
+        <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvCommentCount"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_medium"
             tools:text="100" />
 
         <ImageView
+            android:paddingTop="2dp"
+            android:id="@+id/ivCommentCount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
+            android:layout_marginStart="@dimen/space_small"
             android:src="@drawable/ic_comment" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tvComment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:gravity="center_vertical"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:text="@string/comment"
-            android:textAllCaps="true"
-            android:textSize="14sp" />
-
-        <ImageView
-            android:id="@+id/ivMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
-            android:gravity="center_vertical"
-            android:paddingBottom="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/ic_dots_vertical" />
     </LinearLayout>
 </RelativeLayout>
 

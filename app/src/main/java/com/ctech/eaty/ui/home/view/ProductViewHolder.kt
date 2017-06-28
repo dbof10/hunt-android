@@ -34,20 +34,20 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
     @BindView(R.id.tvCommentCount)
     lateinit var tvCommentCount: TextView
 
+    @BindView(R.id.ivUpvote)
+    lateinit var ivUpvote: ImageView
+
+    @BindView(R.id.ivCommentCount)
+    lateinit var ivCommentCount: ImageView
+
     @BindView(R.id.flProductHolder)
     lateinit var flProductHoder: View
-
-    @BindView(R.id.ivMenu)
-    lateinit var ivMenu: View
-
-    @BindView(R.id.tvComment)
-    lateinit var tvComment: TextView
 
     init {
         ButterKnife.bind(this, view)
         flProductHoder.setOnClickListener(this)
-        ivMenu.setOnClickListener(this)
-        tvComment.setOnClickListener(this)
+        ivUpvote.setOnClickListener(this)
+        ivCommentCount.setOnClickListener(this)
     }
 
     companion object {

@@ -13,7 +13,7 @@
     <!-- Navigation -->
     <string name="navigation_header_guest">Guest</string>
     <string name="navigation_collection">Collections</string>
-    <string name="navigation_topic">Topic</string>
+    <string name="navigation_topic">Topics</string>
 
 
     <string name="comment">Comment</string>

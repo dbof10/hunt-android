@@ -94,10 +94,13 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                             navigator
                                     .toProduct(item.id)
                                     .subscribe()
-                        } else if (view.id == R.id.tvComment) {
-                            navigator
-                                    .toComment(item.id)
-                                    .subscribe()
+                        }
+                        when(view.id){
+                            R.id.tvUpvote, R.id.ivUpvote, R.id.tvCommentCount, R.id.ivCommentCount -> {
+                                navigator
+                                        .toComment(item.id)
+                                        .subscribe()
+                            }
                         }
                     }
 
