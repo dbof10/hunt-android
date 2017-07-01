@@ -22,19 +22,19 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>) {
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null }
-                .map { it.loadError }
+                .map { it.loadError!! }
     }
 
     fun refreshError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.refreshError != null }
-                .map { it.refreshError }
+                .map { it.refreshError!! }
     }
 
     fun loadMoreError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map(HomeState::loadMoreError)
+                .map { it.loadMoreError!! }
     }
 
     fun refreshSuccess(): Observable<HomeState> {
@@ -59,6 +59,7 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>) {
                             && it.loadError == null
                             && it.refreshError == null
                             && it.loadMoreError == null
+                            && it.content.isNotEmpty()
                 }
                 .map { it.content }
     }

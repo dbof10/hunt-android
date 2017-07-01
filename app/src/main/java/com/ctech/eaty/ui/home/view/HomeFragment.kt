@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     }
 
     private val adsManager: NativeAdsManager by lazy {
-         NativeAdsManager(context, "1966287263602613_1966287926935880", 5)
+        NativeAdsManager(context, "1966287263602613_1966287926935880", 5)
     }
 
 
@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                 return oldItem.id == newItem.id
             } else if (oldItem is ProductItemViewModel && newItem is ProductItemViewModel) {
                 return oldItem.id == newItem.id
-            } else if (oldItem is HorizontalAdsItemViewModel && newItem is HorizontalAdsItemViewModel){
+            } else if (oldItem is HorizontalAdsItemViewModel && newItem is HorizontalAdsItemViewModel) {
                 return oldItem.id == newItem.id
             }
             return false
@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                 .diffCallback(diffCallback)
                 .onItemClickListener { view, item, _ ->
                     if (item is ProductItemViewModel) {
-                        when(view.id){
+                        when (view.id) {
                             R.id.llUpvote, R.id.llComment -> {
                                 navigator
                                         .toComment(item.id)
@@ -99,7 +99,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                                         .toProduct(item.id)
                                         .subscribe()
                             }
-                            R.id.llShare ->{
+                            R.id.llShare -> {
                                 navigator
                                         .toShare(item.shareUrl)
                                         .subscribe()
@@ -209,7 +209,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvNewFeeds.adapter = adapter
         rvNewFeeds.layoutManager = layoutManager
-        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(ProductViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(listOf(ProductViewHolder::class.java, HorizontalAdsViewHolder::class.java), resources.getDimensionPixelSize(R.dimen.divider_space)))
         rvNewFeeds.addOnScrollListener(loadMoreCallback)
     }
 

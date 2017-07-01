@@ -44,7 +44,6 @@ class HorizontalAdsViewHolder(val view: View, val adsManager: NativeAdsManager) 
 
                 override fun onAdError(adError: AdError) {
                     Timber.e(Throwable(adError.errorMessage))
-                    // Ad error callback
                 }
             })
             adsManager.loadAds(NativeAd.MediaCacheFlag.ALL)

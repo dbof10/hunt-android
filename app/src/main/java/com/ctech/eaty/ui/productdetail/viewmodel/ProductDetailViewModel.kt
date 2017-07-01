@@ -7,6 +7,7 @@ import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
+import io.reactivex.internal.functions.Functions
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
@@ -124,7 +125,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
     fun getProduct(session: CustomTabsSession) {
         val product = stateDispatcher.value.content
         product?.run {
-            navigation.toUrl(redirectUrl, session).subscribe()
+            navigation.toUrl(redirectUrl, session).subscribe(Functions.EMPTY_ACTION, Functions.ERROR_CONSUMER)
         }
 
     }

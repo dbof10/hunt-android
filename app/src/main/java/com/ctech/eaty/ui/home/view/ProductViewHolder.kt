@@ -16,7 +16,7 @@ import vn.tiki.noadapter2.AbsViewHolder
 
 class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
 
-    private val IMAGE_WIDTH = 300
+    private val IMAGE_WIDTH = 500
 
     @BindView(R.id.ivProduct)
     lateinit var ivProduct: ImageView
