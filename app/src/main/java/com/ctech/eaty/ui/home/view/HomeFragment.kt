@@ -40,8 +40,6 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         }
     }
 
-    @Inject
-    lateinit var customTabActivityHelper: CustomTabActivityHelper
 
     @Inject
     lateinit var store: Store<HomeState>
@@ -90,15 +88,20 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                 .diffCallback(diffCallback)
                 .onItemClickListener { view, item, _ ->
                     if (item is ProductItemViewModel) {
-                        if (view.id == R.id.flProductHolder) {
-                            navigator
-                                    .toProduct(item.id)
-                                    .subscribe()
-                        }
                         when(view.id){
-                            R.id.tvUpvote, R.id.ivUpvote, R.id.tvCommentCount, R.id.ivCommentCount -> {
+                            R.id.llUpvote, R.id.llComment -> {
                                 navigator
                                         .toComment(item.id)
+                                        .subscribe()
+                            }
+                            R.id.flProductHolder -> {
+                                navigator
+                                        .toProduct(item.id)
+                                        .subscribe()
+                            }
+                            R.id.llShare ->{
+                                navigator
+                                        .toShare(item.shareUrl)
                                         .subscribe()
                             }
                         }

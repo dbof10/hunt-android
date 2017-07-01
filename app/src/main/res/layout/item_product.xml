@@ -13,9 +13,9 @@
         <com.ctech.eaty.widget.ForegroundImageView
             android:id="@+id/ivProduct"
             android:layout_width="match_parent"
-            android:scaleType="fitXY"
             android:layout_height="240dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:scaleType="fitXY" />
 
         <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvProductName"
@@ -55,45 +55,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dp"
-        android:paddingBottom="@dimen/content_padding_vertical"
+        android:layout_height="32dp"
         android:layout_below="@id/separator"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:paddingEnd="@dimen/content_padding_horizontal"
-        android:paddingStart="@dimen/content_padding_horizontal"
-      >
+        >
 
-        <com.ctech.eaty.widget.BaselineGridTextView
-            android:id="@+id/tvUpvote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            tools:text="287" />
-
-        <ImageView
-            android:id="@+id/ivUpvote"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llUpvote"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/space_small"
-            android:src="@drawable/ic_heart_solid_grey" />
+            android:layout_weight="1">
 
-        <com.ctech.eaty.widget.BaselineGridTextView
-            android:id="@+id/tvCommentCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_medium"
-            tools:text="100" />
+            <com.ctech.eaty.widget.BaselineGridTextView
+                android:id="@+id/tvUpvote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="287" />
 
-        <ImageView
-            android:paddingTop="2dp"
-            android:id="@+id/ivCommentCount"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/space_small"
+                android:src="@drawable/ic_heart_solid_grey" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llComment"
+            android:background="?selectableItemBackground"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/space_small"
-            android:src="@drawable/ic_comment" />
+            android:layout_weight="1">
 
+            <com.ctech.eaty.widget.BaselineGridTextView
+                android:id="@+id/tvCommentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="100" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/space_small"
+                android:paddingTop="2dp"
+                android:src="@drawable/ic_comment" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llShare"
+            android:background="?selectableItemBackground"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_share" />
+
+        </LinearLayout>
     </LinearLayout>
+
+
 </RelativeLayout>
 

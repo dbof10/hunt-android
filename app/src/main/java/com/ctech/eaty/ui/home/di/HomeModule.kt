@@ -20,11 +20,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 @Module
 class HomeModule {
 
-    @ActivityScope
-    @Provides
-    fun provideCustomTabHelper(): CustomTabActivityHelper {
-        return CustomTabActivityHelper()
-    }
 
     @Provides
     fun provideBarCodeGenerator(): BarCodeGenerator {

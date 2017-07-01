@@ -1,5 +1,4 @@
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
     android:viewportHeight="24"
@@ -7,8 +6,8 @@
 
     <path
         android:name="@string/name_dots"
-        android:pathData="@string/path_share_dots"
-        android:fillColor="@color/gray_600" />
+        android:fillColor="@color/gray_600"
+        android:pathData="@string/path_share_dots" />
 
     <path
         android:name="@string/name_lines"

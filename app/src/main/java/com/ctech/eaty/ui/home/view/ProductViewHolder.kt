@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.home.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,26 +27,30 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
     @BindView(R.id.tvDescription)
     lateinit var tvDescription: TextView
 
+    @BindView(R.id.llUpvote)
+    lateinit var llUpvote: View
+
+    @BindView(R.id.llComment)
+    lateinit var llComment: View
+
+    @BindView(R.id.llShare)
+    lateinit var llShare: View
+
     @BindView(R.id.tvUpvote)
     lateinit var tvUpvote: TextView
 
     @BindView(R.id.tvCommentCount)
     lateinit var tvCommentCount: TextView
 
-    @BindView(R.id.ivUpvote)
-    lateinit var ivUpvote: ImageView
-
-    @BindView(R.id.ivCommentCount)
-    lateinit var ivCommentCount: ImageView
-
     @BindView(R.id.flProductHolder)
-    lateinit var flProductHoder: View
+    lateinit var flProductHolder: View
 
     init {
         ButterKnife.bind(this, view)
-        flProductHoder.setOnClickListener(this)
-        ivUpvote.setOnClickListener(this)
-        ivCommentCount.setOnClickListener(this)
+        flProductHolder.setOnClickListener(this)
+        llUpvote.setOnClickListener(this)
+        llComment.setOnClickListener(this)
+        llShare.setOnClickListener(this)
     }
 
     companion object {

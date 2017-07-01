@@ -9,7 +9,7 @@
         android:id="@+id/rvComments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_comment" />
+        tools:listitem="@layout/item_comment_collapsed" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/vLottie"

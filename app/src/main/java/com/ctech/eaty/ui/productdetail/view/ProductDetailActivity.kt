@@ -27,6 +27,7 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
+import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.ColorUtils
 import com.ctech.eaty.util.GlideImageLoader
@@ -39,10 +40,12 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import java.lang.Exception
 import javax.inject.Inject
 
-const val SCRIM_ADJUSTMENT = 0.075f
 
 
-class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract {
+
+class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract,CustomTabActivityHelper.ConnectionCallback {
+    private val SCRIM_ADJUSTMENT = 0.075f
+
     override fun getScreenName(): String = "Product Detail"
 
     companion object {
@@ -54,6 +57,9 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             return intent
         }
     }
+
+    @Inject
+    lateinit var customTabActivityHelper: CustomTabActivityHelper
 
     @Inject
     lateinit var trackingManager: FirebaseTrackManager
@@ -151,7 +157,6 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
                                     ContextCompat.getColor(applicationContext, R.color.mid_grey),
                                     true)
                         }
-
                 // TODO should keep the background if the image contains transparency?!
              //   ivProduct.background = null
                 return false
@@ -170,19 +175,40 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             }
         }
 
+        setupChromeService()
         setupViewModel()
         setupRecommendationFragment()
         setupToolbar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        flDraggable.addListener(chromeFader)
+    }
+
+    override fun onPause() {
+        flDraggable.removeListener(chromeFader)
+        super.onPause()
+    }
+
     override fun onStart() {
         super.onStart()
         trackingManager.trackScreenView(getScreenName())
+        customTabActivityHelper.bindCustomTabsService(this)
         store.dispatch(ProductDetailAction.Load(productId))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        customTabActivityHelper.unbindCustomTabsService(this)
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
+    }
+
+    private fun setupChromeService() {
+        customTabActivityHelper.setConnectionCallback(this)
     }
 
     private fun setupViewModel() {
@@ -205,21 +231,10 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         }
     }
 
-
     private fun setupToolbar() {
         ivBack.setOnClickListener {
             finish()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        flDraggable.addListener(chromeFader)
-    }
-
-    override fun onPause() {
-        flDraggable.removeListener(chromeFader)
-        super.onPause()
     }
 
     override fun onScrollStateChanged(newState: Int) {
@@ -236,6 +251,14 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     override fun onFling() {
         ivProduct.setImmediatePin(true)
+    }
+
+    override fun onCustomTabsConnected() {
+
+    }
+
+    override fun onCustomTabsDisconnected() {
+
     }
 
 }

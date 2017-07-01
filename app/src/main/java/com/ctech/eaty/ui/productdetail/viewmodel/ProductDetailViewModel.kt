@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.productdetail.viewmodel
 
+import android.support.customtabs.CustomTabsSession
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
@@ -118,5 +119,13 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         product?.run {
             navigation.toShare(redirectUrl).subscribe()
         }
+    }
+
+    fun getProduct(session: CustomTabsSession) {
+        val product = stateDispatcher.value.content
+        product?.run {
+            navigation.toUrl(redirectUrl, session).subscribe()
+        }
+
     }
 }

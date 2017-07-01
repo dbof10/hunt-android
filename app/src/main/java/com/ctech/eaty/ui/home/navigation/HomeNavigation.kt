@@ -21,15 +21,13 @@ import javax.inject.Inject
 @ActivityScope
 class HomeNavigation @Inject constructor(private val context: HomeActivity) {
 
-    fun toUrl(url: String, session: CustomTabsSession): Completable {
+    fun toShare(link: String): Completable {
         return Completable.fromAction {
-            val intentBuilder = CustomTabsIntent.Builder(session)
-            intentBuilder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
-            intentBuilder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-            intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-            CustomTabActivityHelper.openCustomTab(context, intentBuilder.build(), Uri.parse(url), WebviewFallback())
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, link)
+            context.startActivity(Intent.createChooser(shareIntent, "Share link using"))
         }
-
     }
 
     fun toProduct(id: Int): Completable{

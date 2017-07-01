@@ -17,14 +17,11 @@ import kotlinx.android.synthetic.main.layout_home_content.*
 import javax.inject.Inject
 
 
-class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivityHelper.ConnectionCallback {
+class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun getScreenName() = "Home"
 
     @Inject
     lateinit var trackingManager: FirebaseTrackManager
-
-    @Inject
-    lateinit var customTabActivityHelper: CustomTabActivityHelper
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -38,7 +35,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupChromeService()
         setupToolbar()
         var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
@@ -61,20 +57,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
         }
     }
 
-    private fun setupChromeService() {
-        customTabActivityHelper.setConnectionCallback(this)
-    }
-
-
     override fun onStart() {
         super.onStart()
         trackingManager.trackScreenView(getScreenName())
-        customTabActivityHelper.bindCustomTabsService(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        customTabActivityHelper.unbindCustomTabsService(this)
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
@@ -86,11 +71,5 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, CustomTabActivi
         imageLoader.clearMemory()
     }
 
-    override fun onCustomTabsConnected() {
 
-    }
-
-    override fun onCustomTabsDisconnected() {
-
-    }
 }

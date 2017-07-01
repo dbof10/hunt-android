@@ -9,10 +9,10 @@ import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.reducer.ProductDetailReducer
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
+import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.rx.ThreadScheduler
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 @Module
@@ -26,7 +26,7 @@ class ProductDetailModule {
     @ActivityScope
     @Provides
     fun provideProductDetailStore(productRepository: ProductRepository, barCodeGenerator: BarCodeGenerator,
-                            threadScheduler: ThreadScheduler): Store<ProductDetailState> {
+                                  threadScheduler: ThreadScheduler): Store<ProductDetailState> {
         return Store<ProductDetailState>(ProductDetailState(), ProductDetailReducer(), arrayOf(LoadEpic(productRepository, barCodeGenerator, threadScheduler)))
 
     }
@@ -35,6 +35,12 @@ class ProductDetailModule {
     @Provides
     fun provideProductDetailViewModel(store: Store<ProductDetailState>, navigation: ProductDetailNavigation,
                                       threadScheduler: ThreadScheduler): ProductDetailViewModel {
-        return ProductDetailViewModel(store.state, navigation,threadScheduler)
+        return ProductDetailViewModel(store.state, navigation, threadScheduler)
+    }
+
+    @ActivityScope
+    @Provides
+    fun provideCustomTabHelper(): CustomTabActivityHelper {
+        return CustomTabActivityHelper()
     }
 }

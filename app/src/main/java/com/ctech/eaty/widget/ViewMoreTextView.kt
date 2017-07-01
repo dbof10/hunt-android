@@ -1,23 +1,20 @@
 package com.ctech.eaty.widget;
 
-import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.text.Layout;
-import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.TextView;
-
-import com.ctech.eaty.R;
+import android.content.Context
+import android.support.v4.content.ContextCompat
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.util.AttributeSet
+import android.view.View
+import android.widget.TextView
+import com.ctech.eaty.R
 
 class ViewMoreTextView(context: Context, attrs: AttributeSet) : TextView(context, attrs) {
     private val ELLIPSIS: String = "... "
     private var listener: OnViewMoreClickListener? = null
-    private var maxCollapsedLines = 3
+    private var maxCollapsedLines = 4
     private var originalText: CharSequence = ""
     private var shouldCollapseText: Boolean
     private var viewMore: String = context.getString(R.string.view_more)
@@ -25,7 +22,7 @@ class ViewMoreTextView(context: Context, attrs: AttributeSet) : TextView(context
     val viewMoreSpan = object : ClickableSpan() {
         override fun onClick(widget: View) {
             if (listener != null) {
-                listener?.onClick(widget)
+                listener?.onViewMoreClick(widget)
                 return
             }
             maxLines = Integer.MAX_VALUE
@@ -39,10 +36,8 @@ class ViewMoreTextView(context: Context, attrs: AttributeSet) : TextView(context
     }
 
     interface OnViewMoreClickListener {
-        fun onClick(view: View)
+        fun onViewMoreClick(view: View): Unit
     }
-
-
 
     init {
         movementMethod = LinkMovementMethod.getInstance()

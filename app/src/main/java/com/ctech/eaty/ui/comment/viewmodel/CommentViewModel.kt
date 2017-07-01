@@ -1,10 +1,14 @@
 package com.ctech.eaty.ui.comment.viewmodel
 
-import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.comment.state.CommentState
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class CommentViewModel(private val stateDispatcher: Observable<CommentState>) {
+
+    private var comment: List<CommentItemViewModel> = emptyList()
+    private val commentSubject: PublishSubject<List<CommentItemViewModel>> = PublishSubject.create()
+
     fun loading(): Observable<CommentState> {
         return stateDispatcher
                 .filter { it.loading }
@@ -28,7 +32,7 @@ class CommentViewModel(private val stateDispatcher: Observable<CommentState>) {
                 .map(CommentState::loadMoreError)
     }
 
-    fun content(): Observable<List<Comment>> {
+    fun content(): Observable<List<CommentItemViewModel>> {
         return stateDispatcher
                 .filter {
                     !it.loading
@@ -38,6 +42,23 @@ class CommentViewModel(private val stateDispatcher: Observable<CommentState>) {
                             && it.content.isNotEmpty()
 
                 }
-                .map { it.content }
+                .map {
+                    comment = it.content.map { CommentItemViewModel(it) }
+                    comment
+                }
+    }
+
+    fun commentExpansion() = commentSubject
+
+    fun selectCommentAt(position: Int) {
+
+        comment = comment.mapIndexed { index, itemViewModel ->
+            if (index == position) {
+                itemViewModel.copy(expanded = !itemViewModel.isExpanded)
+            } else {
+                itemViewModel
+            }
+        }
+        commentSubject.onNext(comment)
     }
 }

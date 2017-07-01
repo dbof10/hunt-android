@@ -43,7 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
             android:drawableTop="@drawable/ic_comment"
             tools:text="33 views" />
 
@@ -56,6 +55,16 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/avd_share"
             android:text="@string/share" />
+
+        <Button
+            android:id="@+id/btGetIt"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_get_app_grey"
+            android:text="@string/get_it" />
 
     </LinearLayout>
 

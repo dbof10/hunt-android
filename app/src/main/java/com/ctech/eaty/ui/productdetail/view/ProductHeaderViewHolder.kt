@@ -23,6 +23,9 @@ class ProductHeaderViewHolder(view: View, val imageLoader: GlideImageLoader) : A
     @BindView(R.id.btShare)
     lateinit var btShare: Button
 
+    @BindView(R.id.btGetIt)
+    lateinit var btGetIt: Button
+
     @BindView(R.id.tvHunterName)
     lateinit var tvHunterName: TextView
 
@@ -44,6 +47,7 @@ class ProductHeaderViewHolder(view: View, val imageLoader: GlideImageLoader) : A
         btVote.setOnClickListener(this)
         btCommentCount.setOnClickListener(this)
         btShare.setOnClickListener(this)
+        btGetIt.setOnClickListener(this)
     }
 
     companion object {

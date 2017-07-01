@@ -38,10 +38,17 @@ class ProductCommentViewHolder(view: View, val imageLoader: GlideImageLoader) : 
     @BindView(R.id.tvTimeStamp)
     lateinit var tvTimeStamp: TextView
 
+    @BindView(R.id.rlComment)
+    lateinit var rlComment: View
+
     init {
         ButterKnife.bind(this, view)
         tvComment.setOnViewMoreClickListener(this)
+        rlComment.setOnClickListener(this)
+    }
 
+    override fun onViewMoreClick(view: View) {
+            onClick(view)
     }
 
     companion object {

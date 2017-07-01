@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <com.ctech.eaty.widget.ForegroundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/rlComment"
     android:background="@drawable/comment_background"
     android:clipToPadding="false"
     android:descendantFocusability="blocksDescendants"
@@ -46,57 +46,25 @@
         android:textAppearance="@style/TextAppearance.CommentAuthor"
         tools:text="Nick B" />
 
-    <com.ctech.eaty.widget.ViewMoreTextView
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_gravity="center_vertical"
+        android:layout_toEndOf="@+id/ivAvatar"
+        tools:text="Lorem isum" />
+
+    <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvComment"
         style="@style/Widget.Hunt.Comment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/tvUserName"
-        android:layout_toEndOf="@id/ivAvatar"
+        android:layout_below="@id/tvHeadline"
+        android:layout_marginTop="@dimen/space_medium"
         android:textColorHighlight="@color/hunt_link_highlight"
         android:textColorLink="@color/hunt_links"
         tools:text="Blah blah blah blah blah blah blah blah blah blah blah blah blah" />
 
-    <com.ctech.eaty.widget.BaselineGridTextView
-        android:id="@+id/tvReplyCount"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/comment_actions_height"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvComment"
-        android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:gravity="end|center_vertical"
-        android:padding="@dimen/space_medium"
-        android:paddingTop="@dimen/space_medium"
-        android:textColor="@color/black_60"
-        android:visibility="gone"
-        tools:text="11"
-        tools:visibility="visible" />
-
-    <com.ctech.eaty.widget.CheckableImageButton
-        android:id="@+id/ivCommentLike"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/comment_actions_height"
-        android:layout_below="@+id/tvComment"
-        android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
-        android:layout_toStartOf="@+id/tvReplyCount"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:padding="@dimen/space_medium"
-        android:src="@drawable/asl_comment_like"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/ivReply"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/comment_actions_height"
-        android:layout_below="@id/tvComment"
-        android:layout_toStartOf="@+id/ivCommentLike"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:padding="@dimen/space_medium"
-        android:src="@drawable/ic_reply"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
 </com.ctech.eaty.widget.ForegroundRelativeLayout>
+

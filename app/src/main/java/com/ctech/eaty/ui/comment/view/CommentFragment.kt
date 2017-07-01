@@ -16,7 +16,9 @@ import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.comment.state.CommentState
+import com.ctech.eaty.ui.comment.viewmodel.CommentItemViewModel
 import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
+import com.ctech.eaty.ui.home.view.EmptyViewHolder
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
@@ -57,13 +59,16 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     private val diffCallback = object : DiffCallback {
 
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            if (oldItem is Comment && newItem is Comment) {
-                return oldItem.id == newItem.id && oldItem.parentCommentId == newItem.parentCommentId
+            if (oldItem is CommentItemViewModel && newItem is CommentItemViewModel) {
+                return oldItem.id == newItem.id && oldItem.parentId == newItem.parentId
             }
             return false
         }
 
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            if (oldItem is CommentItemViewModel && newItem is CommentItemViewModel) {
+                return oldItem.isExpanded == newItem.isExpanded
+            }
             return oldItem == newItem
         }
 
@@ -72,8 +77,24 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
     private val adapter: OnlyAdapter by lazy {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
-                .viewHolderFactory { viewGroup, _ ->
-                    CommentViewHolder.create(viewGroup, imageLoader)
+                .onItemClickListener { view, _, position ->
+                    if (view.id == R.id.tvComment) {
+                        viewModel.selectCommentAt(position)
+                    }
+                }
+                .viewHolderFactory { viewGroup, type ->
+                    when (type) {
+                        1 -> CommentCollapsedViewHolder.create(viewGroup, imageLoader)
+                        2 -> CommentExpandedViewHolder.create(viewGroup, imageLoader)
+                        else -> EmptyViewHolder.create(viewGroup)
+                    }
+                }
+                .typeFactory {
+                    val item = it as CommentItemViewModel
+                    if (!item.isExpanded)
+                        1
+                    else
+                        2
                 }
                 .build()
     }
@@ -99,7 +120,7 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
         store.dispatch(CommentAction.Load(productId))
     }
 
-    private fun renderContent(list: List<Comment>) {
+    private fun renderContent(list: List<CommentItemViewModel>) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
         vError.visibility = View.GONE
@@ -140,6 +161,7 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
         disposeOnStop(viewModel.loadError().subscribe { renderLoadError(it) })
         disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
         disposeOnStop(viewModel.content().subscribe { renderContent(it) })
+        disposeOnStop(viewModel.commentExpansion().subscribe { adapter.setItems(it) })
     }
 
     private fun setupRecyclerView() {

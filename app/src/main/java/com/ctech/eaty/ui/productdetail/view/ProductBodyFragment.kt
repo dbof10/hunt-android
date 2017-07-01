@@ -25,10 +25,11 @@ import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
+import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration
 import com.ctech.eaty.widget.TransitionListenerAdapter
+import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration
 import kotlinx.android.synthetic.main.fragment_product_body.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -57,6 +58,9 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
 
     @Inject
     lateinit var imageLoader: GlideImageLoader
+
+    @Inject
+    lateinit var customTabActivityHelper: CustomTabActivityHelper
 
     private val diffCallback = object : DiffCallback {
 
@@ -150,7 +154,15 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                                 drawable.start()
                             }
                         }
-                        else -> {
+
+                        R.id.tvComment -> {
+                            viewModel.navigateComment()
+                        }
+
+                        R.id.btGetIt -> {
+                            viewModel.getProduct(customTabActivityHelper.session)
+                        }
+                        R.id.rlComment -> {
                             TransitionManager.beginDelayedTransition(rvBody, expandCollapse)
                             val animator = rvBody.itemAnimator as? CommentAnimator
                             animator?.run {
