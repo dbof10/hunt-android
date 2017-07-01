@@ -1,3 +1,3 @@
 package com.ctech.eaty.ui.home.viewmodel
 
-class HorizontalAdsItemViewModel(val id: Int): HomeItemViewModel
+data class HorizontalAdsItemViewModel(val id: Int, val adId: String): HomeItemViewModel

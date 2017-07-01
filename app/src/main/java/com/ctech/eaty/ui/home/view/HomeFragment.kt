@@ -13,6 +13,7 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.action.HomeAction
+import com.ctech.eaty.ui.home.ad.AdsProvider
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.*
@@ -53,16 +54,14 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
     @Inject
     lateinit var navigator: HomeNavigation
 
+    @Inject
+    lateinit var adsProvider: AdsProvider
+
     private val loadMoreCallback by lazy {
         InfiniteScrollListener(rvNewFeeds.layoutManager as LinearLayoutManager, 3, Runnable {
             store.dispatch(HomeAction.LOAD_MORE)
         })
     }
-
-    private val adsManager: NativeAdsManager by lazy {
-        NativeAdsManager(context, "1966287263602613_1966287926935880", 5)
-    }
-
 
     private val diffCallback = object : DiffCallback {
 
@@ -112,7 +111,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                     when (type) {
                         1 -> SectionViewHolder.create(viewGroup)
                         2 -> ProductViewHolder.create(viewGroup, imageLoader)
-                        3 -> HorizontalAdsViewHolder.create(viewGroup, adsManager)
+                        3 -> HorizontalAdsViewHolder.create(viewGroup, adsProvider)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
                 }

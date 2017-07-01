@@ -6,27 +6,31 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
+import com.ctech.eaty.ui.home.ad.AdsProvider
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.facebook.ads.*
 import timber.log.Timber
 import vn.tiki.noadapter2.AbsViewHolder
 
 
-class HorizontalAdsViewHolder(val view: View, val adsManager: NativeAdsManager) : AbsViewHolder(view) {
+class HorizontalAdsViewHolder(private val view: View, private val adsProvider: AdsProvider) : AbsViewHolder(view) {
 
     @BindView(R.id.flAdsContainer)
     lateinit var flAdsContainer: ViewGroup
 
-    private var nativeAdScrollView: NativeAdScrollView? = null
+    @BindView(R.id.progressBar)
+    lateinit var progressBar: View
+
+    private var nativeAdScrollView: View? = null
 
     init {
         ButterKnife.bind(this, view)
     }
 
     companion object {
-        fun create(parent: ViewGroup, adsManager: NativeAdsManager): AbsViewHolder {
+        fun create(parent: ViewGroup, adsProvider: AdsProvider): AbsViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horizontal_ads, parent, false)
-            return HorizontalAdsViewHolder(view, adsManager)
+            return HorizontalAdsViewHolder(view, adsProvider)
         }
     }
 
@@ -34,11 +38,18 @@ class HorizontalAdsViewHolder(val view: View, val adsManager: NativeAdsManager) 
         super.bind(item)
         val horizontalAds = item as HorizontalAdsItemViewModel
         with(horizontalAds) {
+            val adsManager = adsProvider.getAdsManager(adId)
+
             adsManager.setListener(object : NativeAdsManager.Listener {
                 override fun onAdsLoaded() {
+                    progressBar.visibility = View.GONE
+
                     flAdsContainer.removeAllViews()
-                    nativeAdScrollView = NativeAdScrollView(view.context, adsManager,
-                            NativeAdView.Type.HEIGHT_300)
+
+                    if (nativeAdScrollView == null) {
+                        nativeAdScrollView = NativeAdScrollView(view.context, adsManager, NativeAdView.Type.HEIGHT_300)
+                    }
+
                     flAdsContainer.addView(nativeAdScrollView)
                 }
 
@@ -46,7 +57,12 @@ class HorizontalAdsViewHolder(val view: View, val adsManager: NativeAdsManager) 
                     Timber.e(Throwable(adError.errorMessage))
                 }
             })
+
             adsManager.loadAds(NativeAd.MediaCacheFlag.ALL)
+
+            if (!adsManager.isLoaded) {
+                progressBar.visibility = View.VISIBLE
+            }
         }
 
 
