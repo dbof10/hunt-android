@@ -25,6 +25,7 @@ import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
@@ -68,6 +69,8 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
             if (oldItem is CommentItemViewModel && newItem is CommentItemViewModel) {
                 return oldItem.id == newItem.id
             } else if (oldItem is ProductHeaderItemViewModel && newItem is ProductHeaderItemViewModel) {
+                return oldItem.id == newItem.id
+            } else if (oldItem is ProductRecommendItemViewModel && newItem is ProductRecommendItemViewModel) {
                 return oldItem.id == newItem.id
             }
             return false
@@ -117,17 +120,19 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                 .viewHolderFactory { viewGroup, type ->
                     when (type) {
                         1 -> {
-                            headerView = LayoutInflater.from(context).inflate(R.layout.item_product_header, viewGroup, false)
+                            headerView = LayoutInflater.from(context).inflate(R.layout.item_product_detail_header, viewGroup, false)
                             ProductHeaderViewHolder.create(headerView, imageLoader)
                         }
                         2 -> ProductCommentViewHolder.create(viewGroup, imageLoader)
+                        3 -> ProductRecommendViewHolder.create(viewGroup, imageLoader)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
                 }
                 .typeFactory {
                     when (it) {
-                        is CommentItemViewModel -> 2
                         is ProductHeaderItemViewModel -> 1
+                        is CommentItemViewModel -> 2
+                        is ProductRecommendItemViewModel -> 3
                         else -> 0
                     }
                 }

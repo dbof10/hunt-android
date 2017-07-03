@@ -69,8 +69,12 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextSection" parent="TextAppearance.AppCompat.Headline">
+    <style name="TextAppearance.Section" parent="@android:style/TextAppearance.Material.Headline"/>
 
+    <style name="TextAppearance.BodySection" parent="@android:style/TextAppearance.Material.Notification.Title"/>
+
+    <style name="TextAppearance.SubProductTitle" parent="@android:style/TextAppearance.Material.Small">
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
 

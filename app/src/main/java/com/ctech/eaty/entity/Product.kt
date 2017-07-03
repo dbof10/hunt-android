@@ -13,4 +13,5 @@ data class Product(val id: Int, val name: String, val tagline: String,
                    @SerializedName("redirect_url")
                    val redirectUrl: String,
                    @SerializedName("screenshot_url")
-                   val imageUrl: ImageUrl)
+                   val imageUrl: ImageUrl,
+                   val thumbnail: ThumbNail)

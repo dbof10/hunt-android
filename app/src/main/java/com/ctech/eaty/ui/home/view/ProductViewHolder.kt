@@ -21,8 +21,8 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
     @BindView(R.id.ivProduct)
     lateinit var ivProduct: ImageView
 
-    @BindView(R.id.tvProductName)
-    lateinit var tvProductName: TextView
+    @BindView(R.id.tvName)
+    lateinit var tvName: TextView
 
     @BindView(R.id.tvDescription)
     lateinit var tvDescription: TextView
@@ -64,13 +64,11 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
         super.bind(item)
         val product = item as ProductItemViewModel
         with(product) {
-            tvProductName.text = name
+            tvName.text = name
             tvDescription.text = tagline
             tvUpvote.text = votesCount
             tvCommentCount.text = commentsCount
-            imageLoader.downloadInto(ResizeImageUrlProvider.getNewUrl(imageUrl, IMAGE_WIDTH), ivProduct)
+            imageLoader.downloadInto(imageUrl, ivProduct)
         }
-
-
     }
 }

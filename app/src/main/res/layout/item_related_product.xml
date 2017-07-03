@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ctech.eaty.widget.ForegroundImageView
+        android:id="@+id/ivProduct"
+        android:scaleType="fitCenter"
+        android:layout_width="@dimen/related_product_size"
+        android:layout_height="@dimen/related_product_size" />
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvName"
+        style="@style/TextAppearance.SubProductTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:lines="2"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingEnd="@dimen/space_small"
+        android:paddingStart="@dimen/space_small"
+        tools:text="Instagram" />
+
+</LinearLayout>

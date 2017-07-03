@@ -18,7 +18,7 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null }
-                .map { it.loadError }
+                .map { it.loadError!! }
     }
 
 
@@ -40,7 +40,7 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
     fun header(): Observable<String> {
         return content()
                 .map {
-                    ResizeImageUrlProvider.getNewUrl(it.backgroundImageUrl, IMAGE_BACKGROUND_WIDTH )
+                    it.backgroundImageUrl
                 }
     }
 

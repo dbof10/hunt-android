@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.collection.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Collection
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.util.ResizeImageUrlProvider
 import vn.tiki.noadapter2.AbsViewHolder
 
 
@@ -45,7 +43,7 @@ class CollectionViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsV
         with(collection) {
             tvName.text = name
             tvTitle.text = title
-            imageLoader.downloadInto(ResizeImageUrlProvider.getNewUrl(imageUrl, IMAGE_WIDTH), ivBackground)
+            imageLoader.downloadInto(imageUrl, ivBackground)
         }
 
 

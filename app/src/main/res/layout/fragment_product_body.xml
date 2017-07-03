@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/space_large"
     android:scrollbarStyle="insideOverlay"
     android:scrollbars="vertical"
     tools:listitem="@layout/item_product_comment" />

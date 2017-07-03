@@ -31,7 +31,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         return stateDispatcher
                 .observeOn(threadScheduler.uiThread())
                 .filter { it.error != null && !it.loading }
-                .map { it.error }
+                .map { it.error!! }
 
     }
 
@@ -71,11 +71,17 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                             CommentItemViewModel(it)
                         }
                     }
+                    body += mapRecommend(it)
                     this.body = body
                     body
                 }
 
     }
+
+
+    private fun mapRecommend(productDetail: ProductDetail): ProductRecommendItemViewModel = ProductRecommendItemViewModel(productDetail.relatedPosts)
+
+    private fun mapHeader(productDetail: ProductDetail): ProductHeaderItemViewModel = ProductHeaderItemViewModel(productDetail)
 
     fun commentsSelection(): Observable<List<ProductBodyItemViewModel>> {
         return bodySubject
@@ -85,21 +91,20 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun selectCommentAt(position: Int) {
 
-        body = body.mapIndexed { index, bodyItemViewModel ->
-            if (index == 0) {
-                return@mapIndexed bodyItemViewModel
-            }
-            val viewModel = bodyItemViewModel as CommentItemViewModel
-            if (index == position) {
-                viewModel.copy(selected = !viewModel.isSelected)
+        body = body.mapIndexed { index, itemViewModel ->
+            if (itemViewModel is CommentItemViewModel) {
+                val viewModel = itemViewModel
+                if (index == position) {
+                    viewModel.copy(selected = !viewModel.isSelected)
+                } else {
+                    viewModel.copy(selected = false)
+                }
             } else {
-                viewModel.copy(selected = false)
+                return@mapIndexed itemViewModel
             }
         }
         bodySubject.onNext(body)
     }
-
-    private fun mapHeader(productDetail: ProductDetail): ProductHeaderItemViewModel = ProductHeaderItemViewModel(productDetail)
 
     fun navigateToVote() {
         val product = stateDispatcher.value.content

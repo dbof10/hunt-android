@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="@dimen/content_padding_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        style="@style/TextAppearance.BodySection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/content_padding_vertical"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/content_padding_vertical"
+        android:text="@string/related_products" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginEnd="@dimen/content_padding_horizontal"
+        android:layout_marginStart="@dimen/content_padding_horizontal"
+        android:background="@color/divider_color" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_medium"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_related_product"
+        tools:orientation="horizontal" />
+</LinearLayout>
