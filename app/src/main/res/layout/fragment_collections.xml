@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView android:id="@+id/rvCollections"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCollections"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_collection" />
@@ -21,11 +22,11 @@
 
     <com.ctech.eaty.widget.ErrorView
         android:id="@+id/vError"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_gravity="center"
-        app:retryButtonText="@string/retry"
-        app:errorImage="@drawable/network_error"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry"
+        tools:visibility="visible" />
 </FrameLayout>

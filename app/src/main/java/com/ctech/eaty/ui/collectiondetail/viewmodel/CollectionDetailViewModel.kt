@@ -9,9 +9,10 @@ import io.reactivex.Observable
 class CollectionDetailViewModel(private val stateDispatcher: Observable<CollectionDetailState>) {
 
     private val IMAGE_BACKGROUND_WIDTH = 600
+
     fun loading(): Observable<CollectionDetailState> {
         return stateDispatcher
-                .filter { it.loading }
+                .filter { it.loading && it.content == CollectionDetail.EMPTY }
     }
 
 
@@ -28,7 +29,7 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
                     !it.loading && it.loadError == null
                 }
                 .flatMap {
-                    if (it == null)
+                    if (it.content == null)
                         Observable.just(CollectionDetail.EMPTY)
                     else
                         Observable.just(it.content)
@@ -46,6 +47,9 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
 
     fun body(): Observable<List<CollectionDetailItemViewModel>> {
         return content()
+                .filter {
+                    it != CollectionDetail.EMPTY
+                }
                 .map {
                     val body = ArrayList<CollectionDetailItemViewModel>()
                     body += mapHeader(it)

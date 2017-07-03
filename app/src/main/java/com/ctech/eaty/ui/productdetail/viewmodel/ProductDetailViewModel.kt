@@ -23,7 +23,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
     fun loading(): Observable<ProductDetailState> {
         return stateDispatcher
                 .observeOn(threadScheduler.uiThread())
-                .filter { it.loading }
+                .filter { it.loading && it.content == ProductDetail.EMPTY }
     }
 
 
@@ -59,6 +59,9 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun body(): Observable<List<ProductBodyItemViewModel>> {
         return content()
+                .filter {
+                    it != ProductDetail.EMPTY
+                }
                 .map {
                     val body = ArrayList<ProductBodyItemViewModel>(MAX_BODY_ITEM)
                     body += mapHeader(it)

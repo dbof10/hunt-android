@@ -17,7 +17,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/ic_arrow_back_white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/app_name" />
+            app:title="@string/collection" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -1,10 +1,37 @@
-<android.support.v7.widget.RecyclerView android:id="@+id/rvBody"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:orientation="vertical"
-    android:scrollbarStyle="insideOverlay"
-    android:scrollbars="vertical"
-    tools:listitem="@layout/item_product_comment" />
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView android:id="@+id/rvBody"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_product_comment" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
+
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry"
+        tools:visibility="visible" />
+
+</FrameLayout>

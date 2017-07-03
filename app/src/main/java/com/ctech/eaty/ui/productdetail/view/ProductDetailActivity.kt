@@ -92,6 +92,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             override fun onResourceReady(resource: GlideDrawable, model: String, target: Target<GlideDrawable>, isFromMemoryCache: Boolean,
                                          isFirstResource: Boolean): Boolean {
 
+                progressBar.visibility = View.GONE
                 val bitmap = GlideImageLoader.getBitmap(resource)
                 val twentyFourDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         24f, resources.displayMetrics).toInt()

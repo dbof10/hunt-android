@@ -22,10 +22,7 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
-import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
-import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
-import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
-import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
@@ -230,8 +227,23 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.body().subscribe { adapter.setItems(it) })
+        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
+        disposeOnStop(viewModel.body().subscribe {
+            renderContent(it)
+
+        })
         disposeOnStop(viewModel.commentsSelection().subscribe { adapter.setItems(it) })
+    }
+
+    private fun renderContent(items: List<ProductBodyItemViewModel>) {
+        vError.visibility = View.GONE
+        progressBar.visibility = View.GONE
+        adapter.setItems(items)
+    }
+
+    fun renderLoading() {
+        vError.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupRecyclerView() {

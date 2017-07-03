@@ -4,6 +4,8 @@
 
     <!-- Title -->
     <string name="topic">Topics</string>
+    <string name="collection">Collections</string>
+
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>

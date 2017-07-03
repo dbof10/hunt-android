@@ -3,6 +3,7 @@ package com.ctech.eaty.ui.collectiondetail.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,9 +121,17 @@ class CollectionDetailFragment : BaseFragment<CollectionDetailState>(), Injectab
 
     private fun setupViewModel() {
         disposeOnStop(viewModel.body().subscribe { renderContent(it) })
+        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
+    }
+
+    private fun renderLoading(){
+        vError.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun renderContent(content: List<CollectionDetailItemViewModel>) {
+        vError.visibility = View.GONE
+        progressBar.visibility = View.GONE
         adapter.setItems(content)
     }
 
