@@ -6,6 +6,7 @@ import com.crashlytics.android.Crashlytics
 import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.di.AppInjector
 import com.google.firebase.FirebaseApp
+import com.google.firebase.perf.FirebasePerformance
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -36,6 +37,8 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         if (!BuildConfig.DEBUG) {
             Fabric.with(this, Crashlytics())
         }
+        FirebasePerformance.getInstance().isPerformanceCollectionEnabled = !BuildConfig.DEBUG
+
     }
 
 }

@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.internal.functions.Functions
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 
 
 class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<ProductDetailState>,
@@ -133,7 +134,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
     fun getProduct(session: CustomTabsSession) {
         val product = stateDispatcher.value.content
         product?.run {
-            navigation.toUrl(redirectUrl, session).subscribe(Functions.EMPTY_ACTION, Functions.ERROR_CONSUMER)
+            navigation.toUrl(redirectUrl, session).subscribe({}, Timber::e)
         }
 
     }

@@ -31,8 +31,12 @@ class AppInjector private constructor() {
         }
 
         fun handleActivity(activity: Activity) {
-            if (activity is HasSupportFragmentInjector) {
-                AndroidInjection.inject(activity)
+
+            when (activity) {
+                is HasSupportFragmentInjector,
+                is Injectable -> {
+                    AndroidInjection.inject(activity)
+                }
             }
             if (activity is FragmentActivity) {
                 activity.supportFragmentManager

@@ -1,5 +1,6 @@
 package com.ctech.eaty.di
 
+import com.ctech.eaty.linking.UniversalLinkActivity
 import com.ctech.eaty.ui.collection.di.CollectionFragmentBuilderModule
 import com.ctech.eaty.ui.collection.di.CollectionModule
 import com.ctech.eaty.ui.collection.view.CollectionActivity
@@ -60,4 +61,7 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(SearchModule::class, SearchFragmentBuilderModule::class))
     abstract fun contributeSearchActivity(): SearchActivity
+
+    @ContributesAndroidInjector()
+    abstract fun contributeDeepLinkActivity(): UniversalLinkActivity
 }

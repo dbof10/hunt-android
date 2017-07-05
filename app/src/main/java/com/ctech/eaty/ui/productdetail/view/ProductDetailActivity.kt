@@ -40,9 +40,6 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import java.lang.Exception
 import javax.inject.Inject
 
-
-
-
 class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract,CustomTabActivityHelper.ConnectionCallback {
     private val SCRIM_ADJUSTMENT = 0.075f
 
@@ -92,7 +89,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             override fun onResourceReady(resource: GlideDrawable, model: String, target: Target<GlideDrawable>, isFromMemoryCache: Boolean,
                                          isFirstResource: Boolean): Boolean {
 
-                progressBar.visibility = View.GONE
+            //    progressBar.visibility = View.GONE
                 val bitmap = GlideImageLoader.getBitmap(resource)
                 val twentyFourDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         24f, resources.displayMetrics).toInt()

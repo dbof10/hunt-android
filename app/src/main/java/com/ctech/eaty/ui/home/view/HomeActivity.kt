@@ -1,5 +1,7 @@
 package com.ctech.eaty.ui.home.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity.START
@@ -7,7 +9,6 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
-import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.GlideImageLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -31,6 +32,14 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var imageLoader: GlideImageLoader
+
+    companion object {
+
+        fun newIntent(context: Context): Intent {
+            val intent = Intent(context, HomeActivity::class.java)
+            return intent
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
