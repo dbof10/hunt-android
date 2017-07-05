@@ -8,6 +8,6 @@ data class Collection(
         val name: String,
         val title: String,
         @SerializedName("background_image_url")
-        val imageUrl: String,
+        val imageUrl: String?,
         @SerializedName("collection_url")
         val collectionUrl: String)

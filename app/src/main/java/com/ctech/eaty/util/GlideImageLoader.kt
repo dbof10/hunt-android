@@ -27,7 +27,7 @@ class GlideImageLoader(context: Context) {
         }
     }
 
-    fun downloadInto(url: String, imageView: ImageView) {
+    fun downloadInto(url: String?, imageView: ImageView) {
         Glide.with(imageView.context)
                 .load(url)
                 .into(imageView)
