@@ -138,4 +138,8 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         }
 
     }
+
+    fun toProduct(id: Int) {
+        navigation.toProduct(id).subscribe({}, Timber::e)
+    }
 }

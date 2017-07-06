@@ -112,6 +112,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                         1 -> SectionViewHolder.create(viewGroup)
                         2 -> ProductViewHolder.create(viewGroup, imageLoader)
                         3 -> HorizontalAdsViewHolder.create(viewGroup, adsProvider)
+                        4 -> SingleAdViewHolder.create(viewGroup)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
                 }
@@ -120,6 +121,7 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
                         is ProductItemViewModel -> 2
                         is SectionViewModel -> 1
                         is HorizontalAdsItemViewModel -> 3
+                        is SingleAdItemViewModel -> 4
                         else -> 0
                     }
                 }
@@ -208,7 +210,9 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvNewFeeds.adapter = adapter
         rvNewFeeds.layoutManager = layoutManager
-        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(listOf(ProductViewHolder::class.java, HorizontalAdsViewHolder::class.java), resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvNewFeeds.addItemDecoration(
+                VerticalSpaceItemDecoration(listOf(ProductViewHolder::class.java, HorizontalAdsViewHolder::class.java,
+                        SingleAdViewHolder::class.java), resources.getDimensionPixelSize(R.dimen.divider_space)))
         rvNewFeeds.addOnScrollListener(loadMoreCallback)
     }
 

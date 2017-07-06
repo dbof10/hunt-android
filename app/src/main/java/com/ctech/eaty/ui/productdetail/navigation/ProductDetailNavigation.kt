@@ -53,4 +53,11 @@ class ProductDetailNavigation @Inject constructor(private val context: ProductDe
         }
     }
 
+    fun toProduct(id: Int): Completable {
+        return Completable.fromAction {
+            val intent = ProductDetailActivity.newIntent(context, id)
+            context.startActivity(intent)
+        }
+    }
+
 }

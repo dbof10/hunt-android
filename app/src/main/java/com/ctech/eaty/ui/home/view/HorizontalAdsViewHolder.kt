@@ -44,10 +44,11 @@ class HorizontalAdsViewHolder(private val view: View, private val adsProvider: A
                 override fun onAdsLoaded() {
                     progressBar.visibility = View.GONE
 
-                    flAdsContainer.removeAllViews()
+                    flAdsContainer.removeView(itemView.findViewById(id))
 
                     if (nativeAdScrollView == null) {
                         nativeAdScrollView = NativeAdScrollView(view.context, adsManager, NativeAdView.Type.HEIGHT_300)
+                        nativeAdScrollView?.id = id
                     }
 
                     flAdsContainer.addView(nativeAdScrollView)

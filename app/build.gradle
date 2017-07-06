@@ -98,6 +98,8 @@ dependencies {
     implementation ('com.facebook.android:audience-network-sdk:4.+'){
         exclude group: "com.google.android.gms"
     }
+    implementation 'com.google.firebase:firebase-ads:11.0.2'
+
 
     implementation 'com.jakewharton.timber:timber:4.5.1'
 

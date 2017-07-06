@@ -21,6 +21,7 @@ import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
+import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -47,7 +48,6 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
             return fragment
         }
     }
-
     @Inject
     lateinit var store: Store<ProductDetailState>
 
@@ -121,7 +121,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                             ProductHeaderViewHolder.create(headerView, imageLoader)
                         }
                         2 -> ProductCommentViewHolder.create(viewGroup, imageLoader)
-                        3 -> ProductRecommendViewHolder.create(viewGroup, imageLoader)
+                        3 -> ProductRecommendViewHolder.create(viewGroup, imageLoader, viewModel)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
                 }

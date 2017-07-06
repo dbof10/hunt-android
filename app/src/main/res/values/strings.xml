@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Daily Hunt</string>
     <string name="facebook_app_id">1966287263602613</string>
-
+    <string name="admob_app_id">ca-app-pub-6007267266282978~8999558641</string>
     <!-- Title -->
     <string name="topic">Topics</string>
     <string name="collection">Collections</string>

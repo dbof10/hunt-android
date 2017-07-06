@@ -2,7 +2,6 @@ package com.ctech.eaty.widget.recyclerview;
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 
 class VerticalSpaceItemDecoration(private val listDividedViewHolderClasses: List<Class<out Any>>,

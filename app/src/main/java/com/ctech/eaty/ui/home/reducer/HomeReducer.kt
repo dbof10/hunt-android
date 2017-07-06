@@ -9,6 +9,7 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
+import com.ctech.eaty.ui.home.viewmodel.SingleAdItemViewModel
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
@@ -16,6 +17,8 @@ import java.lang.IllegalArgumentException
 class HomeReducer : Reducer<HomeState> {
 
     private val AD_ID = "1966287263602613_1966287926935880"
+    private val ADMOB_NATIVE_1 = "ca-app-pub-6007267266282978/2953025043"
+
 
     override fun apply(state: HomeState, result: Result): HomeState {
         when (result) {
@@ -58,9 +61,11 @@ class HomeReducer : Reducer<HomeState> {
 
     private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeItemViewModel> {
         val next: List<HomeItemViewModel>
-
-        if (result.dayAgo < 3) {
+        if (result.dayAgo < 2) {
             next = state.content + HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
+                    listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
+        } else if (result.dayAgo < 3) {
+            next = state.content + SingleAdItemViewModel(result.dayAgo, ADMOB_NATIVE_1) +
                     listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         } else {
             next = state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content

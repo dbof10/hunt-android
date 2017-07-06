@@ -9,13 +9,17 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
+import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 
-class ProductRecommendViewHolder(view: View, private val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
+class ProductRecommendViewHolder(view: View,
+                                 private val imageLoader: GlideImageLoader,
+                                 private val viewModel: ProductDetailViewModel) : AbsViewHolder(view) {
 
     @BindView(R.id.rvProducts)
     lateinit var rvProducts: RecyclerView
@@ -40,7 +44,7 @@ class ProductRecommendViewHolder(view: View, private val imageLoader: GlideImage
                 .diffCallback(diffCallback)
                 .onItemClickListener { _, item, _ ->
                     if (item is ProductItemViewModel) {
-
+                         viewModel.toProduct(item.id)
                     }
 
                 }
@@ -62,9 +66,9 @@ class ProductRecommendViewHolder(view: View, private val imageLoader: GlideImage
     }
 
     companion object {
-        fun create(parent: ViewGroup, imageLoader: GlideImageLoader): AbsViewHolder {
+        fun create(parent: ViewGroup, imageLoader: GlideImageLoader, viewModel: ProductDetailViewModel): AbsViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_detail_recommend, parent, false)
-            return ProductRecommendViewHolder(view, imageLoader)
+            return ProductRecommendViewHolder(view, imageLoader, viewModel)
         }
     }
 
