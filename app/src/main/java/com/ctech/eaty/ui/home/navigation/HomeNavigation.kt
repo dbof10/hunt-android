@@ -11,6 +11,7 @@ import com.ctech.eaty.ui.collection.view.CollectionActivity
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.web.WebviewFallback
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -53,6 +54,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 }
                 R.id.action_topic -> {
                     intent.setClass(context, TopicActivity::class.java)
+                }
+                R.id.action_radio -> {
+                    intent.setClass(context, RadioActivity::class.java)
                 }
             }
             context.startActivity(intent)

@@ -67,11 +67,11 @@ class CollectionDetailActivity : BaseActivity(), HasSupportFragmentInjector {
                     .add(R.id.fragmentContainer, fragment)
                     .commit()
         }
+        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun onStart() {
         super.onStart()
-        trackingManager.trackScreenView(getScreenName())
         store.dispatch(CollectionDetailAction.Load(collectionId))
     }
 

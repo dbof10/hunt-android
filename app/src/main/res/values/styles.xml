@@ -77,8 +77,15 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="TextAppearance.ListItemTitle" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 
-    <!-- Comment -->
+    <style name="TextAppearance.TextIndicator" parent="@android:style/TextAppearance.Material.Small">
+        <item name="android:textColor">@color/hunt</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="TextAppearance.ProductTitle" parent="@android:style/TextAppearance.Material.Headline">
         <item name="android:textColor">@color/text_primary_dark</item>
@@ -100,7 +107,7 @@
     </style>
 
     <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 

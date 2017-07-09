@@ -5,6 +5,7 @@
     <dimen name="content_padding_vertical">8dp</dimen>
 
 
+    <dimen name="artwork_avatar_size">64dp</dimen>
     <dimen name="avatar_size">44dp</dimen>
     <dimen name="drag_dismiss_distance">168dp</dimen>
     <dimen name="corner">8dp</dimen>
@@ -18,8 +19,12 @@
     <dimen name="single_ad_height">180dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_space">16dp</dimen>
+    <dimen name="divider_horizontal_space">8dp</dimen>
     <dimen name="keyline_1">72dp</dimen>
 
+
+    <!--Collection Detail -->
+    <dimen name="collection_detail_background_height">180dp</dimen>
 
     <!-- Product Detail -->
     <dimen name="shot_collapsed_app_bar_height">168dp</dimen> <!-- 3 * ?android:actionBarSize -->
@@ -27,6 +32,13 @@
     <dimen name="comment_actions_height">40dp</dimen>
     <dimen name="comment_like_margin_adjustment">-8dp</dimen>
     <dimen name="avatar_margin">12dp</dimen>
+    <dimen name="related_product_size">120dp</dimen>
+
+    <!--Radio -->
+    <dimen name="radio_artwork_height">320dp</dimen>
+    <dimen name="media_panel_height">64dp</dimen>
+    <dimen name="play_size">48dp</dimen>
+    <dimen name="media_progress_bar_height">2dp</dimen>
 
 
     <!-- Z-axis elevations -->
@@ -34,8 +46,6 @@
     <dimen name="touch_raise">6dp</dimen>
     <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
     <dimen name="z_card">2dp</dimen>
-    <dimen name="collection_detail_background_height">180dp</dimen>
-    <dimen name="related_product_size">150dp</dimen>
 
 
 </resources>

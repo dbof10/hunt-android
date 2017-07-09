@@ -65,4 +65,9 @@ class DataModule {
     }
 
 
+    @Provides
+    fun provideRadioRepository(store: Store<RadioResponse, BarCode>): RadioRepository {
+        return RadioRepository(store)
+    }
+
 }

@@ -33,6 +33,12 @@ class GlideImageLoader(context: Context) {
                 .into(imageView)
     }
 
+    fun downloadInto(@DrawableRes drawableRes: Int, imageView: ImageView) {
+        Glide.with(imageView.context)
+                .load(drawableRes)
+                .into(imageView)
+    }
+
     fun cancel(imageView: ImageView) {
         Glide.clear(imageView)
     }

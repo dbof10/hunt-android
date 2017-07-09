@@ -5,6 +5,7 @@ import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductHuntApi
+import com.ctech.eaty.repository.SoundCloudApi
 import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.DateTimeConverter
 import com.ctech.eaty.util.GlideImageLoader
@@ -64,6 +65,12 @@ class NetworkModule {
     @Provides
     fun provideProductHuntApi(okHttpClient: OkHttpClient): ProductHuntApi {
         return createRestServices(okHttpClient, Constants.API_URL, ProductHuntApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSoundCloudApi(okHttpClient: OkHttpClient): SoundCloudApi {
+        return createRestServices(okHttpClient, Constants.SOUND_CLOUD_API, SoundCloudApi::class.java)
     }
 
     @Singleton

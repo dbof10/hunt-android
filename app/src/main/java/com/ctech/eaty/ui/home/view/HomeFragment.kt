@@ -210,9 +210,9 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvNewFeeds.adapter = adapter
         rvNewFeeds.layoutManager = layoutManager
-        rvNewFeeds.addItemDecoration(
-                VerticalSpaceItemDecoration(listOf(ProductViewHolder::class.java, HorizontalAdsViewHolder::class.java,
-                        SingleAdViewHolder::class.java), resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(ProductViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(HorizontalAdsViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvNewFeeds.addItemDecoration(VerticalSpaceItemDecoration(SingleAdViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
         rvNewFeeds.addOnScrollListener(loadMoreCallback)
     }
 

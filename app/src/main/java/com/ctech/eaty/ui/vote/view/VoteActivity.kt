@@ -59,11 +59,8 @@ class VoteActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContrac
         }
         setupHeader()
         setupBottomSheet()
-    }
-
-    override fun onStart() {
-        super.onStart()
         trackingManager.trackScreenView(getScreenName())
+
     }
 
     private fun setupHeader() {

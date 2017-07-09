@@ -2,10 +2,11 @@
     <string name="app_name">Daily Hunt</string>
     <string name="facebook_app_id">1966287263602613</string>
     <string name="admob_app_id">ca-app-pub-6007267266282978~8999558641</string>
+
     <!-- Title -->
     <string name="topic">Topics</string>
     <string name="collection">Collections</string>
-
+    <string name="radio">Radio</string>
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>
@@ -16,6 +17,7 @@
     <string name="navigation_header_guest">Guest</string>
     <string name="navigation_collection">Collections</string>
     <string name="navigation_topic">Topics</string>
+    <string name="navigation_radio">Radio</string>
 
 
     <string name="comment">Comment</string>
@@ -24,5 +26,7 @@
     <string name="view_more">Read more</string>
     <string name="vote_count">%s votes</string>
     <string name="related_products">Related Products</string>
+    <string name="now_playing">Now playing</string>
+
 
 </resources>

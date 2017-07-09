@@ -16,6 +16,9 @@ import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.radio.di.RadioFragmentBuilderModule
+import com.ctech.eaty.ui.radio.di.RadioModule
+import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.search.di.SearchFragmentBuilderModule
 import com.ctech.eaty.ui.search.di.SearchModule
 import com.ctech.eaty.ui.search.view.SearchActivity
@@ -64,4 +67,8 @@ abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector()
     abstract fun contributeDeepLinkActivity(): UniversalLinkActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(RadioModule::class, RadioFragmentBuilderModule::class))
+    abstract fun contributeRadioActivity(): RadioActivity
 }

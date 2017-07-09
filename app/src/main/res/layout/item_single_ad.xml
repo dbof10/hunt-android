@@ -19,7 +19,7 @@
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ads:adSize="320x150"
+        ads:adSize="SMART_BANNER"
         ads:adUnitId="ca-app-pub-6007267266282978/2953025043"/>
 
 </FrameLayout>

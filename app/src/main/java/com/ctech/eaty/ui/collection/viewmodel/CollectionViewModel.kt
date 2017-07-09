@@ -18,14 +18,14 @@ class CollectionViewModel(private val stateDispatcher: Observable<CollectionStat
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null && !it.loading }
-                .map { it.loadError }
+                .map { it.loadError!! }
     }
 
 
     fun loadMoreError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map(CollectionState::loadMoreError)
+                .map { it.loadMoreError!! }
     }
 
     fun content(): Observable<List<Collection>> {

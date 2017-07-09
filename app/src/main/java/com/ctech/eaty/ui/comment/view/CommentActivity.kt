@@ -55,11 +55,8 @@ class CommentActivity : BaseActivity(), HasSupportFragmentInjector {
                     .add(R.id.fragmentContainer, fragment)
                     .commit()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
         trackingManager.trackScreenView(getScreenName())
+
     }
 
     override fun onResume() {

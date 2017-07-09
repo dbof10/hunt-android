@@ -18,13 +18,13 @@ class SearchViewModel(private val stateDispatcher: Observable<SearchState>) {
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null }
-                .map { it.loadError }
+                .map { it.loadError!! }
     }
 
     fun loadMoreError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map(SearchState::loadMoreError)
+                .map { it.loadMoreError!! }
     }
 
 

@@ -18,7 +18,9 @@
         tools:background="@android:color/black" />
 
     <TextView
+        tools:text="Game"
         android:id="@+id/tvTopicName"
+        style="@style/TextAppearance.ListItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

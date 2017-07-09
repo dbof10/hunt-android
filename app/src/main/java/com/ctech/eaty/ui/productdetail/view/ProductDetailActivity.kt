@@ -177,6 +177,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         setupViewModel()
         setupRecommendationFragment()
         setupToolbar()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun onResume() {
@@ -191,7 +192,6 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     override fun onStart() {
         super.onStart()
-        trackingManager.trackScreenView(getScreenName())
         customTabActivityHelper.bindCustomTabsService(this)
         store.dispatch(ProductDetailAction.Load(productId))
     }

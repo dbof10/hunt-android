@@ -54,6 +54,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
                     .add(R.id.fragmentContainer, fragment)
                     .commit()
         }
+        trackingManager.trackScreenView(getScreenName())
     }
 
     private fun setupToolbar() {
@@ -64,11 +65,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
             homeNavigation.delegate(it.itemId).subscribe()
             false
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

@@ -13,6 +13,7 @@ import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration
 import vn.tiki.noadapter2.AbsViewHolder
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
@@ -44,7 +45,7 @@ class ProductRecommendViewHolder(view: View,
                 .diffCallback(diffCallback)
                 .onItemClickListener { _, item, _ ->
                     if (item is ProductItemViewModel) {
-                         viewModel.toProduct(item.id)
+                        viewModel.toProduct(item.id)
                     }
 
                 }
@@ -63,6 +64,8 @@ class ProductRecommendViewHolder(view: View,
         val layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
         rvProducts.adapter = adapter
         rvProducts.layoutManager = layoutManager
+        rvProducts.addItemDecoration(HorizontalSpaceItemDecoration(RelatedProductViewHolder::class.java,
+                itemView.context.resources.getDimensionPixelSize(R.dimen.divider_horizontal_space)))
     }
 
     companion object {

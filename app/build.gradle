@@ -57,6 +57,9 @@ dependencies {
     implementation 'com.android.support:palette-v7:25.4.0'
     implementation 'com.airbnb.android:lottie:2.0.0'
 
+    //Media
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.3'
+
 
     //Reactive
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -77,8 +80,8 @@ dependencies {
     //Networking
     implementation "com.squareup.retrofit2:retrofit:2.2.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
-    implementation "com.squareup.okhttp3:okhttp:3.8.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.6.0"
+    implementation "com.squareup.okhttp3:okhttp:3.8.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
@@ -97,7 +100,9 @@ dependencies {
     //Ad
     implementation ('com.facebook.android:audience-network-sdk:4.+'){
         exclude group: "com.google.android.gms"
+        exclude group: "com.google.android.exoplayer.source"
     }
+
     implementation 'com.google.firebase:firebase-ads:11.0.2'
 
 
@@ -108,7 +113,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:11.0.2'
     implementation 'com.google.firebase:firebase-appindexing:11.0.2'
 
-
+    //Profile
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
     //Crash report
     implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {

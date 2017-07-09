@@ -7,6 +7,7 @@ import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.di.AppInjector
 import com.google.firebase.FirebaseApp
 import com.google.firebase.perf.FirebasePerformance
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -39,6 +40,10 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         }
         FirebasePerformance.getInstance().isPerformanceCollectionEnabled = !BuildConfig.DEBUG
 
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
     }
 
 }

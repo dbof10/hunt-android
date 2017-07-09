@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.web
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import com.ctech.eaty.R
@@ -13,6 +14,7 @@ class WebviewActivity : BaseActivity() {
         val EXTRA_URL = "extra.url"
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
