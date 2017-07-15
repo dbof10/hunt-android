@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -22,7 +21,6 @@ import com.ctech.eaty.annotation.LIGHTNESS_UNKNOWN
 import com.ctech.eaty.annotation.Lightness
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
-import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
@@ -40,7 +38,7 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import java.lang.Exception
 import javax.inject.Inject
 
-class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract,CustomTabActivityHelper.ConnectionCallback {
+class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract, CustomTabActivityHelper.ConnectionCallback {
     private val SCRIM_ADJUSTMENT = 0.075f
 
     override fun getScreenName(): String = "Product Detail"
@@ -89,7 +87,6 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
             override fun onResourceReady(resource: GlideDrawable, model: String, target: Target<GlideDrawable>, isFromMemoryCache: Boolean,
                                          isFirstResource: Boolean): Boolean {
 
-            //    progressBar.visibility = View.GONE
                 val bitmap = GlideImageLoader.getBitmap(resource)
                 val twentyFourDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         24f, resources.displayMetrics).toInt()
@@ -129,7 +126,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
                             }
 
                             if (statusBarColor != window.statusBarColor) {
-                               ivProduct.setScrimColor(statusBarColor)
+                                ivProduct.setScrimColor(statusBarColor)
                                 val statusBarColorAnim = ValueAnimator.ofArgb(
                                         window.statusBarColor, statusBarColor)
                                 statusBarColorAnim.addUpdateListener { animation -> window.statusBarColor = animation.animatedValue as Int }
@@ -156,7 +153,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
                                     true)
                         }
                 // TODO should keep the background if the image contains transparency?!
-             //   ivProduct.background = null
+                //   ivProduct.background = null
                 return false
             }
         }
@@ -175,7 +172,8 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
         setupChromeService()
         setupViewModel()
-        setupRecommendationFragment()
+        setupBodyFragment()
+        setupHeader()
         setupToolbar()
         trackingManager.trackScreenView(getScreenName())
     }
@@ -215,11 +213,17 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         }
     }
 
+    private fun setupHeader() {
+        ivProduct.setOnClickListener {
+            viewModel.navigateGallery()
+        }
+    }
+
     private fun renderHeader(productUrl: String) {
         imageLoader.downloadInto(productUrl, ivProduct, imageLoaderCallback)
     }
 
-    private fun setupRecommendationFragment() {
+    private fun setupBodyFragment() {
         var fragment = supportFragmentManager.findFragmentById(R.id.fBody)
         if (fragment == null) {
             fragment = ProductBodyFragment.newInstance()

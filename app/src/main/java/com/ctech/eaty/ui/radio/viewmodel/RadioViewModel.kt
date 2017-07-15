@@ -3,14 +3,15 @@ package com.ctech.eaty.ui.radio.viewmodel
 import android.net.Uri
 import com.ctech.eaty.entity.TrackStatus
 import com.ctech.eaty.response.RadioResponse
-import com.ctech.eaty.ui.radio.controller.RadioController
+import com.ctech.eaty.player.MediaController
 import com.ctech.eaty.ui.radio.state.MediaPlayerState
 import com.ctech.eaty.ui.radio.state.RadioState
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 
-class RadioViewModel(private val stateDispatcher: Observable<RadioState>, private val radioController: RadioController) {
+class RadioViewModel(private val stateDispatcher: Observable<RadioState>, private val radioController: MediaController<SimpleExoPlayerView>) {
 
     private var body: List<TrackItemViewModel> = emptyList()
     private val bodySubject: PublishSubject<List<TrackItemViewModel>> = PublishSubject.create()

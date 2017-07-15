@@ -29,6 +29,7 @@
         app:maxScrimAlpha="0.4"
         app:parallaxFactor="-0.5"
         app:scrimAlpha="0"
+        android:elevation="0.5dp"
         app:scrimColor="@color/scrim" />
 
 

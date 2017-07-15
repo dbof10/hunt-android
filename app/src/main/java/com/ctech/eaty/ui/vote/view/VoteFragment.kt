@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Vote
@@ -26,7 +26,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class VoteFragment : BaseFragment<VoteState>(), Injectable {
+class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
 
     companion object {
         val POST_ID = "postId"
@@ -98,7 +98,6 @@ class VoteFragment : BaseFragment<VoteState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
     }

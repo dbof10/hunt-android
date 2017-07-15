@@ -9,10 +9,11 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.entity.TrackStatus
 import com.ctech.eaty.tracking.FirebaseTrackManager
-import com.ctech.eaty.ui.radio.controller.RadioController
+import com.ctech.eaty.player.MediaController
 import com.ctech.eaty.ui.radio.state.MediaPlayerState
 import com.ctech.eaty.ui.radio.viewmodel.RadioViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -37,7 +38,7 @@ class RadioActivity : BaseActivity(), HasSupportFragmentInjector {
     lateinit var viewModel: RadioViewModel
 
     @Inject
-    lateinit var radioController: RadioController
+    lateinit var radioController: MediaController<SimpleExoPlayerView>
 
     companion object {
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.load.resource.gif.GifDrawable
@@ -30,6 +31,7 @@ class GlideImageLoader(context: Context) {
     fun downloadInto(url: String?, imageView: ImageView) {
         Glide.with(imageView.context)
                 .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView)
     }
 
@@ -48,6 +50,7 @@ class GlideImageLoader(context: Context) {
         Glide.with(imageView.context)
                 .load(url)
                 .listener(listener)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(placeholderRes)
                 .into(imageView)
     }

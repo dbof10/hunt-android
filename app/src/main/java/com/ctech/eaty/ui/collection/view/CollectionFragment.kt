@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Collection
@@ -26,7 +26,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
+class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
 
     companion object {
 
@@ -89,7 +89,6 @@ class CollectionFragment : BaseFragment<CollectionState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
         setupErrorView()

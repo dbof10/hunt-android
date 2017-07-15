@@ -17,11 +17,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
-import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -35,7 +34,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
+class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable {
 
 
     companion object {
@@ -48,6 +47,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
             return fragment
         }
     }
+
     @Inject
     lateinit var store: Store<ProductDetailState>
 
@@ -138,7 +138,7 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                         R.id.btVote -> {
                             with(view as Button) {
                                 (compoundDrawables[1] as AnimatedVectorDrawable).start()
-                                viewModel.navigateToVote()
+                                viewModel.navigateVote()
                             }
                         }
                         R.id.btCommentCount -> {
@@ -178,17 +178,16 @@ class ProductBodyFragment : BaseFragment<ProductDetailState>(), Injectable {
                 .build()
     }
 
-    private val scrollListener by lazy {
-        object : RecyclerView.OnScrollListener() {
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
 
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                contractor.onScrolled(headerView)
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                contractor.onScrollStateChanged(newState)
-            }
+        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            contractor.onScrolled(headerView)
         }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            contractor.onScrollStateChanged(newState)
+        }
+
     }
 
     private val flingListener by lazy {

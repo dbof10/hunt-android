@@ -6,9 +6,12 @@ import android.net.Uri
 import android.support.customtabs.CustomTabsIntent
 import android.support.customtabs.CustomTabsSession
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
+import com.ctech.eaty.entity.Media
 import com.ctech.eaty.ui.comment.view.CommentActivity
+import com.ctech.eaty.ui.gallery.view.GalleryActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.vote.view.VoteActivity
 import com.ctech.eaty.ui.web.WebviewFallback
@@ -56,6 +59,13 @@ class ProductDetailNavigation @Inject constructor(private val context: ProductDe
     fun toProduct(id: Int): Completable {
         return Completable.fromAction {
             val intent = ProductDetailActivity.newIntent(context, id)
+            context.startActivity(intent)
+        }
+    }
+
+    fun toGallery(media: ArrayList<Media>): Completable{
+        return Completable.fromAction {
+            val intent = GalleryActivity.newIntent(context, media)
             context.startActivity(intent)
         }
     }

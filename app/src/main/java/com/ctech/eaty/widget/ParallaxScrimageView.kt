@@ -8,7 +8,6 @@ import android.graphics.Rect
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.util.AttributeSet
-import android.util.Log
 import android.util.Property
 import com.ctech.eaty.R
 import com.ctech.eaty.util.AnimUtils

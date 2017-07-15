@@ -40,12 +40,19 @@
     <dimen name="play_size">48dp</dimen>
     <dimen name="media_progress_bar_height">2dp</dimen>
 
+    <!-- Gallery -->
+    <dimen name="play_large_size">64dp</dimen>
+
+
 
     <!-- Z-axis elevations -->
     <dimen name="z_app_bar">4dp</dimen>
     <dimen name="touch_raise">6dp</dimen>
     <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
     <dimen name="z_card">2dp</dimen>
+    <dimen name="gallery_preview_height">84dp</dimen>
+    <dimen name="indicator_diameter">8dp</dimen>
+    <dimen name="indicator_gap">8dp</dimen>
 
 
 </resources>

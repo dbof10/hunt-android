@@ -10,6 +10,10 @@ import com.ctech.eaty.ui.collectiondetail.view.CollectionDetailActivity
 import com.ctech.eaty.ui.comment.di.CommentFragmentBuilderModule
 import com.ctech.eaty.ui.comment.di.CommentModule
 import com.ctech.eaty.ui.comment.view.CommentActivity
+import com.ctech.eaty.ui.gallery.di.GalleryFragmentBuilderModule
+import com.ctech.eaty.ui.gallery.di.GalleryModule
+import com.ctech.eaty.ui.gallery.view.GalleryActivity
+import com.ctech.eaty.ui.gallery.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
@@ -71,4 +75,12 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(RadioModule::class, RadioFragmentBuilderModule::class))
     abstract fun contributeRadioActivity(): RadioActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(GalleryModule::class, GalleryFragmentBuilderModule::class))
+    abstract fun contributeGalleryActivity(): GalleryActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(GalleryModule::class))
+    abstract fun contributeYoutubeActivity(): YoutubeActivity
 }

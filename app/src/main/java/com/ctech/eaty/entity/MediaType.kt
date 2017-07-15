@@ -1,7 +1,10 @@
 package com.ctech.eaty.entity
 
+import com.google.gson.annotations.SerializedName
+
 enum class MediaType(val type: String) {
-    VIDEO("video"), Image("image");
+    @SerializedName("video") VIDEO("video"),
+    @SerializedName("image") IMAGE("image");
 
     override fun toString() = type
 }

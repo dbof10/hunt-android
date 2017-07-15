@@ -4,16 +4,14 @@ package com.ctech.eaty.ui.comment.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
-import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.comment.state.CommentState
 import com.ctech.eaty.ui.comment.viewmodel.CommentItemViewModel
@@ -27,7 +25,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class CommentFragment : BaseFragment<CommentState>(), Injectable {
+class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
 
     companion object {
         val PRODUCT_ID = "productId"
@@ -109,7 +107,6 @@ class CommentFragment : BaseFragment<CommentState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
         setupErrorView()

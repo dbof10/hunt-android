@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
@@ -26,7 +26,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class SearchFragment : BaseFragment<SearchState>(), Injectable {
+class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     companion object {
         val TOPIC_ID_KEY = "topicId"
@@ -108,7 +108,6 @@ class SearchFragment : BaseFragment<SearchState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
     }

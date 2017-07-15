@@ -42,99 +42,84 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
     implementation 'com.android.support:multidex:1.0.1'
-
     //UI
     implementation 'com.android.support:appcompat-v7:25.4.0'
     implementation 'com.android.support:design:25.4.0'
     implementation 'com.android.support:customtabs:25.4.0'
     implementation 'com.android.support:palette-v7:25.4.0'
     implementation 'com.airbnb.android:lottie:2.0.0'
-
+    implementation 'com.pacioianu.david:ink-page-indicator:1.2.0'
     //Media
     implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.3'
-
-
+    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.3'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.3'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.3'
     //Reactive
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.0.9'
-
     implementation 'vn.tiki.noadapter2:noadapter:2.0.1-SNAPSHOT'
-
     implementation 'com.jakewharton:butterknife:8.6.0'
     kapt 'com.jakewharton:butterknife-compiler:8.6.0'
-
     //Dagger
     implementation 'com.google.dagger:dagger:2.11'
-    implementation "com.google.dagger:dagger-android-support:2.11"
+    implementation 'com.google.dagger:dagger-android-support:2.11'
     kapt 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.google.dagger:dagger-android:2.11'
     kapt 'com.google.dagger:dagger-android-processor:2.11'
-
     //Networking
-    implementation "com.squareup.retrofit2:retrofit:2.2.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.2.0"
-    implementation "com.squareup.okhttp3:okhttp:3.8.1"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'org.jsoup:jsoup:1.10.3'
-
-
     //Caching
-    implementation "com.nytimes.android:store2:0.0.1-SNAPSHOT"
-    implementation "com.nytimes.android:cache:2.1.0"
-    implementation "com.nytimes.android:middleware2:0.0.1-SNAPSHOT"
-    implementation "com.nytimes.android:filesystem2:0.0.1-SNAPSHOT"
-
+    implementation 'com.nytimes.android:store2:0.0.1-SNAPSHOT'
+    implementation 'com.nytimes.android:cache:2.1.0'
+    implementation 'com.nytimes.android:middleware2:0.0.1-SNAPSHOT'
+    implementation 'com.nytimes.android:filesystem2:0.0.1-SNAPSHOT'
     //Date
     implementation 'net.danlew:android.joda:2.9.9'
-
     //Ad
-    implementation ('com.facebook.android:audience-network-sdk:4.+'){
+    implementation('com.facebook.android:audience-network-sdk:4.+') {
         exclude group: "com.google.android.gms"
-        exclude group: "com.google.android.exoplayer.source"
+        exclude group: "com.google.android.exoplayer"
+
     }
-
     implementation 'com.google.firebase:firebase-ads:11.0.2'
-
-
     implementation 'com.jakewharton.timber:timber:4.5.1'
-
     //Tracking
     implementation 'com.google.firebase:firebase-core:11.0.2'
     implementation 'com.google.firebase:firebase-perf:11.0.2'
     implementation 'com.google.firebase:firebase-appindexing:11.0.2'
-
     //Profile
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-
     //Crash report
     implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true
     }
-
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.7.22"
-    testImplementation "org.robolectric:robolectric:3.3.2"
-
+    testImplementation 'org.mockito:mockito-core:2.7.22'
+    testImplementation 'org.robolectric:robolectric:3.3.2'
     androidTestImplementation 'com.android.support:support-annotations:25.4.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'org.mockito:mockito-android:2.7.19'
-
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 apply plugin: 'com.google.gms.google-services'
 

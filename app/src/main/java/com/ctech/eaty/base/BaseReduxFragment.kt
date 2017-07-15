@@ -8,7 +8,7 @@ import com.ctech.eaty.base.redux.Store
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BaseFragment<State> : Fragment() {
+abstract class BaseReduxFragment<State> : Fragment() {
 
     private lateinit var lifecycleDelegate: LifeCycleDelegate<State>
     private val disposables = CompositeDisposable()

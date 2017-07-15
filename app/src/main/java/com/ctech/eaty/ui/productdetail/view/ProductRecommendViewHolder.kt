@@ -45,7 +45,7 @@ class ProductRecommendViewHolder(view: View,
                 .diffCallback(diffCallback)
                 .onItemClickListener { _, item, _ ->
                     if (item is ProductItemViewModel) {
-                        viewModel.toProduct(item.id)
+                        viewModel.navigateProduct(item.id)
                     }
 
                 }

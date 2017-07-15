@@ -56,6 +56,12 @@
             android:name=".ui.productdetail.view.ProductDetailActivity"
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
+        <activity android:name=".ui.gallery.view.GalleryActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
+
+        <activity android:name=".ui.gallery.view.YoutubeActivity"
+            android:theme="@style/AppTheme.FullScreen"/>
+
         <activity
             android:name=".ui.web.WebviewActivity"
             android:theme="@style/AppTheme" />

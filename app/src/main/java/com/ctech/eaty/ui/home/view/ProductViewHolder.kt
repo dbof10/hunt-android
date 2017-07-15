@@ -68,7 +68,7 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
             tvDescription.text = tagline
             tvUpvote.text = votesCount
             tvCommentCount.text = commentsCount
-            imageLoader.downloadInto(imageUrl, ivProduct)
+            imageLoader.downloadInto(ResizeImageUrlProvider.getNewUrl(imageUrl,IMAGE_WIDTH), ivProduct)
         }
     }
 }

@@ -8,27 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
-import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.ad.AdsProvider
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.*
-import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
-import com.facebook.ads.NativeAdsManager
 import kotlinx.android.synthetic.main.fragment_products.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class HomeFragment : BaseFragment<HomeState>(), Injectable {
+class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
 
     companion object {
         fun newInstance(): Fragment {
@@ -138,7 +135,6 @@ class HomeFragment : BaseFragment<HomeState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
         setupRefresh()

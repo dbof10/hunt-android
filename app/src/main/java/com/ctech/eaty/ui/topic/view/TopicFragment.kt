@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
@@ -25,7 +25,7 @@ import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
-class TopicFragment : BaseFragment<TopicState>(), Injectable {
+class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
 
     companion object {
 
@@ -90,7 +90,6 @@ class TopicFragment : BaseFragment<TopicState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupViewModel()
         setupRecyclerView()
         setupErrorView()

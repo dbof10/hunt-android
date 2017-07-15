@@ -7,7 +7,6 @@ import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
-import io.reactivex.internal.functions.Functions
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -75,7 +74,9 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                             CommentItemViewModel(it)
                         }
                     }
-                    body += mapRecommend(it)
+                    if (it.relatedPosts.isNotEmpty()) {
+                        body += mapRecommend(it)
+                    }
                     this.body = body
                     body
                 }
@@ -110,7 +111,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         bodySubject.onNext(body)
     }
 
-    fun navigateToVote() {
+    fun navigateVote() {
         val product = stateDispatcher.value.content
         product?.run {
             navigation.toVote(id, voteCount).subscribe()
@@ -139,7 +140,14 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     }
 
-    fun toProduct(id: Int) {
+    fun navigateProduct(id: Int) {
         navigation.toProduct(id).subscribe({}, Timber::e)
+    }
+
+    fun navigateGallery() {
+        val product = stateDispatcher.value.content
+        product?.run {
+            navigation.toGallery(ArrayList(media)).subscribe({}, Timber::e)
+        }
     }
 }

@@ -48,6 +48,11 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AppTheme.FullScreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <style name="Widget.Hunt" parent="android:Widget" />
 
 
@@ -69,9 +74,9 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextAppearance.Section" parent="@android:style/TextAppearance.Material.Headline"/>
+    <style name="TextAppearance.Section" parent="@android:style/TextAppearance.Material.Headline" />
 
-    <style name="TextAppearance.BodySection" parent="@android:style/TextAppearance.Material.Notification.Title"/>
+    <style name="TextAppearance.BodySection" parent="@android:style/TextAppearance.Material.Notification.Title" />
 
     <style name="TextAppearance.SubProductTitle" parent="@android:style/TextAppearance.Material.Small">
         <item name="android:textColor">@android:color/black</item>

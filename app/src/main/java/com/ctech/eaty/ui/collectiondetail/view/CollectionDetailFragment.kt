@@ -3,13 +3,12 @@ package com.ctech.eaty.ui.collectiondetail.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.collectiondetail.navigation.CollectionDetailNavigation
@@ -28,7 +27,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class CollectionDetailFragment : BaseFragment<CollectionDetailState>(), Injectable {
+class CollectionDetailFragment : BaseReduxFragment<CollectionDetailState>(), Injectable {
 
     companion object {
 
@@ -113,7 +112,6 @@ class CollectionDetailFragment : BaseFragment<CollectionDetailState>(), Injectab
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
     }

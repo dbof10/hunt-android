@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.base.BaseFragment
+import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.radio.action.RadioAction
@@ -24,7 +24,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class RadioFragment : BaseFragment<RadioState>(), Injectable {
+class RadioFragment : BaseReduxFragment<RadioState>(), Injectable {
 
     companion object {
 
@@ -87,7 +87,6 @@ class RadioFragment : BaseFragment<RadioState>(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this, view)
         setupRecyclerView()
         setupViewModel()
         setupErrorView()
