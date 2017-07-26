@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.util.ResourceProvider
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -20,8 +21,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAppSettingsManager(sharedPreferences: SharedPreferences): AppSettingsManager {
-        return AppSettingsManager(sharedPreferences)
+    fun provideAppSettingsManager(sharedPreferences: SharedPreferences, gson: Gson): AppSettingsManager {
+        return AppSettingsManager(sharedPreferences, gson)
     }
 
     @Provides

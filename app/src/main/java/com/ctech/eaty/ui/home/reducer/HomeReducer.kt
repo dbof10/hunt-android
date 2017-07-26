@@ -2,9 +2,7 @@ package com.ctech.eaty.ui.home.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.home.result.LoadMoreResult
-import com.ctech.eaty.ui.home.result.LoadResult
-import com.ctech.eaty.ui.home.result.RefreshResult
+import com.ctech.eaty.ui.home.result.*
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
@@ -52,6 +50,12 @@ class HomeReducer : Reducer<HomeState> {
                 } else {
                     return state.copy(loadingMore = false, loadError = null, content = computeNextBody(state, result), dayAgo = result.dayAgo)
                 }
+            }
+            is LoadUserResult -> {
+                return state.copy(user = result.content)
+            }
+            is CheckLoginResult -> {
+                return state.copy(user = result.content)
             }
             else -> {
                 throw  IllegalArgumentException("Unknown result")

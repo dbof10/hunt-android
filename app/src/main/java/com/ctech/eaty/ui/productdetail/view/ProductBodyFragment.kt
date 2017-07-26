@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.productdetail.view
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -59,6 +60,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
 
     @Inject
     lateinit var customTabActivityHelper: CustomTabActivityHelper
+
 
     private val diffCallback = object : DiffCallback {
 
@@ -133,7 +135,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
                         else -> 0
                     }
                 }
-                .onItemClickListener { view, _, position ->
+                .onItemClickListener { view, item, position ->
                     when (view.id) {
                         R.id.btVote -> {
                             with(view as Button) {
@@ -148,8 +150,8 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
                             with(view as Button) {
                                 val drawable = (compoundDrawables[1] as AnimatedVectorDrawable)
                                 drawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
-                                    override fun onAnimationEnd(drawable: Drawable?) {
-                                        super.onAnimationEnd(drawable)
+                                    override fun onAnimationEnd(drawableCallback: Drawable) {
+                                        super.onAnimationEnd(drawableCallback)
                                         viewModel.shareLink()
                                     }
                                 })
@@ -172,6 +174,14 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
                             }
                             viewModel.selectCommentAt(position)
 
+                        }
+                        R.id.ivAvatar -> {
+                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getString(R.string.transition_user_avatar))
+                            viewModel.navigateUser((item as CommentItemViewModel).user, options)
+                        }
+                        R.id.ivHunterAvatar -> {
+                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getString(R.string.transition_user_avatar))
+                            viewModel.navigateUser((item as ProductHeaderItemViewModel).user, options)
                         }
                     }
                 }

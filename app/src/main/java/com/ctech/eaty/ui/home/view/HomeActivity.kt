@@ -5,10 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity.START
+import android.widget.ImageView
+import android.widget.TextView
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
+import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
+import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -19,6 +26,7 @@ import javax.inject.Inject
 
 
 class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
+
     override fun getScreenName() = "Home"
 
     @Inject
@@ -33,6 +41,12 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var imageLoader: GlideImageLoader
 
+    @Inject
+    lateinit var store: Store<HomeState>
+
+    @Inject
+    lateinit var viewModel: HomeViewModel
+
     companion object {
 
         fun newIntent(context: Context): Intent {
@@ -45,6 +59,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar()
+        setupViewModel()
         var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
         if (fragment == null) {
@@ -57,10 +72,38 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         trackingManager.trackScreenView(getScreenName())
     }
 
+    private fun setupViewModel() {
+        viewModel.user().subscribe { renderNavigationHeader(it) }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        store.dispatch(HomeAction.LOAD_USER)
+    }
+
+    private fun renderNavigationHeader(user: UserDetail) {
+        (navigation.getHeaderView(0)
+                .findViewById(R.id.ivAvatar) as ImageView)
+                .run {
+                    imageLoader.downloadInto(user.imageUrl.px48, this)
+                }
+        (navigation.getHeaderView(0)
+                .findViewById(R.id.tvUserName) as TextView)
+                .run {
+                    text = user.username
+                }
+    }
+
+
     private fun setupToolbar() {
         toolbar.setNavigationOnClickListener {
             drawer.openDrawer(START)
         }
+        navigation.getHeaderView(0)
+                .findViewById(R.id.llUser)
+                .setOnClickListener {
+                    viewModel.userNavigation()
+                }
         navigation.setNavigationItemSelectedListener {
             homeNavigation.delegate(it.itemId).subscribe()
             false
@@ -76,5 +119,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         imageLoader.clearMemory()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        store.dispatch(HomeAction.CHECK_RESULT(requestCode, resultCode, data))
+    }
 
 }

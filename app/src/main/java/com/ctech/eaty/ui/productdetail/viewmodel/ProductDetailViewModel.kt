@@ -1,7 +1,9 @@
 package com.ctech.eaty.ui.productdetail.viewmodel
 
+import android.app.ActivityOptions
 import android.support.customtabs.CustomTabsSession
 import com.ctech.eaty.entity.ProductDetail
+import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.util.ResizeImageUrlProvider
@@ -37,6 +39,9 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun header(): Observable<String> {
         return content()
+                .filter {
+                    it != ProductDetail.EMPTY
+                }
                 .map {
                     ResizeImageUrlProvider.overrideUrl(it.thumbnail.imageUrl, HEADER_IMAGE_SIZE)
                 }
@@ -48,11 +53,8 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                 .filter {
                     !it.loading && it.error == null
                 }
-                .flatMap {
-                    if (it.content == null)
-                        Observable.just(ProductDetail.EMPTY)
-                    else
-                        Observable.just(it.content)
+                .map {
+                    it.content ?: ProductDetail.EMPTY
                 }
 
     }
@@ -149,5 +151,10 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         product?.run {
             navigation.toGallery(ArrayList(media)).subscribe({}, Timber::e)
         }
+    }
+
+    fun navigateUser(user: User, option: ActivityOptions) {
+        navigation.toUser(user, option)
+                .subscribe({}, Timber::e)
     }
 }

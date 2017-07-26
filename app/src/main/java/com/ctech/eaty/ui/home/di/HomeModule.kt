@@ -3,14 +3,13 @@ package com.ctech.eaty.ui.home.di
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.ProductRepository
+import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.home.action.BarCodeGenerator
-import com.ctech.eaty.ui.home.epic.LoadEpic
-import com.ctech.eaty.ui.home.epic.LoadMoreEpic
-import com.ctech.eaty.ui.home.epic.RefreshEpic
+import com.ctech.eaty.ui.home.epic.*
+import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.reducer.HomeReducer
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
-import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.rx.ThreadScheduler
 import dagger.Module
 import dagger.Provides
@@ -28,18 +27,22 @@ class HomeModule {
 
     @ActivityScope
     @Provides
-    fun provideHomeStore(productRepository: ProductRepository, barCodeGenerator: BarCodeGenerator,
+    fun provideHomeStore(productRepository: ProductRepository,
+                         userRepository: UserRepository,
+                         barCodeGenerator: BarCodeGenerator,
                          threadScheduler: ThreadScheduler): Store<HomeState> {
         return Store<HomeState>(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, barCodeGenerator, threadScheduler),
                 RefreshEpic(productRepository, barCodeGenerator, threadScheduler),
-                LoadMoreEpic(productRepository, barCodeGenerator, threadScheduler)))
+                LoadUserEpic(userRepository, threadScheduler),
+                LoadMoreEpic(productRepository, barCodeGenerator, threadScheduler), CheckLoginEpic()))
 
     }
 
+    @ActivityScope
     @Provides
-    fun provideHomeViewModel(store: Store<HomeState>): HomeViewModel {
+    fun provideHomeViewModel(store: Store<HomeState>, userRepository: UserRepository, navigation: HomeNavigation): HomeViewModel {
         val state = store.state
                 .observeOn(AndroidSchedulers.mainThread())
-        return HomeViewModel(state)
+        return HomeViewModel(state, userRepository, navigation)
     }
 }

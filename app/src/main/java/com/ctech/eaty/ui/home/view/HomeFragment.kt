@@ -20,6 +20,7 @@ import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_products.*
+import timber.log.Timber
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
@@ -176,6 +177,7 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
     private fun renderLoadError(error: Throwable) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
+        Timber.e(error)
     }
 
     private fun renderLoadingMore() {

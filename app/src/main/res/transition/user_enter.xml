@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:transitionOrdering="together"
+    android:interpolator="@android:interpolator/linear_out_slow_in">
+
+    <transitionSet>
+        <targets>
+            <target android:excludeId="@android:id/navigationBarBackground" />
+            <target android:excludeId="@android:id/statusBarBackground" />
+            <target android:excludeId="@id/background" />
+        </targets>
+        <transition
+            class="com.ctech.eaty.widget.transition.StaggeredDistanceSlide"
+            app:spread="7"
+            android:startDelay="120"
+            android:duration="350"
+            android:interpolator="@android:interpolator/linear_out_slow_in" />
+        <fade
+            android:startDelay="120"
+            android:duration="120"
+            android:interpolator="@android:interpolator/linear_out_slow_in" />
+    </transitionSet>
+
+    <fade android:duration="200">
+        <targets>
+            <target android:targetId="@id/background" />
+        </targets>
+    </fade>
+
+    <fade android:duration="400">
+        <targets>
+            <target android:targetId="@android:id/navigationBarBackground" />
+            <target android:targetId="@android:id/statusBarBackground" />
+        </targets>
+    </fade>
+
+</transitionSet>

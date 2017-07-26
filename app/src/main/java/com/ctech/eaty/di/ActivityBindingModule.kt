@@ -17,6 +17,8 @@ import com.ctech.eaty.ui.gallery.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.login.di.LoginModule
+import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -29,6 +31,9 @@ import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
+import com.ctech.eaty.ui.user.di.UserDetailFragmentBuilderModule
+import com.ctech.eaty.ui.user.di.UserDetailModule
+import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.ui.vote.di.VoteFragmentBuilderModule
 import com.ctech.eaty.ui.vote.di.VoteModule
 import com.ctech.eaty.ui.vote.view.VoteActivity
@@ -83,4 +88,12 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(GalleryModule::class))
     abstract fun contributeYoutubeActivity(): YoutubeActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(LoginModule::class))
+    abstract fun contributeLoginActivity(): LoginActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(UserDetailModule::class, UserDetailFragmentBuilderModule::class))
+    abstract fun contributeUserActivity(): UserActivity
 }

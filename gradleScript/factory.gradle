@@ -1,0 +1,21 @@
+android.applicationVariants.all { variant ->
+    def appName
+
+    if (project.hasProperty("applicationName")) {
+        appName = applicationName
+    } else {
+        appName = project.name
+    }
+
+    variant.outputs.all { output ->
+
+        def newApkName
+        if (variant.buildType.name.contains("release")) {
+            newApkName = "${appName}-${output.baseName}-${variant.versionName}.apk"
+        } else {
+            newApkName = "${appName}-${output.baseName}-${variant.versionName}-unaligned.apk"
+        }
+
+        outputFileName = newApkName
+    }
+}

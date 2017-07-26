@@ -44,6 +44,7 @@ class ProductCommentViewHolder(view: View, val imageLoader: GlideImageLoader) : 
     init {
         ButterKnife.bind(this, view)
         tvComment.setOnViewMoreClickListener(this)
+        ivAvatar.setOnClickListener(this)
         rlComment.setOnClickListener(this)
     }
 

@@ -37,6 +37,19 @@
         <item name="android:navigationBarColor">@color/hunt_super_dark</item>
     </style>
 
+    <style name="AppTheme.Translucent.Overlap.User">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/light_immersive_bars</item>
+        <item name="android:navigationBarColor">@color/immersive_bars</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/user_shared_enter</item>
+        <item name="android:windowEnterTransition">@transition/user_enter</item>
+        <item name="android:windowReturnTransition">@transition/user_return</item>
+        <item name="android:windowTransitionBackgroundFadeDuration">200</item>
+    </style>
+
 
     <style name="AppTheme.Translucent.Overlap.Vote">
         <item name="android:windowEnterTransition">@transition/vote_sheet_enter</item>
@@ -111,6 +124,16 @@
         <item name="lineHeightHint">24sp</item>
     </style>
 
+    <style name="Widget.Hunt.Comment">
+        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
+        <item name="lineHeightHint">24sp</item>
+    </style>
+
+    <style name="Widget.Hunt.UserTitle">
+        <item name="android:textAppearance">@style/TextAppearance.Author.Title</item>
+        <item name="lineHeightHint">28sp</item>
+    </style>
+
     <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
@@ -129,12 +152,20 @@
     </style>
 
     <style name="TextAppearance.CommentAuthor" parent="@android:style/TextAppearance.Material.Caption">
-        <item name="android:textColor">@color/comment_author</item>
+        <item name="android:fontFeatureSettings">smcp, onum</item>
+        <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <style name="Widget.Hunt.Comment">
-        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
-        <item name="lineHeightHint">24sp</item>
+    <style name="TextAppearance.Author.Title" parent="@style/TextAppearance.CommentAuthor">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.DarkButton" parent="@android:style/TextAppearance.Material.Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="LightRippleOverlay">
+        <item name="android:colorControlHighlight">@color/ripple_light</item>
     </style>
 
 </resources>

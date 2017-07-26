@@ -19,7 +19,7 @@ data class ProductDetail(val id: Int, @SerializedName("comments_count") val comm
 
     companion object {
         val EMPTY = ProductDetail(-1, 0, "", "", emptyList(), emptyList(),
-                ThumbNail.EMPTY, "", User.GUEST, 0, emptyList(),
+                ThumbNail.EMPTY, "", User.ANONYMOUS, 0, emptyList(),
                 emptyList(), emptyList(), emptyList(), DateTime.now())
     }
 

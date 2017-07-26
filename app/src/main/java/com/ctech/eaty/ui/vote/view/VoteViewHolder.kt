@@ -45,7 +45,7 @@ class VoteViewHolder(view: View, private val imageLoader: GlideImageLoader) : Ab
         with(vote) {
             tvUserName.text = user.username
             tvHeadline.text = user.headline
-            imageLoader.downloadInto(user.imageUrl.smallImgUrl, ivAvatar)
+            imageLoader.downloadInto(user.imageUrl.px48, ivAvatar)
             tvTimeStamp.text = DateUtils.getRelativeTimeSpan(itemView.context, vote.createAt)
         }
 

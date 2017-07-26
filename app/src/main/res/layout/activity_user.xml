@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ctech.eaty.widget.ElasticDragDismissFrameLayout android:id="@+id/flDraggable"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="false"
+    app:dragDismissDistance="@dimen/drag_dismiss_distance"
+    app:dragDismissScale="0.95">
+
+    <!-- need a separate view for the background to target during the window transition -->
+    <View
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_50"
+        android:elevation="@dimen/z_card"
+        android:transitionName="@string/transition_user_background" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:elevation="@dimen/z_card"
+        android:transitionGroup="false">
+
+        <com.ctech.eaty.widget.CircularImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/avatar_large_size"
+            android:layout_height="@dimen/avatar_large_size"
+            android:layout_marginTop="@dimen/space_medium"
+            android:elevation="@dimen/z_card"
+            android:src="@drawable/avatar_placeholder"
+            android:transitionName="@string/transition_user_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvName"
+            style="@style/Widget.Hunt.UserTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+            tools:text="Nick Butcher" />
+
+        <Button
+            android:id="@+id/btFollow"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/space_medium"
+            android:drawableStart="@drawable/asl_follow"
+            android:text="@string/follow"
+            android:textAppearance="@style/TextAppearance.DarkButton"
+            android:theme="@style/LightRippleOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvBio"
+            style="@style/Widget.Hunt.ShotDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/space_medium"
+            android:paddingStart="@dimen/space_medium"
+            android:gravity="center"
+            android:paddingTop="@dimen/space_medium"
+            android:textColorHighlight="@color/hunt_link_highlight"
+            android:textColorLink="@color/hunt_links"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btFollow"
+            tools:text="Designer &amp; developer at Google." />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvProductCount"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/avd_product"
+            android:paddingBottom="@dimen/space_medium"
+            android:paddingTop="@dimen/space_medium"
+            app:layout_constraintEnd_toStartOf="@+id/tvFollowerCount"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBio"
+            tools:text="1337 shots" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvFollowerCount"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/avd_followers"
+            android:paddingBottom="@dimen/space_medium"
+            android:paddingTop="@dimen/space_medium"
+            app:layout_constraintEnd_toStartOf="@+id/tvFollowingCount"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/tvProductCount"
+            app:layout_constraintTop_toBottomOf="@id/tvBio"
+            tools:text="1337 followers" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvFollowingCount"
+            style="@style/Widget.Hunt.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/ic_heart_solid_grey"
+            android:paddingBottom="@dimen/space_medium"
+            android:paddingTop="@dimen/space_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/tvFollowerCount"
+            app:layout_constraintTop_toBottomOf="@id/tvBio"
+            tools:text="1,000,000 likes" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/fBody"
+        android:elevation="@dimen/z_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:elevation="@dimen/z_card"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_1"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        />
+
+</com.ctech.eaty.widget.ElasticDragDismissFrameLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Disable the given check in this project -->
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+    <issue id="ContentDescription" severity="ignore" />
+    <issue id="ButtonCase" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
+    <issue id="Overdraw" severity="ignore" />
+    <issue id="MissingVersion" severity="ignore" />
+    <issue id="InnerclassSeparator" severity="ignore" />
+    <issue id="UsesMinSdkAttributes" severity="ignore" />
+    <issue id="InvalidPackage" severity="ignore" />
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
+    <issue id="GradleDynamicVersion" severity="ignore" />
+    <issue id="NewApi" severity="ignore" />
+
+    <issue id="UnusedResources">
+        <ignore regexp="res/values/strings.xml" />
+        <ignore regexp="res/values/dimens.xml" />
+    </issue>
+
+</lint>

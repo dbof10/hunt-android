@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/fast_out_slow_in">
+
+    <!-- move up, scale down and rotate while the path is morphing -->
+    <objectAnimator
+        android:propertyName="translateY"
+        android:valueTo="-3"
+        android:duration="250" />
+
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="0.8"
+        android:duration="250" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="0.8"
+        android:duration="250" />
+
+    <objectAnimator
+        android:propertyName="rotation"
+        android:valueTo="-180"
+        android:duration="250" />
+
+    <!-- move the arrow down & restore scale -->
+    <objectAnimator
+        android:propertyName="translateY"
+        android:valueTo="0"
+        android:startOffset="250"
+        android:duration="150" />
+
+    <objectAnimator
+        android:propertyName="scaleX"
+        android:valueTo="1"
+        android:startOffset="250"
+        android:duration="150" />
+
+    <objectAnimator
+        android:propertyName="scaleY"
+        android:valueTo="1"
+        android:startOffset="250"
+        android:duration="150" />
+
+    <!-- bounce back up -->
+    <objectAnimator
+        android:propertyName="translateY"
+        android:valueTo="-2"
+        android:startOffset="400"
+        android:duration="150" />
+
+    <!-- bounce down -->
+    <objectAnimator
+        android:propertyName="translateY"
+        android:valueTo="0"
+        android:startOffset="550"
+        android:duration="150" />
+
+    <!-- instantaneously restore the rotation in preparation for the morph
+         back from arrow to the standard icon -->
+    <objectAnimator
+        android:propertyName="rotation"
+        android:valueTo="0"
+        android:startOffset="1000"
+        android:duration="0" />
+
+</set>

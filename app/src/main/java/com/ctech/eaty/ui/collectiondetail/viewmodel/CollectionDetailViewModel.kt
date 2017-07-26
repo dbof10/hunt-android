@@ -28,11 +28,8 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
                 .filter {
                     !it.loading && it.loadError == null
                 }
-                .flatMap {
-                    if (it.content == null)
-                        Observable.just(CollectionDetail.EMPTY)
-                    else
-                        Observable.just(it.content)
+                .map {
+                    it.content ?: CollectionDetail.EMPTY
                 }
 
 
@@ -40,6 +37,9 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
 
     fun header(): Observable<String> {
         return content()
+                .filter {
+                    it != CollectionDetail.EMPTY
+                }
                 .map {
                     it.backgroundImageUrl
                 }

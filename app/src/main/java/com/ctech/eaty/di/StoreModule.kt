@@ -118,4 +118,13 @@ class StoreModule {
                 .parser(GsonParserFactory.createSourceParser(gson, RadioResponse::class.java))
                 .open()
     }
+
+    @Provides
+    fun providePersistedUserStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<UserResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, UserResponse>()
+                .fetcher { barcode -> apiClient.getUser(barcode.key.toInt()).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, UserResponse::class.java))
+                .open()
+    }
 }

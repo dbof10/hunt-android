@@ -6,6 +6,7 @@
     android:background="@drawable/header_background">
 
     <LinearLayout
+        android:id="@+id/llUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -13,7 +14,7 @@
         android:layout_marginStart="@dimen/content_padding_horizontal"
         android:layout_marginTop="@dimen/content_padding_vertical">
 
-        <ImageView
+        <com.ctech.eaty.widget.CircularImageView
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"

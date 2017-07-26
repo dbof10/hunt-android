@@ -1,7 +1,7 @@
 package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.AccessToken
-import com.ctech.eaty.entity.Authentication
+import com.ctech.eaty.request.OAuthClientRequest
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.functions.Function
@@ -16,9 +16,9 @@ class RefreshTokenFunc(private val apiClient: ProductHuntApi, private val appSet
                 .flatMap { throwable ->
                     if (throwable is HttpException) {
                         if (throwable.response().code() == 401) {
-                            return@flatMap apiClient.getAccessToken(Authentication.instance)
-                                    .doOnNext { accessToken -> appSettingsManager.setToken(accessToken.accessToken) }
-                                    .doOnError { appSettingsManager.resetToken() }
+                            return@flatMap apiClient.getAccessToken(OAuthClientRequest.instance)
+                                    .doOnNext { accessToken -> appSettingsManager.setClientToken(accessToken.accessToken) }
+                                    .doOnError { appSettingsManager.resetClientToken() }
                         }
                     }
 

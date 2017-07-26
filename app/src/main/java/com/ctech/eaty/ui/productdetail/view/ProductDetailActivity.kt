@@ -35,6 +35,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -80,7 +81,8 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     private val imageLoaderCallback by lazy {
         object : RequestListener<String, GlideDrawable> {
-            override fun onException(e: Exception, model: String, target: Target<GlideDrawable>, isFirstResource: Boolean): Boolean {
+            override fun onException(e: Exception?, model: String, target: Target<GlideDrawable>, isFirstResource: Boolean): Boolean {
+                Timber.e(e)
                 return false
             }
 

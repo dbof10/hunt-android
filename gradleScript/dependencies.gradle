@@ -1,0 +1,123 @@
+def versions = [
+        support: '25.4.0'
+]
+
+def build = [
+        buildToolsVersion: '25.0.3',
+        compileSdkVersion: 25,
+        ci               : 'true' == System.getenv('CI'),
+        minSdkVersion    : 21,
+        targetSdkVersion : 25,
+
+]
+
+def support = [
+        appcompat   : "com.android.support:appcompat-v7:${versions.support}",
+        recyclerview: "com.android.support:recyclerview-v7:${versions.support}",
+        multidex    : "com.android.support:multidex:1.0.1",
+        design      : 'com.android.support:design:25.4.0',
+        customtab   : 'com.android.support:customtabs:25.4.0',
+        palette     : 'com.android.support:palette-v7:25.4.0',
+        annotation  : 'com.android.support:support-annotations:25.4.0',
+        constraint  : 'com.android.support.constraint:constraint-layout:1.0.2'
+]
+
+def dagger = [
+        lib            : 'com.google.dagger:dagger:2.11',
+        compiler       : 'com.google.dagger:dagger-compiler:2.11',
+        android        : 'com.google.dagger:dagger-android:2.11',
+        androidSupport : 'com.google.dagger:dagger-android-support:2.11',
+        androidCompiler: 'com.google.dagger:dagger-android-processor:2.11'
+]
+
+def butterknife = [
+        lib     : 'com.jakewharton:butterknife:8.6.0',
+        compiler: 'com.jakewharton:butterknife-compiler:8.6.0'
+]
+
+def rx = [
+        java   : 'io.reactivex.rxjava2:rxjava:2.0.9',
+        android: 'io.reactivex.rxjava2:rxandroid:2.0.1',
+]
+
+def autovalue = [
+        "lib"     : "com.google.auto.value:auto-value:1.4.1",
+        "compiler": "com.google.auto.value:auto-value:1.4.1"
+]
+
+def test = [
+        "mockito"    : "org.mockito:mockito-core:2.7.22",
+        "junit"      : "junit:junit:4.12",
+        "robolectric": "org.robolectric:robolectric:3.3.2"
+]
+
+def exo = [
+        core           : 'com.google.android.exoplayer:exoplayer-core:r2.4.3',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:r2.4.3',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:r2.4.3',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:r2.4.3',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.3'
+]
+
+def network = [
+        retrofit             : 'com.squareup.retrofit2:retrofit:2.2.0',
+        retrofitRxAdapter    : 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
+        retrofitGsonConverter: 'com.squareup.retrofit2:converter-gson:2.2.0',
+        okhttp               : 'com.squareup.okhttp3:okhttp:3.8.1',
+        okhttpLog            : 'com.squareup.okhttp3:logging-interceptor:3.8.1',
+]
+
+def glide = [
+        lib     : 'com.github.bumptech.glide:glide:3.8.0',
+        compiler: 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+]
+
+def store = [
+        lib       : 'com.nytimes.android:store2:0.0.1-SNAPSHOT',
+        cache     : 'com.nytimes.android:cache:2.1.0',
+        middleware: 'com.nytimes.android:middleware2:0.0.1-SNAPSHOT',
+        filesystem: 'com.nytimes.android:filesystem2:0.0.1-SNAPSHOT'
+]
+
+def firebase = [
+        core    : 'com.google.firebase:firebase-core:11.0.2',
+        perf    : 'com.google.firebase:firebase-perf:11.0.2',
+        indexing: 'com.google.firebase:firebase-appindexing:11.0.2',
+        ads     : 'com.google.firebase:firebase-ads:11.0.2'
+]
+
+def leakcanary = [
+        op  : 'com.squareup.leakcanary:leakcanary-android:1.5.1',
+        noop: 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+]
+
+def ui = [
+        lottie      : 'com.airbnb.android:lottie:2.1.0',
+        inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0'
+]
+
+ext.deps = [
+        "build"      : build,
+        "versions"   : versions,
+        "support"    : support,
+        "kotlin"     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+        "timber"     : "com.jakewharton.timber:timber:4.5.1",
+        "jodatime"   : "net.danlew:android.joda:2.9.9",
+        "dagger"     : dagger,
+        "butterknife": butterknife,
+        "mockito"    : 'org.mockito:mockito-core:2.6.8',
+        "rx"         : rx,
+        "autovalue"  : autovalue,
+        "crashlytics": "com.crashlytics.sdk.android:crashlytics:2.6.8@aar",
+        "test"       : test,
+        "exo"        : exo,
+        "noadapter"  : "vn.tiki.noadapter2:noadapter:2.0.1-SNAPSHOT",
+        "network"    : network,
+        "glide"      : glide,
+        "store"      : store,
+        "firebase"   : firebase,
+        "leakcanary" : leakcanary,
+        "ui"         : ui,
+        "gson"       : "com.google.code.gson:gson:2.8.0",
+        "jsoup"      : "org.jsoup:jsoup:1.10.3"
+]

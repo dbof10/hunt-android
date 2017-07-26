@@ -3,6 +3,7 @@
     <string name="facebook_app_id">1966287263602613</string>
     <string name="admob_app_id">ca-app-pub-6007267266282978~8999558641</string>
 
+
     <!-- Title -->
     <string name="topic">Topics</string>
     <string name="collection">Collections</string>
@@ -19,6 +20,11 @@
     <string name="navigation_topic">Topics</string>
     <string name="navigation_radio">Radio</string>
 
+    <!-- User Detail -->
+    <string name="transition_user_background" translatable="false">transition_player_background</string>
+    <string name="transition_user_avatar" translatable="false">transition_player_avatar</string>
+    <string name="transition_user" translatable="false">user</string>
+
 
     <string name="comment">Comment</string>
     <string name="share">Share</string>
@@ -27,6 +33,11 @@
     <string name="vote_count">%s votes</string>
     <string name="related_products">Related Products</string>
     <string name="now_playing">Now playing</string>
+    <string name="follow">Follow</string>
+    <string name="follower">%d followers</string>
+    <string name="following">%d followings</string>
+    <string name="product">%d products</string>
+
 
 
 </resources>

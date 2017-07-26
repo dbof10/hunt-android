@@ -10,6 +10,6 @@ data class CommentItemViewModel(private val comment: Comment, private val expand
     val headline: String get() = comment.user.headline
     val body: String get() = comment.body
     val createdAt: DateTime get() = comment.createdAt
-    val imageUrl: String get() = comment.user.imageUrl.smallImgUrl
+    val imageUrl: String get() = comment.user.imageUrl.px48
     val isExpanded: Boolean get() = expanded
 }

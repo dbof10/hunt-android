@@ -48,6 +48,7 @@ class ProductHeaderViewHolder(view: View, val imageLoader: GlideImageLoader) : A
         btCommentCount.setOnClickListener(this)
         btShare.setOnClickListener(this)
         btGetIt.setOnClickListener(this)
+        ivHunterAvatar.setOnClickListener(this)
     }
 
     companion object {

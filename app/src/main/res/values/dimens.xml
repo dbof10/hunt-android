@@ -43,6 +43,9 @@
     <!-- Gallery -->
     <dimen name="play_large_size">64dp</dimen>
 
+    <!-- User Detail -->
+    <dimen name="avatar_large_size">120dp</dimen>
+
 
 
     <!-- Z-axis elevations -->

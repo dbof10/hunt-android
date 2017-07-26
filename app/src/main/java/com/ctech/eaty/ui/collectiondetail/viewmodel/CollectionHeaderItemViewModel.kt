@@ -7,6 +7,6 @@ data class CollectionHeaderItemViewModel(private val collection: CollectionDetai
     val id: Int get() = collection.id
     val userName: String get() = collection.user.name
     val headLine: String get() = collection.user.headline
-    val imageUrl: String get() = collection.user.imageUrl.smallImgUrl
+    val imageUrl: String get() = collection.user.imageUrl.px48
     val description: String get() = collection.title
 }

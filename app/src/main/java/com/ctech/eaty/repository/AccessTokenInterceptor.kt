@@ -8,7 +8,10 @@ class AccessTokenInterceptor(val appSettingsManager: AppSettingsManager) : Inter
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
                 .addHeader("Accept", "application/json")
-                .addHeader("Authorization", "Bearer ${appSettingsManager.getToken()}")
+                .addHeader("Authorization", "Bearer ${
+                appSettingsManager.run {
+                    if(getUserToken().isEmpty()) getClientToken() else getUserToken()
+                }}")
                 .build()
         return chain.proceed(request)
     }

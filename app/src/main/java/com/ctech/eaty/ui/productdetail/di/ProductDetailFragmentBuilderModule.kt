@@ -9,5 +9,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class ProductDetailFragmentBuilderModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeProductCommentFragment(): ProductBodyFragment
+    abstract fun contributeProductBodyFragment(): ProductBodyFragment
 }

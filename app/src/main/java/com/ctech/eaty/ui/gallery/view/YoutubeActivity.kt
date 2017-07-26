@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.ctech.eaty.R
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.player.MediaController
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubePlayerView
 import kotlinx.android.synthetic.main.activity_youtube.*
@@ -17,6 +18,11 @@ class YoutubeActivity : YouTubeBaseActivity(), Injectable{
 
     @Inject
     lateinit var mediaController: MediaController<YouTubePlayerView>
+
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
+
+    private fun getScreenName() = "Youtube"
 
     companion object {
 
@@ -37,5 +43,8 @@ class YoutubeActivity : YouTubeBaseActivity(), Injectable{
         mediaController.takeView(youtube)
         mediaController.play(videoUrl)
                 .subscribe({}, Timber::e)
+
+        trackingManager.trackScreenView(getScreenName())
+
     }
 }

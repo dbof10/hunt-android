@@ -20,24 +20,18 @@ abstract class BaseReduxFragment<State> : Fragment() {
         disposables.add(disposable)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleDelegate = LifeCycleDelegate(store())
-
-    }
-
-    override fun onStart() {
-        super.onStart()
         lifecycleDelegate.onStart()
+
     }
 
-    override fun onStop() {
+    override fun onDestroyView() {
         lifecycleDelegate.onStop(activity.isFinishing)
         disposables.clear()
-        super.onStop()
+        super.onDestroyView()
+
     }
+
 }

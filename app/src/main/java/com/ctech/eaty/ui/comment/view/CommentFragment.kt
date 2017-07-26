@@ -20,6 +20,7 @@ import com.ctech.eaty.ui.home.view.EmptyViewHolder
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
+import timber.log.Timber
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
@@ -139,6 +140,7 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
         vError.visibility = View.VISIBLE
+        Timber.e(error)
     }
 
     private fun renderLoadingMore() {

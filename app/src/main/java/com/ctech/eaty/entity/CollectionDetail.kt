@@ -17,6 +17,6 @@ data class CollectionDetail(val id: Int,
 
 
     companion object {
-        val EMPTY = CollectionDetail(-1, "", "", "", "", 0, User.GUEST, emptyList())
+        val EMPTY = CollectionDetail(-1, "", "", "", "", 0, User.ANONYMOUS, emptyList())
     }
 }

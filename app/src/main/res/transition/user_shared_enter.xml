@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:interpolator="@android:interpolator/fast_out_slow_in"
+    android:transitionOrdering="together">
+
+    <changeBounds android:duration="300">
+        <pathMotion
+            class="com.ctech.eaty.widget.transition.GravityArcMotion"
+            android:maximumAngle="50" />
+    </changeBounds>
+    <transition
+        class="com.ctech.eaty.widget.transition.LiftOff"
+        android:duration="400"
+        app:initialElevation="@dimen/touch_raise" />
+
+</transitionSet>

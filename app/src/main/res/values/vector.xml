@@ -21,4 +21,13 @@
     <integer name="share_delay_start_expand">450</integer>
     <integer name="share_delay_full_expand">700</integer>
 
+
+    <string name="path_follow_person">M15,12C17.21,12 19,10.21 19,8C19,5.79 17.21,4 15,4C12.79,4 11,5.79 11,8C11,10.21 12.79,12 15,12L15,12ZM15,14C12.33,14 7,15.34 7,18L7,20L23,20L23,18C23,15.34 17.67,14 15,14L15,14Z</string>
+    <string name="path_follow_plus">M6,7 L4,7 L4,10 L1,10 L1,12 L4,12 L4,15 L6,15 L6,12 L9,12 L9,10 L6,10 L6,7 Z</string>
+    <string name="path_follow_minus">M6,10 L4,10 L4,10 L1,10 L1,12 L4,12 L4,12 L6,12 L6,12 L9,12 L9,10 L6,10 L6,10 Z</string>
+
+
+    <string name="path_image_mountains">M11,16.51L14.5,12L19,18L15,18L9,18L5,18L8.5,13.5Z</string>
+    <string name="path_image_arrow_down">M10,9L14,9L14,13L17,13L12,18L7,13L10,13Z</string>
+    <string name="path_image_arrow_up">M7,11L12,6L17,11L14,11L14,15L10,15L10,11Z</string>
 </resources>

@@ -70,4 +70,11 @@ class DataModule {
         return RadioRepository(store)
     }
 
+
+    @Provides
+    fun provideUserRepository(apiClient: ProductHuntApi, store: Store<UserResponse, BarCode>,
+                              appSettingsManager: AppSettingsManager): UserRepository {
+        return UserRepository(apiClient, store, appSettingsManager)
+    }
+
 }
