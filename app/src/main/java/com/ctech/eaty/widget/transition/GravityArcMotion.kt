@@ -6,8 +6,12 @@ import android.transition.ArcMotion
 import android.util.AttributeSet
 
 
-class GravityArcMotion(context: Context, attrs: AttributeSet) : ArcMotion(context, attrs) {
+class GravityArcMotion : ArcMotion {
 
+
+    constructor()
+
+    constructor(context: Context, attrs: AttributeSet): super(context, attrs)
 
     private val DEFAULT_MIN_ANGLE_DEGREES = 0f
     private val DEFAULT_MAX_ANGLE_DEGREES = 70f

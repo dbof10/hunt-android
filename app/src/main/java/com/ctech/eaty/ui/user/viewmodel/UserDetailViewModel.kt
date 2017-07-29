@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.user.viewmodel
 
+import android.view.View
 import android.widget.Button
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.UserDetail
@@ -18,11 +19,11 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
                           private val resourceProvider: ResourceProvider) {
 
 
-    fun loading(): Observable<UserDetailState> = stateDispatcher
-            .filter { it.loading && it.content == UserDetail.GUEST }
+    fun loadingUser(): Observable<UserDetailState> = stateDispatcher
+            .filter { it.loading && it.user == UserDetail.GUEST }
 
 
-    fun loadError(): Observable<Throwable> = stateDispatcher
+    fun loadUserError(): Observable<Throwable> = stateDispatcher
             .filter { it.loadError != null }
             .map {
                 it.loadError!!
@@ -34,7 +35,7 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
                 !it.loading && it.loadError == null
             }
             .map {
-                it.content ?: UserDetail.GUEST
+                it.user ?: UserDetail.GUEST
             }
 
 
@@ -43,9 +44,18 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
                 it != UserDetail.GUEST
             }
 
-    fun body(): Observable<List<ProductItemViewModel>> = content()
+    fun loadingProduct(): Observable<UserDetailState> = stateDispatcher
+            .filter { it.loadingProduct }
+
+    fun loadProductError(): Observable<Throwable> = stateDispatcher
+            .filter { it.loadProductError != null }
+            .map {
+                it.loadProductError!!
+            }
+
+    fun body(): Observable<List<ProductItemViewModel>> = stateDispatcher
             .filter {
-                it != UserDetail.GUEST
+                !it.loadingProduct && it.loadProductError == null
             }
             .map {
                 it.products.map { ProductItemViewModel(it) }
@@ -58,7 +68,7 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
     fun loadRelationshipError(): Observable<Throwable> = stateDispatcher
             .filter { it.loadRLError != null }
             .map {
-                it.loadError!!
+                it.loadRLError!!
             }
 
     fun relationship(): Observable<FollowButtonViewModel> = stateDispatcher
@@ -70,15 +80,17 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
             }
             .map {
                 val stringId = if (it) R.string.unfollow else R.string.follow
-                FollowButtonViewModel(it, resourceProvider.getString(stringId))
+                FollowButtonViewModel(View.VISIBLE, it, resourceProvider.getString(stringId))
             }
 
-    fun checkRelationship(): Maybe<FollowButtonViewModel> {
+    fun checkRelationship(userId: Int): Maybe<FollowButtonViewModel> {
         return Maybe.create { emitter ->
             userRepository.getUser()
                     .subscribe({
                         if (it == UserDetail.GUEST) {
-                            emitter.onSuccess(FollowButtonViewModel(false, resourceProvider.getString(R.string.follow)))
+                            emitter.onSuccess(FollowButtonViewModel(View.VISIBLE, false, resourceProvider.getString(R.string.follow)))
+                        } else if (it.id == userId) {
+                            emitter.onSuccess(FollowButtonViewModel(View.INVISIBLE))
                         } else {
                             emitter.onComplete()
                         }
@@ -95,7 +107,7 @@ class UserDetailViewModel(private val stateDispatcher: Observable<UserDetailStat
                                 emitter.onComplete()
                             }
                         } else {
-                            //   navigation.toUser(it).subscribe()
+                            emitter.onSuccess(Any())
                         }
                     }, Timber::e)
         }

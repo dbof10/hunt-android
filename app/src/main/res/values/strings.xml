@@ -24,7 +24,8 @@
     <string name="transition_user_background" translatable="false">transition_player_background</string>
     <string name="transition_user_avatar" translatable="false">transition_player_avatar</string>
     <string name="transition_user" translatable="false">user</string>
-    <string name="transition_user_login" translatable="false">userlogin</string>
+    <string name="transition_user_login" translatable="false">user_login</string>
+    <string name="need_login">First you need to login</string>
 
 
     <string name="comment">Comment</string>
@@ -39,7 +40,7 @@
     <string name="follower">%d followers</string>
     <string name="following">%d followings</string>
     <string name="product">%d products</string>
-
+    <string name="login">Login</string>
 
 
 </resources>

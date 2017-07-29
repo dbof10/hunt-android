@@ -2,21 +2,45 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:onClick="dismiss">
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar"
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/space_xlarge"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:indeterminate="true"
-        tools:visibility="visible"
-        android:visibility="gone" />
+        android:elevation="@dimen/z_fab"
+        android:background="@drawable/dialog_background"
+        android:transitionName="@string/transition_user_login">
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:text="@string/need_login"
+            style="@style/Widget.Hunt.DialogText" />
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:text="@string/login"
+            android:textAppearance="@style/TextAppearance.DarkButton"
+            android:onClick="doLogin" />
+
+
+        <include
+            android:id="@+id/vLogin"
+            android:visibility="gone"
+            layout="@layout/layout_login" />
+
+    </LinearLayout>
 
 </FrameLayout>

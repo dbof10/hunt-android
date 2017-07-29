@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.home.viewmodel
 
+import android.widget.ImageView
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
@@ -70,11 +71,11 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                 .map { it.content }
     }
 
-    fun userNavigation() {
+    fun userNavigation(ivAvatar: ImageView) {
         userRepository.getUser()
                 .subscribe({
                     if (it == UserDetail.GUEST) {
-                        navigation.toLogin().subscribe()
+                        navigation.toLogin(ivAvatar).subscribe()
                     } else {
                         navigation.toUser(it).subscribe()
                     }

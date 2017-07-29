@@ -7,6 +7,7 @@ import com.ctech.eaty.repository.SoundCloudApi
 import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.search.action.SearchBarCode
+import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.google.gson.Gson
 import com.nytimes.android.external.fs2.SourcePersisterFactory
@@ -23,11 +24,12 @@ import okio.BufferedSource
 @Module
 class StoreModule {
 
-    val COMMENT_LIMIT = 10
-    val COLLECTION_LIMIT = 10
-    val TOPIC_LIMIT = 10
-    val VOTE_LIMIT = 10
-    val SEARCH_LIMIT = 10
+    private val PRODUCT_LIMIT = 10
+    private val COMMENT_LIMIT = 10
+    private val COLLECTION_LIMIT = 10
+    private val TOPIC_LIMIT = 10
+    private val VOTE_LIMIT = 10
+    private val SEARCH_LIMIT = 10
 
     @Provides
     fun homePersister(context: Context): Persister<BufferedSource, BarCode> {
@@ -125,6 +127,15 @@ class StoreModule {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, UserResponse>()
                 .fetcher { barcode -> apiClient.getUser(barcode.key.toInt()).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, UserResponse::class.java))
+                .open()
+    }
+
+    @Provides
+    fun providePersistedUserProductStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<ProductResponse, UserProductBarCode> {
+        return StoreBuilder.parsedWithKey<UserProductBarCode, BufferedSource, ProductResponse>()
+                .fetcher { barcode -> apiClient.getProductsByUser(barcode.id, PRODUCT_LIMIT, barcode.page).map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
                 .open()
     }
 }

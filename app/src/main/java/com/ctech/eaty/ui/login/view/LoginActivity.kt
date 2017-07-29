@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.transition.TransitionManager
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
@@ -18,7 +20,12 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.login.action.LoginAction
 import com.ctech.eaty.ui.login.state.LoginState
 import com.ctech.eaty.ui.login.viewmodel.LoginViewModel
+import com.ctech.eaty.util.MorphTransform
+import com.ctech.eaty.util.setHeight
+import com.ctech.eaty.util.setWidth
+import com.ctech.eaty.widget.transition.CircularTransform
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.layout_login.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -36,6 +43,9 @@ class LoginActivity : BaseActivity(), Injectable {
     @Inject
     lateinit var trackingManager: FirebaseTrackManager
 
+    private var isDismissing = false
+
+
     companion object {
 
         fun newIntent(context: Context): Intent {
@@ -49,6 +59,12 @@ class LoginActivity : BaseActivity(), Injectable {
         setContentView(R.layout.activity_login)
         setupWebView()
         setupViewModel()
+
+        if (!CircularTransform.setup(this, container)) {
+            MorphTransform.setup(this, container,
+                    ContextCompat.getColor(this, R.color.gray_50),
+                    resources.getDimensionPixelSize(R.dimen.dialog_corners))
+        }
         trackingManager.trackScreenView(getScreenName())
     }
 
@@ -57,9 +73,23 @@ class LoginActivity : BaseActivity(), Injectable {
         store.startBinding()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    fun doLogin(view: View) {
+        showLoading()
+    }
 
+    private fun showLoading() {
+        TransitionManager.beginDelayedTransition(container)
+        tvMessage.visibility = View.GONE
+        btLogin.visibility = View.GONE
+        vLogin.visibility = View.VISIBLE
+        container.setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
+        container.setHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+        container.setPadding(0, 0, 0, 0)
+    }
+
+    fun dismiss(view: View) {
+        isDismissing = true
+        finishAfterTransition()
     }
 
     private fun setupViewModel() {

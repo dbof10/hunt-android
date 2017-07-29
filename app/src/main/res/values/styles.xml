@@ -40,7 +40,6 @@
     <style name="AppTheme.Translucent.Overlap.User">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/light_immersive_bars</item>
-        <item name="android:navigationBarColor">@color/immersive_bars</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -50,6 +49,11 @@
         <item name="android:windowTransitionBackgroundFadeDuration">200</item>
     </style>
 
+    <style name="AppTheme.Translucent.Overlap.Login">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:colorButtonNormal">@color/hunt_button</item>
+        <item name="android:colorControlHighlight">@color/ripple_light</item>
+    </style>
 
     <style name="AppTheme.Translucent.Overlap.Vote">
         <item name="android:windowEnterTransition">@transition/vote_sheet_enter</item>
@@ -76,6 +80,11 @@
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
     </style>
 
+    <style name="Widget.Hunt.DialogText">
+        <item name="android:textAppearance">@style/TextAppearance.DialogContent</item>
+        <item name="lineHeightHint">20sp</item>
+    </style>
+
     <style name="Widget.Hunt.DialogTitle">
         <item name="android:textAppearance">@style/TextAppearance.DialogTitle</item>
         <item name="lineHeightHint">28sp</item>
@@ -83,6 +92,13 @@
 
     <style name="TextAppearance.DialogTitle" parent="@android:style/TextAppearance.Material.Title">
         <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+
+    <style name="TextAppearance.DialogContent" parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">@color/text_secondary_dark</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.01</item>
     </style>

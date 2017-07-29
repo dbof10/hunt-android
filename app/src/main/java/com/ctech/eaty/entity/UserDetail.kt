@@ -18,12 +18,12 @@ class UserDetail(
         val followerCount: Int,
         @SerializedName("followings_count")
         val followingCount: Int,
-        @SerializedName("posts")
-        val products: List<Product>) : User(id, name, headline, username, imageUrl), Parcelable {
+        @SerializedName("posts_count")
+        val productCount: Int) : User(id, name, headline, username, imageUrl), Parcelable {
 
     companion object {
         val GUEST = UserDetail(-1, "", "", "", "",
-                ImageUrl(), NotificationIndicator(), 0, 0, emptyList())
+                ImageUrl(), NotificationIndicator(), 0, 0, 0)
         @JvmField val CREATOR: Parcelable.Creator<UserDetail> = object : Parcelable.Creator<UserDetail> {
             override fun createFromParcel(source: Parcel): UserDetail = UserDetail(source)
             override fun newArray(size: Int): Array<UserDetail?> = arrayOfNulls(size)
@@ -40,7 +40,7 @@ class UserDetail(
             source.readParcelable<NotificationIndicator>(NotificationIndicator::class.java.classLoader),
             source.readInt(),
             source.readInt(),
-            ArrayList<Product>().apply { source.readList(this, Product::class.java.classLoader) }
+            source.readInt()
     )
 
     override fun describeContents() = 0
@@ -55,6 +55,6 @@ class UserDetail(
         dest.writeParcelable(notification, 0)
         dest.writeInt(followerCount)
         dest.writeInt(followingCount)
-        dest.writeList(products)
+        dest.writeInt(productCount)
     }
 }

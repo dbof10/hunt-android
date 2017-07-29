@@ -41,13 +41,22 @@ interface ProductHuntApi {
     @GET("/v1/topics?search[trending]=true")
     fun getTopics(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
-    @GET("/v1/me")
+    @GET("/v1/me?exclude[]=relationships")
     fun getMe(): Observable<UserResponse>
 
     @GET("/v1/me/interactions?include[]=following_user_ids")
     fun getUserFollowingRL(): Observable<RelationshipResponse>
 
-    @GET("/v1/users/{id}")
+    @GET("/v1/users/{id}?exclude[]=relationships")
     fun getUser(@Path("id") id: Int): Observable<ResponseBody>
+
+    @POST("/v1/users/{id}/follow")
+    fun followUser(@Path("id") id: Int): Observable<Any>
+
+    @DELETE("/v1/users/{id}/follow")
+    fun unfollowUser(@Path("id") id: Int): Observable<Any>
+
+    @GET("/v1/users/{id}/posts")
+    fun getProductsByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
 
 }

@@ -96,7 +96,7 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onStart() {
         super.onStart()
-        viewModel.checkRelationship().subscribe({
+        viewModel.checkRelationship(user.id).subscribe({
             renderFollowing(it)
         }, Timber::e, {
             store.dispatch(UserAction.LoadRelationship(user.id))
@@ -105,7 +105,11 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun setupListener() {
         btFollow.setOnClickListener {
-             viewModel.followNavigation(btFollow).subscribe()
+            viewModel.followNavigation(btFollow).subscribe({
+              //  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
+            }, Timber::e, {
+
+            })
         }
     }
 
@@ -131,14 +135,14 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun renderFollowing(btViewModel: FollowButtonViewModel) {
         pbFollowing.visibility = View.GONE
-        btFollow.visibility = View.VISIBLE
+        btFollow.visibility = btViewModel.visibility
         btFollow.isActivated = btViewModel.following
         btFollow.text = btViewModel.text
     }
 
     private fun renderHeader(user: UserDetail) {
         with(user) {
-            tvProductCount.text = getString(R.string.product, products.size)
+            tvProductCount.text = getString(R.string.product, productCount)
             tvFollowerCount.text = getString(R.string.follower, followerCount)
             tvFollowingCount.text = getString(R.string.following, followingCount)
         }

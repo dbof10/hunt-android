@@ -4,10 +4,10 @@ import android.view.View
 
 
 fun View.setPaddingTop(paddingTop: Int) {
-   setPaddingRelative(paddingStart,
+    setPaddingRelative(paddingStart,
             paddingTop,
-           paddingEnd,
-           paddingBottom)
+            paddingEnd,
+            paddingBottom)
 }
 
 fun View.setPaddingBottom(paddingBottom: Int) {
@@ -15,4 +15,16 @@ fun View.setPaddingBottom(paddingBottom: Int) {
             paddingTop,
             paddingEnd,
             paddingBottom)
+}
+
+fun View.setWidth(width: Int) {
+    val newLayoutParams = layoutParams
+    newLayoutParams.width = width
+    layoutParams = newLayoutParams
+}
+
+fun View.setHeight(height: Int) {
+    val newLayoutParams = layoutParams
+    newLayoutParams.height = height
+    layoutParams = newLayoutParams
 }

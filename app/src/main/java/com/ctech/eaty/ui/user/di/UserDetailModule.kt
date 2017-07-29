@@ -5,7 +5,9 @@ import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.user.action.BarCodeGenerator
+import com.ctech.eaty.ui.user.epic.FollowUserEpic
 import com.ctech.eaty.ui.user.epic.LoadEpic
+import com.ctech.eaty.ui.user.epic.LoadProductEpic
 import com.ctech.eaty.ui.user.epic.LoadRelationshipEpic
 import com.ctech.eaty.ui.user.navigation.UserDetailNavigation
 import com.ctech.eaty.ui.user.reducer.UserDetailReducer
@@ -31,7 +33,8 @@ class UserDetailModule {
     fun provideUserDetailStore(apiClient: ProductHuntApi, userRepository: UserRepository, barCodeGenerator: BarCodeGenerator,
                                threadScheduler: ThreadScheduler): Store<UserDetailState> {
         return Store<UserDetailState>(UserDetailState(), UserDetailReducer(),
-                arrayOf(LoadEpic(userRepository, barCodeGenerator, threadScheduler), LoadRelationshipEpic(apiClient, threadScheduler)))
+                arrayOf(LoadEpic(userRepository, barCodeGenerator, threadScheduler), LoadRelationshipEpic(apiClient, threadScheduler),
+                        FollowUserEpic(apiClient, threadScheduler), LoadProductEpic(userRepository, barCodeGenerator, threadScheduler)))
 
     }
 

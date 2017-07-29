@@ -47,6 +47,16 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var viewModel: HomeViewModel
 
+    private val ivHeaderAvatar: ImageView by lazy {
+        navigation.getHeaderView(0)
+                .findViewById(R.id.ivAvatar) as ImageView
+    }
+
+    private val tvHeaderUserName: TextView by lazy {
+        navigation.getHeaderView(0)
+                .findViewById(R.id.tvUserName) as TextView
+    }
+
     companion object {
 
         fun newIntent(context: Context): Intent {
@@ -82,16 +92,12 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     }
 
     private fun renderNavigationHeader(user: UserDetail) {
-        (navigation.getHeaderView(0)
-                .findViewById(R.id.ivAvatar) as ImageView)
-                .run {
-                    imageLoader.downloadInto(user.imageUrl.px48, this)
-                }
-        (navigation.getHeaderView(0)
-                .findViewById(R.id.tvUserName) as TextView)
-                .run {
-                    text = user.username
-                }
+
+        with(user) {
+            imageLoader.downloadInto(imageUrl.px48, ivHeaderAvatar)
+            tvHeaderUserName.text = username
+        }
+
     }
 
 
@@ -102,7 +108,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         navigation.getHeaderView(0)
                 .findViewById(R.id.llUser)
                 .setOnClickListener {
-                    viewModel.userNavigation()
+                    viewModel.userNavigation(ivHeaderAvatar)
                 }
         navigation.setNavigationItemSelectedListener {
             homeNavigation.delegate(it.itemId).subscribe()

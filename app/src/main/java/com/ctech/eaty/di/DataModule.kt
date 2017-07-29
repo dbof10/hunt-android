@@ -5,6 +5,7 @@ import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.search.action.SearchBarCode
+import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
 import com.ctech.eaty.util.rx.ThreadScheduler
@@ -72,9 +73,10 @@ class DataModule {
 
 
     @Provides
-    fun provideUserRepository(apiClient: ProductHuntApi, store: Store<UserResponse, BarCode>,
+    fun provideUserRepository(apiClient: ProductHuntApi, userStore: Store<UserResponse, BarCode>,
+                              productStore: Store<ProductResponse, UserProductBarCode>,
                               appSettingsManager: AppSettingsManager): UserRepository {
-        return UserRepository(apiClient, store, appSettingsManager)
+        return UserRepository(apiClient, userStore, productStore, appSettingsManager)
     }
 
 }

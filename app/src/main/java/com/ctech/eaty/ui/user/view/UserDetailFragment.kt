@@ -111,7 +111,9 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
-        store.dispatch(UserAction.Load(arguments.getInt(USER_ID_KEY)))
+        val userId = arguments.getInt(USER_ID_KEY)
+        store.dispatch(UserAction.Load(userId))
+        store.dispatch(UserAction.LoadProduct(userId))
     }
 
 
@@ -135,8 +137,8 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
-        disposeOnStop(viewModel.loadError().subscribe { renderLoadError(it) })
+        disposeOnStop(viewModel.loadingProduct().subscribe { renderLoading() })
+        disposeOnStop(viewModel.loadProductError().subscribe { renderLoadError(it) })
         disposeOnStop(viewModel.body().subscribe { renderContent(it) })
     }
 
