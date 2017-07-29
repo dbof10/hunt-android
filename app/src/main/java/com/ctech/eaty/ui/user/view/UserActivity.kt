@@ -9,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
+import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
+import com.ctech.eaty.ui.user.action.UserAction
+import com.ctech.eaty.ui.user.state.UserDetailState
+import com.ctech.eaty.ui.user.viewmodel.FollowButtonViewModel
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.setPaddingBottom
@@ -19,6 +23,7 @@ import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_user.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -32,6 +37,9 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var viewModel: UserDetailViewModel
+
+    @Inject
+    lateinit var store: Store<UserDetailState>
 
     private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
@@ -68,6 +76,7 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_user)
         setupViewModel()
         setupBodyFragment()
+        setupListener()
         preRenderHeader()
         chromeFader = ElasticDragDismissFrameLayout.SystemChromeFader(this)
         flDraggable.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -85,6 +94,21 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
         setExitSharedElementCallback(createSharedElementReenterCallback(this))
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.checkRelationship().subscribe({
+            renderFollowing(it)
+        }, Timber::e, {
+            store.dispatch(UserAction.LoadRelationship(user.id))
+        })
+    }
+
+    private fun setupListener() {
+        btFollow.setOnClickListener {
+             viewModel.followNavigation(btFollow).subscribe()
+        }
+    }
+
     private fun preRenderHeader() {
         with(user) {
             imageLoader.downloadInto(imageUrl.px64, ivAvatar)
@@ -95,6 +119,21 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun setupViewModel() {
         viewModel.header().subscribe { renderHeader(it) }
+        viewModel.loadingRelationship().subscribe {
+            pbFollowing.visibility = View.VISIBLE
+            btFollow.visibility = View.GONE
+        }
+        viewModel.loadRelationshipError().subscribe { Timber.e(it) }
+        viewModel.relationship().subscribe {
+            renderFollowing(it)
+        }
+    }
+
+    private fun renderFollowing(btViewModel: FollowButtonViewModel) {
+        pbFollowing.visibility = View.GONE
+        btFollow.visibility = View.VISIBLE
+        btFollow.isActivated = btViewModel.following
+        btFollow.text = btViewModel.text
     }
 
     private fun renderHeader(user: UserDetail) {

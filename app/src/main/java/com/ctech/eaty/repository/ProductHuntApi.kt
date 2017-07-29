@@ -3,6 +3,7 @@ package com.ctech.eaty.repository
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.request.OAuthClientRequest
 import com.ctech.eaty.request.OAuthUserRequest
+import com.ctech.eaty.response.RelationshipResponse
 import com.ctech.eaty.response.UserResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -42,6 +43,9 @@ interface ProductHuntApi {
 
     @GET("/v1/me")
     fun getMe(): Observable<UserResponse>
+
+    @GET("/v1/me/interactions?include[]=following_user_ids")
+    fun getUserFollowingRL(): Observable<RelationshipResponse>
 
     @GET("/v1/users/{id}")
     fun getUser(@Path("id") id: Int): Observable<ResponseBody>

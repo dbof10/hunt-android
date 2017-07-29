@@ -49,34 +49,52 @@
             app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
             tools:text="Nick Butcher" />
 
-        <Button
-            android:id="@+id/btFollow"
-            style="@style/Widget.AppCompat.Button.Colored"
+        <FrameLayout
+            android:id="@+id/flFollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/space_medium"
-            android:drawableStart="@drawable/asl_follow"
-            android:text="@string/follow"
-            android:textAppearance="@style/TextAppearance.DarkButton"
-            android:theme="@style/LightRippleOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
+            app:layout_constraintTop_toBottomOf="@id/tvName">
+
+
+            <Button
+                android:id="@+id/btFollow"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/space_medium"
+                android:drawableStart="@drawable/asl_follow"
+                android:text="@string/follow"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:textAppearance="@style/TextAppearance.DarkButton"
+                android:theme="@style/LightRippleOverlay" />
+
+            <ProgressBar
+                android:id="@+id/pbFollowing"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+
+        </FrameLayout>
 
         <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvBio"
             style="@style/Widget.Hunt.ShotDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingEnd="@dimen/space_medium"
             android:paddingStart="@dimen/space_medium"
-            android:gravity="center"
             android:paddingTop="@dimen/space_medium"
             android:textColorHighlight="@color/hunt_link_highlight"
             android:textColorLink="@color/hunt_links"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btFollow"
+            app:layout_constraintTop_toBottomOf="@id/flFollow"
             tools:text="Designer &amp; developer at Google." />
 
         <com.ctech.eaty.widget.BaselineGridTextView
@@ -128,19 +146,18 @@
 
     <FrameLayout
         android:id="@+id/fBody"
-        android:elevation="@dimen/z_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:elevation="@dimen/z_card" />
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:elevation="@dimen/z_card"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/keyline_1"
         android:layout_gravity="center"
-        android:indeterminate="true"
-        />
+        android:layout_marginTop="@dimen/keyline_1"
+        android:elevation="@dimen/z_card"
+        android:indeterminate="true" />
 
 </com.ctech.eaty.widget.ElasticDragDismissFrameLayout>
