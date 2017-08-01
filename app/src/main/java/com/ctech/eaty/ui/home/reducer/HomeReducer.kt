@@ -7,7 +7,6 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
-import com.ctech.eaty.ui.home.viewmodel.SingleAdItemViewModel
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
@@ -68,10 +67,7 @@ class HomeReducer : Reducer<HomeState> {
         if (result.dayAgo < 2) {
             next = state.content + HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
                     listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
-        } else if (result.dayAgo < 3) {
-            next = state.content + SingleAdItemViewModel(result.dayAgo, ADMOB_NATIVE_1) +
-                    listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
-        } else {
+        }  else {
             next = state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         }
         return next

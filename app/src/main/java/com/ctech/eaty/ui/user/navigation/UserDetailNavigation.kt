@@ -5,6 +5,8 @@ import android.support.v4.content.ContextCompat
 import android.widget.Button
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
+import com.ctech.eaty.ui.follow.view.FollowActivity
+import com.ctech.eaty.ui.follow.view.Relationship
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.user.view.UserActivity
@@ -31,6 +33,20 @@ class UserDetailNavigation @Inject constructor(private val context: UserActivity
                     ContextCompat.getColor(context, R.color.hunt), context.resources.getDimensionPixelSize(R.dimen.dialog_corners))
             val options = ActivityOptions.makeSceneTransitionAnimation(context, btFollow, context.getString(R.string.transition_user_login))
             context.startActivity(intent, options.toBundle())
+        }
+    }
+
+    fun toFollowers(id: Int, count: Int): Completable {
+        return Completable.fromAction {
+            val intent = FollowActivity.newIntent(context, id, count, Relationship.FOLLOWER)
+            context.startActivity(intent)
+        }
+    }
+
+    fun toFollowing(id: Int, count: Int): Completable {
+        return Completable.fromAction {
+            val intent = FollowActivity.newIntent(context, id, count, Relationship.FOLLOWING)
+            context.startActivity(intent)
         }
     }
 

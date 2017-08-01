@@ -1,74 +1,70 @@
-package com.ctech.eaty.ui.search.view
+package com.ctech.eaty.ui.follow.view
 
+
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
-import com.ctech.eaty.entity.Topic
-import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.ui.search.action.SearchAction
-import com.ctech.eaty.ui.search.navigation.SearchNavigation
-import com.ctech.eaty.ui.search.state.SearchState
-import com.ctech.eaty.ui.search.viewmodel.SearchViewModel
+import com.ctech.eaty.entity.User
+import com.ctech.eaty.ui.follow.action.FollowAction
+import com.ctech.eaty.ui.follow.state.FollowState
+import com.ctech.eaty.ui.follow.viewmodel.FollowViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
-import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_votes.*
 import timber.log.Timber
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
+class FollowFragment : BaseReduxFragment<FollowState>(), Injectable {
 
     companion object {
-        val TOPIC_ID_KEY = "topicId"
+        private val USER_ID_KEY = "userId"
+        private val RELATIONSHIP_KEY = "relationship"
 
-        fun newInstance(topic: Topic): Fragment {
+        fun newInstance(id: Int, type: Relationship): Fragment {
 
             val args = Bundle()
 
-            val fragment = SearchFragment()
-            args.putParcelable(TOPIC_ID_KEY, topic)
+            val fragment = FollowFragment()
+            args.putInt(USER_ID_KEY, id)
+            args.putSerializable(RELATIONSHIP_KEY, type)
             fragment.arguments = args
             return fragment
         }
     }
 
     @Inject
-    lateinit var store: Store<SearchState>
+    lateinit var store: Store<FollowState>
 
     @Inject
-    lateinit var viewModel: SearchViewModel
+    lateinit var viewModel: FollowViewModel
 
     @Inject
     lateinit var imageLoader: GlideImageLoader
 
-    @Inject
-    lateinit var navigator: SearchNavigation
-
-    private val topic by lazy {
-        arguments.getParcelable<Topic>(TOPIC_ID_KEY)
+    private val userId by lazy {
+        arguments.getInt(USER_ID_KEY)
     }
 
-    private val loadMoreCallback by lazy {
-        InfiniteScrollListener(rvSearch.layoutManager as LinearLayoutManager, 3) {
-            store.dispatch(SearchAction.LoadMore(topic.id))
-        }
+    private val relationship by lazy {
+        arguments.getSerializable(RELATIONSHIP_KEY)
     }
 
     private val diffCallback = object : DiffCallback {
 
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            if (oldItem is ProductItemViewModel && newItem is ProductItemViewModel) {
+            if (oldItem is User && newItem is User) {
                 return oldItem.id == newItem.id
             }
             return false
@@ -83,52 +79,62 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
     private val adapter: OnlyAdapter by lazy {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
-                .onItemClickListener { view, item, _ ->
-                    if (item is ProductItemViewModel) {
-                        if (view.id == R.id.flProductHolder) {
-                            navigator
-                                    .toProduct(item.id)
-                                    .subscribe()
-                        }
-                    }
-
-                }
                 .viewHolderFactory { viewGroup, _ ->
-                    SearchViewHolder.create(viewGroup, imageLoader)
+                    FollowViewHolder.create(viewGroup, imageLoader)
                 }
                 .build()
     }
 
-    override fun store(): Store<SearchState> {
+    private lateinit var contractor: FragmentContractor
+
+    override fun store(): Store<FollowState> {
         return store
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is FollowActivity) {
+            contractor = context
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_follow, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupErrorView()
         setupViewModel()
     }
 
-
     override fun onStart() {
         super.onStart()
-        store.dispatch(SearchAction.Load(topic.id))
+        store.dispatch(relationship.run {
+            if (this == Relationship.FOLLOWER)
+                FollowAction.LoadFollower(userId)
+            else
+                FollowAction.LoadFollowing(userId)
+        })
     }
 
-    override fun onDestroyView() {
-        vLottie.cancelAnimation()
-        super.onDestroyView()
-    }
-
-    private fun renderContent(list: List<ProductItemViewModel>) {
+    private fun renderContent(list: List<User>) {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
         vError.visibility = View.GONE
         adapter.setItems(list)
+    }
+
+    private fun setupErrorView() {
+        vError.setOnRetryListener {
+            store.dispatch(relationship.run {
+                if (this == Relationship.FOLLOWER)
+                    FollowAction.LoadFollower(userId)
+                else
+                    FollowAction.LoadFollowing(userId)
+            })
+        }
     }
 
     private fun renderLoadMoreError() {
@@ -164,11 +170,22 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(context)
-        rvSearch.adapter = adapter
-        rvSearch.layoutManager = layoutManager
-        rvSearch.addItemDecoration(VerticalSpaceItemDecoration(SearchViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
-        rvSearch.addOnScrollListener(loadMoreCallback)
+        rvVotes.adapter = adapter
+        rvVotes.layoutManager = layoutManager
+        rvVotes.addOnScrollListener(InfiniteScrollListener(layoutManager, 3){
+            store.dispatch(relationship.run {
+                if (this == Relationship.FOLLOWER)
+                    FollowAction.LoadMoreFollower(userId)
+                else
+                    FollowAction.LoadMoreFollowing(userId)
+            })
+        })
+        rvVotes.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val raiseTitleBar = dy > 0 || rvVotes.computeVerticalScrollOffset() != 0
+                contractor.getTitleBar().isActivated = raiseTitleBar // animated via a StateListAnimator
+            }
+        })
     }
-
 
 }

@@ -97,6 +97,10 @@
             android:theme="@style/AppTheme.Translucent.Overlap.Vote" />
 
         <activity
+            android:name=".ui.follow.view.FollowActivity"
+            android:theme="@style/AppTheme.Translucent.Overlap.Vote" />
+
+        <activity
             android:name=".ui.topic.view.TopicActivity"
             android:theme="@style/AppTheme" />
 

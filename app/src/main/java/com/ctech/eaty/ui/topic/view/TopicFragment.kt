@@ -151,7 +151,7 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
         rvTopic.adapter = adapter
         rvTopic.layoutManager = layoutManager
         rvTopic.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-        rvTopic.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
+        rvTopic.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, {
             store.dispatch(CommentAction.LoadMore(id))
         }))
     }

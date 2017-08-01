@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.user.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.SharedElementCallback
@@ -106,10 +107,19 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
     private fun setupListener() {
         btFollow.setOnClickListener {
             viewModel.followNavigation(btFollow).subscribe({
-              //  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
+                //  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
             }, Timber::e, {
 
             })
+        }
+        tvFollowerCount.setOnClickListener {
+            with(tvFollowerCount) {
+                (compoundDrawables[1] as AnimatedVectorDrawable).start()
+                viewModel.navigateFollower(user.id)
+            }
+        }
+        tvFollowingCount.setOnClickListener {
+            viewModel.navigateFollowing(user.id)
         }
     }
 

@@ -4,7 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
 class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val visibleThreshold: Int,
-                             val callbacks: Runnable) : RecyclerView.OnScrollListener() {
+                             val callback: () -> Unit) : RecyclerView.OnScrollListener() {
 
     private var previousTotal: Int = 0 // The total number of items in the dataset after the last load
     private var loading: Boolean = true // True if we are still waiting for the last set of data to load.
@@ -25,7 +25,9 @@ class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val v
 
         // End has been reached
         if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
-            recyclerView.post(callbacks)
+            recyclerView.post{
+                callback()
+            }
             loading = true
         }
     }

@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
@@ -56,9 +55,9 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
     lateinit var adsProvider: AdsProvider
 
     private val loadMoreCallback by lazy {
-        InfiniteScrollListener(rvNewFeeds.layoutManager as LinearLayoutManager, 3, Runnable {
+        InfiniteScrollListener(rvNewFeeds.layoutManager as LinearLayoutManager, 3) {
             store.dispatch(HomeAction.LOAD_MORE)
-        })
+        }
     }
 
     private val diffCallback = object : DiffCallback {

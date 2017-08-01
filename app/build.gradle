@@ -124,6 +124,7 @@ dependencies {
     implementation deps.firebase.perf
     implementation deps.firebase.indexing
 
+
     //Profile
     debugImplementation deps.leakcanary.op
     releaseImplementation deps.leakcanary.noop

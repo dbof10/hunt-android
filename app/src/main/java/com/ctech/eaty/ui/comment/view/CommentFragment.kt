@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
@@ -167,9 +166,9 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvComments.adapter = adapter
         rvComments.layoutManager = layoutManager
-        rvComments.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
+        rvComments.addOnScrollListener(InfiniteScrollListener(layoutManager, 3) {
             store.dispatch(CommentAction.LoadMore(productId))
-        }))
+        })
     }
 
 }

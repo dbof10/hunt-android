@@ -2,6 +2,7 @@ package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.entity.Product
+import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.request.OAuthUserRequest
 import com.ctech.eaty.response.ProductResponse
@@ -34,6 +35,20 @@ class UserRepository(private val apiClient: ProductHuntApi,
         return productStore.get(barcode)
                 .map { it.products }
                 .retryWhen(RefreshTokenFunc(apiClient, appSettings))
+    }
+
+    fun getFollowers(id: Int, limit: Int, page: Int): Observable<List<User>> {
+        return apiClient.getFollowersByUser(id, limit, page)
+                .map {
+                    it.followers.map { it.user }
+                }
+    }
+
+    fun getFollowing(id: Int, limit: Int, page: Int): Observable<List<User>> {
+        return apiClient.getFollowingByUser(id, limit, page)
+                .map {
+                    it.followings.map { it.user }
+                }
     }
 
 }

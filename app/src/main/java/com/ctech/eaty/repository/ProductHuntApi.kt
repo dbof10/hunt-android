@@ -3,6 +3,8 @@ package com.ctech.eaty.repository
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.request.OAuthClientRequest
 import com.ctech.eaty.request.OAuthUserRequest
+import com.ctech.eaty.response.FollowerResponse
+import com.ctech.eaty.response.FollowingResponse
 import com.ctech.eaty.response.RelationshipResponse
 import com.ctech.eaty.response.UserResponse
 import io.reactivex.Observable
@@ -58,5 +60,12 @@ interface ProductHuntApi {
 
     @GET("/v1/users/{id}/posts")
     fun getProductsByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+
+    @GET("/v1/users/{id}/followers")
+    fun getFollowersByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<FollowerResponse>
+
+    @GET("/v1/users/{id}/following")
+    fun getFollowingByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<FollowingResponse>
+
 
 }

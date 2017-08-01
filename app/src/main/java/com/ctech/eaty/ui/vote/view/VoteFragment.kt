@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
@@ -21,6 +20,7 @@ import com.ctech.eaty.ui.vote.viewmodel.VoteViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_votes.*
+import timber.log.Timber
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
@@ -99,6 +99,7 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupErrorView()
         setupViewModel()
     }
 
@@ -129,6 +130,7 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
         vError.visibility = View.VISIBLE
+        Timber.e(error)
     }
 
     private fun renderLoadingMore() {
@@ -154,9 +156,9 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvVotes.adapter = adapter
         rvVotes.layoutManager = layoutManager
-        rvVotes.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
+        rvVotes.addOnScrollListener(InfiniteScrollListener(layoutManager, 3) {
             store.dispatch(VoteAction.LoadMore(postId))
-        }))
+        })
         rvVotes.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val raiseTitleBar = dy > 0 || rvVotes.computeVerticalScrollOffset() != 0

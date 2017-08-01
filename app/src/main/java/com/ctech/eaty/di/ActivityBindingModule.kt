@@ -10,6 +10,9 @@ import com.ctech.eaty.ui.collectiondetail.view.CollectionDetailActivity
 import com.ctech.eaty.ui.comment.di.CommentFragmentBuilderModule
 import com.ctech.eaty.ui.comment.di.CommentModule
 import com.ctech.eaty.ui.comment.view.CommentActivity
+import com.ctech.eaty.ui.follow.di.FollowFragmentBuilderModule
+import com.ctech.eaty.ui.follow.di.FollowModule
+import com.ctech.eaty.ui.follow.view.FollowActivity
 import com.ctech.eaty.ui.gallery.di.GalleryFragmentBuilderModule
 import com.ctech.eaty.ui.gallery.di.GalleryModule
 import com.ctech.eaty.ui.gallery.view.GalleryActivity
@@ -96,4 +99,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(UserDetailModule::class, UserDetailFragmentBuilderModule::class))
     abstract fun contributeUserActivity(): UserActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(FollowModule::class, FollowFragmentBuilderModule::class))
+    abstract fun contributeFollowActivity(): FollowActivity
 }

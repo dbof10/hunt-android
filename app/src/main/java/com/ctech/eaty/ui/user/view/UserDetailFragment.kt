@@ -17,6 +17,7 @@ import com.ctech.eaty.ui.user.state.UserDetailState
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.setPaddingTop
+import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.SlideInItemAnimator
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_user.*
@@ -58,6 +59,10 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
     private val container by lazy {
         activity.findViewById(R.id.container)
+    }
+
+    private val userId by lazy {
+        arguments.getInt(USER_ID_KEY)
     }
 
     private val diffCallback = object : DiffCallback {
@@ -111,7 +116,7 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
-        val userId = arguments.getInt(USER_ID_KEY)
+
         store.dispatch(UserAction.Load(userId))
         store.dispatch(UserAction.LoadProduct(userId))
     }
@@ -146,9 +151,11 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvProducts.adapter = adapter
         rvProducts.layoutManager = layoutManager
-        rvProducts.setHasFixedSize(true)
         rvProducts.itemAnimator = SlideInItemAnimator()
         rvProducts.addItemDecoration(VerticalSpaceItemDecoration(ProductViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvProducts.addOnScrollListener(InfiniteScrollListener(layoutManager, 3) {
+            store.dispatch(UserAction.LoadMoreProduct(userId))
+        })
         rvProducts.setOnTouchListener { _, event ->
             val firstVisible = layoutManager.findFirstVisibleItemPosition()
             if (firstVisible > 0) {

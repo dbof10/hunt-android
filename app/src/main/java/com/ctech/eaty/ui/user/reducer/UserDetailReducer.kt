@@ -2,10 +2,7 @@ package com.ctech.eaty.ui.user.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.user.result.FollowUserResult
-import com.ctech.eaty.ui.user.result.LoadProductResult
-import com.ctech.eaty.ui.user.result.LoadRelationshipResult
-import com.ctech.eaty.ui.user.result.LoadResult
+import com.ctech.eaty.ui.user.result.*
 import com.ctech.eaty.ui.user.state.UserDetailState
 import java.lang.IllegalArgumentException
 
@@ -51,6 +48,16 @@ class UserDetailReducer : Reducer<UserDetailState> {
                 } else {
                     return state.copy(loadingProduct = false, loadProductError = null,
                             products = result.content)
+                }
+            }
+            is LoadMoreProductResult -> {
+                if (result.loading) {
+                    return state.copy(loadingMoreProduct = true)
+                } else if (result.error != null) {
+                    return state.copy(loadingMoreProduct = false, loadMoreProductError = result.error)
+                } else {
+                    return state.copy(loadingMoreProduct = false, loadMoreProductError = null,
+                            products = state.products + result.content, page = result.page)
                 }
             }
             else -> {

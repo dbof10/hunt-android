@@ -150,9 +150,9 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvCollections.adapter = adapter
         rvCollections.layoutManager = layoutManager
-        rvCollections.addOnScrollListener(InfiniteScrollListener(layoutManager, 3, Runnable {
+        rvCollections.addOnScrollListener(InfiniteScrollListener(layoutManager, 3) {
             store.dispatch(CommentAction.LoadMore(id))
-        }))
+        })
     }
 
 }

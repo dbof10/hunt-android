@@ -201,6 +201,11 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         customTabActivityHelper.unbindCustomTabsService(this)
     }
 
+    override fun onDestroy() {
+        imageLoader.cancel(ivProduct)
+        super.onDestroy()
+    }
+
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
     }
