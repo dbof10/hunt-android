@@ -10,11 +10,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha8'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha9'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:3.1.0'
         classpath 'io.fabric.tools:gradle:1.+'
-        classpath ('com.google.firebase:firebase-plugins:1.1.0'){
+        classpath('com.google.firebase:firebase-plugins:1.1.0') {
             exclude group: 'com.google.guava', module: 'guava-jdk5'
         }
 
@@ -32,6 +32,7 @@ allprojects {
         }
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.fabric.io/public' }
+        maven { url "$rootDir/app/src/main/js/node_modules/react-native/android" }
         mavenCentral()
     }
 }
@@ -51,7 +52,7 @@ subprojects {
         }
     }
 
-    tasks.create("buildCheck"){
+    tasks.create("buildCheck") {
         dependsOn 'findbugs'
         dependsOn 'lint'
         dependsOn 'pmd'

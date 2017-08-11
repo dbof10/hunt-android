@@ -57,6 +57,10 @@
             android:theme="@style/AppTheme.Translucent.Overlap.Login" />
 
         <activity
+            android:name=".ui.live.view.LiveEventActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
             android:name=".ui.user.view.UserActivity"
             android:theme="@style/AppTheme.Translucent.Overlap.User" />
 

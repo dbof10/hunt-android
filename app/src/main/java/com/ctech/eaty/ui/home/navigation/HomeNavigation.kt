@@ -11,6 +11,7 @@ import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.collection.view.CollectionActivity
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.radio.view.RadioActivity
@@ -79,6 +80,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 }
                 R.id.action_radio -> {
                     intent.setClass(context, RadioActivity::class.java)
+                }
+                R.id.action_live -> {
+                    intent.setClass(context, LiveEventActivity::class.java)
                 }
             }
             context.startActivity(intent)

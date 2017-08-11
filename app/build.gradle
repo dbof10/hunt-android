@@ -32,6 +32,10 @@ android {
         versionName VERSION
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
 
     signingConfigs {
@@ -53,6 +57,12 @@ android {
 
     kapt {
         generateStubs = true
+    }
+
+    packagingOptions {
+        exclude '/lib/mips64/**'
+        exclude '/lib/arm64-v8a/**'
+        exclude '/lib/x86_64/**'
     }
 
 }
@@ -124,6 +134,9 @@ dependencies {
     implementation deps.firebase.perf
     implementation deps.firebase.indexing
 
+    //React
+    implementation deps.react.core
+
 
     //Profile
     debugImplementation deps.leakcanary.op
@@ -147,6 +160,7 @@ dependencies {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
 }
 apply plugin: 'com.google.gms.google-services'
 

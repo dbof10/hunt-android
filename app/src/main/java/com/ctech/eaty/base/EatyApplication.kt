@@ -5,6 +5,7 @@ import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.di.AppInjector
+import com.facebook.soloader.SoLoader
 import com.google.firebase.FirebaseApp
 import com.google.firebase.perf.FirebasePerformance
 import com.squareup.leakcanary.LeakCanary
@@ -44,6 +45,8 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
             return
         }
         LeakCanary.install(this)
+        SoLoader.init(this, false)
+
     }
 
 }

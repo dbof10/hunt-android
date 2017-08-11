@@ -20,6 +20,7 @@ import com.ctech.eaty.ui.gallery.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.di.LoginModule
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
@@ -103,4 +104,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(FollowModule::class, FollowFragmentBuilderModule::class))
     abstract fun contributeFollowActivity(): FollowActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector()
+    abstract fun contributeLiveEventActivity(): LiveEventActivity
 }

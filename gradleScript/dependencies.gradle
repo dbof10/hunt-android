@@ -96,6 +96,10 @@ def ui = [
         inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0'
 ]
 
+def react = [
+        "core": "com.facebook.react:react-native:+"
+]
+
 ext.deps = [
         "build"      : build,
         "versions"   : versions,
@@ -119,5 +123,6 @@ ext.deps = [
         "leakcanary" : leakcanary,
         "ui"         : ui,
         "gson"       : "com.google.code.gson:gson:2.8.0",
-        "jsoup"      : "org.jsoup:jsoup:1.10.3"
+        "jsoup"      : "org.jsoup:jsoup:1.10.3",
+        "react"      : react
 ]
