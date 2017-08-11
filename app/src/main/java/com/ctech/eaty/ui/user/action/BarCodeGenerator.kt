@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.user.action
 
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.response.UserResponse
-import com.nytimes.android.external.store2.base.impl.BarCode
+import com.nytimes.android.external.store3.base.impl.BarCode
 
 class BarCodeGenerator {
 

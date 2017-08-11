@@ -8,6 +8,7 @@ import com.ctech.eaty.response.FollowingResponse
 import com.ctech.eaty.response.RelationshipResponse
 import com.ctech.eaty.response.UserResponse
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -20,28 +21,28 @@ interface ProductHuntApi {
     fun getAccessToken(@Body auth: OAuthUserRequest): Observable<AccessToken>
 
     @GET("/v1/posts")
-    fun getPosts(@Query("day") date: String): Observable<ResponseBody>
+    fun getPosts(@Query("day") date: String): Single<ResponseBody>
 
     @GET("/v1/posts/{id}")
-    fun getProductDetail(@Path("id") id: Int): Observable<ResponseBody>
+    fun getProductDetail(@Path("id") id: Int): Single<ResponseBody>
 
     @GET("/v1/posts/all")
-    fun getProductsByTopic(@Query("search[topic]") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getProductsByTopic(@Query("search[topic]") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/posts/{id}/comments")
-    fun getComments(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getComments(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/posts/{id}/votes")
-    fun getVotes(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getVotes(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/collections?search[featured]=true")
-    fun getCollections(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getCollections(@Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/collections/{id}")
-    fun getCollectionDetail(@Path("id") id: Int): Observable<ResponseBody>
+    fun getCollectionDetail(@Path("id") id: Int): Single<ResponseBody>
 
     @GET("/v1/topics?search[trending]=true")
-    fun getTopics(@Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getTopics(@Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/me?exclude[]=relationships")
     fun getMe(): Observable<UserResponse>
@@ -50,7 +51,7 @@ interface ProductHuntApi {
     fun getUserFollowingRL(): Observable<RelationshipResponse>
 
     @GET("/v1/users/{id}?exclude[]=relationships")
-    fun getUser(@Path("id") id: Int): Observable<ResponseBody>
+    fun getUser(@Path("id") id: Int): Single<ResponseBody>
 
     @POST("/v1/users/{id}/follow")
     fun followUser(@Path("id") id: Int): Observable<Any>
@@ -59,7 +60,7 @@ interface ProductHuntApi {
     fun unfollowUser(@Path("id") id: Int): Observable<Any>
 
     @GET("/v1/users/{id}/posts")
-    fun getProductsByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<ResponseBody>
+    fun getProductsByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Single<ResponseBody>
 
     @GET("/v1/users/{id}/followers")
     fun getFollowersByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<FollowerResponse>

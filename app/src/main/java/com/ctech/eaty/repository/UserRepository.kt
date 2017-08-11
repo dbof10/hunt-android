@@ -8,8 +8,8 @@ import com.ctech.eaty.request.OAuthUserRequest
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.response.UserResponse
 import com.ctech.eaty.ui.user.action.UserProductBarCode
-import com.nytimes.android.external.store2.base.impl.BarCode
-import com.nytimes.android.external.store2.base.impl.Store
+import com.nytimes.android.external.store3.base.impl.BarCode
+import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
 
 class UserRepository(private val apiClient: ProductHuntApi,
@@ -29,10 +29,12 @@ class UserRepository(private val apiClient: ProductHuntApi,
             .map {
                 it.user
             }
+            .toObservable()
             .retryWhen(RefreshTokenFunc(apiClient, appSettings))
 
     fun getProduct(barcode: UserProductBarCode): Observable<List<Product>> {
         return productStore.get(barcode)
+                .toObservable()
                 .map { it.products }
                 .retryWhen(RefreshTokenFunc(apiClient, appSettings))
     }

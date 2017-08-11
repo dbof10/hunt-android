@@ -1,7 +1,6 @@
 package com.ctech.eaty.player
 
 import android.net.Uri
-import android.view.View
 import com.ctech.eaty.util.Constants
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer

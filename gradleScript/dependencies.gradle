@@ -73,10 +73,11 @@ def glide = [
 ]
 
 def store = [
-        lib       : 'com.nytimes.android:store2:0.0.1-SNAPSHOT',
-        cache     : 'com.nytimes.android:cache:2.1.0',
-        middleware: 'com.nytimes.android:middleware2:0.0.1-SNAPSHOT',
-        filesystem: 'com.nytimes.android:filesystem2:0.0.1-SNAPSHOT'
+        lib       : 'com.nytimes.android:store3:3.0.0-beta',
+        cache     : 'com.nytimes.android:cache3:3.0.0-beta',
+        middleware: 'com.nytimes.android:middleware3:3.0.0-beta',
+        filesystem: 'com.nytimes.android:filesystem3:3.0.0-beta',
+        kotlin    : 'com.nytimes.android:store-kotlin3:3.0.0-beta'
 ]
 
 def firebase = [

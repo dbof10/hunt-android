@@ -115,6 +115,7 @@ dependencies {
     implementation deps.store.cache
     implementation deps.store.middleware
     implementation deps.store.filesystem
+    implementation deps.store.kotlin
 
     //Date
     implementation deps.jodatime

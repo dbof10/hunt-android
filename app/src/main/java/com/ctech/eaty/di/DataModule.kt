@@ -9,8 +9,8 @@ import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
 import com.ctech.eaty.util.rx.ThreadScheduler
-import com.nytimes.android.external.store2.base.impl.BarCode
-import com.nytimes.android.external.store2.base.impl.Store
+import com.nytimes.android.external.store3.base.impl.BarCode
+import com.nytimes.android.external.store3.base.impl.Store
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
