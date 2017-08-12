@@ -3,15 +3,19 @@ package com.ctech.eaty.entity
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmModel
+import io.realm.annotations.RealmClass
 
-data class ImageUrl(@SerializedName("48px")
-                    val px48: String = "",
+@RealmClass
+open class ImageUrl(@SerializedName("48px")
+                    var px48: String = "",
                     @SerializedName("64px")
-                    val px64: String = "",
+                    var px64: String = "",
                     @SerializedName("300px")
-                    val px300: String = "",
+                    var px300: String = "",
                     @SerializedName("850px")
-                    val px850: String = "") : Parcelable {
+                    var px850: String = "") : Parcelable, RealmModel {
+
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<ImageUrl> = object : Parcelable.Creator<ImageUrl> {
             override fun createFromParcel(source: Parcel): ImageUrl = ImageUrl(source)
@@ -20,10 +24,10 @@ data class ImageUrl(@SerializedName("48px")
     }
 
     constructor(source: Parcel) : this(
-    source.readString(),
-    source.readString(),
-    source.readString(),
-    source.readString()
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString()
     )
 
     override fun describeContents() = 0

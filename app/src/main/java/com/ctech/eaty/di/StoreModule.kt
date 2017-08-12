@@ -2,6 +2,7 @@ package com.ctech.eaty.di
 
 import android.content.Context
 import com.ctech.eaty.entity.Comments
+import com.ctech.eaty.repository.HomePersister
 import com.ctech.eaty.repository.ProductHuntApi
 import com.ctech.eaty.repository.SoundCloudApi
 import com.ctech.eaty.response.*
@@ -9,6 +10,7 @@ import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.search.action.SearchBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
+import com.ctech.eaty.util.rx.ThreadScheduler
 import com.google.gson.Gson
 import com.nytimes.android.external.fs3.SourcePersisterFactory
 import com.nytimes.android.external.store3.base.Persister
@@ -18,6 +20,7 @@ import com.nytimes.android.external.store3.base.impl.StoreBuilder
 import com.nytimes.android.external.store3.middleware.GsonParserFactory
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 import okio.BufferedSource
 
 
@@ -32,17 +35,22 @@ class StoreModule {
     private val SEARCH_LIMIT = 10
 
     @Provides
-    fun homePersister(context: Context): Persister<BufferedSource, BarCode> {
+    fun providerRealmPersister(realm: Realm, threadScheduler: ThreadScheduler): Persister<ProductResponse, BarCode> {
+        return HomePersister(realm,threadScheduler)
+    }
+
+    @Provides
+    fun provideFilePersister(context: Context): Persister<BufferedSource, BarCode> {
         return SourcePersisterFactory.create(context.cacheDir)
     }
 
     @Provides
-    fun providePersistedHomeStore(apiClient: ProductHuntApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
+    fun providePersistedHomeStore(apiClient: ProductHuntApi, persister: Persister<ProductResponse, BarCode>, threadScheduler: ThreadScheduler)
             : Store<ProductResponse, BarCode> {
-        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, ProductResponse>()
-                .fetcher { barcode -> apiClient.getPosts(barcode.key).map { it.source() } }
+        return StoreBuilder.parsedWithKey<BarCode, ProductResponse, ProductResponse>()
+                .fetcher { barcode -> apiClient.getPosts(barcode.key).subscribeOn(threadScheduler.workerThread()) }
                 .persister(persister)
-                .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
+                .refreshOnStale()
                 .open()
     }
 

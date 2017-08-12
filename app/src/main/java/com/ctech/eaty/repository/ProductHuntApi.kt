@@ -3,10 +3,7 @@ package com.ctech.eaty.repository
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.request.OAuthClientRequest
 import com.ctech.eaty.request.OAuthUserRequest
-import com.ctech.eaty.response.FollowerResponse
-import com.ctech.eaty.response.FollowingResponse
-import com.ctech.eaty.response.RelationshipResponse
-import com.ctech.eaty.response.UserResponse
+import com.ctech.eaty.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
@@ -21,7 +18,7 @@ interface ProductHuntApi {
     fun getAccessToken(@Body auth: OAuthUserRequest): Observable<AccessToken>
 
     @GET("/v1/posts")
-    fun getPosts(@Query("day") date: String): Single<ResponseBody>
+    fun getPosts(@Query("day") date: String): Single<ProductResponse>
 
     @GET("/v1/posts/{id}")
     fun getProductDetail(@Path("id") id: Int): Single<ResponseBody>

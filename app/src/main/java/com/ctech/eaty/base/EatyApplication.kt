@@ -13,6 +13,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import io.fabric.sdk.android.Fabric
+import io.realm.Realm
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
@@ -46,7 +47,7 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         }
         LeakCanary.install(this)
         SoLoader.init(this, false)
-
+        Realm.init(this)
     }
 
 }

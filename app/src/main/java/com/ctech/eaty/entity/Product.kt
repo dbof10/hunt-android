@@ -1,17 +1,20 @@
 package com.ctech.eaty.entity
 
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmModel
+import io.realm.annotations.RealmClass
 
 
-data class Product(val id: Int, val name: String, val tagline: String,
+@RealmClass
+open class Product(var id: Int = -1, var name: String = "", var tagline: String = "",
                    @SerializedName("comments_count")
-                   val commentsCount: Int,
+                   var commentsCount: Int = -1,
                    @SerializedName("votes_count")
-                   val votesCount: Int,
+                   var votesCount: Int = -1,
                    @SerializedName("discussion_url")
-                   val discussionUrl: String,
+                   var discussionUrl: String = "",
                    @SerializedName("redirect_url")
-                   val redirectUrl: String,
+                   var redirectUrl: String = "",
                    @SerializedName("screenshot_url")
-                   val imageUrl: ImageUrl,
-                   val thumbnail: ThumbNail)
+                   var imageUrl: ImageUrl = ImageUrl(),
+                   var thumbnail: ThumbNail = ThumbNail.EMPTY) : RealmModel
