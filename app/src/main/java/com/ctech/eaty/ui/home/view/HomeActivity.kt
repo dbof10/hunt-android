@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.Gravity.START
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,7 +13,6 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.home.action.HomeAction
-import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.util.GlideImageLoader
@@ -35,9 +33,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-
-    @Inject
-    lateinit var homeNavigation: HomeNavigation
 
     @Inject
     lateinit var imageLoader: GlideImageLoader
@@ -97,6 +92,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         with(user) {
             imageLoader.downloadInto(imageUrl.px48, ivHeaderAvatar)
             tvHeaderUserName.text = username
+            tvIndicator.text = notification.unseen.toString()
         }
 
     }
@@ -112,8 +108,11 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
                     viewModel.userNavigation(ivHeaderAvatar)
                 }
         navigation.setNavigationItemSelectedListener {
-            homeNavigation.delegate(it.itemId).subscribe()
+            viewModel.navigationClick(it.itemId)
             false
+        }
+        ivNoti.setOnClickListener {
+            viewModel.notificationNavigation()
         }
     }
 

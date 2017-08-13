@@ -9,7 +9,7 @@
     <string name="collection">Collections</string>
     <string name="radio">Radio</string>
     <string name="live_event">LIVE Event</string>
-
+    <string name="notification">Notification</string>
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>
@@ -47,4 +47,6 @@
     <string name="login">Login</string>
 
 
+    <!--Empty -->
+    <string name="empty_notification">You don\'t have any notification. ✌️</string>
 </resources>

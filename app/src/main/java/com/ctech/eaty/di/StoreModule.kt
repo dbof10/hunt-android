@@ -36,7 +36,7 @@ class StoreModule {
 
     @Provides
     fun providerRealmPersister(realm: Realm, threadScheduler: ThreadScheduler): Persister<ProductResponse, BarCode> {
-        return HomePersister(realm,threadScheduler)
+        return HomePersister(realm, threadScheduler)
     }
 
     @Provides
@@ -50,7 +50,7 @@ class StoreModule {
         return StoreBuilder.parsedWithKey<BarCode, ProductResponse, ProductResponse>()
                 .fetcher { barcode -> apiClient.getPosts(barcode.key).subscribeOn(threadScheduler.workerThread()) }
                 .persister(persister)
-                .refreshOnStale()
+                .networkBeforeStale()
                 .open()
     }
 
@@ -144,6 +144,15 @@ class StoreModule {
         return StoreBuilder.parsedWithKey<UserProductBarCode, BufferedSource, ProductResponse>()
                 .fetcher { barcode -> apiClient.getProductsByUser(barcode.id, PRODUCT_LIMIT, barcode.page).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
+                .open()
+    }
+
+    @Provides
+    fun providePersistedNotificationStore(apiClient: ProductHuntApi, gson: Gson)
+            : Store<NotificationResponse, BarCode> {
+        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, NotificationResponse>()
+                .fetcher { apiClient.getNotifications().map { it.source() } }
+                .parser(GsonParserFactory.createSourceParser(gson, NotificationResponse::class.java))
                 .open()
     }
 }

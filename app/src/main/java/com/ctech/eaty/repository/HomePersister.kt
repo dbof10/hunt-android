@@ -18,7 +18,6 @@ class HomePersister(private val realm: Realm, private val threadScheduler: Threa
 
     override fun getRecordState(key: BarCode): RecordState {
         val queryResult = realm.where(HomeEntity::class.java)
-                .equalTo("key", key.key)
                 .findAll()
 
         if (queryResult.isEmpty()) {

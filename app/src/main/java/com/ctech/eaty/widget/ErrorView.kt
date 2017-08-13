@@ -93,7 +93,7 @@ class ErrorView : LinearLayout {
             val alignInt = a.getInt(R.styleable.ErrorView_explainAlignment, 1)
 
             if (imageRes != 0) {
-                setImage(imageRes)
+                setImage(ContextCompat.getDrawable(context, imageRes))
             }
 
             if (reason != null) {
@@ -143,80 +143,28 @@ class ErrorView : LinearLayout {
     }
 
 
-    fun setImage(res: Int) {
-        ivError.setImageResource(res)
-    }
-
     fun setImage(drawable: Drawable) {
         ivError.setImageDrawable(drawable)
-    }
-
-    fun setImage(bitmap: Bitmap) {
-        ivError.setImageBitmap(bitmap)
-    }
-
-    fun getImage(): Drawable {
-        return ivError.drawable
     }
 
     fun setReason(text: String) {
         tvReason.text = text
     }
 
-    fun setReason(res: Int) {
-        tvReason.setText(res)
-    }
-
-    fun getReason(): String {
-        return tvReason.text.toString()
-    }
-
     fun setReasonColor(res: Int) {
         tvReason.setTextColor(res)
-    }
-
-    fun getReasonColor(): Int {
-        return tvReason.currentTextColor
     }
 
     fun setExplain(exception: String) {
         tvExplain.text = exception
     }
 
-    fun setExplain(res: Int) {
-        tvExplain.setText(res)
-    }
-
-    fun getExplain(): String {
-        return tvExplain.text.toString()
-    }
-
     fun setExplainColor(res: Int) {
         tvExplain.setTextColor(res)
     }
 
-    fun getSubtitleColor(): Int {
-        return tvExplain.currentTextColor
-    }
-
     fun setRetryButtonText(text: String) {
         tvRetry.text = text
-    }
-
-    fun setRetryButtonText(res: Int) {
-        tvRetry.setText(res)
-    }
-
-    fun getRetryButtonText(): String {
-        return tvRetry.text.toString()
-    }
-
-    fun setRetryButtonTextColor(color: Int) {
-        tvRetry.setTextColor(color)
-    }
-
-    fun getRetryButtonTextColor(): Int {
-        return tvRetry.currentTextColor
     }
 
     fun showTitle(show: Boolean) {

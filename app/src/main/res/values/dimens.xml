@@ -25,6 +25,11 @@
     <dimen name="keyline_1">72dp</dimen>
     <dimen name="dialog_corners">2dp</dimen>
 
+    <!-- Home -->
+    <dimen name="noti_indicator_size">14dp</dimen>
+    <dimen name="noti_icon_width">24dp</dimen>
+    <dimen name="noti_icon_height">32dp</dimen>
+    <dimen name="noti_indicator_text_size">10sp</dimen>
 
     <!--Collection Detail -->
     <dimen name="collection_detail_background_height">180dp</dimen>
@@ -50,7 +55,6 @@
     <dimen name="avatar_large_size">120dp</dimen>
 
 
-
     <!-- Z-axis elevations -->
     <dimen name="z_app_bar">4dp</dimen>
     <dimen name="touch_raise">6dp</dimen>
@@ -60,6 +64,7 @@
     <dimen name="gallery_preview_height">84dp</dimen>
     <dimen name="indicator_diameter">8dp</dimen>
     <dimen name="indicator_gap">8dp</dimen>
+    <dimen name="noti_type_size">16dp</dimen>
 
 
 </resources>

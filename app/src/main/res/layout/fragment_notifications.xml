@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_notification" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/vLottie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="preloader.json"
+        app:lottie_loop="true" />
+
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry"
+        tools:visibility="visible" />
+
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/ic_empty_notification"
+        app:explain="@string/empty_notification"
+        tools:visibility="visible" />
+</FrameLayout>

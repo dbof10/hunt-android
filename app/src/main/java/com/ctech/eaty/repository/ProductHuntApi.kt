@@ -65,5 +65,8 @@ interface ProductHuntApi {
     @GET("/v1/users/{id}/following")
     fun getFollowingByUser(@Path("id") id: Int, @Query("per_page") limit: Int, @Query("page") page: Int): Observable<FollowingResponse>
 
+    @GET("/v1/notifications")
+    fun getNotifications(): Single<ResponseBody>
+
 
 }

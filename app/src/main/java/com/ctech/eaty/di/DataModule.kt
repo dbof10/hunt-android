@@ -54,6 +54,13 @@ class DataModule {
         return CollectionRepository(store, collectionDetailStore, apiClient, appSettingsManager)
     }
 
+    @Provides
+    fun provideNotificationRepository(store: Store<NotificationResponse, BarCode>,
+                                      apiClient: ProductHuntApi,
+                                      appSettingsManager: AppSettingsManager): NotificationRepository {
+        return NotificationRepository(store, apiClient, appSettingsManager)
+    }
+
 
     @Provides
     fun provideTopicRepository(store: Store<TopicResponse, BarCode>,

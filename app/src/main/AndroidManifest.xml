@@ -112,6 +112,10 @@
             android:name=".ui.comment.view.CommentActivity"
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
+        <activity
+            android:name=".ui.noti.view.NotificationActivity"
+            android:theme="@style/AppTheme" />
+
         <service android:name=".ui.web.support.KeepAliveService" />
     </application>
 

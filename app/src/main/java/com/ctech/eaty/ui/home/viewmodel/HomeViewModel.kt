@@ -72,16 +72,30 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
     }
 
     fun userNavigation(ivAvatar: ImageView) {
-        userRepository.getUser()
-                .subscribe({
+        userRepository
+                .getUser()
+                .flatMapCompletable {
                     if (it == UserDetail.GUEST) {
-                        navigation.toLogin(ivAvatar).subscribe()
+                        navigation.toLogin(ivAvatar)
                     } else {
-                        navigation.toUser(it).subscribe()
+                        navigation.toUser(it)
                     }
-                }, Timber::e)
+                }
+                .subscribe({}, Timber::e)
     }
 
+    fun notificationNavigation() {
+        userRepository
+                .getUser()
+                .flatMapCompletable {
+                    if (it == UserDetail.GUEST) {
+                        navigation.toLogin()
+                    } else {
+                        navigation.toNotification()
+                    }
+                }
+                .subscribe({}, Timber::e)
+    }
 
     fun user(): Observable<UserDetail> {
         return stateDispatcher
@@ -89,5 +103,9 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                     it.user != null && it.user != UserDetail.GUEST
                 }
                 .map { it.user!! }
+    }
+
+    fun navigationClick(id: Int) {
+        navigation.delegate(id).subscribe()
     }
 }

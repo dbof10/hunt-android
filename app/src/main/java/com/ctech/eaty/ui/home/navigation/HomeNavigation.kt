@@ -3,7 +3,6 @@ package com.ctech.eaty.ui.home.navigation
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.widget.ImageView
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
@@ -13,6 +12,7 @@ import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
+import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
@@ -52,12 +52,16 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
         }
     }
 
-    fun toLogin(ivAvatar: ImageView): Completable {
+    fun toLogin(transitionView: ImageView? = null): Completable {
         return Completable.fromAction {
             val intent = LoginActivity.newIntent(context)
             CircularTransform.addExtras(intent, Color.WHITE, R.drawable.ic_account_white)
-            val options = ActivityOptions.makeSceneTransitionAnimation(context, ivAvatar, context.getString(R.string.transition_user_login))
-            context.startActivityForResult(intent, LOGIN_REQUEST_CODE, options.toBundle())
+            if (transitionView != null) {
+                val options = ActivityOptions.makeSceneTransitionAnimation(context, transitionView, context.getString(R.string.transition_user_login))
+                context.startActivityForResult(intent, LOGIN_REQUEST_CODE, options.toBundle())
+                return@fromAction
+            }
+            context.startActivityForResult(intent, LOGIN_REQUEST_CODE)
         }
     }
 
@@ -85,6 +89,13 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                     intent.setClass(context, LiveEventActivity::class.java)
                 }
             }
+            context.startActivity(intent)
+        }
+    }
+
+    fun toNotification(): Completable {
+        return Completable.fromAction {
+            val intent = NotificationActivity.newIntent(context)
             context.startActivity(intent)
         }
     }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/content_padding_vertical"
+    android:paddingEnd="@dimen/content_padding_horizontal"
+    android:paddingStart="@dimen/content_padding_horizontal"
+    android:paddingTop="@dimen/content_padding_vertical"
+    tools:background="@color/colorPrimaryHighlight">
+
+
+    <com.ctech.eaty.widget.CircularImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_medium"
+        android:orientation="vertical">
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvSentence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            tools:text="Minh sent you a friend request" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivType"
+                android:layout_width="@dimen/noti_type_size"
+                android:layout_height="@dimen/noti_type_size"
+                android:layout_gravity="center"
+                tools:src="@drawable/ic_type_recommendation" />
+
+            <com.ctech.eaty.widget.BaselineGridTextView
+                android:id="@+id/tvTimeStamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_small"
+                tools:text="3 hours ago" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

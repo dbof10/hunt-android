@@ -23,6 +23,9 @@ import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.di.LoginModule
 import com.ctech.eaty.ui.login.view.LoginActivity
+import com.ctech.eaty.ui.noti.di.NotificationFragmentBuilderModule
+import com.ctech.eaty.ui.noti.di.NotificationModule
+import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -108,4 +111,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector()
     abstract fun contributeLiveEventActivity(): LiveEventActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(NotificationModule::class, NotificationFragmentBuilderModule::class))
+    abstract fun contributeNotificationActivity(): NotificationActivity
 }
