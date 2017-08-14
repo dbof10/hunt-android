@@ -35,8 +35,8 @@ class StoreModule {
     private val SEARCH_LIMIT = 10
 
     @Provides
-    fun providerRealmPersister(realm: Realm, threadScheduler: ThreadScheduler): Persister<ProductResponse, BarCode> {
-        return HomePersister(realm, threadScheduler)
+    fun providerRealmPersister(realm: Realm): Persister<ProductResponse, BarCode> {
+        return HomePersister(realm)
     }
 
     @Provides
@@ -45,10 +45,10 @@ class StoreModule {
     }
 
     @Provides
-    fun providePersistedHomeStore(apiClient: ProductHuntApi, persister: Persister<ProductResponse, BarCode>, threadScheduler: ThreadScheduler)
+    fun providePersistedHomeStore(apiClient: ProductHuntApi, persister: Persister<ProductResponse, BarCode>)
             : Store<ProductResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, ProductResponse, ProductResponse>()
-                .fetcher { barcode -> apiClient.getPosts(barcode.key).subscribeOn(threadScheduler.workerThread()) }
+                .fetcher { barcode -> apiClient.getPosts(barcode.key) }
                 .persister(persister)
                 .networkBeforeStale()
                 .open()

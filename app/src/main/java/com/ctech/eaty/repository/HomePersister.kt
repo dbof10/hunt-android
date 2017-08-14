@@ -1,5 +1,7 @@
 package com.ctech.eaty.repository
 
+import android.os.Handler
+import android.os.Looper
 import com.ctech.eaty.entity.HomeEntity
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.response.ProductResponse
@@ -14,7 +16,7 @@ import io.realm.Realm
 import io.realm.RealmList
 
 
-class HomePersister(private val realm: Realm, private val threadScheduler: ThreadScheduler) : Persister<ProductResponse, BarCode>, RecordProvider<BarCode> {
+class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCode>, RecordProvider<BarCode> {
 
     override fun getRecordState(key: BarCode): RecordState {
         val queryResult = realm.where(HomeEntity::class.java)
@@ -30,20 +32,24 @@ class HomePersister(private val realm: Realm, private val threadScheduler: Threa
     override fun write(key: BarCode, raw: ProductResponse): Single<Boolean> {
 
         val single = Single.create<Boolean> { emitter ->
-            realm.executeTransaction {
-                val reamList = RealmList<Product>()
-                reamList.addAll(raw.products)
-                val entity = HomeEntity(key.key, reamList)
-                realm.copyToRealmOrUpdate(entity)
-                emitter.onSuccess(true)
+            Handler(Looper.getMainLooper()).post {
+                realm.executeTransaction {
+                    val reamList = RealmList<Product>()
+                    reamList.addAll(raw.products)
+                    val entity = HomeEntity(key.key, reamList)
+                    realm.copyToRealmOrUpdate(entity)
+                    emitter.onSuccess(true)
+                }
             }
+
         }
         return single
-                .subscribeOn(threadScheduler.uiThread())
+
     }
 
     override fun read(key: BarCode): Maybe<ProductResponse> {
         val maybe = Maybe.create<ProductResponse> { emitter ->
+
             val queryResult = realm.where(HomeEntity::class.java)
                     .equalTo("key", key.key)
                     .findAll()
@@ -54,7 +60,8 @@ class HomePersister(private val realm: Realm, private val threadScheduler: Threa
                 emitter.onSuccess(ProductResponse(queryResult.first().value))
             }
         }
-        return maybe.subscribeOn(threadScheduler.uiThread())
+        return maybe
+
     }
 
 
