@@ -82,9 +82,6 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 R.id.action_topic -> {
                     intent.setClass(context, TopicActivity::class.java)
                 }
-                R.id.action_radio -> {
-                    intent.setClass(context, RadioActivity::class.java)
-                }
                 R.id.action_live -> {
                     intent.setClass(context, LiveEventActivity::class.java)
                 }
