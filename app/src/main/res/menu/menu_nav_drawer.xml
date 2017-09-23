@@ -16,8 +16,4 @@
         android:title="@string/navigation_live"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_radio"
-        android:title="@string/navigation_radio"
-        app:showAsAction="never" />
 </menu>

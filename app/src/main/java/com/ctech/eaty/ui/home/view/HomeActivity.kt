@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.Gravity.START
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.ctech.eaty.R
@@ -45,12 +46,12 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private val ivHeaderAvatar: ImageView by lazy {
         navigation.getHeaderView(0)
-                .findViewById(R.id.ivAvatar) as ImageView
+                .findViewById<ImageView>(R.id.ivAvatar)
     }
 
     private val tvHeaderUserName: TextView by lazy {
         navigation.getHeaderView(0)
-                .findViewById(R.id.tvUserName) as TextView
+                .findViewById<TextView>(R.id.tvUserName)
     }
 
     companion object {
@@ -103,7 +104,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
             drawer.openDrawer(START)
         }
         navigation.getHeaderView(0)
-                .findViewById(R.id.llUser)
+                .findViewById<View>(R.id.llUser)
                 .setOnClickListener {
                     viewModel.userNavigation(ivHeaderAvatar)
                 }

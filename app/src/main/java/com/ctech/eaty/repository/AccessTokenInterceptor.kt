@@ -7,6 +7,7 @@ class AccessTokenInterceptor(val appSettingsManager: AppSettingsManager) : Inter
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
+                .addHeader("User-Agent", "ProductHunt/3.8.9 (iPad; iOS 10.3.3; Scale/2.00)")
                 .addHeader("Accept", "application/json")
                 .addHeader("Authorization", "Bearer ${
                 appSettingsManager.run {

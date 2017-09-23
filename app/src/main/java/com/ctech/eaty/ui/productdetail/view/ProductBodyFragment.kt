@@ -87,7 +87,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
     private lateinit var headerView: View
 
     private val ivSpacer by lazy {
-        headerView.findViewById(R.id.ivSpacer)
+        headerView.findViewById<View>(R.id.ivSpacer)
     }
 
     private val expandCollapse: Transition by lazy {

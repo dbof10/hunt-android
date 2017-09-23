@@ -65,7 +65,7 @@ class HomeReducer : Reducer<HomeState> {
     private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeItemViewModel> {
         val next: List<HomeItemViewModel>
         if (result.dayAgo < 2) {
-            next = state.content + HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
+            next = state.content + //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
                     listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         }  else {
             next = state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content

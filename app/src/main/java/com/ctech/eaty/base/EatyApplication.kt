@@ -5,6 +5,8 @@ import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.di.AppInjector
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.litho.fresco.FrescoImage
 import com.facebook.soloader.SoLoader
 import com.google.firebase.FirebaseApp
 import com.google.firebase.perf.FirebasePerformance
@@ -48,6 +50,7 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         LeakCanary.install(this)
         SoLoader.init(this, false)
         Realm.init(this)
+        Fresco.initialize(this)
     }
 
 }

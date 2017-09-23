@@ -54,11 +54,11 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
     lateinit var imageLoader: GlideImageLoader
 
     private val progressBar by lazy {
-        activity.findViewById(R.id.progressBar)
+        activity.findViewById<View>(R.id.progressBar)
     }
 
     private val container by lazy {
-        activity.findViewById(R.id.container)
+        activity.findViewById<View>(R.id.container)
     }
 
     private val userId by lazy {
@@ -126,7 +126,7 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
         progressBar.visibility = View.GONE
         vError.visibility = View.GONE
         rvProducts.visibility = View.VISIBLE
-        rvProducts.setPaddingTop(activity.findViewById(R.id.tvProductCount).bottom)
+        rvProducts.setPaddingTop(activity.findViewById<View>(R.id.tvProductCount).bottom)
         adapter.setItems(list)
     }
 

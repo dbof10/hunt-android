@@ -28,13 +28,13 @@ class PagerAdapter(private val context: Activity) : PagerAdapter() {
         val item = items[position]
         if (item.type == MediaType.IMAGE) {
             layout = inflater.inflate(R.layout.item_gallery_image, collection, false) as ViewGroup
-            image = layout.findViewById(R.id.image) as ImageView
-            val progressBar = layout.findViewById(R.id.progressBar)
+            image = layout.findViewById(R.id.image)
+            val progressBar = layout.findViewById<View>(R.id.progressBar)
             loadImage(image, progressBar, item.imageUrl)
         } else {
             layout = inflater.inflate(R.layout.item_gallery_video, collection, false) as ViewGroup
-            video = layout.findViewById(R.id.ivThumbnail) as YouTubeThumbnailView
-            layout.findViewById(R.id.ivPlay)!!.setOnClickListener {
+            video = layout.findViewById(R.id.ivThumbnail)
+            layout.findViewById<View>(R.id.ivPlay)!!.setOnClickListener {
                 playVideo(item.videoUrl!!)
             }
             video.setOnClickListener {

@@ -79,6 +79,11 @@ dependencies {
     implementation deps.support.customtab
     implementation deps.support.palette
     implementation deps.support.constraint
+    implementation deps.litho.lib
+    implementation deps.litho.widget
+    provided deps.litho.annotation
+    kapt deps.litho.processor
+    implementation deps.litho.fresco
 
     implementation deps.ui.lottie
     implementation deps.ui.inkindicator
@@ -139,7 +144,6 @@ dependencies {
     //React
     implementation deps.react.core
 
-
     //Profile
     debugImplementation deps.leakcanary.op
     releaseImplementation deps.leakcanary.noop
@@ -151,14 +155,17 @@ dependencies {
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
     testImplementation deps.test.robolectric
+    testImplementation deps.litho.test
 
     androidTestImplementation deps.support.annotation
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
     androidTestImplementation 'org.mockito:mockito-android:2.7.19'
+
     configurations.all {
+        exclude group: 'com.facebook.yoga', module: 'yoga'
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
     implementation files('libs/YouTubeAndroidPlayerApi.jar')

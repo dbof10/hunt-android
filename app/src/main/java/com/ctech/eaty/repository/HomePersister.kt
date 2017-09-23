@@ -3,6 +3,7 @@ package com.ctech.eaty.repository
 import android.os.Handler
 import android.os.Looper
 import com.ctech.eaty.entity.HomeEntity
+import com.ctech.eaty.entity.ImageUrl
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.util.rx.ThreadScheduler
@@ -57,7 +58,15 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
             if (queryResult.isEmpty()) {
                 emitter.onComplete()
             } else {
-                emitter.onSuccess(ProductResponse(queryResult.first().value))
+                val detachedRealm = queryResult.first().value.map {
+                    Product(it.id, it.name + "", it.tagline + "", it.commentsCount,
+                            it.votesCount,
+                            it.discussionUrl,
+                            it.redirectUrl,
+                            ImageUrl(it.imageUrl.px48 + "", it.imageUrl.px64 + "", it.imageUrl.px300 + "", it.imageUrl.px850 + ""),
+                            it.thumbnail)
+                }
+                emitter.onSuccess(ProductResponse(detachedRealm))
             }
         }
         return maybe

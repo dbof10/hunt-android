@@ -23,6 +23,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.splash.view.SplashActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -33,6 +34,7 @@
         </activity>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.home.view.HomeActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
@@ -53,66 +55,82 @@
         </activity>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.login.view.LoginActivity"
             android:theme="@style/AppTheme.Translucent.Overlap.Login" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.live.view.LiveEventActivity"
             android:theme="@style/AppTheme"/>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.user.view.UserActivity"
             android:theme="@style/AppTheme.Translucent.Overlap.User" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.productdetail.view.ProductDetailActivity"
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.gallery.view.GalleryActivity"
             android:theme="@style/AppTheme.FullScreen" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.gallery.view.YoutubeActivity"
             android:theme="@style/AppTheme.FullScreen" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.web.WebviewActivity"
             android:theme="@style/AppTheme" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.collection.view.CollectionActivity"
             android:theme="@style/AppTheme" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.radio.view.RadioActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.collectiondetail.view.CollectionDetailActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.search.view.SearchActivity"
             android:theme="@style/AppTheme" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.vote.view.VoteActivity"
             android:theme="@style/AppTheme.Translucent.Overlap.Vote" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.follow.view.FollowActivity"
             android:theme="@style/AppTheme.Translucent.Overlap.Vote" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.topic.view.TopicActivity"
             android:theme="@style/AppTheme" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.comment.view.CommentActivity"
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.noti.view.NotificationActivity"
             android:theme="@style/AppTheme" />
 

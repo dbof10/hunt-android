@@ -1,13 +1,14 @@
 def versions = [
-        support: '25.4.0'
+        support: '26.1.0',
+        litho  : '0.6.1'
 ]
 
 def build = [
         buildToolsVersion: '26.0.1',
-        compileSdkVersion: 25,
+        compileSdkVersion: 26,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
-        targetSdkVersion : 25,
+        targetSdkVersion : 26,
 
 ]
 
@@ -15,10 +16,10 @@ def support = [
         appcompat   : "com.android.support:appcompat-v7:${versions.support}",
         recyclerview: "com.android.support:recyclerview-v7:${versions.support}",
         multidex    : "com.android.support:multidex:1.0.1",
-        design      : 'com.android.support:design:25.4.0',
-        customtab   : 'com.android.support:customtabs:25.4.0',
-        palette     : 'com.android.support:palette-v7:25.4.0',
-        annotation  : 'com.android.support:support-annotations:25.4.0',
+        design      : "com.android.support:design:${versions.support}",
+        customtab   : "com.android.support:customtabs:${versions.support}",
+        palette     : "com.android.support:palette-v7:${versions.support}",
+        annotation  : "com.android.support:support-annotations:${versions.support}",
         constraint  : 'com.android.support.constraint:constraint-layout:1.0.2'
 ]
 
@@ -38,11 +39,6 @@ def butterknife = [
 def rx = [
         java   : 'io.reactivex.rxjava2:rxjava:2.0.9',
         android: 'io.reactivex.rxjava2:rxandroid:2.0.1',
-]
-
-def autovalue = [
-        "lib"     : "com.google.auto.value:auto-value:1.4.1",
-        "compiler": "com.google.auto.value:auto-value:1.4.1"
 ]
 
 def test = [
@@ -101,6 +97,16 @@ def react = [
         "core": "com.facebook.react:react-native:+"
 ]
 
+def litho = [
+        "lib"       : "com.facebook.litho:litho-core:${versions.litho}",
+        "widget"    : "com.facebook.litho:litho-widget:${versions.litho}",
+        "annotation": "com.facebook.litho:litho-annotations:${versions.litho}",
+        "processor" : "com.facebook.litho:litho-processor:${versions.litho}",
+        "loader"    : 'com.facebook.soloader:soloader:0.2.0',
+        "fresco"    : "com.facebook.litho:litho-fresco:${versions.litho}",
+        "test"      : "com.facebook.litho:litho-testing:${versions.litho}",
+]
+
 ext.deps = [
         "build"      : build,
         "versions"   : versions,
@@ -112,7 +118,6 @@ ext.deps = [
         "butterknife": butterknife,
         "mockito"    : 'org.mockito:mockito-core:2.6.8',
         "rx"         : rx,
-        "autovalue"  : autovalue,
         "crashlytics": "com.crashlytics.sdk.android:crashlytics:2.6.8@aar",
         "test"       : test,
         "exo"        : exo,
@@ -125,5 +130,6 @@ ext.deps = [
         "ui"         : ui,
         "gson"       : "com.google.code.gson:gson:2.8.0",
         "jsoup"      : "org.jsoup:jsoup:1.10.3",
-        "react"      : react
+        "react"      : react,
+        "litho"      : litho
 ]

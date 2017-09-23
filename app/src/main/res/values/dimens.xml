@@ -30,6 +30,10 @@
     <dimen name="noti_icon_width">24dp</dimen>
     <dimen name="noti_icon_height">32dp</dimen>
     <dimen name="noti_indicator_text_size">10sp</dimen>
+    <dimen name="feed_footer_height">32dp</dimen>
+    <dimen name="feed_product_height">240dp</dimen>
+    <dimen name="feed_title_height">40dp</dimen>
+
 
     <!--Collection Detail -->
     <dimen name="collection_detail_background_height">180dp</dimen>

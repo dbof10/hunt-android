@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sfRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvNewFeeds"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_product" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+   <com.facebook.litho.LithoView
+       android:id="@+id/litho"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/vLottie"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
+        app:lottie_autoPlay="false"
         app:lottie_fileName="preloader.json"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="false" />
+        app:lottie_loop="true" />
 
     <com.ctech.eaty.widget.ErrorView
         android:id="@+id/vError"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        app:errorImage="@drawable/network_error"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error" />
 </FrameLayout>
