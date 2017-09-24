@@ -2,7 +2,8 @@
     <string name="app_name">Daily Hunt</string>
     <string name="facebook_app_id">1966287263602613</string>
     <string name="admob_app_id">ca-app-pub-6007267266282978~8999558641</string>
-
+    <string name="twitter_consumer_key">idu8gebrlgIVRKgLd4Ph657yu</string>
+    <string name="twitter_consumer_secret">2bvwMtnQJWqSUzsCXq3wVNWMHMgz30tl492jg8ompZIp27xzVP</string>
 
     <!-- Title -->
     <string name="topic">Topics</string>
@@ -47,6 +48,16 @@
     <string name="login">Login</string>
 
 
+    <!--Login -->
+    <string name="login_title">Login to join the community</string>
+    <string name="login_introduction">Product Hunt is a community to share and to geek out about the latest products, books, games, podcasts</string>
+    <string name="login_facebook">Login with Facebook</string>
+    <string name="login_twitter">Login with Twitter</string>
+    <string name="policy_agreement_notification">By signing in you agree with terms of service</string>
+
     <!--Empty -->
     <string name="empty_notification">You don\'t have any notification. ✌️</string>
+    <string name="app_slogon">Best things every day</string>
+
+
 </resources>

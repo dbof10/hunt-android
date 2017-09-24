@@ -90,11 +90,20 @@ def leakcanary = [
 
 def ui = [
         lottie      : 'com.airbnb.android:lottie:2.1.0',
-        inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0'
+        inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0',
+        gradient    : 'com.dynamitechetan.flowinggradient:flowinggradient:1.1'
 ]
 
 def react = [
         "core": "com.facebook.react:react-native:+"
+]
+
+def facebook = [
+        "login": "com.facebook.android:facebook-android-sdk:4.26.0"
+]
+
+def twitter = [
+        "core": 'com.twitter.sdk.android:twitter-core:3.1.1'
 ]
 
 def litho = [
@@ -116,7 +125,7 @@ ext.deps = [
         "jodatime"   : "net.danlew:android.joda:2.9.9",
         "dagger"     : dagger,
         "butterknife": butterknife,
-        "mockito"    : 'org.mockito:mockito-core:2.6.8',
+        "mockito"    : 'org.mockito:mockito-core:2.10.0',
         "rx"         : rx,
         "crashlytics": "com.crashlytics.sdk.android:crashlytics:2.6.8@aar",
         "test"       : test,
@@ -131,5 +140,7 @@ ext.deps = [
         "gson"       : "com.google.code.gson:gson:2.8.0",
         "jsoup"      : "org.jsoup:jsoup:1.10.3",
         "react"      : react,
-        "litho"      : litho
+        "litho"      : litho,
+        "facebook"   : facebook,
+        "twitter"    : twitter
 ]

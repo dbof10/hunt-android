@@ -1,10 +1,10 @@
 package com.ctech.eaty.repository
 
-import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
-import com.ctech.eaty.request.OAuthUserRequest
+import com.ctech.eaty.request.LoginRequest
+import com.ctech.eaty.response.LoginResponse
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.response.UserResponse
 import com.ctech.eaty.ui.user.action.UserProductBarCode
@@ -17,7 +17,9 @@ class UserRepository(private val apiClient: ProductHuntApi,
                      private val productStore: Store<ProductResponse, UserProductBarCode>,
                      private val appSettings: AppSettingsManager) {
 
-    fun getUserToken(code: String): Observable<AccessToken> = apiClient.getAccessToken(OAuthUserRequest(code = code))
+    fun getUserToken(loginProvider: String, oauthToken: String, oauthTokenSecret: String):
+            Observable<LoginResponse> =
+            apiClient.getAccessToken(LoginRequest(loginProvider, oauthToken, oauthTokenSecret))
 
     fun getMe(): Observable<UserDetail> = apiClient.getMe().map {
         it.user

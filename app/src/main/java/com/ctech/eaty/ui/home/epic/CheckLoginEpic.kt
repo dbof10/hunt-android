@@ -1,6 +1,7 @@
 package com.ctech.eaty.ui.home.epic
 
 import android.app.Activity
+import android.util.Log
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.ui.home.action.HomeAction

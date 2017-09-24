@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.login.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
+import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.login.action.LoginAction
@@ -18,19 +19,13 @@ class RequestTokenEpic(private val userRepository: UserRepository,
 
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<LoginState>): Observable<RequestTokenResult> {
         return action.ofType(LoginAction.REQUEST_TOKEN::class.java)
-                .filter {
-                    it.url.getQueryParameter("code")?.isNotEmpty() ?: false
-                }
-                .map {
-                    it.url.getQueryParameter("code")
-                }
                 .flatMap {
-                    userRepository.getUserToken(it)
+                    userRepository.getUserToken(it.loginProvider, it.oauthToken, it.authTokenSecret)
                             .doOnNext {
                                 appSettings.setUserToken(it.accessToken)
                             }
                             .map {
-                                RequestTokenResult.success(it)
+                                RequestTokenResult.success(AccessToken(it.accessToken, it.type), it.firstTime)
                             }
                             .onErrorReturn {
                                 RequestTokenResult.fail(it)

@@ -50,8 +50,8 @@
     </style>
 
     <style name="AppTheme.Translucent.Overlap.Login">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:colorButtonNormal">@color/hunt_button</item>
         <item name="android:colorControlHighlight">@color/ripple_light</item>
     </style>
 
@@ -72,6 +72,14 @@
 
     <style name="Widget.Hunt" parent="android:Widget" />
 
+    <style name="Widget.Hunt.HorizontalInlineActionButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/space_small</item>
+        <item name="android:paddingStart">@dimen/content_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/content_padding_horizontal</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+        <item name="android:elevation">@dimen/elevation</item>
+    </style>
 
     <style name="Widget.Hunt.InlineActionButton" parent="@android:style/Widget.Material.Button">
         <item name="android:gravity">center_horizontal</item>
@@ -127,12 +135,22 @@
         <item name="android:textColor">@color/text_primary_dark</item>
     </style>
 
+    <style name="TextAppearance.LoginTitle" parent="@android:style/TextAppearance.Material.Headline">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_50</item>
+    </style>
+
     <style name="TextAppearance.HomeProductTitle" parent="@android:style/TextAppearance.Material.Headline">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.ShotDescription" parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">@color/text_tertiary_dark</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.SmallNotification" parent="@android:style/TextAppearance.Material.Small">
         <item name="android:textColor">@color/text_tertiary_dark</item>
         <item name="android:letterSpacing">0.01</item>
     </style>

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 class UserDetail(
         id: Int,
         name: String,
-        headline: String,
+        headline: String?,
         username: String,
         @SerializedName("website_url")
         val webUrl: String?,
@@ -24,7 +24,8 @@ class UserDetail(
     companion object {
         val GUEST = UserDetail(-1, "", "", "", "",
                 ImageUrl(), NotificationIndicator(), 0, 0, 0)
-        @JvmField val CREATOR: Parcelable.Creator<UserDetail> = object : Parcelable.Creator<UserDetail> {
+        @JvmField
+        val CREATOR: Parcelable.Creator<UserDetail> = object : Parcelable.Creator<UserDetail> {
             override fun createFromParcel(source: Parcel): UserDetail = UserDetail(source)
             override fun newArray(size: Int): Array<UserDetail?> = arrayOfNulls(size)
         }

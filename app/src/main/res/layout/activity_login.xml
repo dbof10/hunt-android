@@ -32,6 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/space_medium"
             android:text="@string/login"
+            android:backgroundTint="@color/hunt"
             android:textAppearance="@style/TextAppearance.DarkButton"
             android:onClick="doLogin" />
 

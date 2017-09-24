@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 open class User(
         val id: Int,
         val name: String,
-        val headline: String,
+        val headline: String?,
         val username: String,
         @SerializedName("image_url")
         val imageUrl: ImageUrl) : Parcelable {

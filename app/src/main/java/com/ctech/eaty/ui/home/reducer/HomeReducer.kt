@@ -5,7 +5,6 @@ import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.ui.home.result.*
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
@@ -20,34 +19,27 @@ class HomeReducer : Reducer<HomeState> {
     override fun apply(state: HomeState, result: Result): HomeState {
         when (result) {
             is LoadResult -> {
-                if (result.loading) {
-                    return state.copy(loading = true)
-                } else if (result.error != null) {
-                    return state.copy(loading = false, loadError = result.error)
-                } else {
-                    return state.copy(loading = false, loadError = null,
+                return when {
+                    result.loading -> state.copy(loading = true)
+                    result.error != null -> state.copy(loading = false, loadError = result.error)
+                    else -> state.copy(loading = false, loadError = null,
                             content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content)
                 }
             }
             is RefreshResult -> {
-                if (result.refreshing) {
-                    return state.copy(refreshing = true)
-                } else if (result.error != null) {
-                    return state.copy(refreshing = false, refreshError = result.error)
-                } else {
-                    return state.copy(refreshing = false, refreshError = null,
+                return when {
+                    result.refreshing -> state.copy(refreshing = true)
+                    result.error != null -> state.copy(refreshing = false, refreshError = result.error)
+                    else -> state.copy(refreshing = false, refreshError = null,
                             content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content,
                             dayAgo = 0)
                 }
             }
             is LoadMoreResult -> {
-                if (result.loading) {
-                    return state.copy(loadingMore = true)
-                } else if (result.error != null) {
-
-                    return state.copy(loadingMore = false, loadMoreError = result.error)
-                } else {
-                    return state.copy(loadingMore = false, loadError = null, content = computeNextBody(state, result), dayAgo = result.dayAgo)
+                return when {
+                    result.loading -> state.copy(loadingMore = true)
+                    result.error != null -> state.copy(loadingMore = false, loadMoreError = result.error)
+                    else -> state.copy(loadingMore = false, loadError = null, content = computeNextBody(state, result), dayAgo = result.dayAgo)
                 }
             }
             is LoadUserResult -> {
@@ -63,13 +55,11 @@ class HomeReducer : Reducer<HomeState> {
     }
 
     private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeItemViewModel> {
-        val next: List<HomeItemViewModel>
-        if (result.dayAgo < 2) {
-            next = state.content + //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
+        return if (result.dayAgo < 2) {
+            state.content + //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
                     listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         }  else {
-            next = state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
+            state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         }
-        return next
     }
 }

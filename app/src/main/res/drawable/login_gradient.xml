@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:id="@+id/selected"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <!-- The drawables used here can be solid colors, gradients, shapes, images, etc. -->
+    <item
+        android:drawable="@drawable/seventh_bg"
+        android:duration="4000" />
+    <item
+        android:drawable="@drawable/thrid_bg"
+        android:duration="4000" />
+
+    <item
+        android:drawable="@drawable/original_state"
+        android:duration="4000" />
+    <item
+        android:drawable="@drawable/fifth_bg"
+        android:duration="4000" />
+</animation-list>

@@ -7,7 +7,7 @@ data class CommentItemViewModel(private val comment: Comment, private val expand
     val id: Int get() = comment.id
     val parentId: Int get() = comment.parentCommentId
     val name: String get() = "${comment.user.username} - ${comment.user.name}"
-    val headline: String get() = comment.user.headline
+    val headline: String get() = comment.user.headline ?: ""
     val body: String get() = comment.body
     val createdAt: DateTime get() = comment.createdAt
     val imageUrl: String get() = comment.user.imageUrl.px48

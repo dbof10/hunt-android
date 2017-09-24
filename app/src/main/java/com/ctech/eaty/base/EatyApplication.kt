@@ -2,15 +2,20 @@ package com.ctech.eaty.base
 
 import android.app.Activity
 import android.support.multidex.MultiDexApplication
+import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.ctech.eaty.BuildConfig
+import com.ctech.eaty.R
 import com.ctech.eaty.di.AppInjector
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.litho.fresco.FrescoImage
 import com.facebook.soloader.SoLoader
 import com.google.firebase.FirebaseApp
 import com.google.firebase.perf.FirebasePerformance
 import com.squareup.leakcanary.LeakCanary
+import com.twitter.sdk.android.core.DefaultLogger
+import com.twitter.sdk.android.core.Twitter
+import com.twitter.sdk.android.core.TwitterAuthConfig
+import com.twitter.sdk.android.core.TwitterConfig
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -19,6 +24,7 @@ import io.realm.Realm
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
+
 
 class EatyApplication : MultiDexApplication(), HasActivityInjector {
 
@@ -51,6 +57,13 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         SoLoader.init(this, false)
         Realm.init(this)
         Fresco.initialize(this)
+        val config = TwitterConfig.Builder(this)
+                .logger(DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(TwitterAuthConfig(resources.getString(R.string.twitter_consumer_key),
+                        resources.getString(R.string.twitter_consumer_secret)))
+                .debug(BuildConfig.DEBUG)
+                .build()
+        Twitter.initialize(config)
     }
 
 }

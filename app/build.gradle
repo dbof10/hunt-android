@@ -87,12 +87,15 @@ dependencies {
 
     implementation deps.ui.lottie
     implementation deps.ui.inkindicator
+    implementation deps.ui.gradient
+
     //Media
     implementation deps.exo.core
     implementation deps.exo.ui
     implementation deps.exo.dash
     implementation deps.exo.hls
     implementation deps.exo.smoothstreaming
+
     //Reactive
     implementation deps.rx.android
     implementation deps.rx.java
@@ -121,7 +124,6 @@ dependencies {
     implementation deps.store.cache
     implementation deps.store.middleware
     implementation deps.store.filesystem
-    implementation deps.store.kotlin
 
     //Date
     implementation deps.jodatime
@@ -143,6 +145,10 @@ dependencies {
 
     //React
     implementation deps.react.core
+
+    //Social
+    implementation deps.facebook.login
+    implementation deps.twitter.core
 
     //Profile
     debugImplementation deps.leakcanary.op

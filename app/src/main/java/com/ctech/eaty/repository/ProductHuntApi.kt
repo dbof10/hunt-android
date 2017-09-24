@@ -3,6 +3,7 @@ package com.ctech.eaty.repository
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.request.OAuthClientRequest
 import com.ctech.eaty.request.OAuthUserRequest
+import com.ctech.eaty.request.LoginRequest
 import com.ctech.eaty.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -14,8 +15,8 @@ interface ProductHuntApi {
     @POST("/v1/oauth/token")
     fun getAccessToken(@Body auth: OAuthClientRequest): Observable<AccessToken>
 
-    @POST("/v1/oauth/token")
-    fun getAccessToken(@Body auth: OAuthUserRequest): Observable<AccessToken>
+    @PUT("/v1/sessions")
+    fun getAccessToken(@Body auth: LoginRequest): Observable<LoginResponse>
 
     @GET("/v1/posts")
     fun getPosts(@Query("day") date: String): Single<ProductResponse>
