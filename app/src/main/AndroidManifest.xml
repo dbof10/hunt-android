@@ -140,6 +140,11 @@
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <activity
+            android:name=".ui.profile.view.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".ui.noti.view.NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

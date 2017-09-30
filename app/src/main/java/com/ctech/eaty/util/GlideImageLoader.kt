@@ -2,14 +2,15 @@ package com.ctech.eaty.util
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.ctech.eaty.R
 
 
@@ -18,20 +19,23 @@ class GlideImageLoader(context: Context) {
     private val glide: Glide = Glide.get(context)
 
     companion object {
-        fun getBitmap(glideDrawable: GlideDrawable): Bitmap? {
-            if (glideDrawable is GlideBitmapDrawable) {
-                return glideDrawable.bitmap
-            } else if (glideDrawable is GifDrawable) {
-                return glideDrawable.firstFrame
+        fun getBitmap(drawable: Drawable): Bitmap? {
+            if (drawable is BitmapDrawable) {
+                return drawable.bitmap
+            } else if (drawable is GifDrawable) {
+                return drawable.firstFrame
             }
             return null
         }
     }
 
     fun downloadInto(url: String?, imageView: ImageView) {
+        val options = RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+
         Glide.with(imageView.context)
                 .load(url)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .apply(options)
                 .into(imageView)
     }
 
@@ -41,17 +45,16 @@ class GlideImageLoader(context: Context) {
                 .into(imageView)
     }
 
-    fun cancel(imageView: ImageView) {
-        Glide.clear(imageView)
-    }
-
     fun downloadInto(url: String, imageView: ImageView,
-                     listener: RequestListener<String, GlideDrawable>, @DrawableRes placeholderRes: Int = R.drawable.ic_photo_placeholder) {
+                     listener: RequestListener<Drawable>, @DrawableRes placeholderRes: Int = R.drawable.ic_photo_placeholder) {
+        val options = RequestOptions()
+                .placeholder(placeholderRes)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+
         Glide.with(imageView.context)
                 .load(url)
                 .listener(listener)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(placeholderRes)
+                .apply(options)
                 .into(imageView)
     }
 

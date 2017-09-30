@@ -27,8 +27,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideResourceProvider(context: Context): ResourceProvider{
-        return object :ResourceProvider{
+    fun provideResourceProvider(context: Context): ResourceProvider {
+        return object : ResourceProvider {
             override fun getString(id: Int) = context.getString(id)
         }
     }

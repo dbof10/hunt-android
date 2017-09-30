@@ -1,7 +1,6 @@
 package com.ctech.eaty.ui.login.view
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -65,6 +64,8 @@ class LoginActivity : BaseActivity(), Injectable {
                     resources.getDimensionPixelSize(R.dimen.dialog_corners))
         }
         trackingManager.trackScreenView(getScreenName())
+        store.startBinding()
+
     }
 
     private fun setupListener() {
@@ -74,11 +75,6 @@ class LoginActivity : BaseActivity(), Injectable {
         btLoginTwitter.setOnClickListener {
             viewModel.loginWithTwitter()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        store.startBinding()
     }
 
     fun doLogin(view: View) {
@@ -95,7 +91,7 @@ class LoginActivity : BaseActivity(), Injectable {
         container.setPadding(0, 0, 0, 0)
     }
 
-    fun dismiss() {
+    fun dismiss(view: View) {
         isDismissing = true
         finishAfterTransition()
     }
@@ -103,13 +99,12 @@ class LoginActivity : BaseActivity(), Injectable {
     private fun setupViewModel() {
         viewModel.loading().subscribe { renderLoading() }
         viewModel.loadError().subscribe { renderError(it) }
-        viewModel.content().subscribe {
-            trackingManager.trackLoginSuccess()
-        }
+        viewModel.content().subscribe {}
         viewModel.tokenGrant().subscribe {
             progressBar.visibility = View.GONE
             store.dispatch(LoginAction.LOAD_USER())
         }
+        viewModel.configUser().subscribe {}
     }
 
     private fun renderError(throwable: Throwable) {

@@ -40,11 +40,11 @@ class ColorUtils private constructor() {
         fun isDark(bitmap: Bitmap, backupPixelX: Int, backupPixelY: Int): Boolean {
             // first try palette with a small color quant size
             val palette = Palette.from(bitmap).maximumColorCount(3).generate()
-            if (palette.swatches.size > 0) {
-                return isDark(palette) == IS_DARK
+            return if (palette.swatches.size > 0) {
+                isDark(palette) == IS_DARK
             } else {
                 // if palette failed, then check the color of the specified pixel
-                return isDark(bitmap.getPixel(backupPixelX, backupPixelY))
+                isDark(bitmap.getPixel(backupPixelX, backupPixelY))
             }
         }
 

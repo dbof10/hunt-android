@@ -24,6 +24,10 @@ import com.ctech.eaty.util.ViewOffsetHelper;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import io.reactivex.CompletableSource;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+
 public class BottomSheet extends FrameLayout {
 
     // constants

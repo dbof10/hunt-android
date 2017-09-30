@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.SharedElementCallback
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.ctech.eaty.R
@@ -15,6 +16,7 @@ import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.user.action.UserAction
 import com.ctech.eaty.ui.user.state.UserDetailState
+import com.ctech.eaty.ui.user.viewmodel.EditButtonViewModel
 import com.ctech.eaty.ui.user.viewmodel.FollowButtonViewModel
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
 import com.ctech.eaty.util.GlideImageLoader
@@ -98,28 +100,34 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun onStart() {
         super.onStart()
         viewModel.checkRelationship(user.id).subscribe({
-            renderFollowing(it)
+            renderFollowing(it.first)
+            renderEditButton(it.second)
         }, Timber::e, {
             store.dispatch(UserAction.LoadRelationship(user.id))
         })
     }
 
+    private fun renderEditButton(second: EditButtonViewModel) {
+        btEdit.visibility = second.visibility
+    }
+
     private fun setupListener() {
         btFollow.setOnClickListener {
             viewModel.followNavigation(btFollow).subscribe({
-                //  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
-            }, Timber::e, {
-
-            })
+                  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
+            }, Timber::e)
         }
         tvFollowerCount.setOnClickListener {
             with(tvFollowerCount) {
                 (compoundDrawables[1] as AnimatedVectorDrawable).start()
-                viewModel.navigateFollower(user.id)
+                viewModel.navigateFollower()
             }
         }
         tvFollowingCount.setOnClickListener {
-            viewModel.navigateFollowing(user.id)
+            viewModel.navigateFollowing()
+        }
+        btEdit.setOnClickListener {
+            viewModel.navigateEditProfile(user as UserDetail)
         }
     }
 
@@ -180,7 +188,7 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    fun createSharedElementReenterCallback(context: Context): SharedElementCallback {
+    private fun createSharedElementReenterCallback(context: Context): SharedElementCallback {
         val shotTransitionName = context.getString(R.string.transition_user)
         val shotBackgroundTransitionName = context.getString(R.string.transition_user_background)
         return object : SharedElementCallback() {

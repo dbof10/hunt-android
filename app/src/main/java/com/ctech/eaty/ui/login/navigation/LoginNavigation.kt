@@ -7,6 +7,7 @@ import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.login.view.FacebookActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.login.view.TwitterActivity
+import com.ctech.eaty.ui.profile.view.ProfileActivity
 import io.reactivex.Completable
 import javax.inject.Inject
 
@@ -41,4 +42,13 @@ class LoginNavigation @Inject constructor(private val context: LoginActivity) {
             context.startActivityForResult(intent, TWITTER_REQUEST)
         }
     }
+
+    fun toEdit(): Completable {
+        return Completable.fromAction {
+            val intent = ProfileActivity.newIntent(context)
+            context.startActivity(intent)
+            context.finish()
+        }
+    }
+
 }

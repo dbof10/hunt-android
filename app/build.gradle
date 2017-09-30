@@ -117,6 +117,11 @@ dependencies {
     implementation deps.network.retrofitGsonConverter
     implementation deps.gson
     implementation deps.glide.lib
+    implementation (deps.glide.recyclerview) {
+        transitive = false
+    }
+    kapt deps.glide.compiler
+
     implementation deps.jsoup
 
     //Caching

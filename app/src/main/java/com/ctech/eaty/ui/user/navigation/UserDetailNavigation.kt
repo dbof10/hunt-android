@@ -5,10 +5,12 @@ import android.support.v4.content.ContextCompat
 import android.widget.Button
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
+import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.follow.view.FollowActivity
 import com.ctech.eaty.ui.follow.view.Relationship
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.profile.view.ProfileActivity
 import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.util.MorphTransform
 import io.reactivex.Completable
@@ -46,6 +48,13 @@ class UserDetailNavigation @Inject constructor(private val context: UserActivity
     fun toFollowing(id: Int, count: Int): Completable {
         return Completable.fromAction {
             val intent = FollowActivity.newIntent(context, id, count, Relationship.FOLLOWING)
+            context.startActivity(intent)
+        }
+    }
+
+    fun toEdit(user: UserDetail): Completable {
+        return Completable.fromAction {
+            val intent = ProfileActivity.newIntent(context, user)
             context.startActivity(intent)
         }
     }

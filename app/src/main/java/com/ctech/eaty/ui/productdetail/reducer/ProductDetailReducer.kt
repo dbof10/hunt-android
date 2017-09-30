@@ -11,12 +11,10 @@ class ProductDetailReducer : Reducer<ProductDetailState> {
     override fun apply(state: ProductDetailState, result: Result): ProductDetailState {
         when (result) {
             is LoadResult -> {
-                if (result.loading) {
-                    return state.copy(loading = true, error = null)
-                } else if (result.error != null) {
-                    return state.copy(loading = false, error = result.error)
-                } else {
-                    return state.copy(loading = false, error = null,
+                return when {
+                    result.loading -> state.copy(loading = true, error = null)
+                    result.error != null -> state.copy(loading = false, error = result.error)
+                    else -> state.copy(loading = false, error = null,
                             content = result.content)
                 }
             }

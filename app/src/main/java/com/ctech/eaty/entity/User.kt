@@ -39,4 +39,26 @@ open class User(
         dest.writeString(username)
         dest.writeParcelable(imageUrl, 0)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is User) return false
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (headline != other.headline) return false
+        if (username != other.username) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + name.hashCode()
+        result = 31 * result + (headline?.hashCode() ?: 0)
+        result = 31 * result + username.hashCode()
+        return result
+    }
+
+
 }

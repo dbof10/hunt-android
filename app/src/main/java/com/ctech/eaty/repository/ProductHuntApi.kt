@@ -1,9 +1,10 @@
 package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.AccessToken
-import com.ctech.eaty.request.OAuthClientRequest
-import com.ctech.eaty.request.OAuthUserRequest
+import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.request.LoginRequest
+import com.ctech.eaty.request.OAuthClientRequest
+import com.ctech.eaty.request.UpdateUserRequest
 import com.ctech.eaty.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -68,6 +69,9 @@ interface ProductHuntApi {
 
     @GET("/v1/notifications")
     fun getNotifications(): Single<ResponseBody>
+
+    @PUT("/v1/settings")
+    fun updateUser(@Body request: UpdateUserRequest): Observable<UpdateUserResponse>
 
 
 }

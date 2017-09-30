@@ -1,12 +1,14 @@
 package com.ctech.eaty.ui.login.viewmodel
 
 import com.ctech.eaty.entity.UserDetail
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.login.navigation.LoginNavigation
 import com.ctech.eaty.ui.login.state.LoginState
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class LoginViewModel(private val stateDispatcher: Observable<LoginState>, private val navigation: LoginNavigation) {
+class LoginViewModel(private val stateDispatcher: Observable<LoginState>, private val navigation: LoginNavigation,
+                     private val trackManager: FirebaseTrackManager) {
 
 
     fun loading(): Observable<LoginState> {
@@ -23,7 +25,17 @@ class LoginViewModel(private val stateDispatcher: Observable<LoginState>, privat
     fun tokenGrant(): Observable<LoginState> {
         return stateDispatcher
                 .filter {
-                    it.tokenGrant
+                    it.tokenGrant && !it.firstTime
+                }
+    }
+
+    fun configUser(): Completable {
+        return stateDispatcher
+                .filter {
+                    it.firstTime
+                }
+                .flatMapCompletable {
+                    navigation.toEdit()
                 }
     }
 
@@ -37,9 +49,13 @@ class LoginViewModel(private val stateDispatcher: Observable<LoginState>, privat
                 .map {
                     it.content
                 }
+                .doOnNext {
+                    trackManager.trackLoginSuccess()
+                }
                 .flatMapCompletable {
                     navigation.toHome(it)
                 }
+
     }
 
     fun loginWithFacebook() {

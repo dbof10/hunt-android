@@ -7,6 +7,7 @@ import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.util.ResizeImageUrlProvider
+import com.ctech.eaty.util.rx.Functions
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -33,7 +34,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         return stateDispatcher
                 .observeOn(threadScheduler.uiThread())
                 .filter { it.error != null && !it.loading }
-                .map { it.error!! }
+                .map { it.error }
 
     }
 
@@ -67,12 +68,12 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                 .map {
                     val body = ArrayList<ProductBodyItemViewModel>(MAX_BODY_ITEM)
                     body += mapHeader(it)
-                    if (it.comments.size > 5) {
-                        body += it.comments.take(5).map {
+                    body += if (it.comments.size > 5) {
+                        it.comments.take(5).map {
                             CommentItemViewModel(it)
                         }
                     } else {
-                        body += it.comments.map {
+                        it.comments.map {
                             CommentItemViewModel(it)
                         }
                     }
@@ -155,6 +156,6 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun navigateUser(user: User, option: ActivityOptions) {
         navigation.toUser(user, option)
-                .subscribe({}, Timber::e)
+                .subscribe(Functions.EMPTY, Timber::e)
     }
 }

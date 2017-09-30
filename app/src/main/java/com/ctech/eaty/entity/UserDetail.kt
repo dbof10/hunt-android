@@ -9,6 +9,7 @@ class UserDetail(
         name: String,
         headline: String?,
         username: String,
+        val email: String,
         @SerializedName("website_url")
         val webUrl: String?,
         imageUrl: ImageUrl,
@@ -22,7 +23,7 @@ class UserDetail(
         val productCount: Int) : User(id, name, headline, username, imageUrl), Parcelable {
 
     companion object {
-        val GUEST = UserDetail(-1, "", "", "", "",
+        val GUEST = UserDetail(-1, "", "", "", "", "",
                 ImageUrl(), NotificationIndicator(), 0, 0, 0)
         @JvmField
         val CREATOR: Parcelable.Creator<UserDetail> = object : Parcelable.Creator<UserDetail> {
@@ -33,6 +34,7 @@ class UserDetail(
 
     constructor(source: Parcel) : this(
             source.readInt(),
+            source.readString(),
             source.readString(),
             source.readString(),
             source.readString(),
@@ -51,6 +53,7 @@ class UserDetail(
         dest.writeString(name)
         dest.writeString(headline)
         dest.writeString(username)
+        dest.writeString(email)
         dest.writeString(webUrl)
         dest.writeParcelable(imageUrl, 0)
         dest.writeParcelable(notification, 0)
@@ -58,4 +61,6 @@ class UserDetail(
         dest.writeInt(followingCount)
         dest.writeInt(productCount)
     }
+
+
 }

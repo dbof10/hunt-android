@@ -3,6 +3,7 @@ package com.ctech.eaty.ui.user.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.ctech.eaty.ui.user.action.UserAction
 import com.ctech.eaty.ui.user.state.UserDetailState
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.rx.plusAssign
 import com.ctech.eaty.util.setPaddingTop
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.SlideInItemAnimator
@@ -116,6 +118,7 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
+        Log.e("ABCD", "start")
 
         store.dispatch(UserAction.Load(userId))
         store.dispatch(UserAction.LoadProduct(userId))
@@ -142,9 +145,12 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.loadingProduct().subscribe { renderLoading() })
-        disposeOnStop(viewModel.loadProductError().subscribe { renderLoadError(it) })
-        disposeOnStop(viewModel.body().subscribe { renderContent(it) })
+        disposables += viewModel.loadingProduct().subscribe { renderLoading() }
+        disposables += viewModel.loadProductError().subscribe { renderLoadError(it) }
+        disposables += viewModel.body().subscribe { renderContent(it) }
+        disposables += viewModel.empty().subscribe {
+            renderContent(emptyList())
+        }
     }
 
     private fun setupRecyclerView() {

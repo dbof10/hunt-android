@@ -8,6 +8,7 @@
     android:paddingEnd="@dimen/content_padding_horizontal"
     android:paddingStart="@dimen/content_padding_horizontal"
     android:paddingTop="@dimen/content_padding_vertical"
+    android:background="@android:color/white"
     tools:background="@color/colorPrimaryHighlight">
 
 

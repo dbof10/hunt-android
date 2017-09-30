@@ -13,7 +13,7 @@ class NotificationViewModel(private val stateDispatcher: Observable<Notification
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null && !it.loading }
-                .map { it.loadError!! }
+                .map { it.loadError }
     }
 
     fun empty(): Observable<NotificationState> {

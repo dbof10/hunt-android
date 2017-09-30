@@ -11,6 +11,7 @@
     <string name="radio">Radio</string>
     <string name="live_event">LIVE Event</string>
     <string name="notification">Notification</string>
+    <string name="edit_profile">Edit profile</string>
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>
@@ -58,6 +59,9 @@
     <!--Empty -->
     <string name="empty_notification">You don\'t have any notification. ✌️</string>
     <string name="app_slogon">Best things every day</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_headline">Headline</string>
 
 
 </resources>

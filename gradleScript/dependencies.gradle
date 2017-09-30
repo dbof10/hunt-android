@@ -48,24 +48,25 @@ def test = [
 ]
 
 def exo = [
-        core           : 'com.google.android.exoplayer:exoplayer-core:r2.4.3',
-        ui             : 'com.google.android.exoplayer:exoplayer-ui:r2.4.3',
-        dash           : 'com.google.android.exoplayer:exoplayer-dash:r2.4.3',
-        hls            : 'com.google.android.exoplayer:exoplayer-hls:r2.4.3',
-        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.3'
+        core           : 'com.google.android.exoplayer:exoplayer-core:r2.5.3',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:r2.5.3',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:r2.5.3',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:r2.5.3',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.5.3'
 ]
 
 def network = [
-        retrofit             : 'com.squareup.retrofit2:retrofit:2.2.0',
-        retrofitRxAdapter    : 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
-        retrofitGsonConverter: 'com.squareup.retrofit2:converter-gson:2.2.0',
-        okhttp               : 'com.squareup.okhttp3:okhttp:3.8.1',
-        okhttpLog            : 'com.squareup.okhttp3:logging-interceptor:3.8.1',
+        retrofit             : 'com.squareup.retrofit2:retrofit:2.3.0',
+        retrofitRxAdapter    : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
+        retrofitGsonConverter: 'com.squareup.retrofit2:converter-gson:2.3.0',
+        okhttp               : 'com.squareup.okhttp3:okhttp:3.9.0',
+        okhttpLog            : 'com.squareup.okhttp3:logging-interceptor:3.9.0',
 ]
 
 def glide = [
-        lib     : 'com.github.bumptech.glide:glide:3.8.0',
-        compiler: 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+        lib     : 'com.github.bumptech.glide:glide:4.1.1',
+        compiler: 'com.github.bumptech.glide:compiler:4.1.1',
+        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.1.1'
 ]
 
 def store = [
@@ -84,12 +85,12 @@ def firebase = [
 ]
 
 def leakcanary = [
-        op  : 'com.squareup.leakcanary:leakcanary-android:1.5.1',
-        noop: 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+        op  : 'com.squareup.leakcanary:leakcanary-android:1.5.4',
+        noop: 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 ]
 
 def ui = [
-        lottie      : 'com.airbnb.android:lottie:2.1.0',
+        lottie      : 'com.airbnb.android:lottie:2.2.5',
         inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0',
         gradient    : 'com.dynamitechetan.flowinggradient:flowinggradient:1.1'
 ]

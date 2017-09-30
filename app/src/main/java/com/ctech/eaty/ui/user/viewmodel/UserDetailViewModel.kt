@@ -9,6 +9,7 @@ import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.user.navigation.UserDetailNavigation
 import com.ctech.eaty.ui.user.state.UserDetailState
 import com.ctech.eaty.util.ResourceProvider
+import com.ctech.eaty.util.rx.Functions
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -20,18 +21,6 @@ class UserDetailViewModel(private val stateDispatcher: BehaviorSubject<UserDetai
                           private val navigation: UserDetailNavigation,
                           private val threadScheduler: ThreadScheduler,
                           private val resourceProvider: ResourceProvider) {
-
-
-    fun loadingUser(): Observable<UserDetailState> = stateDispatcher
-            .filter { it.loading && it.user == UserDetail.GUEST }
-
-
-    fun loadUserError(): Observable<Throwable> = stateDispatcher
-            .filter { it.loadError != null }
-            .map {
-                it.loadError!!
-            }
-
 
     private fun content(): Observable<UserDetail> = stateDispatcher
             .filter {
@@ -75,6 +64,17 @@ class UserDetailViewModel(private val stateDispatcher: BehaviorSubject<UserDetai
             .observeOn(threadScheduler.uiThread())
 
 
+    fun empty(): Observable<List<ProductItemViewModel>> = stateDispatcher
+            .filter {
+                !it.loadingProduct
+                        && it.loadProductError == null
+                        && it.products.isEmpty()
+            }
+            .map {
+                it.products.map { ProductItemViewModel(it) }
+            }
+            .observeOn(threadScheduler.uiThread())
+
     fun body(): Observable<List<ProductItemViewModel>> = stateDispatcher
             .filter {
                 !it.loadingProduct
@@ -107,7 +107,7 @@ class UserDetailViewModel(private val stateDispatcher: BehaviorSubject<UserDetai
                 it.following != null
             }
             .map {
-                it.following!!
+                it.following
             }
             .map {
                 val stringId = if (it) R.string.unfollow else R.string.follow
@@ -116,16 +116,25 @@ class UserDetailViewModel(private val stateDispatcher: BehaviorSubject<UserDetai
             .observeOn(threadScheduler.uiThread())
 
 
-    fun checkRelationship(userId: Int): Maybe<FollowButtonViewModel> {
+    fun checkRelationship(userId: Int): Maybe<Pair<FollowButtonViewModel, EditButtonViewModel>> {
         return Maybe.create { emitter ->
             userRepository.getUser()
                     .subscribe({
-                        if (it == UserDetail.GUEST) {
-                            emitter.onSuccess(FollowButtonViewModel(View.VISIBLE, false, resourceProvider.getString(R.string.follow)))
-                        } else if (it.id == userId) {
-                            emitter.onSuccess(FollowButtonViewModel(View.INVISIBLE))
-                        } else {
-                            emitter.onComplete()
+                        when {
+                            it == UserDetail.GUEST -> {
+                                emitter.onSuccess(
+                                        Pair(FollowButtonViewModel(View.VISIBLE,
+                                                false,
+                                                resourceProvider.getString(R.string.follow)
+                                        ), EditButtonViewModel(View.GONE)))
+                            }
+                            it.id == userId -> {
+                                emitter.onSuccess(
+                                        Pair(FollowButtonViewModel(View.GONE),
+                                                EditButtonViewModel(View.VISIBLE)
+                                        ))
+                            }
+                            else -> emitter.onComplete()
                         }
                     }, Timber::e)
         }
@@ -149,25 +158,30 @@ class UserDetailViewModel(private val stateDispatcher: BehaviorSubject<UserDetai
 
     fun navigateProduct(id: Int) {
         navigation.toProduct(id)
-                .subscribe({}, Timber::e)
+                .subscribe(Functions.EMPTY, Timber::e)
     }
 
-    fun navigateFollower(userId: Int) {
+    fun navigateFollower() {
         val user = stateDispatcher.value.user
         user?.run {
-            navigation.toFollowers(userId, followerCount)
-                    .subscribe({}, Timber::e)
+            navigation.toFollowers(id, followerCount)
+                    .subscribe(Functions.EMPTY, Timber::e)
         }
 
     }
 
-    fun navigateFollowing(userId: Int) {
+    fun navigateFollowing() {
         val user = stateDispatcher.value.user
         user?.run {
-            navigation.toFollowing(userId, followingCount)
-                    .subscribe({}, Timber::e)
+            navigation.toFollowing(id, followingCount)
+                    .subscribe(Functions.EMPTY, Timber::e)
         }
 
+    }
+
+    fun navigateEditProfile(user: UserDetail) {
+        navigation.toEdit(user)
+                .subscribe(Functions.EMPTY, Timber::e)
     }
 
 }

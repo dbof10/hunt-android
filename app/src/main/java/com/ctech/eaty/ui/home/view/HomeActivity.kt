@@ -107,7 +107,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     }
 
-
     private fun setupToolbar() {
         toolbar.setNavigationOnClickListener {
             drawer.openDrawer(START)

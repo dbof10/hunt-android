@@ -15,7 +15,7 @@ class LoginReducer : Reducer<LoginState> {
                     result.loading -> state.copy(loading = true, loadError = null)
                     result.error != null -> state.copy(loading = false, loadError = result.error)
                     else -> state.copy(loading = false, loadError = null,
-                            tokenGrant = true)
+                            tokenGrant = true, firstTime = result.firstTime)
                 }
             }
             is LoadUserResult -> {

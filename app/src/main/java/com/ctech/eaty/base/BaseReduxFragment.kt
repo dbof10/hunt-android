@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable
 abstract class BaseReduxFragment<State> : Fragment() {
 
     private lateinit var lifecycleDelegate: LifeCycleDelegate<State>
-    private val disposables = CompositeDisposable()
+    protected val disposables = CompositeDisposable()
 
 
     protected abstract fun store(): Store<State>

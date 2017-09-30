@@ -29,6 +29,9 @@ import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.profile.di.ProfileFragmentBuilderModule
+import com.ctech.eaty.ui.profile.di.ProfileModule
+import com.ctech.eaty.ui.profile.view.ProfileActivity
 import com.ctech.eaty.ui.radio.di.RadioFragmentBuilderModule
 import com.ctech.eaty.ui.radio.di.RadioModule
 import com.ctech.eaty.ui.radio.view.RadioActivity
@@ -115,4 +118,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(NotificationModule::class, NotificationFragmentBuilderModule::class))
     abstract fun contributeNotificationActivity(): NotificationActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(ProfileModule::class, ProfileFragmentBuilderModule::class))
+    abstract fun contributeProfileActivity(): ProfileActivity
+
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common -->
-    <color name="colorPrimary">#00AA8D</color>
-    <color name="colorPrimaryDark">#008975</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#03A9F4</color>
     <color name="windowBackground">#eaeaea</color>
     <color name="colorPrimaryHighlight">#2800aa8d</color>
 
@@ -20,8 +20,8 @@
     <color name="text_primary_light">@color/white_100</color>
     <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
 
-    <color name="hunt">#fff06292</color>
-    <color name="hunt_link_highlight">#b3f06292</color>
+    <color name="hunt">#ff2196F3</color>
+    <color name="hunt_link_highlight">#b31976D2</color>
     <color name="hunt_super_dark">#ff33292d</color>
 
 

@@ -71,6 +71,19 @@
                 android:textAppearance="@style/TextAppearance.DarkButton"
                 android:theme="@style/LightRippleOverlay" />
 
+            <Button
+                android:id="@+id/btEdit"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/space_medium"
+                android:drawableStart="@drawable/ic_person_profile"
+                android:text="@string/edit_profile"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:textAppearance="@style/TextAppearance.DarkButton"
+                android:theme="@style/LightRippleOverlay" />
+
             <ProgressBar
                 android:id="@+id/pbFollowing"
                 style="@style/Widget.AppCompat.ProgressBar"

@@ -19,7 +19,7 @@ class CollectionDetailViewModel(private val stateDispatcher: Observable<Collecti
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
                 .filter { it.loadError != null }
-                .map { it.loadError!! }
+                .map { it.loadError }
     }
 
 

@@ -4,6 +4,7 @@ import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.request.LoginRequest
+import com.ctech.eaty.request.UpdateUserRequest
 import com.ctech.eaty.response.LoginResponse
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.response.UserResponse
@@ -11,6 +12,7 @@ import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
+import io.reactivex.Single
 
 class UserRepository(private val apiClient: ProductHuntApi,
                      private val userStore: Store<UserResponse, BarCode>,
@@ -23,6 +25,12 @@ class UserRepository(private val apiClient: ProductHuntApi,
 
     fun getMe(): Observable<UserDetail> = apiClient.getMe().map {
         it.user
+    }
+
+    fun updateUser(email: String, userName: String, headline: String): Observable<UserDetail> {
+        return apiClient
+                .updateUser(UpdateUserRequest(UpdateUserRequest.User(email, userName, headline)))
+                .map { it.user }
     }
 
     fun getUser(): Observable<UserDetail> = Observable.just(appSettings.getUser())

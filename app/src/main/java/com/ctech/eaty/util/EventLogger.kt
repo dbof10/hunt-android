@@ -25,16 +25,16 @@ import java.text.NumberFormat
 import java.util.*
 
 
-class EventLogger(private val trackSelector: MappingTrackSelector) : ExoPlayer.EventListener,
+class EventLogger(private val trackSelector: MappingTrackSelector) : Player.EventListener,
         AudioRendererEventListener, VideoRendererEventListener, AdaptiveMediaSourceEventListener,
         ExtractorMediaSource.EventListener, DefaultDrmSessionManager.EventListener,
         MetadataRenderer.Output {
+
     private val TAG = "EventLogger"
     private val MAX_TIMELINE_ITEM_LINES = 3
 
     companion object {
         val TIME_FORMAT = NumberFormat.getInstance(Locale.US)
-
     }
 
     private var window: Timeline.Window = Timeline.Window()
@@ -49,6 +49,10 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : ExoPlayer.E
 
 
     // ExoPlayer.EventListener
+
+    override fun onRepeatModeChanged(repeatMode: Int) {
+        Log.d(TAG, "repeating [$repeatMode]")
+    }
 
     override fun onLoadingChanged(isLoading: Boolean) {
         Log.d(TAG, "loading [$isLoading]")
