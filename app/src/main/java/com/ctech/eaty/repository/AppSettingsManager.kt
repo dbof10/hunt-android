@@ -9,6 +9,7 @@ class AppSettingsManager(private val sharedPreferences: SharedPreferences, priva
     private val CLIENT_ACCESS_TOKEN_KEY = "clientAccessToken"
     private val USER_ACCESS_TOKEN_KEY = "userAccessToken"
     private val USER_KEY = "user"
+    private val KEY_BOARDING = "onboarding"
 
     fun setClientToken(token: String) {
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_KEY, token).apply()
@@ -41,4 +42,12 @@ class AppSettingsManager(private val sharedPreferences: SharedPreferences, priva
         }
         return gson.fromJson(persistedUser, UserDetail::class.java)
     }
+
+    fun setDidSeeOnboarding() {
+        sharedPreferences.edit().putBoolean(KEY_BOARDING, true).apply()
+    }
+
+    fun didSeeOnboarding() = sharedPreferences.getBoolean(KEY_BOARDING, false)
+
+
 }

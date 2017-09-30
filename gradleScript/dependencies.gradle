@@ -64,8 +64,8 @@ def network = [
 ]
 
 def glide = [
-        lib     : 'com.github.bumptech.glide:glide:4.1.1',
-        compiler: 'com.github.bumptech.glide:compiler:4.1.1',
+        lib         : 'com.github.bumptech.glide:glide:4.1.1',
+        compiler    : 'com.github.bumptech.glide:compiler:4.1.1',
         recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.1.1'
 ]
 
@@ -92,7 +92,8 @@ def leakcanary = [
 def ui = [
         lottie      : 'com.airbnb.android:lottie:2.2.5',
         inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0',
-        gradient    : 'com.dynamitechetan.flowinggradient:flowinggradient:1.1'
+        gradient    : 'com.dynamitechetan.flowinggradient:flowinggradient:1.1',
+        appintro    : 'com.github.apl-devs:appintro:v4.2.2'
 ]
 
 def react = [

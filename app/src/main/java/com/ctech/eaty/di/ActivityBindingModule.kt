@@ -26,6 +26,7 @@ import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.noti.di.NotificationFragmentBuilderModule
 import com.ctech.eaty.ui.noti.di.NotificationModule
 import com.ctech.eaty.ui.noti.view.NotificationActivity
+import com.ctech.eaty.ui.onboarding.view.OnboardingActivity
 import com.ctech.eaty.ui.productdetail.di.ProductDetailFragmentBuilderModule
 import com.ctech.eaty.ui.productdetail.di.ProductDetailModule
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -38,6 +39,7 @@ import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.search.di.SearchFragmentBuilderModule
 import com.ctech.eaty.ui.search.di.SearchModule
 import com.ctech.eaty.ui.search.view.SearchActivity
+import com.ctech.eaty.ui.splash.view.SplashActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
@@ -122,5 +124,13 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(ProfileModule::class, ProfileFragmentBuilderModule::class))
     abstract fun contributeProfileActivity(): ProfileActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector()
+    abstract fun contributeSplashActivity(): SplashActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector()
+    abstract fun contributeOnboardingActivity(): OnboardingActivity
 
 }

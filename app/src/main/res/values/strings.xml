@@ -64,4 +64,13 @@
     <string name="hint_headline">Headline</string>
 
 
+    <!-- Onboarding -->
+    <string name="onboarding_first_scene">Daily hunt is the place to discover your next favorite thing</string>
+    <string name="onboarding_second_scene">Discover and share new things posted and liked by the community every day</string>
+    <string name="onboarding_third_scene">Discuss directly with makers and other friendly folks</string>
+    <string name="onboarding_first_scene_title">Discovery</string>
+    <string name="onboarding_second_scene_title">Share</string>
+    <string name="onboarding_third_scene_title">Community</string>
+
+
 </resources>

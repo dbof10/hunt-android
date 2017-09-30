@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.SharedElementCallback
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.ctech.eaty.R
@@ -114,7 +113,8 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
     private fun setupListener() {
         btFollow.setOnClickListener {
             viewModel.followNavigation(btFollow).subscribe({
-                  store.dispatch(UserAction.FollowUserAction(user.id, !btFollow.isActivated))
+                btFollow.isActivated = !btFollow.isActivated
+                store.dispatch(UserAction.FollowUserAction(user.id, btFollow.isActivated))
             }, Timber::e)
         }
         tvFollowerCount.setOnClickListener {

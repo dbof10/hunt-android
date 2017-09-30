@@ -3,7 +3,6 @@ package com.ctech.eaty.ui.user.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -118,8 +117,6 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
     override fun onStart() {
         super.onStart()
-        Log.e("ABCD", "start")
-
         store.dispatch(UserAction.Load(userId))
         store.dispatch(UserAction.LoadProduct(userId))
     }
