@@ -4,13 +4,14 @@ package com.ctech.eaty.util.rx
 import com.ctech.eaty.error.NoConnectionException
 import com.ctech.eaty.util.NetworkManager
 import io.reactivex.Observable
-import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
+import io.reactivex.Single
+import io.reactivex.SingleTransformer
 
 
-class NetworkCheckTransformer(private val networkManager: NetworkManager) : ObservableTransformer<Any, Any> {
+class NetworkObservableTransformer<Upstream>(private val networkManager: NetworkManager) : ObservableTransformer<Upstream, Upstream> {
 
-    override fun apply(upstream: Observable<Any>): ObservableSource<Any> {
+    override fun apply(upstream: Observable<Upstream>): Observable<Upstream> {
         if (networkManager.isConnected()) {
             return upstream
         }
@@ -18,3 +19,15 @@ class NetworkCheckTransformer(private val networkManager: NetworkManager) : Obse
     }
 
 }
+
+class NetworkSingleTransformer<Upstream>(private val networkManager: NetworkManager) : SingleTransformer<Upstream, Upstream> {
+
+    override fun apply(upstream: Single<Upstream>): Single<Upstream> {
+        if (networkManager.isConnected()) {
+            return upstream
+        }
+        return Single.error(NoConnectionException())
+    }
+
+}
+

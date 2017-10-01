@@ -5,8 +5,9 @@ import android.os.Looper
 import com.ctech.eaty.entity.HomeEntity
 import com.ctech.eaty.entity.ImageUrl
 import com.ctech.eaty.entity.Product
+import com.ctech.eaty.error.RecordNotFoundException
 import com.ctech.eaty.response.ProductResponse
-import com.ctech.eaty.util.rx.ThreadScheduler
+import com.nytimes.android.external.store3.base.Parser
 import com.nytimes.android.external.store3.base.Persister
 import com.nytimes.android.external.store3.base.RecordProvider
 import com.nytimes.android.external.store3.base.RecordState
@@ -23,16 +24,16 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
         val queryResult = realm.where(HomeEntity::class.java)
                 .findAll()
 
-        if (queryResult.isEmpty()) {
-            return RecordState.STALE
+        return if (queryResult.isEmpty()) {
+            RecordState.MISSING
         } else {
-            return RecordState.FRESH
+            RecordState.FRESH
         }
     }
 
     override fun write(key: BarCode, raw: ProductResponse): Single<Boolean> {
 
-        val single = Single.create<Boolean> { emitter ->
+        return Single.create { emitter ->
             Handler(Looper.getMainLooper()).post {
                 realm.executeTransaction {
                     val reamList = RealmList<Product>()
@@ -44,32 +45,48 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
             }
 
         }
-        return single
 
     }
 
     override fun read(key: BarCode): Maybe<ProductResponse> {
-        val maybe = Maybe.create<ProductResponse> { emitter ->
+        return Maybe.create { emitter ->
 
-            val queryResult = realm.where(HomeEntity::class.java)
-                    .equalTo("key", key.key)
-                    .findAll()
+            Handler(Looper.getMainLooper()).post {
 
-            if (queryResult.isEmpty()) {
-                emitter.onComplete()
-            } else {
-                val detachedRealm = queryResult.first().value.map {
-                    Product(it.id, it.name + "", it.tagline + "", it.commentsCount,
-                            it.votesCount,
-                            it.discussionUrl,
-                            it.redirectUrl,
-                            ImageUrl(it.imageUrl.px48 + "", it.imageUrl.px64 + "", it.imageUrl.px300 + "", it.imageUrl.px850 + ""),
-                            it.thumbnail)
+                val queryResult = realm.where(HomeEntity::class.java)
+                        .equalTo("key", key.key)
+                        .findAll()
+
+                if (queryResult.isEmpty()) {
+                    emitter.onError(RecordNotFoundException("Record for $key not found"))
+                } else {
+                    emitter.onSuccess(ProductResponse(queryResult.first().value))
                 }
-                emitter.onSuccess(ProductResponse(detachedRealm))
             }
         }
-        return maybe
+    }
+
+    companion object {
+        fun createParser(): HomeParser {
+            return HomeParser()
+        }
+    }
+
+    class HomeParser : Parser<ProductResponse, ProductResponse> {
+        override fun apply(raw: ProductResponse): ProductResponse {
+            val parsed = raw.products.map {
+                Product(it.id, it.name + "", it.tagline + "", it.commentsCount,
+                        it.votesCount,
+                        it.discussionUrl,
+                        it.redirectUrl,
+                        ImageUrl(it.imageUrl.px48 + "",
+                                it.imageUrl.px64 + "",
+                                it.imageUrl.px300 + "",
+                                it.imageUrl.px850 + ""),
+                        it.thumbnail)
+            }
+            return ProductResponse(parsed)
+        }
 
     }
 

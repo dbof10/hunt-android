@@ -10,7 +10,7 @@ interface NetworkManager {
     class IMPL(private val context: Context) : NetworkManager {
         override fun isConnected(): Boolean {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            return connectivityManager.activeNetworkInfo.isConnected
+            return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
 
     }

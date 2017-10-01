@@ -13,9 +13,9 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class LoadEpic(val productRepository: ProductRepository,
-               val barCodeGenerator: BarCodeGenerator,
-               val threadScheduler: ThreadScheduler) : Epic<HomeState> {
+class LoadEpic(private val productRepository: ProductRepository,
+               private val barCodeGenerator: BarCodeGenerator,
+               private val threadScheduler: ThreadScheduler) : Epic<HomeState> {
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<HomeState>): Observable<LoadResult> {
         return action.filter {
             it == HomeAction.LOAD

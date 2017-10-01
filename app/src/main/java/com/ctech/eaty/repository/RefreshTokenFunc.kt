@@ -14,9 +14,9 @@ class RefreshTokenFunc(private val apiClient: ProductHuntApi, private val appSet
 
     override fun apply(observable: Observable<out Throwable>): ObservableSource<AccessToken> {
         return observable
-                .flatMap { throwable ->
-                    if (throwable is HttpException) {
-                        if (throwable.response().code() == 401) {
+                .flatMap {
+                    if (it is HttpException) {
+                        if (it.response().code() == 401) {
                             return@flatMap apiClient.getAccessToken(OAuthClientRequest.instance)
                                     .doOnNext { accessToken ->
                                         appSettingsManager.resetUserToken()
@@ -27,7 +27,7 @@ class RefreshTokenFunc(private val apiClient: ProductHuntApi, private val appSet
                         }
                     }
 
-                    return@flatMap Observable.error<AccessToken>(throwable)
+                    return@flatMap Observable.error<AccessToken>(it)
                 }
     }
 

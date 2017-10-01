@@ -8,6 +8,13 @@ import android.util.TypedValue;
 import android.widget.TextView;
 
 import com.ctech.eaty.R;
+import com.ctech.eaty.entity.Product;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 
 public class BaselineGridTextView extends TextView {
 
@@ -47,6 +54,14 @@ public class BaselineGridTextView extends TextView {
         FOUR_DIP = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
         computeLineHeight();
+
+        Observable.just(1)
+                .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends Integer>>() {
+                    @Override
+                    public ObservableSource<? extends Integer> apply(Throwable throwable) throws Exception {
+                        return null;
+                    }
+                });
     }
 
     public float getLineHeightMultiplierHint() {
@@ -101,7 +116,7 @@ public class BaselineGridTextView extends TextView {
     }
 
     /**
-     * Ensures line height is a multiple of 4dp.
+     Ensures line height is a multiple of 4dp.
      */
     private void computeLineHeight() {
         final Paint.FontMetrics fm = getPaint().getFontMetrics();
@@ -116,7 +131,7 @@ public class BaselineGridTextView extends TextView {
     }
 
     /**
-     * Ensure that the first line of text sits on the 4dp grid.
+     Ensure that the first line of text sits on the 4dp grid.
      */
     private int ensureBaselineOnGrid() {
         float baseline = getBaseline();
@@ -128,7 +143,7 @@ public class BaselineGridTextView extends TextView {
     }
 
     /**
-     * Ensure that height is a multiple of 4dp.
+     Ensure that height is a multiple of 4dp.
      */
     private int ensureHeightGridAligned(int height) {
         float gridOverhang = height % FOUR_DIP;
@@ -139,8 +154,8 @@ public class BaselineGridTextView extends TextView {
     }
 
     /**
-     * When measured with an exact height, text can be vertically clipped mid-line. Prevent
-     * this by setting the {@code maxLines} property based on the available space.
+     When measured with an exact height, text can be vertically clipped mid-line. Prevent
+     this by setting the {@code maxLines} property based on the available space.
      */
     private void checkMaxLines(int height, int heightMode) {
         if (!maxLinesByHeight || heightMode != MeasureSpec.EXACTLY) {

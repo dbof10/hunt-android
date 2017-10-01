@@ -10,7 +10,8 @@ import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.search.action.SearchBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
-import com.ctech.eaty.util.rx.ThreadScheduler
+import com.ctech.eaty.util.NetworkManager
+import com.ctech.eaty.util.rx.NetworkSingleTransformer
 import com.google.gson.Gson
 import com.nytimes.android.external.fs3.SourcePersisterFactory
 import com.nytimes.android.external.store3.base.Persister
@@ -45,11 +46,17 @@ class StoreModule {
     }
 
     @Provides
-    fun providePersistedHomeStore(apiClient: ProductHuntApi, persister: Persister<ProductResponse, BarCode>)
+    fun providePersistedHomeStore(apiClient: ProductHuntApi,
+                                  persister: Persister<ProductResponse, BarCode>,
+                                  networkManager: NetworkManager)
             : Store<ProductResponse, BarCode> {
+
         return StoreBuilder.parsedWithKey<BarCode, ProductResponse, ProductResponse>()
-                .fetcher { barcode -> apiClient.getPosts(barcode.key) }
+                .fetcher {
+                    apiClient.getPosts(it.key).compose(NetworkSingleTransformer(networkManager))
+                }
                 .persister(persister)
+                .parser(HomePersister.createParser())
                 .networkBeforeStale()
                 .open()
     }

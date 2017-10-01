@@ -9,6 +9,7 @@ import com.ctech.eaty.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
+import okio.BufferedSource
 import retrofit2.http.*
 
 
