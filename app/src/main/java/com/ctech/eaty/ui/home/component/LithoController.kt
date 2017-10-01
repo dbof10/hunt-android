@@ -20,8 +20,9 @@ import javax.inject.Inject
 
 
 @ActivityScope
-class LithoController @Inject constructor(private val context: ComponentContext, private val viewModel: HomeViewModel
-                                          , private val store: Store<HomeState>) {
+class LithoController @Inject constructor(private val context: ComponentContext,
+                                          private val viewModel: HomeViewModel,
+                                          private val store: Store<HomeState>) {
 
     private lateinit var lithoView: LithoView
     private var items: List<HomeItemViewModel> = emptyList()
@@ -66,7 +67,8 @@ class LithoController @Inject constructor(private val context: ComponentContext,
                                 .arg1(item)
                                 .key(item.id.toString())
                                 .build()
-                ).isSticky(true)
+                )
+                        .isSticky(true)
                         .build()
             }
             else -> renderInfoBuilder.build()

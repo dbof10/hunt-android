@@ -1,8 +1,6 @@
 package com.ctech.eaty.ui.home.component
 
 import android.support.v4.content.ContextCompat
-import android.util.TypedValue
-import android.view.View
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -12,7 +10,10 @@ import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
-import com.facebook.litho.annotations.*
+import com.facebook.litho.annotations.LayoutSpec
+import com.facebook.litho.annotations.OnCreateLayout
+import com.facebook.litho.annotations.OnEvent
+import com.facebook.litho.annotations.Prop
 import com.facebook.litho.fresco.FrescoImage
 import com.facebook.litho.widget.Text
 import com.facebook.litho.widget.VerticalGravity
@@ -31,9 +32,6 @@ class BodyComponentSpec {
             val controller = Fresco.newDraweeControllerBuilder()
                     .setUri(viewModel.imageUrl)
                     .build()
-            val outValue = TypedValue()
-            c.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
-
             return Column.create(c)
                     .child(
                             FrescoImage

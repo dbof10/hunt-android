@@ -66,10 +66,12 @@ class ProductDetailNavigation @Inject constructor(private val context: ProductDe
         }
     }
 
-    fun toGallery(media: ArrayList<Media>): Completable{
+    fun toGallery(media: ArrayList<Media>): Completable {
         return Completable.fromAction {
-            val intent = GalleryActivity.newIntent(context, media)
-            context.startActivity(intent)
+            if (media.isNotEmpty()) {
+                val intent = GalleryActivity.newIntent(context, media)
+                context.startActivity(intent)
+            }
         }
     }
 

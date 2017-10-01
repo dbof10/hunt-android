@@ -1,7 +1,6 @@
 package com.ctech.eaty.ui.home.component
 
 import android.content.Intent
-import android.util.Log
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
@@ -44,6 +43,7 @@ class FooterActionComponentSpec {
                     .flex(1F)
                     .alignItems(YogaAlign.CENTER)
                     .justifyContent(YogaJustify.CENTER)
+                    .backgroundRes(R.drawable.item_selectable_background)
                     .clickHandler(FooterActionComponent.onClick(c))
                     .build()
 
@@ -76,8 +76,10 @@ class FooterActionComponentSpec {
                     shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.shareUrl)
                     c.startActivity(Intent.createChooser(shareIntent, "Share link using"))
                 }
+
             }
         }
-
     }
+
+
 }
