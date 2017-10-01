@@ -10,6 +10,7 @@ data class ProductItemViewModel(private val product: Product) : HomeItemViewMode
     val imageUrl: String get() = product.imageUrl.px300
     val votesCount: String get() = product.votesCount.toString()
     val commentsCount: String get() = product.commentsCount.toString()
-    val shareUrl: String get() = product.redirectUrl
+    val discussUrl: String get() = product.discussionUrl
+    val redirectUrl: String get() = product.redirectUrl
     val thumbnailUrl: String get() = product.thumbnail.imageUrl
 }

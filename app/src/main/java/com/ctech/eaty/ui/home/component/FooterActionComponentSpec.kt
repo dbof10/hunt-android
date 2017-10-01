@@ -73,7 +73,7 @@ class FooterActionComponentSpec {
                 R.drawable.ic_share -> {
                     val shareIntent = Intent(Intent.ACTION_SEND)
                     shareIntent.type = "text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.shareUrl)
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)
                     c.startActivity(Intent.createChooser(shareIntent, "Share link using"))
                 }
 
