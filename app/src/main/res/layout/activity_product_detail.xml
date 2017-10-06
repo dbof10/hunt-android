@@ -62,4 +62,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+    <com.ctech.eaty.widget.FABToggle
+        android:id="@+id/fab"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:elevation="@dimen/z_fab_over_touchable_app_bar"
+        android:layout_marginEnd="@dimen/content_padding_horizontal"
+        android:scaleX="0"
+        android:scaleY="0"
+        android:background="@drawable/fab_like"
+        android:layout_gravity="end"
+        android:stateListAnimator="@animator/raise"
+        android:src="@drawable/asl_fab_heart" />
+
 </com.ctech.eaty.widget.ElasticDragDismissFrameLayout>

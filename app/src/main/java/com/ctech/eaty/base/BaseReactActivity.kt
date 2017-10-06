@@ -10,7 +10,7 @@ import com.facebook.react.modules.core.PermissionListener
 
 abstract class BaseReactActivity : BaseActivity(), ReactNativeHost, DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 
-    private val delegate by lazy {
+    protected val delegate by lazy {
         ReactActivityDelegate(this, getMainComponentName())
     }
 
@@ -20,11 +20,6 @@ abstract class BaseReactActivity : BaseActivity(), ReactNativeHost, DefaultHardw
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         delegate.onCreate(savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        delegate.onStart()
     }
 
     override fun onPause() {

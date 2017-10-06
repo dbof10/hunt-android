@@ -121,4 +121,8 @@ class LithoController @Inject constructor(private val context: ComponentContext,
         this.items = items
     }
 
+    fun resetRefreshState() {
+        loadMoreCallback.resetState()
+    }
+
 }

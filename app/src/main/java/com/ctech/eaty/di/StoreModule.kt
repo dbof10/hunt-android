@@ -12,6 +12,7 @@ import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.NetworkManager
 import com.ctech.eaty.util.rx.NetworkSingleTransformer
+import com.ctech.eaty.util.rx.ThreadScheduler
 import com.google.gson.Gson
 import com.nytimes.android.external.fs3.SourcePersisterFactory
 import com.nytimes.android.external.store3.base.Persister
@@ -36,8 +37,8 @@ class StoreModule {
     private val SEARCH_LIMIT = 10
 
     @Provides
-    fun providerRealmPersister(realm: Realm): Persister<ProductResponse, BarCode> {
-        return HomePersister(realm)
+    fun providerRealmPersister(): Persister<ProductResponse, BarCode> {
+        return HomePersister()
     }
 
     @Provides

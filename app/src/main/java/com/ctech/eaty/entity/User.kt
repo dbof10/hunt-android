@@ -5,18 +5,19 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 open class User(
-        val id: Int,
-        val name: String,
-        val headline: String?,
-        val username: String,
+        var id: Int = -1,
+        var name: String = "",
+        var headline: String? = "",
+        var username: String = "",
         @SerializedName("image_url")
-        val imageUrl: ImageUrl) : Parcelable {
+        var imageUrl: ImageUrl = ImageUrl()) : Parcelable {
 
 
     companion object {
-        val ANONYMOUS = User(-1, "", "", "", ImageUrl())
+        val ANONYMOUS = User()
 
-        @JvmField val CREATOR: Parcelable.Creator<User> = object : Parcelable.Creator<User> {
+        @JvmField
+        val CREATOR: Parcelable.Creator<User> = object : Parcelable.Creator<User> {
             override fun createFromParcel(source: Parcel): User = User(source)
             override fun newArray(size: Int): Array<User?> = arrayOfNulls(size)
         }

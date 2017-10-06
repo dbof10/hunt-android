@@ -17,4 +17,5 @@ open class Product(var id: Int = -1, var name: String = "", var tagline: String 
                    var redirectUrl: String = "",
                    @SerializedName("screenshot_url")
                    var imageUrl: ImageUrl = ImageUrl(),
+                   var user: LiteUser = LiteUser.ANONYMOUS,
                    var thumbnail: ThumbNail = ThumbNail.EMPTY) : RealmModel

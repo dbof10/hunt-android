@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +17,11 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.rx.plusAssign
 import kotlinx.android.synthetic.main.fragment_products.*
 import timber.log.Timber
 import javax.inject.Inject
 
-
-//TODO Click on footer
-//TODO Pull to refresh
 class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
 
     companion object {
@@ -72,9 +71,10 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
     }
 
     private fun setupRefresh() {
-//        sfRefresh.setOnRefreshListener {
-//            store.dispatch(HomeAction.REFRESH)
-//        }
+        sfRefresh.setColorSchemeColors(ContextCompat.getColor(context, R.color.colorPrimary))
+        sfRefresh.setOnRefreshListener {
+            store.dispatch(HomeAction.REFRESH)
+        }
     }
 
     override fun onStart() {
@@ -88,13 +88,13 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
     }
 
     private fun renderContent(list: List<HomeItemViewModel>) {
-        // sfRefresh.isRefreshing = false
+        sfRefresh.isRefreshing = false
         vLottie.cancelAnimation()
         vLottie.visibility = View.GONE
     }
 
     private fun renderRefreshError() {
-        //  sfRefresh.isRefreshing = false
+        sfRefresh.isRefreshing = false
     }
 
     private fun renderLoadMoreError() {
@@ -113,7 +113,7 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
     }
 
     private fun renderRefreshing() {
-        //  sfRefresh.isRefreshing = true
+        sfRefresh.isRefreshing = true
     }
 
     private fun renderLoading() {
@@ -129,7 +129,7 @@ class HomeFragment : BaseReduxFragment<HomeState>(), Injectable {
         disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
         disposeOnStop(viewModel.refreshError().subscribe { renderRefreshError() })
         disposeOnStop(viewModel.content().subscribe { renderContent(it) })
-        //  disposeOnStop(viewModel.refreshSuccess().subscribe { loadMoreCallback.resetState() })
+        disposables += viewModel.refreshSuccess().subscribe { lithoController.resetRefreshState() }
     }
 
 

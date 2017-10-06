@@ -5,26 +5,25 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 class UserDetail(
-        id: Int,
-        name: String,
-        headline: String?,
-        username: String,
-        val email: String,
+        id: Int = 0,
+        name: String = "",
+        headline: String? = "",
+        username: String = "",
+        var email: String = "",
         @SerializedName("website_url")
-        val webUrl: String?,
-        imageUrl: ImageUrl,
+        var webUrl: String? = "",
+        imageUrl: ImageUrl = ImageUrl(),
         @SerializedName("notifications")
-        val notification: NotificationIndicator,
+        var notification: NotificationIndicator = NotificationIndicator(),
         @SerializedName("followers_count")
-        val followerCount: Int,
+        var followerCount: Int = 0,
         @SerializedName("followings_count")
-        val followingCount: Int,
+        var followingCount: Int = 0,
         @SerializedName("posts_count")
-        val productCount: Int) : User(id, name, headline, username, imageUrl), Parcelable {
+        var productCount: Int = 0) : User(id, name, headline, username, imageUrl), Parcelable {
 
     companion object {
-        val GUEST = UserDetail(-1, "", "", "", "", "",
-                ImageUrl(), NotificationIndicator(), 0, 0, 0)
+        val GUEST = UserDetail()
         @JvmField
         val CREATOR: Parcelable.Creator<UserDetail> = object : Parcelable.Creator<UserDetail> {
             override fun createFromParcel(source: Parcel): UserDetail = UserDetail(source)

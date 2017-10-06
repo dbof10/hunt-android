@@ -40,7 +40,7 @@ class FooterComponentSpec {
                                     .color(ContextCompat.getColor(c, R.color.divider_color))
                                     .withLayout()
                                     .flex(1F)
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.divider_height))
+                                    .heightPx(2)
                     )
                     .child(
                             Row.create(c)

@@ -75,7 +75,7 @@
         android:layout_marginTop="@dimen/space_medium"
         android:clickable="false"
         android:gravity="end"
-        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        android:textAppearance="@style/TextAppearance.UserName"
         tools:text="—Nick B" />
 
     <com.ctech.eaty.widget.CircularImageView
@@ -102,7 +102,7 @@
         android:id="@+id/tvTimeStamp"
         android:layout_gravity="end"
         android:gravity="end"
-        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        android:textAppearance="@style/TextAppearance.Timestamp"
         tools:text="3 hours ago" />
 
     <!-- GridLayout seems to ignore layout_marginBottom so add another row with a space -->

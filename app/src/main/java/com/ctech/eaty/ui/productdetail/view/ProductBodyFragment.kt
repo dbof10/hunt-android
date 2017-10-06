@@ -27,6 +27,7 @@ import com.ctech.eaty.ui.productdetail.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.rx.plusAssign
 import com.ctech.eaty.widget.TransitionListenerAdapter
 import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration
 import kotlinx.android.synthetic.main.fragment_product_body.*
@@ -76,10 +77,10 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
         }
 
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-            if (oldItem is CommentItemViewModel && newItem is CommentItemViewModel) {
-                return oldItem.id == newItem.id && oldItem.isSelected == newItem.isSelected
+            return if (oldItem is CommentItemViewModel && newItem is CommentItemViewModel) {
+                oldItem.id == newItem.id && oldItem.isSelected == newItem.isSelected
             } else {
-                return oldItem == newItem
+                oldItem == newItem
             }
         }
     }
@@ -227,6 +228,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        contractor.onFinishFragmentInflate()
         setupRecyclerView()
         setupViewModel()
     }
@@ -236,15 +238,16 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
-        disposeOnStop(viewModel.body().subscribe {
+        disposables += viewModel.loading().subscribe { renderLoading() }
+        disposables += viewModel.body().subscribe {
             renderContent(it)
 
-        })
-        disposeOnStop(viewModel.commentsSelection().subscribe { adapter.setItems(it) })
+        }
+        disposables += viewModel.commentsSelection().subscribe { adapter.setItems(it) }
     }
 
     private fun renderContent(items: List<ProductBodyItemViewModel>) {
+        contractor.onDataLoaded()
         vError.visibility = View.GONE
         progressBar.visibility = View.GONE
         adapter.setItems(items)

@@ -77,7 +77,16 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
             }
         }
 
+    }
 
+    fun loadReact() {
+        if (host.getUseDeveloperSupport() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.canDrawOverlays(host.getActivity())) {
+                loadApp(mainComponentName)
+            }
+        } else {
+            loadApp(mainComponentName)
+        }
     }
 
     private fun loadApp(appKey: String) {
@@ -90,16 +99,6 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
                 appKey,
                 host.getLaunchOptions())
         host.mountReactView(reactRootView!!)
-    }
-
-    fun onStart() {
-        if (host.getUseDeveloperSupport() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Settings.canDrawOverlays(host.getActivity())) {
-                loadApp(mainComponentName)
-            }
-        } else {
-            loadApp(mainComponentName)
-        }
     }
 
     fun onPause() {

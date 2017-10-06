@@ -31,6 +31,7 @@ class HomeReducer : Reducer<HomeState> {
                     result.refreshing -> state.copy(refreshing = true)
                     result.error != null -> state.copy(refreshing = false, refreshError = result.error)
                     else -> state.copy(refreshing = false, refreshError = null,
+                            loadError = null,
                             content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content,
                             dayAgo = 0)
                 }
@@ -39,7 +40,11 @@ class HomeReducer : Reducer<HomeState> {
                 return when {
                     result.loading -> state.copy(loadingMore = true)
                     result.error != null -> state.copy(loadingMore = false, loadMoreError = result.error)
-                    else -> state.copy(loadingMore = false, loadError = null, content = computeNextBody(state, result), dayAgo = result.dayAgo)
+                    else -> state.copy(loadingMore = false, loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = computeNextBody(state, result),
+                            dayAgo = result.dayAgo)
                 }
             }
             is LoadUserResult -> {
@@ -58,7 +63,7 @@ class HomeReducer : Reducer<HomeState> {
         return if (result.dayAgo < 2) {
             state.content + //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
                     listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
-        }  else {
+        } else {
             state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
         }
     }

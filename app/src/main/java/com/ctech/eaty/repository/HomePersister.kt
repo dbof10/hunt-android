@@ -1,9 +1,8 @@
 package com.ctech.eaty.repository
 
-import android.os.Handler
-import android.os.Looper
 import com.ctech.eaty.entity.HomeEntity
 import com.ctech.eaty.entity.ImageUrl
+import com.ctech.eaty.entity.LiteUser
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.error.RecordNotFoundException
 import com.ctech.eaty.response.ProductResponse
@@ -18,9 +17,11 @@ import io.realm.Realm
 import io.realm.RealmList
 
 
-class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCode>, RecordProvider<BarCode> {
+class HomePersister : Persister<ProductResponse, BarCode>, RecordProvider<BarCode> {
 
     override fun getRecordState(key: BarCode): RecordState {
+        val realm = Realm.getDefaultInstance()
+
         val queryResult = realm.where(HomeEntity::class.java)
                 .findAll()
 
@@ -34,16 +35,14 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
     override fun write(key: BarCode, raw: ProductResponse): Single<Boolean> {
 
         return Single.create { emitter ->
-            Handler(Looper.getMainLooper()).post {
-                realm.executeTransaction {
-                    val reamList = RealmList<Product>()
-                    reamList.addAll(raw.products)
-                    val entity = HomeEntity(key.key, reamList)
-                    realm.copyToRealmOrUpdate(entity)
-                    emitter.onSuccess(true)
-                }
+            val realm = Realm.getDefaultInstance()
+            realm.executeTransaction {
+                val reamList = RealmList<Product>()
+                reamList.addAll(raw.products)
+                val entity = HomeEntity(key.key, reamList)
+                realm.copyToRealmOrUpdate(entity)
+                emitter.onSuccess(true)
             }
-
         }
 
     }
@@ -51,17 +50,15 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
     override fun read(key: BarCode): Maybe<ProductResponse> {
         return Maybe.create { emitter ->
 
-            Handler(Looper.getMainLooper()).post {
+            val realm = Realm.getDefaultInstance()
+            val queryResult = realm.where(HomeEntity::class.java)
+                    .equalTo("key", key.key)
+                    .findAll()
 
-                val queryResult = realm.where(HomeEntity::class.java)
-                        .equalTo("key", key.key)
-                        .findAll()
-
-                if (queryResult.isEmpty()) {
-                    emitter.onError(RecordNotFoundException("Record for $key not found"))
-                } else {
-                    emitter.onSuccess(ProductResponse(queryResult.first().value))
-                }
+            if (queryResult.isEmpty()) {
+                emitter.onError(RecordNotFoundException("Record for $key not found"))
+            } else {
+                emitter.onSuccess(ProductResponse(queryResult.first().value))
             }
         }
     }
@@ -83,9 +80,19 @@ class HomePersister(private val realm: Realm) : Persister<ProductResponse, BarCo
                                 it.imageUrl.px64 + "",
                                 it.imageUrl.px300 + "",
                                 it.imageUrl.px850 + ""),
+                        detachUser(it.user),
                         it.thumbnail)
             }
             return ProductResponse(parsed)
+        }
+
+        private fun detachUser(user: LiteUser): LiteUser {
+            return LiteUser(user.id, user.name + "",
+                    user.username + "", user.headline + "",
+                    ImageUrl(user.imageUrl.px48 + "",
+                            user.imageUrl.px64 + "",
+                            user.imageUrl.px300 + "",
+                            user.imageUrl.px850 + ""))
         }
 
     }

@@ -3,8 +3,8 @@ package com.ctech.eaty.ui.home.epic
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.repository.ProductRepository
-import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.action.BarCodeGenerator
+import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.result.LoadResult
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel

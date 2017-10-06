@@ -27,6 +27,7 @@ class LiveEventActivity : BaseReactActivity(), Injectable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_event)
         setupToolbar()
+        delegate.loadReact()
     }
 
     private fun setupToolbar() {

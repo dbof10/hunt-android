@@ -8,7 +8,8 @@ import io.reactivex.ObservableSource
 import io.reactivex.functions.Function
 import retrofit2.HttpException
 
-class RefreshTokenFunc(private val apiClient: ProductHuntApi, private val appSettingsManager: AppSettingsManager)
+class RefreshTokenFunc(private val apiClient: ProductHuntApi,
+                       private val appSettingsManager: AppSettingsManager)
     : Function<Observable<out Throwable>, ObservableSource<AccessToken>> {
 
 

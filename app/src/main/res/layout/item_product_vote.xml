@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        android:textAppearance="@style/TextAppearance.Timestamp"
         tools:text="3 hours ago" />
 
     <com.ctech.eaty.widget.AuthorTextView
@@ -42,7 +42,7 @@
         android:layout_toStartOf="@id/tvTimeStamp"
         android:ellipsize="end"
         android:lines="1"
-        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        android:textAppearance="@style/TextAppearance.UserName"
         tools:text="Nick B" />
 
     <com.ctech.eaty.widget.BaselineGridTextView

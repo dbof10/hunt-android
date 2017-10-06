@@ -8,9 +8,9 @@
         style="@style/Widget.Hunt.ProductTitle"
         android:layout_width="match_parent"
         android:layout_columnSpan="3"
-        android:layout_marginBottom="@dimen/space_large"
+        android:layout_marginBottom="@dimen/space_medium"
         android:background="@color/light_grey"
-        android:padding="@dimen/space_large"
+        android:padding="@dimen/space_medium"
         tools:text="Dribbble shot title" />
 
     <com.ctech.eaty.widget.BaselineGridTextView

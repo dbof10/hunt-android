@@ -27,6 +27,7 @@
     <dimen name="keyline_1">72dp</dimen>
     <dimen name="dialog_corners">2dp</dimen>
     <dimen name="button_radius">4dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
 
     <!-- Home -->
     <dimen name="noti_indicator_size">14dp</dimen>
@@ -36,6 +37,8 @@
     <dimen name="feed_footer_height">32dp</dimen>
     <dimen name="feed_product_height">240dp</dimen>
     <dimen name="feed_title_height">40dp</dimen>
+    <dimen name="home_header_margin_top">8dp</dimen>
+    <dimen name="home_header_margin_bottom">4dp</dimen>
 
 
     <!--Collection Detail -->

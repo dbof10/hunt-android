@@ -1,0 +1,31 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_heart_break">
+
+    <!-- rotate and fade out the two broken-halves -->
+    <target
+        android:name="broken_heart_left_group"
+        android:animation="@animator/heart_break_left_rotate" />
+
+    <target
+        android:name="broken_heart_left"
+        android:animation="@animator/heart_break_fade_out" />
+
+    <target
+        android:name="broken_heart_right_group"
+        android:animation="@animator/heart_break_right_rotate" />
+
+    <target
+        android:name="broken_heart_right"
+        android:animation="@animator/heart_break_fade_out" />
+
+    <!-- re-draw the stroke -->
+    <target
+        android:name="heart_stroke_left_atrium"
+        android:animation="@animator/heart_break_draw_stroke"/>
+
+    <target
+        android:name="heart_stroke_right_atrium"
+        android:animation="@animator/heart_break_draw_stroke"/>
+
+</animated-vector>

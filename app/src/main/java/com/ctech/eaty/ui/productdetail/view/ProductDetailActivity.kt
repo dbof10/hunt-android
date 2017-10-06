@@ -10,9 +10,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewTreeObserver
+import android.widget.TextView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -41,7 +42,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract, CustomTabActivityHelper.ConnectionCallback {
+
     private val SCRIM_ADJUSTMENT = 0.075f
+    private val FAB_SCALE_DURATION = 300L
 
     override fun getScreenName(): String = "Product Detail"
 
@@ -75,6 +78,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
+    private var fabOffset: Int = 0
 
     private val productId by lazy {
         intent.getIntExtra(PRODUCT_ID, 0)
@@ -98,7 +102,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
                             .maximumColorCount(3)
                             .clearFilters() /* by default palette ignore certain hues
                         (e.g. pure black/white) but we don't want this. */
-                            .setRegion(0, 0, bitmap!!.width - 1, twentyFourDip) /* - 1 to work around
+                            .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
                         https://code.google.com/p/android/issues/detail?id=191013 */
                             .generate { palette ->
                                 val isDark: Boolean
@@ -182,6 +186,27 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         setupHeader()
         setupToolbar()
         trackingManager.trackScreenView(getScreenName())
+
+    }
+
+    override fun onFinishFragmentInflate() {
+        ivProduct.viewTreeObserver.addOnPreDrawListener(
+                object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        ivProduct.viewTreeObserver.removeOnPreDrawListener(this)
+                        calculateFabPosition()
+                        return true
+                    }
+                })
+    }
+
+    private fun calculateFabPosition() {
+        // calculate 'natural' position i.e. with full height image. Store it for use when scrolling
+        fabOffset = ivProduct.height - (fab.height / 2)
+        fab.setOffset(fabOffset)
+
+        // calculate min position i.e. pinned to the collapsed image when scrolled
+        fab.setMinOffset(ivProduct.minimumHeight - (fab.height / 2))
     }
 
     override fun onResume() {
@@ -219,6 +244,14 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         }
     }
 
+    override fun onDataLoaded() {
+        fab.animate()
+                .scaleX(1F)
+                .scaleY(1F)
+                .setDuration(FAB_SCALE_DURATION)
+                .start()
+    }
+
     private fun setupHeader() {
         ivProduct.setOnClickListener {
             viewModel.navigateGallery()
@@ -254,6 +287,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     override fun onScrolled(headerView: View) {
         val scrollY = headerView.top
+        fab.setOffset(fabOffset + scrollY)
         ivProduct.setOffset(scrollY)
     }
 

@@ -1,0 +1,22 @@
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/liked"
+        android:state_checked="true"
+        android:drawable="@drawable/ic_heart_solid_white" />
+
+    <item
+        android:id="@+id/not_liked"
+        android:drawable="@drawable/ic_heart_empty_white" />
+
+    <transition
+        android:fromId="@id/not_liked"
+        android:toId="@id/liked"
+        android:drawable="@drawable/avd_heart_fill" />
+
+    <transition
+        android:fromId="@id/liked"
+        android:toId="@id/not_liked"
+        android:drawable="@drawable/avd_heart_empty" />
+
+</animated-selector>

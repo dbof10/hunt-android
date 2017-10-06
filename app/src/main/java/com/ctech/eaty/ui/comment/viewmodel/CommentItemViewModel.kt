@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 data class CommentItemViewModel(private val comment: Comment, private val expanded: Boolean = false) {
     val id: Int get() = comment.id
     val parentId: Int get() = comment.parentCommentId
-    val name: String get() = "${comment.user.username} - ${comment.user.name}"
+    val name: String get() = comment.user.name
     val headline: String get() = comment.user.headline ?: ""
     val body: String get() = comment.body
     val createdAt: DateTime get() = comment.createdAt

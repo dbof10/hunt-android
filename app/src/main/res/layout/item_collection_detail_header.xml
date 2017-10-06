@@ -29,7 +29,7 @@
         android:layout_toEndOf="@+id/ivAvatar"
         android:ellipsize="end"
         android:lines="1"
-        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        android:textAppearance="@style/TextAppearance.UserName"
         tools:text="Nick B" />
 
     <com.ctech.eaty.widget.BaselineGridTextView

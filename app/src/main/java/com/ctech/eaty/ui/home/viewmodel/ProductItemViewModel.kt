@@ -1,6 +1,7 @@
 package com.ctech.eaty.ui.home.viewmodel;
 
 import com.ctech.eaty.entity.Product
+import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionDetailItemViewModel
 
 data class ProductItemViewModel(private val product: Product) : HomeItemViewModel, CollectionDetailItemViewModel {
@@ -11,6 +12,11 @@ data class ProductItemViewModel(private val product: Product) : HomeItemViewMode
     val votesCount: String get() = product.votesCount.toString()
     val commentsCount: String get() = product.commentsCount.toString()
     val discussUrl: String get() = product.discussionUrl
-    val redirectUrl: String get() = product.redirectUrl
     val thumbnailUrl: String get() = product.thumbnail.imageUrl
+    val userName get() = product.user.name
+    val userImageUrl get() = product.user.imageUrl.px48
+    val user: User
+        get() =
+            User(product.user.id, product.user.name, product.user.headline, product.user.username, product.user.imageUrl)
+
 }

@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 data class CommentItemViewModel(private val comment: Comment, private val selected: Boolean = false) : ProductBodyItemViewModel {
 
     val id: Int get() = comment.id
-    val userName: String get() = comment.user.username
+    val userName: String get() = comment.user.name
     val body: String get() = comment.body
     val imageUrl: String get() = comment.user.imageUrl.px48
     val isSelected: Boolean get() = selected

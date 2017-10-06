@@ -6,4 +6,6 @@ interface FragmentContract {
     fun onScrolled(headerView: View)
     fun onScrollStateChanged(newState: Int)
     fun onFling()
+    fun onFinishFragmentInflate()
+    fun onDataLoaded()
 }

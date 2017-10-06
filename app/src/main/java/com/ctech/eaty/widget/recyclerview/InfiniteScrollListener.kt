@@ -3,7 +3,8 @@ package com.ctech.eaty.widget.recyclerview;
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
-class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val visibleThreshold: Int,
+class InfiniteScrollListener(private val linearLayoutManager: LinearLayoutManager,
+                             private val visibleThreshold: Int,
                              val callback: () -> Unit) : RecyclerView.OnScrollListener() {
 
     private var previousTotal: Int = 0 // The total number of items in the dataset after the last load
@@ -33,7 +34,7 @@ class InfiniteScrollListener(val linearLayoutManager: LinearLayoutManager, val v
     }
 
     fun resetState() {
-        this.previousTotal = 0
-        this.loading = true
+        previousTotal = 0
+        loading = true
     }
 }

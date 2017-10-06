@@ -83,9 +83,10 @@
 
     <style name="Widget.Hunt.InlineActionButton" parent="@android:style/Widget.Material.Button">
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textAppearance">@style/TextAppearance.CommentAuthor</item>
+        <item name="android:textAppearance">@style/TextAppearance.UserName</item>
         <item name="android:drawablePadding">@dimen/space_small</item>
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="Widget.Hunt.DialogText">
@@ -95,6 +96,26 @@
 
     <style name="Widget.Hunt.DialogTitle">
         <item name="android:textAppearance">@style/TextAppearance.DialogTitle</item>
+        <item name="lineHeightHint">28sp</item>
+    </style>
+
+    <style name="Widget.Hunt.ProductTitle">
+        <item name="android:textAppearance">@style/TextAppearance.ProductTitle</item>
+        <item name="lineHeightHint">32sp</item>
+    </style>
+
+    <style name="Widget.Hunt.ShotDescription">
+        <item name="android:textAppearance">@style/TextAppearance.ShotDescription</item>
+        <item name="lineHeightHint">24sp</item>
+    </style>
+
+    <style name="Widget.Hunt.Comment">
+        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
+        <item name="lineHeightHint">24sp</item>
+    </style>
+
+    <style name="Widget.Hunt.UserTitle">
+        <item name="android:textAppearance">@style/TextAppearance.Author.Title</item>
         <item name="lineHeightHint">28sp</item>
     </style>
 
@@ -111,7 +132,7 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextAppearance.FooterIndicator" parent="@android:style/TextAppearance.Material.Body2"/>
+    <style name="TextAppearance.FooterIndicator" parent="@android:style/TextAppearance.Material.Body2" />
 
     <style name="TextAppearance.Section" parent="@android:style/TextAppearance.Material.Headline" />
 
@@ -155,25 +176,6 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="Widget.Hunt.ProductTitle">
-        <item name="android:textAppearance">@style/TextAppearance.ProductTitle</item>
-        <item name="lineHeightHint">32sp</item>
-    </style>
-
-    <style name="Widget.Hunt.ShotDescription">
-        <item name="android:textAppearance">@style/TextAppearance.ShotDescription</item>
-        <item name="lineHeightHint">24sp</item>
-    </style>
-
-    <style name="Widget.Hunt.Comment">
-        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
-        <item name="lineHeightHint">24sp</item>
-    </style>
-
-    <style name="Widget.Hunt.UserTitle">
-        <item name="android:textAppearance">@style/TextAppearance.Author.Title</item>
-        <item name="lineHeightHint">28sp</item>
-    </style>
 
     <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textSize">14sp</item>
@@ -185,20 +187,22 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
-    <style name="TextAppearance.CommentTimestamp" parent="@android:style/TextAppearance.Material.Caption">
+    <style name="TextAppearance.Timestamp" parent="@android:style/TextAppearance.Material.Caption">
         <item name="android:textColor">@color/hint_disabled_dark</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFeatureSettings">onum, smcp</item>
         <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <style name="TextAppearance.CommentAuthor" parent="@android:style/TextAppearance.Material.Caption">
+    <style name="TextAppearance.UserName" parent="@android:style/TextAppearance.Material.Caption">
         <item name="android:fontFeatureSettings">smcp, onum</item>
         <item name="android:letterSpacing">0.02</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Author.Title" parent="@style/TextAppearance.CommentAuthor">
+    <style name="TextAppearance.Author.Title" parent="@style/TextAppearance.UserName">
         <item name="android:textSize">20sp</item>
     </style>
 

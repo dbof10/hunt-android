@@ -8,13 +8,6 @@ import android.util.TypedValue;
 import android.widget.TextView;
 
 import com.ctech.eaty.R;
-import com.ctech.eaty.entity.Product;
-
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
 
 public class BaselineGridTextView extends TextView {
 
@@ -54,14 +47,6 @@ public class BaselineGridTextView extends TextView {
         FOUR_DIP = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
         computeLineHeight();
-
-        Observable.just(1)
-                .onErrorResumeNext(new Function<Throwable, ObservableSource<? extends Integer>>() {
-                    @Override
-                    public ObservableSource<? extends Integer> apply(Throwable throwable) throws Exception {
-                        return null;
-                    }
-                });
     }
 
     public float getLineHeightMultiplierHint() {

@@ -13,15 +13,11 @@ import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import dagger.Module
 import dagger.Provides
-import io.realm.Realm
 import javax.inject.Singleton
 
 
 @Module(includes = arrayOf(NetworkModule::class, StoreModule::class))
 class DataModule {
-
-    @Provides
-    fun provideRealm(): Realm = Realm.getDefaultInstance()
 
     @Provides
     @Singleton

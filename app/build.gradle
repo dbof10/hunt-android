@@ -19,6 +19,8 @@ if (versionPropFile.canRead()) {
     VERSION = versionProps['VERSION']
 }
 
+android.sourceSets.main.java.srcDirs += 'build/generated/source/objectbox'
+
 
 android {
     compileSdkVersion deps.build.compileSdkVersion

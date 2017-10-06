@@ -21,6 +21,8 @@ class ProductComponentSpec {
         @OnCreateLayout
         fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
             return Column.create(c)
+                    .child( HeaderComponent.create(c)
+                            .arg1(viewModel))
                     .child(
                             BodyComponent.create(c)
                                     .arg1(viewModel)

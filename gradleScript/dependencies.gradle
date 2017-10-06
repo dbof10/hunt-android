@@ -1,10 +1,10 @@
 def versions = [
-        support: '26.1.0',
-        litho  : '0.6.1'
+        support  : '26.1.0',
+        litho    : '0.6.1',
 ]
 
 def build = [
-        buildToolsVersion: '26.0.1',
+        buildToolsVersion: '26.0.2',
         compileSdkVersion: 26,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
@@ -118,6 +118,13 @@ def litho = [
         "test"      : "com.facebook.litho:litho-testing:${versions.litho}",
 ]
 
+
+def objectbox = [
+        "core"    : "io.objectbox:objectbox-android:${versions.objectbox}",
+        "kotlin"  : "io.objectbox:objectbox-kotlin:${versions.objectbox}",
+        "compiler": "io.objectbox:objectbox-processor:${versions.objectbox}"
+]
+
 ext.deps = [
         "build"      : build,
         "versions"   : versions,
@@ -144,5 +151,5 @@ ext.deps = [
         "react"      : react,
         "litho"      : litho,
         "facebook"   : facebook,
-        "twitter"    : twitter
+        "twitter"    : twitter,
 ]
