@@ -63,7 +63,7 @@ public class UrlEncodedQueryString {
         return parse(uri.getEncodedQuery());
     }
 
-    private static final String PARSE_PARAMETER_SEPARATORS = String.valueOf(Separator.AMPERSAND) + Separator.SEMICOLON;
+    private static final String PARSE_PARAMETER_SEPARATORS = Separator.AMPERSAND.toString() + Separator.SEMICOLON;
 
     private final Map<String, List<String>> queryMap = new LinkedHashMap<>();
 

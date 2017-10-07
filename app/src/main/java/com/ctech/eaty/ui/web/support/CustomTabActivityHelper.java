@@ -8,10 +8,6 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.customtabs.CustomTabsServiceConnection;
 import android.support.customtabs.CustomTabsSession;
 
-import com.ctech.eaty.ui.web.support.CustomTabsHelper;
-import com.ctech.eaty.ui.web.support.ServiceConnection;
-import com.ctech.eaty.ui.web.support.ServiceConnectionCallback;
-
 import java.util.List;
 
 public class CustomTabActivityHelper implements ServiceConnectionCallback {

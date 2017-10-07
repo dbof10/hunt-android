@@ -119,12 +119,6 @@ def litho = [
 ]
 
 
-def objectbox = [
-        "core"    : "io.objectbox:objectbox-android:${versions.objectbox}",
-        "kotlin"  : "io.objectbox:objectbox-kotlin:${versions.objectbox}",
-        "compiler": "io.objectbox:objectbox-processor:${versions.objectbox}"
-]
-
 ext.deps = [
         "build"      : build,
         "versions"   : versions,

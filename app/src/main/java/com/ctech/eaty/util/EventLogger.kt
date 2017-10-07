@@ -345,22 +345,22 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     }
 
     private fun getStateString(state: Int): String {
-        when (state) {
-            ExoPlayer.STATE_BUFFERING -> return "B"
-            ExoPlayer.STATE_ENDED -> return "E"
-            ExoPlayer.STATE_IDLE -> return "I"
-            ExoPlayer.STATE_READY -> return "R"
-            else -> return "?"
+        return when (state) {
+            Player.STATE_BUFFERING -> "B"
+            Player.STATE_ENDED -> "E"
+            Player.STATE_IDLE -> "I"
+            Player.STATE_READY -> "R"
+            else -> "?"
         }
     }
 
     private fun getFormatSupportString(formatSupport: Int): String {
-        when (formatSupport) {
-            RendererCapabilities.FORMAT_HANDLED -> return "YES"
-            RendererCapabilities.FORMAT_EXCEEDS_CAPABILITIES -> return "NO_EXCEEDS_CAPABILITIES"
-            RendererCapabilities.FORMAT_UNSUPPORTED_SUBTYPE -> return "NO_UNSUPPORTED_TYPE"
-            RendererCapabilities.FORMAT_UNSUPPORTED_TYPE -> return "NO"
-            else -> return "?"
+        return when (formatSupport) {
+            RendererCapabilities.FORMAT_HANDLED -> "YES"
+            RendererCapabilities.FORMAT_EXCEEDS_CAPABILITIES -> "NO_EXCEEDS_CAPABILITIES"
+            RendererCapabilities.FORMAT_UNSUPPORTED_SUBTYPE -> "NO_UNSUPPORTED_TYPE"
+            RendererCapabilities.FORMAT_UNSUPPORTED_TYPE -> "NO"
+            else -> "?"
         }
     }
 

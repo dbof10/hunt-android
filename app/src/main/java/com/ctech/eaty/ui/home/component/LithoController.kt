@@ -48,7 +48,7 @@ class LithoController @Inject constructor(private val context: ComponentContext,
         })
     }
 
-    private val componentRenderer = RecyclerBinderUpdateCallback.ComponentRenderer<HomeItemViewModel> { item, index ->
+    private val componentRenderer = RecyclerBinderUpdateCallback.ComponentRenderer<HomeItemViewModel> { item, _ ->
         val renderInfoBuilder = ComponentRenderInfo.create()
         when (item) {
             is ProductItemViewModel -> {
