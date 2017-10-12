@@ -36,7 +36,7 @@ class LiveEventActivity : BaseReactActivity(), Injectable {
         }
     }
 
-    override fun getJSMainModuleName() = "live/index.android"
+    override fun getJSMainModuleName() = "live.android"
 
     override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
 

@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, TouchableNativeFeedback} from 'react-native';
 import {formatDate} from "../util/dateUtils"
+import PropTypes from 'prop-types';
 
 export default class EventItem extends Component {
 
@@ -60,7 +61,7 @@ export default class EventItem extends Component {
 }
 
 EventItem.propTypes = {
-    event: React.PropTypes.object,
+    event: PropTypes.object,
 };
 
 const styles = StyleSheet.create({

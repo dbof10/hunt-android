@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-    AppRegistry,
+    AppRegistry
 } from 'react-native';
 
 import {Provider} from 'react-redux';

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import TextStyle from '../style/textStyle';
+import PropTypes from 'prop-types';
 
 export default class Error extends Component {
 
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
 });
 
 Error.propTypes = {
-    onRetry: React.PropTypes.func,
-    errorMessage: React.PropTypes.string,
-    explainMessage: React.PropTypes.string
+    onRetry: PropTypes.func,
+    errorMessage: PropTypes.string,
+    explainMessage: PropTypes.string
 };

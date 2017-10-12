@@ -47,7 +47,7 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
     fun createReactInstanceManager(): ReactInstanceManager {
         val builder = ReactInstanceManager.builder()
                 .setApplication(host.getBaseApplication())
-                .setJSMainModuleName(host.getJSMainModuleName())
+                .setJSMainModulePath(host.getJSMainModuleName())
                 .setUseDeveloperSupport(host.getUseDeveloperSupport())
                 .setRedBoxHandler(host.getRedBoxHandler())
                 .setUIImplementationProvider(host.getUIImplementationProvider())

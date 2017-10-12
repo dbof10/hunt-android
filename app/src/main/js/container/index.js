@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, AppRegistry, StyleSheet, FlatList,View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 
 import {Load, LoadMore} from '../action/action';
 import {bindActionCreators} from 'redux';
@@ -30,7 +30,7 @@ class Main extends Component {
         />
     );
 
-    loadMore(){
+    loadMore() {
         this.props.loadMore(formatCurrentDate(new Date().getTime()))
     }
 
@@ -52,9 +52,9 @@ class Main extends Component {
             } else {
                 return (
                     <FlatList
-                        ItemSeparatorComponent={ () => (
-                            <View style={styles.divider} />
-                            )}
+                        ItemSeparatorComponent={() => (
+                            <View style={styles.divider}/>
+                        )}
                         data={this.props.event.dataSource}
                         keyExtractor={this.keyExtractor}
                         renderItem={this.renderItem}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 
     divider: {
         height: 8,
-        flex:1
+        flex: 1
     }
 
 });
@@ -88,7 +88,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         load: bindActionCreators(Load, dispatch),
-        loadMore: bindActionCreators(LoadMore,dispatch)
+        loadMore: bindActionCreators(LoadMore, dispatch)
     }
 }
 
