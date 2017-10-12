@@ -6,14 +6,13 @@ import android.net.Uri
 import android.support.customtabs.CustomTabsIntent
 import android.support.customtabs.CustomTabsSession
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.entity.Media
 import com.ctech.eaty.entity.User
-import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.gallery.view.GalleryActivity
+import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.ui.vote.view.VoteActivity
@@ -79,6 +78,13 @@ class ProductDetailNavigation @Inject constructor(private val context: ProductDe
         return Completable.fromAction {
             val intent = UserActivity.newIntent(context, user)
             context.startActivity(intent, option.toBundle())
+        }
+    }
+
+    fun toLogin(): Completable {
+        return Completable.fromAction {
+            val intent = LoginActivity.newIntent(context)
+            context.startActivity(intent)
         }
     }
 

@@ -1,10 +1,12 @@
 package com.ctech.eaty.repository
 
+import android.util.Log
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.ProductDetail
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.ProductResponse
-import com.ctech.eaty.ui.search.action.SearchBarCode
+import com.ctech.eaty.ui.topiclist.action.SearchBarCode
 import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
@@ -30,7 +32,14 @@ class ProductRepository(private val homeStore: Store<ProductResponse, BarCode>,
                     it.post
                 }
                 .toObservable()
+                .doOnError {
+                    Log.e("ABCD", "abc ${it.message}")
+                }
                 .retryWhen(RefreshTokenFunc(apiClient, appSettingsManager))
+    }
+
+    fun purgeProductDetail(barcode: BarCode) {
+        productStore.clear(barcode)
     }
 
     fun getPostsByTopic(barcode: SearchBarCode): Observable<List<Product>> {

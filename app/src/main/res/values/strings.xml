@@ -35,6 +35,11 @@
     <string name="transition_user_login" translatable="false">user_login</string>
     <string name="need_login">First you need to login</string>
 
+    <!--Search -->
+    <string name="transition_search_back" translatable="false">transition_search_back</string>
+    <string name="search_hint">Search Daily News</string>
+    <string name="no_search_results">No results for\n“%1$s”</string>
+
 
     <string name="comment">Comment</string>
     <string name="share">Share</string>

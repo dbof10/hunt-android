@@ -24,6 +24,9 @@ import com.ctech.eaty.util.MorphTransform
 import com.ctech.eaty.util.setHeight
 import com.ctech.eaty.util.setWidth
 import com.ctech.eaty.widget.transition.CircularTransform
+import com.uber.autodispose.LifecycleScopeProvider
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposeWith
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.layout_login.*
 import timber.log.Timber
@@ -65,6 +68,8 @@ class LoginActivity : BaseActivity(), Injectable {
         }
         trackingManager.trackScreenView(getScreenName())
         store.startBinding()
+                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .subscribe()
 
     }
 

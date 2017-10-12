@@ -48,7 +48,11 @@ class FooterComponentSpec {
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .arg1(viewModel)
-                                                    .arg2(R.drawable.ic_heart_solid_grey)
+                                                    .arg2(
+                                                            if (viewModel.liked)
+                                                                R.drawable.ic_heart_solid_grey
+                                                            else
+                                                                R.drawable.ic_heart_empty_grey)
                                     )
                                     .child(
                                             FooterActionComponent.create(c)

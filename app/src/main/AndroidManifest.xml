@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.ctech.eaty"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ctech.eaty">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -120,7 +120,7 @@
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <activity
-            android:name=".ui.search.view.SearchActivity"
+            android:name=".ui.topiclist.view.TopicListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -159,6 +159,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoStatusBar" />
 
+        <activity
+            android:name=".ui.search.view.SearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Translucent.Search">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.gms.actions.SEARCH_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

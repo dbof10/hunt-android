@@ -2,6 +2,7 @@ package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.Collection
 import com.ctech.eaty.entity.CollectionDetail
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.response.CollectionDetailResponse
 import com.ctech.eaty.response.CollectionResponse
 import com.nytimes.android.external.store3.base.impl.BarCode

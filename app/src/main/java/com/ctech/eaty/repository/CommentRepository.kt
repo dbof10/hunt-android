@@ -2,6 +2,7 @@ package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.Comment
 import com.ctech.eaty.entity.Comments
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable

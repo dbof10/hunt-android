@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_100"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/flProductHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground">
+
+        <com.ctech.eaty.widget.ForegroundImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter" />
+
+        <com.ctech.eaty.widget.BaselineGridTextView
+            android:id="@+id/tvProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/black_25"
+            android:paddingBottom="@dimen/content_padding_vertical"
+            android:paddingEnd="@dimen/content_padding_horizontal"
+            android:paddingStart="@dimen/content_padding_horizontal"
+            android:paddingTop="@dimen/content_padding_vertical"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            tools:text="Adobe Scan" />
+    </FrameLayout>
+
+    <com.ctech.eaty.widget.BaselineGridTextView
+        android:id="@+id/tvDescription"
+        style="@style/Widget.Hunt.ShotDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/space_small"
+        tools:text="Adobe's free scan app with text recognition" />
+
+</LinearLayout>
+

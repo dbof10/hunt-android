@@ -1,18 +1,16 @@
 package com.ctech.eaty.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.View
-import com.ctech.eaty.base.redux.LifeCycleDelegate
 import com.ctech.eaty.base.redux.Store
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposeWith
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BaseReduxFragment<State> : Fragment() {
+abstract class BaseReduxFragment<State> : BaseFragment() {
 
-    private lateinit var lifecycleDelegate: LifeCycleDelegate<State>
     protected val disposables = CompositeDisposable()
-
 
     protected abstract fun store(): Store<State>
 
@@ -22,13 +20,12 @@ abstract class BaseReduxFragment<State> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleDelegate = LifeCycleDelegate(store())
-        lifecycleDelegate.onStart()
-
+        store().startBinding()
+                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .subscribe()
     }
 
     override fun onDestroyView() {
-        lifecycleDelegate.onStop(activity.isFinishing)
         disposables.clear()
         super.onDestroyView()
 

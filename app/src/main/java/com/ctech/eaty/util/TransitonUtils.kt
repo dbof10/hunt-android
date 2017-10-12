@@ -26,7 +26,7 @@ class TransitionUtils private constructor() {
         }
 
         fun findTransition(set: TransitionSet, clazz: Class<out Transition>, @IdRes targetId: Int): Transition? {
-            for (i in 0..set.transitionCount - 1) {
+            for (i in 0 until set.transitionCount) {
                 val transition = set.getTransitionAt(i)
                 if (transition.javaClass == clazz) {
                     if (transition.targetIds.contains(targetId)) {

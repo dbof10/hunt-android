@@ -1,10 +1,12 @@
 package com.ctech.eaty.ui.home.viewmodel
 
+import android.view.View
 import android.widget.ImageView
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.util.rx.Functions
 import io.reactivex.Observable
 import timber.log.Timber
 
@@ -81,7 +83,7 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                         navigation.toUser(it)
                     }
                 }
-                .subscribe({}, Timber::e)
+                .subscribe(Functions.EMPTY, Timber::e)
     }
 
     fun notificationNavigation() {
@@ -94,7 +96,7 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                         navigation.toNotification()
                     }
                 }
-                .subscribe({}, Timber::e)
+                .subscribe(Functions.EMPTY, Timber::e)
     }
 
     fun user(): Observable<UserDetail> {
@@ -107,5 +109,10 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
 
     fun navigationClick(id: Int) {
         navigation.delegate(id).subscribe()
+    }
+
+    fun navigateSearch(it: View) {
+        navigation.toSearch(it)
+                .subscribe()
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ctech.eaty.widget.BaselineGridTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/no_search_results"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="@dimen/space_small"
+    android:drawableTop="@drawable/ic_search"
+    android:padding="@dimen/search_empty_view_padding"
+    android:textAlignment="center"
+    android:textAppearance="@style/TextAppearance.EmptyText"
+    tools:text="No search result" />

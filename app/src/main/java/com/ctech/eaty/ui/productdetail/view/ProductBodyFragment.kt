@@ -22,6 +22,7 @@ import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
+import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.*
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -40,11 +41,13 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
 
 
     companion object {
+        private val KEY_PRODUCT_ID = "productId"
 
-        fun newInstance(): Fragment {
+        fun newInstance(id: Int): Fragment {
 
             val args = Bundle()
             val fragment = ProductBodyFragment()
+            args.putInt(KEY_PRODUCT_ID, id)
             fragment.arguments = args
             return fragment
         }
@@ -62,6 +65,9 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
     @Inject
     lateinit var customTabActivityHelper: CustomTabActivityHelper
 
+    private val productId by lazy {
+        arguments.getInt(KEY_PRODUCT_ID, 0)
+    }
 
     private val diffCallback = object : DiffCallback {
 
@@ -214,7 +220,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
 
     override fun store(): Store<ProductDetailState> = store
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is ProductDetailActivity) {
             contractor = context
@@ -231,6 +237,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
         contractor.onFinishFragmentInflate()
         setupRecyclerView()
         setupViewModel()
+        store.dispatch(ProductDetailAction.Load(productId))
     }
 
     fun setSpacerBackground(drawable: Drawable) {

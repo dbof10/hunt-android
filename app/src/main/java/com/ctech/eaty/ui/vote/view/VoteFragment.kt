@@ -85,7 +85,7 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
         return store
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is VoteActivity) {
             contractor = context

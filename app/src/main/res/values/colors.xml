@@ -32,6 +32,10 @@
     <color name="ripple_light">#99ffffff</color>
 
 
+    <color name="background_dark">#ff333333</color>
+    <color name="background_super_dark">#ff292929</color>
+
+
     <color name="divider_color">#50B6B6B6</color>
 
     <!-- Error -->
@@ -52,5 +56,13 @@
     <color name="selected_comment_background">@color/white_100</color>
     <color name="news_story_comment_background">@android:color/transparent</color>
 
+    <!-- Search -->
+    <color name="searchback_stroke_color">#fff</color>
+    <array name="loading_placeholders_dark">
+        <item>#ff191919</item>
+        <item>#ff212121</item>
+        <item>#ff232323</item>
+    </array>
+    <color name="gif_badge_dark_image">#b3ffffff</color>
 
 </resources>

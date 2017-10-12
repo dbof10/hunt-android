@@ -5,12 +5,12 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 open class User(
-        var id: Int = -1,
-        var name: String = "",
-        var headline: String? = "",
-        var username: String = "",
+        val id: Int = -1,
+        val name: String = "",
+        val headline: String? = "",
+        val username: String = "",
         @SerializedName("image_url")
-        var imageUrl: ImageUrl = ImageUrl()) : Parcelable {
+        val imageUrl: ImageUrl = ImageUrl()) : Parcelable {
 
 
     companion object {
@@ -62,4 +62,7 @@ open class User(
     }
 
 
+    fun makeRealm(): UserRealm {
+        return UserRealm(id, name, username, headline, imageUrl)
+    }
 }

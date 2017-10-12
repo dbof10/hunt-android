@@ -1,8 +1,6 @@
 package com.ctech.eaty.ui.search.navigation
 
 import com.ctech.eaty.di.ActivityScope
-import com.ctech.eaty.ui.comment.view.CommentActivity
-import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.search.view.SearchActivity
 import io.reactivex.Completable

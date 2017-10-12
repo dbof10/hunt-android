@@ -1,11 +1,11 @@
 package com.ctech.eaty.ui.search.result
 
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 
 data class LoadMoreResult(val loading: Boolean = false, val error: Throwable? = null,
-                          val content: List<ProductItemViewModel> = emptyList(), val page: Int = 2) : Result {
+                          val content: List<ProductItemViewModel> = emptyList(),
+                          val page: Int = 2) : Result {
     companion object {
         fun inProgress(): LoadMoreResult {
             return LoadMoreResult(true)

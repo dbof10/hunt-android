@@ -3,16 +3,17 @@ package com.ctech.eaty.di
 import android.content.Context
 import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.repository.HomePersister
-import com.ctech.eaty.repository.ProductHuntApi
-import com.ctech.eaty.repository.SoundCloudApi
+import com.ctech.eaty.network.ProductHuntApi
+import com.ctech.eaty.network.SoundCloudApi
+import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
-import com.ctech.eaty.ui.search.action.SearchBarCode
+import com.ctech.eaty.ui.topiclist.action.SearchBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
+import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.NetworkManager
 import com.ctech.eaty.util.rx.NetworkSingleTransformer
-import com.ctech.eaty.util.rx.ThreadScheduler
 import com.google.gson.Gson
 import com.nytimes.android.external.fs3.SourcePersisterFactory
 import com.nytimes.android.external.store3.base.Persister
@@ -22,7 +23,6 @@ import com.nytimes.android.external.store3.base.impl.StoreBuilder
 import com.nytimes.android.external.store3.middleware.GsonParserFactory
 import dagger.Module
 import dagger.Provides
-import io.realm.Realm
 import okio.BufferedSource
 
 
@@ -47,6 +47,11 @@ class StoreModule {
     }
 
     @Provides
+    fun provideClearableFilePersister(): Persister<ProductDetailResponse, BarCode> {
+        return ProductDetailPersister()
+    }
+
+    @Provides
     fun providePersistedHomeStore(apiClient: ProductHuntApi,
                                   persister: Persister<ProductResponse, BarCode>,
                                   networkManager: NetworkManager)
@@ -57,7 +62,6 @@ class StoreModule {
                     apiClient.getPosts(it.key).compose(NetworkSingleTransformer(networkManager))
                 }
                 .persister(persister)
-                .parser(HomePersister.createParser())
                 .networkBeforeStale()
                 .open()
     }
@@ -72,12 +76,12 @@ class StoreModule {
     }
 
     @Provides
-    fun provideProductDetailStore(apiClient: ProductHuntApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
+    fun provideProductDetailStore(apiClient: ProductHuntApi, persister: Persister<ProductDetailResponse, BarCode>)
             : Store<ProductDetailResponse, BarCode> {
-        return StoreBuilder.parsedWithKey<BarCode, BufferedSource, ProductDetailResponse>()
-                .fetcher { barcode -> apiClient.getProductDetail(barcode.key.toInt()).map { it.source() } }
+        return StoreBuilder.parsedWithKey<BarCode, ProductDetailResponse, ProductDetailResponse>()
+                .fetcher { barcode -> apiClient.getProductDetail(barcode.key.toInt())}
                 .persister(persister)
-                .parser(GsonParserFactory.createSourceParser(gson, ProductDetailResponse::class.java))
+                .networkBeforeStale()
                 .open()
     }
 
@@ -131,7 +135,7 @@ class StoreModule {
     fun providePersistedRadioStore(apiClient: SoundCloudApi, gson: Gson, persister: Persister<BufferedSource, BarCode>)
             : Store<RadioResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, BufferedSource, RadioResponse>()
-                .fetcher { barcode -> apiClient.getTracks(barcode.key, "2t9loNQH90kzJcsFCODdigxfp325aq4z").map { it.source() } }
+                .fetcher { barcode -> apiClient.getTracks(barcode.key, Constants.SOUND_CLOUD_ID).map { it.source() } }
                 .persister(persister)
                 .parser(GsonParserFactory.createSourceParser(gson, RadioResponse::class.java))
                 .open()

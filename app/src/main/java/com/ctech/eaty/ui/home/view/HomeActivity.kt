@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.home.view
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -122,6 +123,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         }
         ivNoti.setOnClickListener {
             viewModel.notificationNavigation()
+        }
+        ivSearch.setOnClickListener {
+            viewModel.navigateSearch(it)
         }
     }
 

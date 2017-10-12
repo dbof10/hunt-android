@@ -1,9 +1,8 @@
 package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.Notification
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.response.NotificationResponse
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable

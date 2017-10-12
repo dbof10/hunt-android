@@ -13,6 +13,7 @@
             android:clipChildren="false"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            android:outlineProvider="none"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways|snap"
@@ -35,7 +36,7 @@
                     android:id="@+id/ivNoti"
                     android:layout_width="@dimen/noti_icon_width"
                     android:layout_height="@dimen/noti_icon_height"
-                    android:foreground="?selectableItemBackground"
+                    android:foreground="?selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_notification" />
 
                 <TextView
@@ -49,6 +50,14 @@
                     android:layout_height="@dimen/noti_indicator_size" />
 
             </FrameLayout>
+
+            <ImageView
+                android:layout_gravity="end"
+                android:id="@+id/ivSearch"
+                android:layout_width="@dimen/noti_icon_width"
+                android:layout_height="@dimen/noti_icon_height"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_search" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

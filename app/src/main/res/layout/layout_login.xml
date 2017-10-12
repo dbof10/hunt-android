@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/btLoginFacebook"
-            style="@style/Widget.Hunt.HorizontalInlineActionButton"
+            style="@style/Widget.Hunt.LoginButton"
             android:layout_width="@dimen/login_button_width"
             android:layout_height="wrap_content"
             android:background="@drawable/white_border_rounded_background"
@@ -45,7 +45,7 @@
 
         <TextView
             android:id="@+id/btLoginTwitter"
-            style="@style/Widget.Hunt.HorizontalInlineActionButton"
+            style="@style/Widget.Hunt.LoginButton"
             android:layout_width="@dimen/login_button_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_large"

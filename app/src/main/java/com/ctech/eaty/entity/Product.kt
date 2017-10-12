@@ -5,17 +5,31 @@ import io.realm.RealmModel
 import io.realm.annotations.RealmClass
 
 
-@RealmClass
-open class Product(var id: Int = -1, var name: String = "", var tagline: String = "",
+data class Product(val id: Int = -1,
+                   val name: String = "",
+                   val tagline: String = "",
                    @SerializedName("comments_count")
-                   var commentsCount: Int = -1,
+                   val commentsCount: Int = -1,
                    @SerializedName("votes_count")
-                   var votesCount: Int = -1,
+                   val votesCount: Int = -1,
                    @SerializedName("discussion_url")
-                   var discussionUrl: String = "",
+                   val discussionUrl: String = "",
                    @SerializedName("redirect_url")
-                   var redirectUrl: String = "",
+                   val redirectUrl: String = "",
                    @SerializedName("screenshot_url")
-                   var imageUrl: ImageUrl = ImageUrl(),
-                   var user: LiteUser = LiteUser.ANONYMOUS,
-                   var thumbnail: ThumbNail = ThumbNail.EMPTY) : RealmModel
+                   val imageUrl: ImageUrl = ImageUrl(),
+                   @SerializedName("current_user")
+                   val currentUser: CurrentUser = CurrentUser(),
+                   val user: User = User.ANONYMOUS,
+                   val thumbnail: ThumbNail = ThumbNail.EMPTY) {
+
+    fun makeRealm(): ProductRealm {
+        return ProductRealm(id, name,
+                tagline, commentsCount,
+                votesCount, discussionUrl,
+                redirectUrl, imageUrl,
+                currentUser,
+                user.makeRealm(),
+                thumbnail.makeRealm())
+    }
+}

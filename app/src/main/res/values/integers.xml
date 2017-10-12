@@ -4,4 +4,16 @@
     <integer name="fab_expand_duration">360</integer>
     <integer name="comment_expand_collapse_duration">120</integer>
     <integer name="gradient_transition_duration">4000</integer>
+
+    <!-- Search  -->
+    <integer name="searchback_viewport_width">48</integer>
+    <integer name="searchback_viewport_height">24</integer>
+    <integer name="searchback_stroke_width">2</integer>
+    <integer name="searchback_show_hide_circle_duration">250</integer>
+    <integer name="searchback_show_circle_delay">300</integer>
+    <integer name="searchback_stem_trim_longer_duration">600</integer>
+    <integer name="searchback_stem_trim_shorter_duration">450</integer>
+    <integer name="searchback_show_arrow_head_delay">350</integer>
+    <integer name="searchback_show_hide_arrow_head_duration">250</integer>
+
 </resources>

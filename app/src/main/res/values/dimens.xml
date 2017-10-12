@@ -45,8 +45,8 @@
     <dimen name="collection_detail_background_height">180dp</dimen>
 
     <!-- Product Detail -->
-    <dimen name="shot_collapsed_app_bar_height">168dp</dimen> <!-- 3 * ?android:actionBarSize -->
-    <dimen name="avatar_ripple_radius">20dp</dimen> <!-- avatar_size / 2 -->
+    <dimen name="shot_collapsed_app_bar_height">168dp</dimen>
+    <dimen name="avatar_ripple_radius">20dp</dimen>
     <dimen name="comment_actions_height">40dp</dimen>
     <dimen name="comment_like_margin_adjustment">-8dp</dimen>
     <dimen name="avatar_margin">12dp</dimen>
@@ -84,5 +84,11 @@
     <dimen name="login_logo_height">128dp</dimen>
     <dimen name="login_logo_margin_top">84dp</dimen>
 
+    <!-- Search -->
+    <dimen name="searchback_image_width">48dp</dimen>
+    <dimen name="searchback_image_height">24dp</dimen>
+    <dimen name="search_progress_bar_margin_top">64dp</dimen>
+    <dimen name="search_empty_view_padding">64dp</dimen>
+    <dimen name="search_container_width">96dp</dimen>
 
 </resources>

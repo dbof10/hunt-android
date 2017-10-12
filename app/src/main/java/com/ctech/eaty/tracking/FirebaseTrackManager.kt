@@ -12,6 +12,7 @@ class FirebaseTrackManager @Inject constructor(context: Context) {
     private val SCREEN_VIEW = "screen_view"
     private val ATTEMPT_LOGIN = "attempt_login"
     private val NOTIFICATION_TYPE = "noti_type"
+    private val SEARCH_KEYWORD = "search_keyword"
 
     fun trackScreenView(screenName: String) {
         val bundle = Bundle()
@@ -35,5 +36,11 @@ class FirebaseTrackManager @Inject constructor(context: Context) {
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.SOURCE, type)
         firebaseAnalytics.logEvent(NOTIFICATION_TYPE, bundle)
+    }
+
+    fun trackSearchKeyword(keyword: String){
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, keyword)
+        firebaseAnalytics.logEvent(SEARCH_KEYWORD, bundle)
     }
 }

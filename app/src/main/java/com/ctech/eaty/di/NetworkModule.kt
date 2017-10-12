@@ -2,10 +2,11 @@ package com.ctech.eaty.di
 
 import android.content.Context
 import com.ctech.eaty.BuildConfig
+import com.ctech.eaty.network.AlgoliaApi
 import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
-import com.ctech.eaty.repository.ProductHuntApi
-import com.ctech.eaty.repository.SoundCloudApi
+import com.ctech.eaty.network.ProductHuntApi
+import com.ctech.eaty.network.SoundCloudApi
 import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.DateTimeConverter
 import com.ctech.eaty.util.GlideImageLoader
@@ -63,14 +64,20 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideProductHuntApi(okHttpClient: OkHttpClient): ProductHuntApi {
-        return createRestServices(okHttpClient, Constants.API_URL, ProductHuntApi::class.java)
+    fun provideProductHuntApi(okHttpClient: OkHttpClient, gson: Gson): ProductHuntApi {
+        return createRestServices(gson, okHttpClient, Constants.API_URL, ProductHuntApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideSoundCloudApi(okHttpClient: OkHttpClient): SoundCloudApi {
-        return createRestServices(okHttpClient, Constants.SOUND_CLOUD_API, SoundCloudApi::class.java)
+    fun provideSoundCloudApi(okHttpClient: OkHttpClient, gson: Gson): SoundCloudApi {
+        return createRestServices(gson, okHttpClient, Constants.SOUND_CLOUD_API, SoundCloudApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAngoliaApi(okHttpClient: OkHttpClient, gson: Gson): AlgoliaApi {
+        return createRestServices(gson, okHttpClient, Constants.ALGOLIA_CLOUD_API, AlgoliaApi::class.java)
     }
 
     @Singleton
@@ -79,9 +86,10 @@ class NetworkModule {
         return GlideImageLoader(context)
     }
 
-    private fun <T> createRestServices(okHttpClient: OkHttpClient, baseUrl: String,
+    private fun <T> createRestServices(gson: Gson,
+                                       okHttpClient: OkHttpClient,
+                                       baseUrl: String,
                                        servicesClass: Class<T>): T {
-        val gson = GsonBuilder().create()
         val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClient)

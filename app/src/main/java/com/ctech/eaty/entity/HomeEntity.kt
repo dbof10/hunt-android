@@ -6,4 +6,4 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 @RealmClass
-open class HomeEntity(@PrimaryKey var key: String = "", var value: RealmList<Product> = RealmList()) : RealmModel
+open class HomeEntity(@PrimaryKey var key: String = "", var value: RealmList<ProductRealm> = RealmList()) : RealmModel

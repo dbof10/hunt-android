@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/searchback_back">
+
+    <target
+        android:name="arrow_head"
+        android:animation="@animator/searchback_hide_arrow_head_move" />
+
+    <target
+        android:name="arrow_head_top"
+        android:animation="@animator/searchback_hide_arrow_head" />
+
+    <target
+        android:name="arrow_head_bottom"
+        android:animation="@animator/searchback_hide_arrow_head" />
+
+    <target
+        android:name="stem"
+        android:animation="@animator/searchback_stem_back_to_search" />
+
+    <target
+        android:name="search_circle"
+        android:animation="@animator/searchback_show_circle" />
+
+</animated-vector>

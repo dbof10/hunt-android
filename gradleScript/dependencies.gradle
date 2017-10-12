@@ -1,6 +1,7 @@
 def versions = [
-        support  : '26.1.0',
-        litho    : '0.6.1',
+        support    : '26.1.0',
+        litho      : '0.6.1',
+        autodispose: '0.3.0'
 ]
 
 def build = [
@@ -24,16 +25,16 @@ def support = [
 ]
 
 def dagger = [
-        lib            : 'com.google.dagger:dagger:2.11',
-        compiler       : 'com.google.dagger:dagger-compiler:2.11',
-        android        : 'com.google.dagger:dagger-android:2.11',
-        androidSupport : 'com.google.dagger:dagger-android-support:2.11',
-        androidCompiler: 'com.google.dagger:dagger-android-processor:2.11'
+        lib            : 'com.google.dagger:dagger:2.12',
+        compiler       : 'com.google.dagger:dagger-compiler:2.12',
+        android        : 'com.google.dagger:dagger-android:2.12',
+        androidSupport : 'com.google.dagger:dagger-android-support:2.12',
+        androidCompiler: 'com.google.dagger:dagger-android-processor:2.12'
 ]
 
 def butterknife = [
-        lib     : 'com.jakewharton:butterknife:8.6.0',
-        compiler: 'com.jakewharton:butterknife-compiler:8.6.0'
+        lib     : 'com.jakewharton:butterknife:8.8.1',
+        compiler: 'com.jakewharton:butterknife-compiler:8.8.1'
 ]
 
 def rx = [
@@ -42,7 +43,7 @@ def rx = [
 ]
 
 def test = [
-        "mockito"    : "org.mockito:mockito-core:2.7.22",
+        "mockito"    : "org.mockito:mockito-core:2.10.0",
         "junit"      : "junit:junit:4.12",
         "robolectric": "org.robolectric:robolectric:3.3.2"
 ]
@@ -118,6 +119,12 @@ def litho = [
         "test"      : "com.facebook.litho:litho-testing:${versions.litho}",
 ]
 
+def autodispose = [
+        "core"        : "com.uber.autodispose:autodispose:${versions.autodispose}",
+        "android"     : "com.uber.autodispose:autodispose-android:${versions.autodispose}",
+        "architecture": "com.uber.autodispose:autodispose-android-archcomponents:${versions.autodispose}",
+        "kotlin"      : "com.uber.autodispose:autodispose-kotlin:${versions.autodispose}"
+]
 
 ext.deps = [
         "build"      : build,
@@ -146,4 +153,5 @@ ext.deps = [
         "litho"      : litho,
         "facebook"   : facebook,
         "twitter"    : twitter,
+        "autodispose": autodispose
 ]

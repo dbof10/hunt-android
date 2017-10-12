@@ -1,10 +1,12 @@
 package com.ctech.eaty.di
 
 import com.ctech.eaty.entity.Comments
+import com.ctech.eaty.network.AlgoliaApi
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.repository.*
 import com.ctech.eaty.response.*
 import com.ctech.eaty.ui.comment.action.CommentBarCode
-import com.ctech.eaty.ui.search.action.SearchBarCode
+import com.ctech.eaty.ui.topiclist.action.SearchBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.rx.ComputationThreadScheduler
@@ -86,4 +88,8 @@ class DataModule {
         return UserRepository(apiClient, userStore, productStore, appSettingsManager)
     }
 
+    @Provides
+    fun provideSearchRepository(apiClient: AlgoliaApi): SearchRepository {
+        return SearchRepository(apiClient)
+    }
 }

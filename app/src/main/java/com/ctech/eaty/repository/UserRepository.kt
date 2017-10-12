@@ -3,6 +3,7 @@ package com.ctech.eaty.repository
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.entity.UserDetail
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.request.LoginRequest
 import com.ctech.eaty.request.UpdateUserRequest
 import com.ctech.eaty.response.LoginResponse
@@ -12,7 +13,6 @@ import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
-import io.reactivex.Single
 
 class UserRepository(private val apiClient: ProductHuntApi,
                      private val userStore: Store<UserResponse, BarCode>,

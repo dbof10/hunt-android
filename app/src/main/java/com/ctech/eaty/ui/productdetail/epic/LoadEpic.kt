@@ -12,9 +12,9 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class LoadEpic(val productRepository: ProductRepository,
-               val barCodeGenerator: BarCodeGenerator,
-               val threadScheduler: ThreadScheduler) : Epic<ProductDetailState> {
+class LoadEpic(private val productRepository: ProductRepository,
+               private val barCodeGenerator: BarCodeGenerator,
+               private val threadScheduler: ThreadScheduler) : Epic<ProductDetailState> {
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<ProductDetailState>): Observable<LoadResult> {
         return action.ofType(ProductDetailAction.Load::class.java)
                 .flatMap {

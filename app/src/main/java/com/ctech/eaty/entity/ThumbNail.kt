@@ -5,15 +5,20 @@ import io.realm.RealmModel
 import io.realm.annotations.RealmClass
 
 
-@RealmClass
-open class ThumbNail(var id: Int = -1,
-                     @SerializedName("media_type") var rawMediaType: String = "",
-                     @SerializedName("image_url") var imageUrl: String = "") : RealmModel {
+data class ThumbNail(val id: Int = -1,
+                     @SerializedName("image_uuid")
+                     val imageUUID: String = "",
+                     @SerializedName("media_type")
+                     val rawMediaType: String = "",
+                     @SerializedName("image_url")
+                     val imageUrl: String = ""){
 
 
-    val mediaType: MediaType? get() = if (rawMediaType.isNullOrEmpty()) null else MediaType.valueOf(rawMediaType)
+    val mediaType: MediaType? get() = if (rawMediaType.isEmpty()) null else MediaType.valueOf(rawMediaType)
 
     companion object {
         val EMPTY = ThumbNail(-1, "", "")
     }
+
+    fun makeRealm() = ThumbNailRealm(id,rawMediaType + "", imageUrl + "")
 }

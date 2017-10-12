@@ -9,7 +9,6 @@ class Store<State> constructor(initState: State, private val reducer: Reducer<St
     val state: BehaviorSubject<State> = BehaviorSubject.createDefault(initState)
     private val actionDispatcher: PublishSubject<Action> = PublishSubject.create()
     private val result: Observable<Result>
-    private lateinit var disposable: Disposable
 
     init {
         this.result = Observable.fromArray<Epic<State>>(*effects)
@@ -23,16 +22,13 @@ class Store<State> constructor(initState: State, private val reducer: Reducer<St
         actionDispatcher.onNext(action)
     }
 
-    fun startBinding() {
-        disposable = result
+    fun startBinding(): Observable<State> {
+        return result
                 .scan(state.value, reducer)
-                .subscribe {
+                .doOnNext {
                     state.onNext(it)
                 }
-    }
 
-    fun stopBinding() {
-        disposable.dispose()
     }
 
 

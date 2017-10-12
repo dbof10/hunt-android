@@ -2,6 +2,7 @@ package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.AccessToken
 import com.ctech.eaty.entity.UserDetail
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.request.OAuthClientRequest
 import io.reactivex.Observable
 import io.reactivex.ObservableSource

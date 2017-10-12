@@ -70,9 +70,41 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="AppTheme.Translucent.Search">
+        <item name="android:statusBarColor">@color/background_super_dark</item>
+        <item name="android:windowAnimationStyle">@style/SearchWindowAnimations</item>
+        <item name="android:windowEnterTransition">@transition/search_enter</item>
+        <item name="android:windowReturnTransition">@transition/search_return</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/search_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/search_shared_return</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        <item name="shotLoadingPlaceholderColors">@array/loading_placeholders_dark</item>
+        <item name="initialBadgeColor">@color/gif_badge_dark_image</item>
+    </style>
+
+    <style name="SearchWindowAnimations">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_rapidly</item>
+    </style>
+
+    <style name="HuntDarkOverlay" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+    </style>
+
+    <style name="SearchViewTheme" parent="HuntDarkOverlay">
+        <item name="colorControlActivated">?android:colorAccent</item>
+        <item name="android:searchViewStyle">@style/Widget.Hunt.SearchView</item>
+    </style>
+
     <style name="Widget.Hunt" parent="android:Widget" />
 
-    <style name="Widget.Hunt.HorizontalInlineActionButton" parent="@android:style/Widget.Material.Button">
+    <style name="Widget.Hunt.SearchView" parent="android:style/Widget.Material.SearchView">
+        <item name="android:searchIcon">@android:color/transparent</item>
+        <item name="android:searchHintIcon">@android:color/transparent</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:submitBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.Hunt.LoginButton" parent="@android:style/Widget.Material.Button">
         <item name="android:gravity">center_vertical</item>
         <item name="android:drawablePadding">@dimen/space_small</item>
         <item name="android:paddingStart">@dimen/content_padding_horizontal</item>
@@ -83,10 +115,11 @@
 
     <style name="Widget.Hunt.InlineActionButton" parent="@android:style/Widget.Material.Button">
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textAppearance">@style/TextAppearance.UserName</item>
         <item name="android:drawablePadding">@dimen/space_small</item>
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:fontFeatureSettings">smcp, onum</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
     <style name="Widget.Hunt.DialogText">
@@ -130,6 +163,11 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.EmptyText" parent="@style/TextAppearance.DialogContent">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="lineHeightHint">24sp</item>
     </style>
 
     <style name="TextAppearance.FooterIndicator" parent="@android:style/TextAppearance.Material.Body2" />

@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.TextView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -34,6 +33,8 @@ import com.ctech.eaty.util.ColorUtils
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.ViewUtils
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposeWith
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -41,7 +42,8 @@ import kotlinx.android.synthetic.main.activity_product_detail.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract, CustomTabActivityHelper.ConnectionCallback {
+class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract,
+        CustomTabActivityHelper.ConnectionCallback, ProductDetailView {
 
     private val SCRIM_ADJUSTMENT = 0.075f
     private val FAB_SCALE_DURATION = 300L
@@ -151,7 +153,10 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
                                 val fragment = supportFragmentManager.findFragmentById(R.id.fBody) as? ProductBodyFragment
                                 fragment?.apply {
                                     setSpacerBackground(
-                                            ViewUtils.createRipple(palette, 0.25f, 0.5f, ContextCompat.getColor(applicationContext, R.color.mid_grey), true)
+                                            ViewUtils.createRipple(palette, 0.25f,
+                                                    0.5f,
+                                                    ContextCompat.getColor(this@ProductDetailActivity, R.color.mid_grey),
+                                                    true)
                                     )
                                 }
                                 // slightly more opaque ripple on the pinned image to compensate
@@ -182,9 +187,12 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
         setupChromeService()
         setupViewModel()
+        setupListener()
         setupBodyFragment()
         setupHeader()
         setupToolbar()
+        viewModel.attachView(this)
+
         trackingManager.trackScreenView(getScreenName())
 
     }
@@ -201,11 +209,8 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun calculateFabPosition() {
-        // calculate 'natural' position i.e. with full height image. Store it for use when scrolling
         fabOffset = ivProduct.height - (fab.height / 2)
         fab.setOffset(fabOffset)
-
-        // calculate min position i.e. pinned to the collapsed image when scrolled
         fab.setMinOffset(ivProduct.minimumHeight - (fab.height / 2))
     }
 
@@ -222,12 +227,16 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     override fun onStart() {
         super.onStart()
         customTabActivityHelper.bindCustomTabsService(this)
-        store.dispatch(ProductDetailAction.Load(productId))
     }
 
     override fun onStop() {
-        super.onStop()
         customTabActivityHelper.unbindCustomTabsService(this)
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        viewModel.detachView()
+        super.onDestroy()
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
@@ -239,8 +248,21 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun setupViewModel() {
-        viewModel.header().subscribe {
-            renderHeader(it)
+        viewModel.render()
+        viewModel.header()
+                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .subscribe {
+                    renderHeader(it)
+                }
+    }
+
+    private fun setupListener() {
+        fab.setOnClickListener {
+//            if (fab.isChecked) {
+//                store.dispatch(ProductDetailAction.UnLike(productId))
+//            } else {
+//                store.dispatch(ProductDetailAction.Like(productId))
+//            }
         }
     }
 
@@ -265,7 +287,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     private fun setupBodyFragment() {
         var fragment = supportFragmentManager.findFragmentById(R.id.fBody)
         if (fragment == null) {
-            fragment = ProductBodyFragment.newInstance()
+            fragment = ProductBodyFragment.newInstance(productId)
             supportFragmentManager.beginTransaction()
                     .add(R.id.fBody, fragment)
                     .commit()
@@ -301,6 +323,14 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     override fun onCustomTabsDisconnected() {
 
+    }
+
+    override fun showLogin() {
+        viewModel.navigateLogin()
+    }
+
+    override fun showLiked(liked: Boolean) {
+        fab.isChecked = liked
     }
 
 }

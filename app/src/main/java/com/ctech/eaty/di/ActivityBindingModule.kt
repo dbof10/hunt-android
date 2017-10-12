@@ -38,13 +38,13 @@ import com.ctech.eaty.ui.profile.view.ProfileActivity
 import com.ctech.eaty.ui.radio.di.RadioFragmentBuilderModule
 import com.ctech.eaty.ui.radio.di.RadioModule
 import com.ctech.eaty.ui.radio.view.RadioActivity
-import com.ctech.eaty.ui.search.di.SearchFragmentBuilderModule
-import com.ctech.eaty.ui.search.di.SearchModule
-import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.splash.view.SplashActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
+import com.ctech.eaty.ui.topiclist.di.SearchFragmentBuilderModule
+import com.ctech.eaty.ui.topiclist.di.TopicListModule
+import com.ctech.eaty.ui.topiclist.view.TopicListActivity
 import com.ctech.eaty.ui.user.di.UserDetailFragmentBuilderModule
 import com.ctech.eaty.ui.user.di.UserDetailModule
 import com.ctech.eaty.ui.user.view.UserActivity
@@ -85,8 +85,8 @@ abstract class ActivityBindingModule {
     abstract fun contributeVoteActivity(): VoteActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(SearchModule::class, SearchFragmentBuilderModule::class))
-    abstract fun contributeSearchActivity(): SearchActivity
+    @ContributesAndroidInjector(modules = arrayOf(TopicListModule::class, SearchFragmentBuilderModule::class))
+    abstract fun contributeTopicListActivity(): TopicListActivity
 
     @ContributesAndroidInjector()
     abstract fun contributeDeepLinkActivity(): UniversalLinkActivity
@@ -138,5 +138,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(JobListModule::class))
     abstract fun contributeJobsActivity(): JobListActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(com.ctech.eaty.ui.search.di.SearchModule::class))
+    abstract fun contributeSearchActivity(): com.ctech.eaty.ui.search.view.SearchActivity
 
 }

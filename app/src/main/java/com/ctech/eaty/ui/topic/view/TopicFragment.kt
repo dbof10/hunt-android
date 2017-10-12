@@ -7,17 +7,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.ui.comment.action.CommentAction
-import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
+import com.ctech.eaty.ui.topiclist.view.TopicListActivity
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
@@ -71,7 +70,7 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
                 }
                 .onItemClickListener { _, item, _ ->
                     (item as Topic).run {
-                        val intent = SearchActivity.newIntent(context, this)
+                        val intent = TopicListActivity.newIntent(context, this)
                         context.startActivity(intent)
                     }
 

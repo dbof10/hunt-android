@@ -1,7 +1,9 @@
 package com.ctech.eaty.entity
 
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
 import org.joda.time.DateTime
+import org.joda.time.format.ISODateTimeFormat
 
 
 data class Comment(val id: Int, val body: String,
@@ -15,4 +17,13 @@ data class Comment(val id: Int, val body: String,
                    val isMaker: Boolean,
                    val user: User,
                    @SerializedName("child_comments")
-                   val childComments: List<Comment>)
+                   val childComments: List<Comment>) {
+
+    fun makeRealm(): CommentRealm {
+        val realmList = RealmList<CommentRealm>()
+        realmList.addAll(childComments.map { it.makeRealm()})
+        return CommentRealm(id, body, parentCommentId, childCommentCount,
+                ISODateTimeFormat.dateTime().print(createdAt),
+                isMaker, user.makeRealm(), realmList)
+    }
+}

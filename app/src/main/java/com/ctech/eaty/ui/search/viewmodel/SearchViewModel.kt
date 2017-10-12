@@ -1,46 +1,45 @@
 package com.ctech.eaty.ui.search.viewmodel
 
-import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
+import android.util.Log
+import com.ctech.eaty.base.BasePresenter
+import com.ctech.eaty.error.EmptyElementException
+import com.ctech.eaty.ui.search.navigation.SearchNavigation
 import com.ctech.eaty.ui.search.state.SearchState
+import com.ctech.eaty.ui.search.view.SearchView
+import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 
-class SearchViewModel(private val stateDispatcher: Observable<SearchState>) {
-    fun loading(): Observable<SearchState> {
+class SearchViewModel(private val stateDispatcher: Observable<SearchState>,
+                      private val threadScheduler: ThreadScheduler,
+                      private val navigation: SearchNavigation) : BasePresenter<SearchView>() {
+
+    fun render(): Disposable {
         return stateDispatcher
-                .filter { it.loading }
-    }
-
-    fun loadingMore(): Observable<SearchState> {
-        return stateDispatcher
-                .filter { it.loadingMore }
-    }
-
-    fun loadError(): Observable<Throwable> {
-        return stateDispatcher
-                .filter { it.loadError != null }
-                .map { it.loadError }
-    }
-
-    fun loadMoreError(): Observable<Throwable> {
-        return stateDispatcher
-                .filter { it.loadMoreError != null }
-                .map { it.loadMoreError }
-    }
-
-
-    fun content(): Observable<List<ProductItemViewModel>> {
-        return stateDispatcher
-                .filter {
-                    !it.loading
-                            && !it.loadingMore
-                            && it.loadError == null
-                            && it.loadMoreError == null
-                            && it.content.isNotEmpty()
+                .observeOn(threadScheduler.uiThread())
+                .subscribe {
+                    if (it.loading) {
+                        view?.showLoading()
+                    } else {
+                        if (it.loadError != null) {
+                            if (it.loadError is EmptyElementException) {
+                                view?.showEmpty()
+                            } else {
+                                view?.showLoadError()
+                            }
+                        } else if (it.loadingMore) {
+                            view?.showLoadingMore()
+                        } else if (it.loadMoreError != null) {
+                            view?.showLoadMoreError()
+                        } else {
+                            view?.showContent(it.content)
+                        }
+                    }
                 }
-                .map {
-                    it.content
-                }
+    }
 
-
+    fun toProduct(id: Int) {
+        navigation.toProduct(id)
+                .subscribe()
     }
 }

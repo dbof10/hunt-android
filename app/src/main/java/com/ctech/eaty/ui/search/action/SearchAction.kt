@@ -4,8 +4,8 @@ import com.ctech.eaty.base.redux.Action
 
 sealed class SearchAction : Action() {
 
-    data class Load(val id: Int) : SearchAction()
+    data class Load(val keyword: String) : SearchAction()
 
-    data class LoadMore(val id: Int) : SearchAction()
+    data class LoadMore(val keyword: String) : SearchAction()
 
 }

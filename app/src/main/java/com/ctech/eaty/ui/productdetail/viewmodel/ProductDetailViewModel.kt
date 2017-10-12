@@ -2,14 +2,19 @@ package com.ctech.eaty.ui.productdetail.viewmodel
 
 import android.app.ActivityOptions
 import android.support.customtabs.CustomTabsSession
+import android.util.Log
+import com.ctech.eaty.base.BasePresenter
+import com.ctech.eaty.entity.CurrentUser
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
+import com.ctech.eaty.ui.productdetail.view.ProductDetailView
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.util.rx.Functions
 import com.ctech.eaty.util.rx.ThreadScheduler
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -17,11 +22,26 @@ import timber.log.Timber
 
 class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<ProductDetailState>,
                              private val navigation: ProductDetailNavigation,
-                             private val threadScheduler: ThreadScheduler) {
+                             private val threadScheduler: ThreadScheduler) : BasePresenter<ProductDetailView>() {
     private val HEADER_IMAGE_SIZE = 300
     private val MAX_BODY_ITEM = 7
     private var body: List<ProductBodyItemViewModel> = emptyList()
     private val bodySubject: PublishSubject<List<ProductBodyItemViewModel>> = PublishSubject.create()
+
+    fun render(): Disposable {
+        return stateDispatcher
+                .observeOn(threadScheduler.uiThread())
+                .subscribe {
+                    when {
+                        it.liking -> view?.showLiked(true)
+                        it.requiredLoggedIn -> view?.showLogin()
+                        it.unliking -> view?.showLiked(false)
+                        else -> {
+                            view?.showLiked(it.liked)
+                        }
+                    }
+                }
+    }
 
     fun loading(): Observable<ProductDetailState> {
         return stateDispatcher
@@ -46,6 +66,10 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                 .map {
                     ResizeImageUrlProvider.overrideUrl(it.thumbnail.imageUrl, HEADER_IMAGE_SIZE)
                 }
+    }
+
+    fun currentUser(): Observable<CurrentUser> {
+        return content().map { it.currentUser }
     }
 
     fun content(): Observable<ProductDetail> {
@@ -156,6 +180,11 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun navigateUser(user: User, option: ActivityOptions) {
         navigation.toUser(user, option)
+                .subscribe(Functions.EMPTY, Timber::e)
+    }
+
+    fun navigateLogin() {
+        navigation.toLogin()
                 .subscribe(Functions.EMPTY, Timber::e)
     }
 }

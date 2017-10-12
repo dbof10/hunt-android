@@ -74,6 +74,7 @@ dependencies {
 
     implementation deps.kotlin
     implementation deps.support.multidex
+
     //UI
     implementation deps.support.appcompat
     implementation deps.support.design
@@ -105,12 +106,19 @@ dependencies {
     implementation deps.butterknife.lib
     kapt deps.butterknife.compiler
 
+    //Autodispose
+    implementation deps.autodispose.core
+    implementation deps.autodispose.android
+    implementation deps.autodispose.architecture
+    implementation deps.autodispose.kotlin
+
     //Dagger
     implementation deps.dagger.lib
     implementation deps.dagger.androidSupport
     kapt deps.dagger.compiler
     implementation deps.dagger.android
     kapt deps.dagger.androidCompiler
+
     //Networking
     implementation deps.network.retrofit
     implementation deps.network.retrofitRxAdapter
@@ -143,6 +151,7 @@ dependencies {
     }
     implementation deps.firebase.ads
 
+    //Logging
     implementation deps.timber
 
     //Tracking
@@ -161,10 +170,15 @@ dependencies {
     debugImplementation deps.leakcanary.op
     releaseImplementation deps.leakcanary.noop
     testImplementation deps.leakcanary.noop
+
     //Crash report
     implementation(deps.crashlytics) {
         transitive = true
     }
+
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+
     testImplementation deps.test.junit
     testImplementation deps.test.mockito
     testImplementation deps.test.robolectric
@@ -181,8 +195,7 @@ dependencies {
         exclude group: 'com.facebook.yoga', module: 'yoga'
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
 
 }
 apply plugin: 'com.google.gms.google-services'

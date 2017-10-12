@@ -3,6 +3,7 @@ package com.ctech.eaty.ui.home.navigation
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
@@ -14,6 +15,8 @@ import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.ui.radio.view.RadioActivity
+import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.widget.transition.CircularTransform
@@ -71,6 +74,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 R.id.action_jobs -> {
                     intent.setClass(context, JobListActivity::class.java)
                 }
+                R.id.action_radio -> {
+                    intent.setClass(context, RadioActivity::class.java)
+                }
             }
             context.startActivity(intent)
         }
@@ -80,6 +86,13 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
         return Completable.fromAction {
             val intent = NotificationActivity.newIntent(context)
             context.startActivity(intent)
+        }
+    }
+
+    fun toSearch(it: View): Completable {
+        return Completable.fromAction {
+            val options = ActivityOptions.makeSceneTransitionAnimation(context, it, context.getString(R.string.transition_search_back)).toBundle()
+          context.startActivity(SearchActivity.newIntent(context), options)
         }
     }
 

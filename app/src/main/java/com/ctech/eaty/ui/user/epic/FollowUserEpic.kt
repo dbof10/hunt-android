@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.user.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
-import com.ctech.eaty.repository.ProductHuntApi
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.ui.user.action.UserAction
 import com.ctech.eaty.ui.user.result.FollowUserResult
 import com.ctech.eaty.ui.user.state.UserDetailState

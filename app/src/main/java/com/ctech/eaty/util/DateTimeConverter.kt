@@ -18,7 +18,6 @@ class DateTimeConverter : JsonSerializer<DateTime>, JsonDeserializer<DateTime> {
         if (json.asString == null || json.asString.isEmpty()) {
             return null
         }
-
         val fmt = ISODateTimeFormat.dateTimeParser()
         return fmt.parseDateTime(json.asString)
     }

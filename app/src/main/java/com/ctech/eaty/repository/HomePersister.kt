@@ -1,9 +1,7 @@
 package com.ctech.eaty.repository
 
 import com.ctech.eaty.entity.HomeEntity
-import com.ctech.eaty.entity.ImageUrl
-import com.ctech.eaty.entity.LiteUser
-import com.ctech.eaty.entity.Product
+import com.ctech.eaty.entity.ProductRealm
 import com.ctech.eaty.error.RecordNotFoundException
 import com.ctech.eaty.response.ProductResponse
 import com.nytimes.android.external.store3.base.Parser
@@ -25,7 +23,9 @@ class HomePersister : Persister<ProductResponse, BarCode>, RecordProvider<BarCod
         val queryResult = realm.where(HomeEntity::class.java)
                 .findAll()
 
-        return if (queryResult.isEmpty()) {
+        val empty = queryResult.isEmpty()
+
+        return if (empty) {
             RecordState.MISSING
         } else {
             RecordState.FRESH
@@ -37,12 +37,13 @@ class HomePersister : Persister<ProductResponse, BarCode>, RecordProvider<BarCod
         return Single.create { emitter ->
             val realm = Realm.getDefaultInstance()
             realm.executeTransaction {
-                val reamList = RealmList<Product>()
-                reamList.addAll(raw.products)
+                val reamList = RealmList<ProductRealm>()
+                reamList.addAll(raw.products.map { it.makeRealm() })
                 val entity = HomeEntity(key.key, reamList)
                 realm.copyToRealmOrUpdate(entity)
                 emitter.onSuccess(true)
             }
+
         }
 
     }
@@ -55,47 +56,15 @@ class HomePersister : Persister<ProductResponse, BarCode>, RecordProvider<BarCod
                     .equalTo("key", key.key)
                     .findAll()
 
+
             if (queryResult.isEmpty()) {
                 emitter.onError(RecordNotFoundException("Record for $key not found"))
             } else {
-                emitter.onSuccess(ProductResponse(queryResult.first().value))
+                val shadow = realm.copyFromRealm(queryResult.first().value)
+                val result = shadow.map { it.makeProduct() }
+                emitter.onSuccess(ProductResponse(result))
             }
         }
     }
-
-    companion object {
-        fun createParser(): HomeParser {
-            return HomeParser()
-        }
-    }
-
-    class HomeParser : Parser<ProductResponse, ProductResponse> {
-        override fun apply(raw: ProductResponse): ProductResponse {
-            val parsed = raw.products.map {
-                Product(it.id, it.name + "", it.tagline + "", it.commentsCount,
-                        it.votesCount,
-                        it.discussionUrl,
-                        it.redirectUrl,
-                        ImageUrl(it.imageUrl.px48 + "",
-                                it.imageUrl.px64 + "",
-                                it.imageUrl.px300 + "",
-                                it.imageUrl.px850 + ""),
-                        detachUser(it.user),
-                        it.thumbnail)
-            }
-            return ProductResponse(parsed)
-        }
-
-        private fun detachUser(user: LiteUser): LiteUser {
-            return LiteUser(user.id, user.name + "",
-                    user.username + "", user.headline + "",
-                    ImageUrl(user.imageUrl.px48 + "",
-                            user.imageUrl.px64 + "",
-                            user.imageUrl.px300 + "",
-                            user.imageUrl.px850 + ""))
-        }
-
-    }
-
 
 }

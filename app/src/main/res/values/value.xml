@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="searchback_stem_search_trim_start" type="fraction" format="float">0</item>
+    <item name="searchback_stem_search_trim_end" type="fraction" format="float">0.185</item>
+    <item name="searchback_stem_back_trim_start" type="fraction" format="float">0.75</item>
+    <item name="searchback_stem_back_trim_end" type="fraction" format="float">1</item>
+    <item name="searchback_arrow_head_search_trim_end" type="fraction" format="float">0</item>
+    <item name="searchback_arrow_head_back_trim_end" type="fraction" format="float">1</item>
+    <item name="searchback_circle_search_trim_end" type="fraction" format="float">1</item>
+    <item name="searchback_circle_back_trim_end" type="fraction" format="float">0</item>
+</resources>

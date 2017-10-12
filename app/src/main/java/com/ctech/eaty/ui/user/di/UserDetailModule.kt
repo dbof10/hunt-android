@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.user.di
 
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
-import com.ctech.eaty.repository.ProductHuntApi
+import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.ui.user.action.BarCodeGenerator
 import com.ctech.eaty.ui.user.epic.*
@@ -14,7 +14,6 @@ import com.ctech.eaty.util.ResourceProvider
 import com.ctech.eaty.util.rx.ThreadScheduler
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 @Module

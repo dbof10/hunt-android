@@ -1,7 +1,6 @@
 package com.ctech.eaty.ui.search.result
 
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 
 
