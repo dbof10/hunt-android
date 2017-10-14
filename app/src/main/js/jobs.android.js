@@ -5,16 +5,16 @@ import {
 
 import {Provider} from 'react-redux';
 import configureStore from './store/configStore';
-import Main from './container/live'
+import Job from './container/job';
 
 const store = configureStore();
 
-class LiveEvent extends Component {
+class Jobs extends Component {
 
     render() {
         return (
             <Provider store={store}>
-                <Main/>
+                <Job/>
             </Provider>
 
         );
@@ -22,4 +22,4 @@ class LiveEvent extends Component {
 }
 
 
-AppRegistry.registerComponent('LiveEvent', () => LiveEvent);
+AppRegistry.registerComponent('Jobs', () => Jobs);

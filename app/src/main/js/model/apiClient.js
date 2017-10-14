@@ -6,10 +6,12 @@ import axios from "axios";
 import Rx from "rxjs";
 import 'rxjs/add/operator/mergeMap';
 import {getClientToken, getUserToken} from "../util/nativeInfra"
+import * as queryBuilder from '../util/graphqlRequetsFactory'
 
 
 const clientToken = Rx.Observable.fromPromise(getClientToken());
 const userToken = Rx.Observable.fromPromise(getUserToken());
+const TIME_OUT = 20000;
 
 const configSource = Rx.Observable.combineLatest(
     clientToken,
@@ -23,13 +25,18 @@ const configSource = Rx.Observable.combineLatest(
     .map(token => {
         return {
             baseURL: 'https://api.producthunt.com',
-            timeout: 30000,
+            timeout: TIME_OUT,
             headers: {
                 'Accept': 'application/json',
                 "Authorization": `Bearer ${token}`
             }
         }
     });
+
+const instance = axios.create({
+    baseURL: 'https://www.producthunt.com',
+    timeout: TIME_OUT,
+});
 
 export function getEvents(date, offset) {
     return configSource
@@ -40,4 +47,10 @@ export function getEvents(date, offset) {
             }
         )
 
+}
+
+export function getJobs(offset) {
+    let query = queryBuilder.buildJobRequest(offset);
+    return Rx.Observable.fromPromise(instance.post('/frontend/graphql', query))
+                        .map(response => response.data.data)
 }

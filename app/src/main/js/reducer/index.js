@@ -5,7 +5,8 @@
 
 import {combineReducers} from 'redux'
 import event from './event'
+import job from './job'
 
 export default combineReducers({
-    event
+    event, job
 });

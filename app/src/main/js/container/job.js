@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, FlatList, View} from 'react-native';
 
-import {Load, LoadMore} from '../action/action';
+import {Load, LoadMore} from '../action/job';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Loading from '../component/loading'
 import Error from '../component/error'
-import EventItem from '../component/event'
-import {formatCurrentDate} from "../util/dateUtils"
+import JobItem from '../component/job'
 
-class Main extends Component {
+class Job extends Component {
 
     constructor(props) {
         super(props);
@@ -18,32 +17,32 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        this.props.load(formatCurrentDate(new Date().getTime()))
+        this.props.load()
     }
 
     keyExtractor = (item, index) => item.id;
 
-    renderItem = ({item, index}) => (
-        <EventItem
+    renderItem = ({item, index}) => {
+        return <JobItem
             id={item.id}
-            event={item}
+            job={item}
         />
-    );
+    };
 
     loadMore() {
-        this.props.loadMore(formatCurrentDate(new Date().getTime()))
+        this.props.loadMore()
     }
 
     render() {
-        if (this.props.event.isLoading) {
+        if (this.props.job.isLoading) {
             return <Loading/>;
         } else {
 
-            if (this.props.event.error) {
+            if (this.props.job.error) {
 
                 return <Error
-                    errorMessage={this.props.event.error.errorMessage}
-                    explainMessage={this.props.event.error.explainMessage}
+                    errorMessage={this.props.job.error.errorMessage}
+                    explainMessage={this.props.job.error.explainMessage}
                     onRetry={() => {
                         this.props.load()
                     }
@@ -55,7 +54,7 @@ class Main extends Component {
                         ItemSeparatorComponent={() => (
                             <View style={styles.divider}/>
                         )}
-                        data={this.props.event.dataSource}
+                        data={this.props.job.dataSource}
                         keyExtractor={this.keyExtractor}
                         renderItem={this.renderItem}
                         onEndReached={this.loadMore}
@@ -79,9 +78,9 @@ const styles = StyleSheet.create({
 
 
 function mapStateToProps(state) {
-    const event = state.event;
+    const job = state.job;
     return {
-        event,
+        job,
     }
 }
 
@@ -92,4 +91,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Job);

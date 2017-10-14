@@ -1,17 +1,15 @@
-package com.ctech.eaty.react
+package com.ctech.eaty.ui.job.support
 
 import android.view.View
-import com.ctech.eaty.repository.AppSettingsManager
 import com.facebook.react.ReactPackage
-import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
 
-class NativeInfraReactPackage(private val appSettings: AppSettingsManager) : ReactPackage {
+class JobBridgeReactPackage(private val hostContract: NativeHostContract) : ReactPackage {
 
     override fun createNativeModules(context: ReactApplicationContext) =
-            arrayListOf(AppSettingsModule(context, appSettings))
+            arrayListOf(NativeNavigatorModule(context, hostContract))
 
     override fun createViewManagers(context: ReactApplicationContext) = emptyList<ViewManager<View, ReactShadowNode>>()
 

@@ -12,6 +12,8 @@
     <string name="live_event">LIVE Event</string>
     <string name="notification">Notification</string>
     <string name="edit_profile">Edit profile</string>
+    <string name="job_list">Jobs</string>
+
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>
@@ -24,7 +26,7 @@
     <string name="navigation_topic">Topics</string>
     <string name="navigation_radio">Radio</string>
     <string name="navigation_live">LIVE Event</string>
-
+    <string name="navigation_jobs">Jobs</string>
 
     <!-- User Detail -->
     <string name="transition_user_background" translatable="false">transition_player_background</string>

@@ -5,7 +5,7 @@
 import {
     FETCH_EVENT_SUCCESS, FETCH_EVENT_FAIL, FETCH_EVENT_LOADING, LOAD, LOAD_MORE, LoadResult,
     FETCH_MORE_EVENT_LOADING, FETCH_MORE_EVENT_SUCCESS, FETCH_MORE_EVENT_FAIL
-} from "../action/action";
+} from "../action/live";
 import * as apiClient from "../model/apiClient";
 import 'rxjs/add/operator/mergeMap';
 import Rx from "rxjs";

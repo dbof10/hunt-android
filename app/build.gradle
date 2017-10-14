@@ -182,7 +182,11 @@ dependencies {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
 }
 apply plugin: 'com.google.gms.google-services'
+repositories {
+    mavenCentral()
+}
 

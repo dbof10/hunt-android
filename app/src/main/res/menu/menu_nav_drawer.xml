@@ -16,4 +16,9 @@
         android:title="@string/navigation_live"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_jobs"
+        android:title="@string/navigation_jobs"
+        app:showAsAction="never" />
+
 </menu>

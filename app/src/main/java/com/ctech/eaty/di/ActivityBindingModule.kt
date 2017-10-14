@@ -20,6 +20,8 @@ import com.ctech.eaty.ui.gallery.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.job.di.JobListModule
+import com.ctech.eaty.ui.job.view.JobListActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.di.LoginModule
 import com.ctech.eaty.ui.login.view.LoginActivity
@@ -132,5 +134,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector()
     abstract fun contributeOnboardingActivity(): OnboardingActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(JobListModule::class))
+    abstract fun contributeJobsActivity(): JobListActivity
 
 }

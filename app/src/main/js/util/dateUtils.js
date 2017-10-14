@@ -15,7 +15,7 @@ export const formatCurrentDate = (nowMilliseconds) => {
 };
 
 
-export const formatDate = (isoDate) => {
+export const formatHour = (isoDate) => {
     const newDate = new Date(isoDate);
     let year = newDate.getFullYear();
     let month = newDate.getMonth() + 1;
@@ -41,4 +41,20 @@ export const formatDate = (isoDate) => {
 
 
     return `${date}/${month}/${year} - ${hour}:${minute}`
+};
+
+export const formatDate = (isoDate) => {
+    const newDate = new Date(isoDate);
+    let year = newDate.getFullYear();
+    let month = newDate.getMonth() + 1;
+    let date = newDate.getDate();
+
+    if (date < 10) {
+        date = '0' + date;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    return `${date}/${month}/${year}`
 };

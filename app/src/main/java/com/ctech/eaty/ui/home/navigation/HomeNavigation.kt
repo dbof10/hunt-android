@@ -8,13 +8,12 @@ import com.ctech.eaty.R
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.ui.collection.view.CollectionActivity
-import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.view.HomeActivity
+import com.ctech.eaty.ui.job.view.JobListActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
-import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.widget.transition.CircularTransform
@@ -29,25 +28,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
         val LOGIN_REQUEST_CODE = 1001
     }
 
-    fun toShare(link: String): Completable {
-        return Completable.fromAction {
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_TEXT, link)
-            context.startActivity(Intent.createChooser(shareIntent, "Share link using"))
-        }
-    }
-
     fun toProduct(id: Int): Completable {
         return Completable.fromAction {
             val intent = ProductDetailActivity.newIntent(context, id)
-            context.startActivity(intent)
-        }
-    }
-
-    fun toComment(id: Int): Completable {
-        return Completable.fromAction {
-            val intent = CommentActivity.newIntent(context, id)
             context.startActivity(intent)
         }
     }
@@ -84,6 +67,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 }
                 R.id.action_live -> {
                     intent.setClass(context, LiveEventActivity::class.java)
+                }
+                R.id.action_jobs -> {
+                    intent.setClass(context, JobListActivity::class.java)
                 }
             }
             context.startActivity(intent)

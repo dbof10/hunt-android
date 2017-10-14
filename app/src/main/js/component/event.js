@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, TouchableNativeFeedback} from 'react-native';
-import {formatDate} from "../util/dateUtils"
+import {formatHour} from "../util/dateUtils"
 import PropTypes from 'prop-types';
 
 export default class EventItem extends Component {
@@ -18,9 +18,10 @@ export default class EventItem extends Component {
             imageUrl = this.props.event.guests[0].image_url["64px"]
         }
 
-        let startAt;
-        if (this.props.event.starts_at) {
-            startAt = `Start at ${formatDate(this.props.event.starts_at)}`
+        let displayStartedAt;
+        let startAt = this.props.event.starts_at;
+        if (startAt) {
+            displayStartedAt = `Start at ${formatHour(startAt)}`
         }
 
         return (
@@ -45,8 +46,8 @@ export default class EventItem extends Component {
                             {this.props.event.tagline}
                         </Text>
 
-                        <Text style={styles.info}>
-                            {startAt}
+                        <Text style={styles.timeStamp}>
+                            {displayStartedAt}
                         </Text>
                         <Text style={styles.info}>
                             {`${this.props.event.subscriber_count} attending`}
@@ -99,8 +100,13 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 16
+        fontSize: 18,
+        color: 'rgba(0, 0, 0, 0.87)'
+    },
 
+    timeStamp: {
+        marginTop: 2,
+        fontSize: 12,
+        color: 'rgba(0, 0, 0, 0.26)'
     }
-
 });
