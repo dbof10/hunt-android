@@ -1,7 +1,8 @@
 def versions = [
         support    : '26.1.0',
         litho      : '0.6.1',
-        autodispose: '0.3.0'
+        autodispose: '0.3.0',
+        firebase : '11.4.2'
 ]
 
 def build = [
@@ -79,10 +80,11 @@ def store = [
 ]
 
 def firebase = [
-        core    : 'com.google.firebase:firebase-core:11.0.2',
-        perf    : 'com.google.firebase:firebase-perf:11.0.2',
-        indexing: 'com.google.firebase:firebase-appindexing:11.0.2',
-        ads     : 'com.google.firebase:firebase-ads:11.0.2'
+        core     : 'com.google.firebase:firebase-core:${versions.firebase}',
+        perf     : 'com.google.firebase:firebase-perf:${versions.firebase}',
+        indexing : 'com.google.firebase:firebase-appindexing:${versions.firebase}',
+        ads      : 'com.google.firebase:firebase-ads:${versions.firebase}',
+        messaging: 'com.google.firebase:firebase-messaging:${versions.firebase}'
 ]
 
 def leakcanary = [
