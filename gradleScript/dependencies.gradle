@@ -80,11 +80,11 @@ def store = [
 ]
 
 def firebase = [
-        core     : 'com.google.firebase:firebase-core:${versions.firebase}',
-        perf     : 'com.google.firebase:firebase-perf:${versions.firebase}',
-        indexing : 'com.google.firebase:firebase-appindexing:${versions.firebase}',
-        ads      : 'com.google.firebase:firebase-ads:${versions.firebase}',
-        messaging: 'com.google.firebase:firebase-messaging:${versions.firebase}'
+        core     : "com.google.firebase:firebase-core:${versions.firebase}",
+        perf     : "com.google.firebase:firebase-perf:${versions.firebase}",
+        indexing : "com.google.firebase:firebase-appindexing:${versions.firebase}",
+        ads      : "com.google.firebase:firebase-ads:${versions.firebase}",
+        messaging: "com.google.firebase:firebase-messaging:${versions.firebase}"
 ]
 
 def leakcanary = [

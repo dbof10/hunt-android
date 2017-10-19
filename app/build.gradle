@@ -158,6 +158,7 @@ dependencies {
     implementation deps.firebase.core
     implementation deps.firebase.perf
     implementation deps.firebase.indexing
+    implementation deps.firebase.messaging
 
     //React
     implementation deps.react.core
@@ -198,8 +199,6 @@ dependencies {
 
 
 }
+
 apply plugin: 'com.google.gms.google-services'
-repositories {
-    mavenCentral()
-}
 
