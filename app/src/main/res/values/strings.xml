@@ -37,7 +37,7 @@
 
     <!--Search -->
     <string name="transition_search_back" translatable="false">transition_search_back</string>
-    <string name="search_hint">Search Daily News</string>
+    <string name="search_hint">Discover your favorite thing</string>
     <string name="no_search_results">No results for\n“%1$s”</string>
 
 

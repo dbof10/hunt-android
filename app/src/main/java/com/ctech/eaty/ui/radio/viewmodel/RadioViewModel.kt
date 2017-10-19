@@ -6,6 +6,7 @@ import com.ctech.eaty.response.RadioResponse
 import com.ctech.eaty.player.MediaController
 import com.ctech.eaty.ui.radio.state.MediaPlayerState
 import com.ctech.eaty.ui.radio.state.RadioState
+import com.ctech.eaty.util.Constants
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -86,7 +87,7 @@ class RadioViewModel(private val stateDispatcher: Observable<RadioState>, privat
                 } else {
                     radioController.play(Uri.parse(viewModel.streamUrl)
                             .buildUpon()
-                            .appendQueryParameter("client_id", "2t9loNQH90kzJcsFCODdigxfp325aq4z")
+                            .appendQueryParameter("client_id", Constants.SOUND_CLOUD_ID)
                             .build())
                             .subscribe({ newViewModel = viewModel.copy(trackStatus = TrackStatus.PLAYING) }, Timber::e)
                 }

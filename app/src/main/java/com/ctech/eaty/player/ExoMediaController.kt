@@ -3,6 +3,7 @@ package com.ctech.eaty.player
 import android.app.Activity
 import android.net.Uri
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import com.ctech.eaty.util.EventLogger
 import com.google.android.exoplayer2.C
@@ -78,16 +79,16 @@ class ExoMediaController(private val context: Activity) : MediaController<Simple
 
     private fun buildMediaSource(uri: Uri): MediaSource {
         val type = Util.inferContentType(uri)
-        when (type) {
-            C.TYPE_SS -> return SsMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
+        return when (type) {
+            C.TYPE_SS -> SsMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
                     DefaultSsChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger)
 
-            C.TYPE_DASH -> return DashMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
+            C.TYPE_DASH -> DashMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
                     DefaultDashChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger)
 
-            C.TYPE_HLS -> return HlsMediaSource(uri, mediaDataSourceFactory, mainHandler, eventLogger)
+            C.TYPE_HLS -> HlsMediaSource(uri, mediaDataSourceFactory, mainHandler, eventLogger)
 
-            C.TYPE_OTHER -> return ExtractorMediaSource(uri, mediaDataSourceFactory, DefaultExtractorsFactory(), mainHandler, eventLogger)
+            C.TYPE_OTHER -> ExtractorMediaSource(uri, mediaDataSourceFactory, DefaultExtractorsFactory(), mainHandler, eventLogger)
 
             else -> {
                 throw IllegalStateException("Unsupported type: " + type)
