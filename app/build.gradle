@@ -19,9 +19,6 @@ if (versionPropFile.canRead()) {
     VERSION = versionProps['VERSION']
 }
 
-android.sourceSets.main.java.srcDirs += 'build/generated/source/objectbox'
-
-
 android {
     compileSdkVersion deps.build.compileSdkVersion
     buildToolsVersion deps.build.buildToolsVersion
@@ -31,7 +28,7 @@ android {
         applicationId "com.ctech.eaty"
         minSdkVersion deps.build.minSdkVersion
         targetSdkVersion deps.build.targetSdkVersion
-        versionCode 11
+        versionCode 12
         versionName VERSION
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
