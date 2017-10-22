@@ -3,31 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_collection"
+        android:icon="@drawable/ic_collections"
         android:title="@string/navigation_collection"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_topic"
         android:title="@string/navigation_topic"
+        android:icon="@drawable/ic_tag"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_live"
+        android:icon="@drawable/ic_live_stream"
         android:title="@string/navigation_live"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_jobs"
+        android:icon="@drawable/ic_briefcase"
         android:title="@string/navigation_jobs"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_radio"
+        android:icon="@drawable/ic_radio"
         android:title="@string/navigation_radio"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_meetup"
+        android:icon="@drawable/ic_people"
         android:title="@string/navigation_meetups"
         app:showAsAction="never" />
 

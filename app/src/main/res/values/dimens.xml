@@ -35,7 +35,7 @@
     <dimen name="noti_icon_height">32dp</dimen>
     <dimen name="noti_indicator_text_size">10sp</dimen>
     <dimen name="feed_footer_height">32dp</dimen>
-    <dimen name="feed_product_height">240dp</dimen>
+    <dimen name="feed_product_height">260dp</dimen>
     <dimen name="feed_title_height">40dp</dimen>
     <dimen name="home_header_margin_top">8dp</dimen>
     <dimen name="home_header_margin_bottom">4dp</dimen>

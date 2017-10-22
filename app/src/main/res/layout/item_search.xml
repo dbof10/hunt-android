@@ -14,7 +14,7 @@
         <com.ctech.eaty.widget.ForegroundImageView
             android:id="@+id/ivProduct"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="@dimen/feed_product_height"
             android:layout_gravity="center"
             android:scaleType="fitXY" />
 

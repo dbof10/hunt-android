@@ -96,7 +96,7 @@ export default class MeetupItem extends Component {
                             >
                                 <Image
                                     style={styles.menuIcon}
-                                    source={{uri: 'ic_more_vert_black'}}/>
+                                    source={{uri: 'ic_more_vert_gray'}}/>
                             </MenuTrigger>
                             <MenuOptions>
                                 <MenuOption onSelect={this.onMenuItemClick.bind(this, MENU_ID_ADD_CALENDAR)}

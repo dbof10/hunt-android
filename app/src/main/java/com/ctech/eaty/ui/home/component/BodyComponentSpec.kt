@@ -1,9 +1,11 @@
 package com.ctech.eaty.ui.home.component
 
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
+import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.litho.ClickEvent
@@ -29,16 +31,19 @@ class BodyComponentSpec {
         @JvmStatic
         @OnCreateLayout
         fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+            val height = c.resources.getDimensionPixelSize(R.dimen.feed_product_height)
             val controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(viewModel.imageUrl)
+                    .setUri(ResizeImageUrlProvider.overrideUrl(viewModel.imageUrl, height/2))
+                    .setAutoPlayAnimations(true)
                     .build()
+
             return Column.create(c)
                     .child(
                             FrescoImage
                                     .create(c)
                                     .controller(controller)
-                                    .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.feed_product_height))
+                                    .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
+                                    .heightPx(height)
                     )
                     .child(
                             Text

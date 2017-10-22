@@ -14,7 +14,7 @@ data class ProductItemViewModel(private val product: Product) : HomeItemViewMode
             return if (product.imageUrl.px300.isEmpty()) {
                 "${Constants.PRODUCT_HUNT_POST_CDN}/${product.thumbnail.imageUUID}"
             } else {
-                product.imageUrl.px300
+                product.thumbnail.imageUrl
             }
         }
 
