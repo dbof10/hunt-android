@@ -13,6 +13,7 @@ import com.ctech.eaty.ui.home.view.HomeActivity
 import com.ctech.eaty.ui.job.view.JobListActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
+import com.ctech.eaty.ui.meetup.view.MeetupActivity
 import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.radio.view.RadioActivity
@@ -77,6 +78,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 R.id.action_radio -> {
                     intent.setClass(context, RadioActivity::class.java)
                 }
+                R.id.action_meetup -> {
+                    intent.setClass(context, MeetupActivity::class.java)
+                }
             }
             context.startActivity(intent)
         }
@@ -92,7 +96,7 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
     fun toSearch(it: View): Completable {
         return Completable.fromAction {
             val options = ActivityOptions.makeSceneTransitionAnimation(context, it, context.getString(R.string.transition_search_back)).toBundle()
-          context.startActivity(SearchActivity.newIntent(context), options)
+            context.startActivity(SearchActivity.newIntent(context), options)
         }
     }
 

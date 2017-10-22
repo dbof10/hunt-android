@@ -28,7 +28,6 @@ class FooterComponentSpec {
                     .child(
                             Text.create(c, 0, R.style.Widget_Hunt_ShotDescription)
                                     .text(viewModel.tagline)
-                                    .withLayout()
                                     .paddingPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
                                     .paddingPx(YogaEdge.TOP, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
                                     .paddingPx(YogaEdge.LEFT, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
@@ -38,7 +37,6 @@ class FooterComponentSpec {
                     .child(
                             SolidColor.create(c)
                                     .color(ContextCompat.getColor(c, R.color.divider_color))
-                                    .withLayout()
                                     .flex(1F)
                                     .heightPx(2)
                     )
@@ -68,7 +66,6 @@ class FooterComponentSpec {
                     .child(
                             SolidColor.create(c)
                                     .color(ContextCompat.getColor(c, R.color.divider_color))
-                                    .withLayout()
                                     .flex(1F)
                                     .heightPx(c.resources.getDimensionPixelSize(R.dimen.divider_height)))
                     .build()

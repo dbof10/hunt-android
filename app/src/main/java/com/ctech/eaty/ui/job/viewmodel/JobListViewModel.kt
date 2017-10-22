@@ -4,8 +4,9 @@ import android.support.customtabs.CustomTabsSession
 import com.ctech.eaty.ui.job.navigator.JobListNavigation
 import com.ctech.eaty.util.rx.Functions
 import timber.log.Timber
+import javax.inject.Inject
 
-class JobListViewModel(private val navigator: JobListNavigation) {
+class JobListViewModel @Inject constructor(private val navigator: JobListNavigation) {
 
     fun navigateJobDetail(url: String, session: CustomTabsSession) {
         navigator.toUrl(url,session)

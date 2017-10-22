@@ -42,7 +42,6 @@ class HeaderComponentSpec {
                                                     .controller(controller)
                                                     .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
                                     )
-                                    .withLayout()
                                     .heightPx(c.resources.getDimensionPixelSize(R.dimen.avatar_size))
                                     .marginPx(YogaEdge.TOP, c.resources.getDimensionPixelSize(R.dimen.home_header_margin_top))
                                     .marginPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.home_header_margin_bottom))
@@ -54,7 +53,6 @@ class HeaderComponentSpec {
                                     .create(c, 0, R.style.TextAppearance_UserName)
                                     .text(viewModel.userName)
                                     .verticalGravity(VerticalGravity.CENTER)
-                                    .withLayout()
                                     .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_medium))
                                     .clickHandler(HeaderComponent.onClick(c))
 

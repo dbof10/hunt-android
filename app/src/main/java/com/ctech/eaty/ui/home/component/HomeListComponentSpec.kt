@@ -24,9 +24,8 @@ class HomeListComponentSpec {
             return Recycler.create(c)
                     .binder(binder)
                     .onScrollListener(scrollListener)
-                    .withLayout()
                     .testKey(MAIN_SCREEN)
-                    .build()
+                    .buildWithLayout()
         }
     }
 

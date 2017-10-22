@@ -25,10 +25,10 @@ class DateUtils private constructor() {
         fun getRelativeTime(current: DateTime, specific: DateTime): String {
             val currentWeek = current.weekOfWeekyear().get()
             val specificWeek = specific.weekOfWeekyear().get()
-            if (currentWeek == specificWeek) {
-                return relativeDateFormatter.print(specific)
+            return if (currentWeek == specificWeek) {
+                relativeDateFormatter.print(specific)
             } else {
-                return friendlyDateFormatter.print(specific)
+                friendlyDateFormatter.print(specific)
             }
         }
 
@@ -47,6 +47,10 @@ class DateUtils private constructor() {
 
         fun getRelativeTimeSpan(context: Context, time: DateTime): String {
             return DateUtils.getRelativeTimeSpanString(context, time).toString()
+        }
+
+        fun parseStringAsMiliSec(date: String): Long {
+            return dateFormatter.parseMillis(date)
         }
     }
 }

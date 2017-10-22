@@ -36,7 +36,6 @@ class FooterActionComponentSpec {
                     .child(
                             Text.create(c, 0, R.style.TextAppearance_FooterIndicator)
                                     .text(indicatorResolver(viewModel, actionResId))
-                                    .withLayout()
                                     .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_small))
 
                     )

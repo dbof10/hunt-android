@@ -17,4 +17,4 @@ export const Load = (date) => ({date, type: LOAD});
 export const LoadMore = (date) => ({date, type: LOAD_MORE});
 
 
-export const LoadResult = (type, payload) => ({type, payload});
+export const LoadResult = (type, payload, newOffset) => ({type, payload, newOffset});

@@ -25,6 +25,8 @@ import com.ctech.eaty.ui.job.view.JobListActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.di.LoginModule
 import com.ctech.eaty.ui.login.view.LoginActivity
+import com.ctech.eaty.ui.meetup.di.MeetupModule
+import com.ctech.eaty.ui.meetup.view.MeetupActivity
 import com.ctech.eaty.ui.noti.di.NotificationFragmentBuilderModule
 import com.ctech.eaty.ui.noti.di.NotificationModule
 import com.ctech.eaty.ui.noti.view.NotificationActivity
@@ -142,5 +144,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(com.ctech.eaty.ui.search.di.SearchModule::class))
     abstract fun contributeSearchActivity(): com.ctech.eaty.ui.search.view.SearchActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(MeetupModule::class))
+    abstract fun contributeMeetupActivity(): MeetupActivity
 
 }

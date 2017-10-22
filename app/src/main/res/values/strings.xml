@@ -13,6 +13,7 @@
     <string name="notification">Notification</string>
     <string name="edit_profile">Edit profile</string>
     <string name="job_list">Jobs</string>
+    <string name="meet_up">Meetups</string>
 
 
     <!-- Message -->
@@ -27,6 +28,7 @@
     <string name="navigation_radio">Radio</string>
     <string name="navigation_live">LIVE Event</string>
     <string name="navigation_jobs">Jobs</string>
+    <string name="navigation_meetups">Meetups</string>
 
     <!-- User Detail -->
     <string name="transition_user_background" translatable="false">transition_player_background</string>
@@ -41,7 +43,7 @@
     <string name="no_search_results">No results for\n“%1$s”</string>
 
 
-    <string name="comment">Comment</string>
+    <!-- Product detail -->
     <string name="share">Share</string>
     <string name="get_it">Get it</string>
     <string name="view_more">Read more</string>
@@ -53,7 +55,6 @@
     <string name="follower">%d followers</string>
     <string name="following">%d followings</string>
     <string name="product">%d products</string>
-    <string name="login">Login</string>
 
 
     <!--Login -->
@@ -62,6 +63,7 @@
     <string name="login_facebook">Login with Facebook</string>
     <string name="login_twitter">Login with Twitter</string>
     <string name="policy_agreement_notification">By signing in you agree with terms of service</string>
+    <string name="login">Login</string>
 
     <!--Empty -->
     <string name="empty_notification">You don\'t have any notification. ✌️</string>
@@ -79,7 +81,13 @@
     <string name="onboarding_second_scene_title">Share</string>
     <string name="onboarding_third_scene_title">Community</string>
 
-
+    <!-- Common -->
+    <string name="share_chooser">Share link using</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+
+    <!--Meetup -->
+    <string name="meetup_title">Product hunt meetup</string>
+
 
 </resources>

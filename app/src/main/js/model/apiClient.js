@@ -52,5 +52,11 @@ export function getEvents(date, offset) {
 export function getJobs(offset) {
     let query = queryBuilder.buildJobRequest(offset);
     return Rx.Observable.fromPromise(instance.post('/frontend/graphql', query))
-                        .map(response => response.data.data)
+        .map(response => response.data.data)
+}
+
+export function getMeetups(type) {
+    let query = queryBuilder.buildMeetupRequest(type);
+    return Rx.Observable.fromPromise(instance.post('/frontend/graphql', query))
+        .map(response => response.data.data)
 }

@@ -81,6 +81,11 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".ui.meetup.view.MeetupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".ui.user.view.UserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Translucent.Overlap.User" />

@@ -38,7 +38,6 @@ class BodyComponentSpec {
                                     .create(c)
                                     .controller(controller)
                                     .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
-                                    .withLayout()
                                     .heightPx(c.resources.getDimensionPixelSize(R.dimen.feed_product_height))
                     )
                     .child(
@@ -47,7 +46,6 @@ class BodyComponentSpec {
                                     .text(viewModel.name)
                                     .verticalGravity(VerticalGravity.CENTER)
                                     .isSingleLine(true)
-                                    .withLayout()
                                     .backgroundColor(ContextCompat.getColor(c, R.color.black_25))
                                     .positionPx(YogaEdge.LEFT, 0)
                                     .positionPx(YogaEdge.RIGHT, 0)

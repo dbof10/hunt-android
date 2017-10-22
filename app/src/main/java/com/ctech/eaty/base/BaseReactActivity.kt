@@ -38,6 +38,7 @@ abstract class BaseReactActivity : BaseActivity(), ReactNativeHost, DefaultHardw
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         delegate.onActivityResult(requestCode, resultCode, data)
     }
 

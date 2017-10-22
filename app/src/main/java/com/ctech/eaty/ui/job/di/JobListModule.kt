@@ -16,6 +16,4 @@ class JobListModule {
         return CustomTabActivityHelper()
     }
 
-    @Provides
-    fun provideJobListViewModel(navigation: JobListNavigation) = JobListViewModel(navigation)
 }

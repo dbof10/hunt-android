@@ -18,8 +18,8 @@ export default class Error extends Component {
                         resizeMode='contain'
                         source={{uri: 'network_error'}}
                         style={{width: 160, height: 160, marginTop: 32}}/>
-                    <Text style={[{marginTop: 24}, TextStyle.actionSecondary]}>{`Unexpected error`}</Text>
-                    <Text style={[{marginTop: 8}, TextStyle.actionSecondary]}>{`Tap to retry`}</Text>
+                    <Text style={[{marginTop: 24}, TextStyle.textColorPrimary]}>{`Unexpected error`}</Text>
+                    <Text style={[{marginTop: 8}, TextStyle.textColorPrimary]}>{`Tap to retry`}</Text>
 
                 </View>
             </TouchableWithoutFeedback>
