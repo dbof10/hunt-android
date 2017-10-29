@@ -90,5 +90,6 @@
     <dimen name="search_progress_bar_margin_top">64dp</dimen>
     <dimen name="search_empty_view_padding">64dp</dimen>
     <dimen name="search_container_width">96dp</dimen>
+    <dimen name="home_footer_action_icon">20dp</dimen>
 
 </resources>

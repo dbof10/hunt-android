@@ -28,21 +28,21 @@ class FooterComponentSpec {
                     .child(
                             Text.create(c, 0, R.style.Widget_Hunt_ShotDescription)
                                     .text(viewModel.tagline)
-                                    .paddingPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
-                                    .paddingPx(YogaEdge.TOP, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
-                                    .paddingPx(YogaEdge.LEFT, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
-                                    .paddingPx(YogaEdge.RIGHT, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
+                                    .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
+                                    .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
+                                    .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
+                                    .paddingRes(YogaEdge.RIGHT, R.dimen.content_padding_horizontal)
 
                     )
                     .child(
                             SolidColor.create(c)
-                                    .color(ContextCompat.getColor(c, R.color.divider_color))
+                                    .colorRes(R.color.divider_color)
                                     .flex(1F)
                                     .heightPx(2)
                     )
                     .child(
                             Row.create(c)
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.feed_footer_height))
+                                    .heightRes(R.dimen.feed_footer_height)
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .viewModel(viewModel)
@@ -60,14 +60,14 @@ class FooterComponentSpec {
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .viewModel(viewModel)
-                                                    .actionResId(R.drawable.ic_share)
+                                                    .actionResId(R.drawable.ic_share_home)
                                     )
                     )
                     .child(
                             SolidColor.create(c)
                                     .color(ContextCompat.getColor(c, R.color.divider_color))
                                     .flex(1F)
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.divider_height)))
+                                    .heightRes(R.dimen.divider_height))
                     .build()
 
 

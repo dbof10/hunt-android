@@ -15,6 +15,7 @@ export default class MeetupItem extends Component {
 
     constructor(props) {
         super(props);
+        this.onItemClick = this.onItemClick.bind(this)
     }
 
     onItemClick() {

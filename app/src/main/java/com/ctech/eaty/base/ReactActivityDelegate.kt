@@ -29,6 +29,7 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
     private var permissionsCallback: Callback? = null
     private var reactInstanceManager: ReactInstanceManager? = null
 
+
     init {
         reactInstanceManager = createReactInstanceManager()
         doubleTapReloadRecognizer = DoubleTapReloadRecognizer()
@@ -39,12 +40,12 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
         return reactInstanceManager != null
     }
 
-    fun createRootView(): ReactRootView {
+    private fun createRootView(): ReactRootView {
         return ReactRootView(host.getActivity())
     }
 
 
-    fun createReactInstanceManager(): ReactInstanceManager {
+    private fun createReactInstanceManager(): ReactInstanceManager {
         val builder = ReactInstanceManager.builder()
                 .setApplication(host.getBaseApplication())
                 .setJSMainModulePath(host.getJSMainModuleName())
@@ -106,6 +107,7 @@ class ReactActivityDelegate(private val host: ReactNativeHost, private val mainC
     }
 
     fun onResume() {
+
         if (hasInstance()) {
             reactInstanceManager?.onHostResume(host.getActivity(),
                     host.getActivity() as DefaultHardwareBackBtnHandler)

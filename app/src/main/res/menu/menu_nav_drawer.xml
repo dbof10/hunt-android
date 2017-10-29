@@ -37,4 +37,11 @@
         android:title="@string/navigation_meetups"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_ask"
+        android:icon="@drawable/ic_faq"
+        android:title="@string/navigation_ask"
+        app:showAsAction="never" />
+
+
 </menu>

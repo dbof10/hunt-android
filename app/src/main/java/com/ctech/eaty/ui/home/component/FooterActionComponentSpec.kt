@@ -31,6 +31,8 @@ class FooterActionComponentSpec {
                     .child(
                             Image.create(c)
                                     .drawableRes(actionResId)
+                                    .widthRes(R.dimen.home_footer_action_icon)
+                                    .heightRes(R.dimen.home_footer_action_icon)
 
                     )
                     .child(
@@ -42,7 +44,6 @@ class FooterActionComponentSpec {
                     .flex(1F)
                     .alignItems(YogaAlign.CENTER)
                     .justifyContent(YogaJustify.CENTER)
-                    .backgroundRes(R.drawable.item_selectable_background)
                     .clickHandler(FooterActionComponent.onClick(c))
                     .build()
 
@@ -52,7 +53,7 @@ class FooterActionComponentSpec {
             return when (actionResId) {
                 R.drawable.ic_heart_solid_grey -> viewModel.votesCount
                 R.drawable.ic_comment -> viewModel.commentsCount
-                R.drawable.ic_share -> ""
+                R.drawable.ic_share_home -> ""
                 else -> ""
             }
         }
@@ -69,7 +70,7 @@ class FooterActionComponentSpec {
                     val intent = CommentActivity.newIntent(c, viewModel.id)
                     c.startActivity(intent)
                 }
-                R.drawable.ic_share -> {
+                R.drawable.ic_share_home -> {
                     val shareIntent = Intent(Intent.ACTION_SEND)
                     shareIntent.type = "text/plain"
                     shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)

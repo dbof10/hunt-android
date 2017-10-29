@@ -12,13 +12,13 @@ open class CommentRealm(var id: Int = -1,
                         var childCommentCount: Int = 0,
                         var createdAt: String = "",
                         var isMaker: Boolean = false,
-                        var user: UserRealm = UserRealm.ANONYMOUS,
+                        var user: UserRealm? = UserRealm.ANONYMOUS, //? by Realm requirement
                         var childComments: RealmList<CommentRealm> = RealmList()) : RealmModel {
 
     fun makeComment(): Comment {
         val fmt = ISODateTimeFormat.dateTimeParser()
         return Comment(id, body, parentCommentId, childCommentCount,
-                fmt.parseDateTime(createdAt), isMaker, user.makeUser(),
+                fmt.parseDateTime(createdAt), isMaker, user!!.makeUser(),
                 childComments.map { it.makeComment() })
     }
 }

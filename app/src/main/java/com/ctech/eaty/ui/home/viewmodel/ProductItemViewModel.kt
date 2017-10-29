@@ -28,5 +28,4 @@ data class ProductItemViewModel(private val product: Product) : CollectionDetail
         get() =
             User(product.user.id, product.user.name, product.user.headline, product.user.username, product.user.imageUrl)
     val liked get() = product.currentUser.liked
-
 }

@@ -34,7 +34,7 @@ class ProductComponentSpec {
                     .child(
                             SolidColor.create(c)
                                     .color(Color.TRANSPARENT)
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.divider_space))
+                                    .heightRes(R.dimen.divider_space)
                     )
                     .build()
         }

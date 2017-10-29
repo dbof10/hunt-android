@@ -1,6 +1,8 @@
 package com.ctech.eaty.di
 
 import com.ctech.eaty.linking.UniversalLinkActivity
+import com.ctech.eaty.ui.ask.di.AskModule
+import com.ctech.eaty.ui.ask.view.AskActivity
 import com.ctech.eaty.ui.collection.di.CollectionFragmentBuilderModule
 import com.ctech.eaty.ui.collection.di.CollectionModule
 import com.ctech.eaty.ui.collection.view.CollectionActivity
@@ -148,5 +150,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(MeetupModule::class))
     abstract fun contributeMeetupActivity(): MeetupActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(AskModule::class))
+    abstract fun contributeAskActivity(): AskActivity
 
 }

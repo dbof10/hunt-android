@@ -4,12 +4,10 @@ import android.graphics.Color
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.user.view.UserActivity
+import com.ctech.eaty.util.DateUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -42,10 +40,10 @@ class HeaderComponentSpec {
                                                     .controller(controller)
                                                     .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
                                     )
-                                    .heightPx(c.resources.getDimensionPixelSize(R.dimen.avatar_size))
-                                    .marginPx(YogaEdge.TOP, c.resources.getDimensionPixelSize(R.dimen.home_header_margin_top))
-                                    .marginPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.home_header_margin_bottom))
-                                    .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
+                                    .heightRes(R.dimen.avatar_size)
+                                    .marginRes(YogaEdge.TOP, R.dimen.home_header_margin_top)
+                                    .marginRes(YogaEdge.BOTTOM, R.dimen.home_header_margin_bottom)
+                                    .marginRes(YogaEdge.START, R.dimen.content_padding_horizontal)
 
                     )
                     .child(
@@ -53,7 +51,7 @@ class HeaderComponentSpec {
                                     .create(c, 0, R.style.TextAppearance_UserName)
                                     .text(viewModel.userName)
                                     .verticalGravity(VerticalGravity.CENTER)
-                                    .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_medium))
+                                    .marginRes(YogaEdge.START, R.dimen.space_medium)
                                     .clickHandler(HeaderComponent.onClick(c))
 
                     )

@@ -21,10 +21,10 @@ class DateComponentSpec {
         fun onCreateLayout(c: ComponentContext, @Prop viewModel: DateItemViewModel) =
                 Column.create(c)
                         .backgroundColor(Color.WHITE)
-                        .paddingPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
-                        .paddingPx(YogaEdge.TOP, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))
-                        .paddingPx(YogaEdge.LEFT, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
-                        .paddingPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.content_padding_horizontal))
+                        .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
+                        .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
+                        .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
+                        .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                         .child(
                                 Text.create(c, 0, R.style.TextAppearance_Section)
                                         .text(viewModel.date)

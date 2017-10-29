@@ -44,8 +44,8 @@ class MeetupActivity : BaseReactActivity(), Injectable, NativeHostContract {
     }
 
     override fun onStop() {
-        super.onStop()
         customTabActivityHelper.unbindCustomTabsService(this)
+        super.onStop()
     }
 
     private fun setupToolbar() {

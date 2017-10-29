@@ -34,7 +34,7 @@ export const fetchMoreJobEpic = (action$, store) =>
                         payload: error
                     }))
                     .startWith(LoadResult(FETCH_MORE_JOB_LOADING, null))
-            }else {
+            } else {
                 return Rx.Observable.empty()
             }
         });

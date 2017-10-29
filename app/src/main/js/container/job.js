@@ -51,6 +51,7 @@ class Job extends Component {
             } else {
                 return (
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         ItemSeparatorComponent={() => (
                             <View style={styles.divider}/>
                         )}

@@ -6,4 +6,6 @@ import io.realm.annotations.RealmClass
 
 @RealmClass
 open class ProductDetailEntity(@PrimaryKey var key: String = "",
-                               var value: ProductDetailRealm = ProductDetailRealm.EMPTY) : RealmModel
+                               var value: ProductDetailRealm? = ProductDetailRealm.EMPTY
+                                // ? by Realm requirement
+ ) : RealmModel

@@ -1,17 +1,16 @@
-/**
- * Created by daniel on 8/5/17.
- */
-
 import axios from "axios";
 import Rx from "rxjs";
 import 'rxjs/add/operator/mergeMap';
 import {getClientToken, getUserToken} from "../util/nativeInfra"
-import * as queryBuilder from '../util/graphqlRequetsFactory'
-
+import {ApolloClient, createNetworkInterface, gql} from 'react-apollo';
+import {QUERY_ASK, QUERY_ASK_DETAIL, QUERY_JOB, QUERY_MEETUP} from "../query/index";
 
 const clientToken = Rx.Observable.fromPromise(getClientToken());
 const userToken = Rx.Observable.fromPromise(getUserToken());
 const TIME_OUT = 20000;
+
+const BASE_URL = 'https://www.producthunt.com';
+const BASE_API_URL = 'https://api.producthunt.com';
 
 const configSource = Rx.Observable.combineLatest(
     clientToken,
@@ -24,7 +23,7 @@ const configSource = Rx.Observable.combineLatest(
     })
     .map(token => {
         return {
-            baseURL: 'https://api.producthunt.com',
+            baseURL: BASE_API_URL,
             timeout: TIME_OUT,
             headers: {
                 'Accept': 'application/json',
@@ -33,16 +32,26 @@ const configSource = Rx.Observable.combineLatest(
         }
     });
 
-const instance = axios.create({
-    baseURL: 'https://www.producthunt.com',
+
+const networkInterface = createNetworkInterface({
+    uri: `${BASE_URL}/frontend/graphql`,
+});
+
+const apolloClient = new ApolloClient({
+    networkInterface: networkInterface
+});
+
+const axiosInstance = axios.create({
+    baseURL: BASE_URL,
     timeout: TIME_OUT,
 });
+
 
 export function getEvents(date, offset) {
     return configSource
         .mergeMap(
             (config) => {
-                return Rx.Observable.fromPromise(axios.get(`/v1/live?newer=${date}&offset=${offset}`, config))
+                return Rx.Observable.fromPromise(axiosInstance.get(`/v1/live?newer=${date}&offset=${offset}`, config))
                     .map(response => response.data)
             }
         )
@@ -50,13 +59,56 @@ export function getEvents(date, offset) {
 }
 
 export function getJobs(offset) {
-    let query = queryBuilder.buildJobRequest(offset);
-    return Rx.Observable.fromPromise(instance.post('/frontend/graphql', query))
-        .map(response => response.data.data)
+    return Rx.Observable.fromPromise(apolloClient.query({
+        query: gql`${QUERY_JOB}`,
+        variables: {
+            skills: [],
+            roles: [],
+            locations: [],
+            product_ids: [],
+            promoted: true,
+            cursor: offset
+        },
+        operationName: "JobsPage"
+    }))
+        .map(response => response.data)
 }
 
 export function getMeetups(type) {
-    let query = queryBuilder.buildMeetupRequest(type);
-    return Rx.Observable.fromPromise(instance.post('/frontend/graphql', query))
+    return Rx.Observable.fromPromise(apolloClient.query({
+        query: gql`${QUERY_MEETUP}`,
+        variables: {
+            type: type
+        },
+        operationName: "MeetupsPage"
+    }))
+        .map(response => response.data)
+}
+
+
+export function getAsk(tab, offset) {
+    let body = {
+        query: QUERY_ASK,
+        variables: {
+            productRequestFilter: tab,
+            cursor: offset
+        },
+        operationName: "ProductRequestsPage"
+    };
+    return Rx.Observable.fromPromise(axiosInstance.post('/frontend/graphql', body))
+        .map(response => response.data.data)
+}
+
+export function getAskDetail(id, offset) {
+    let body = {
+        query: QUERY_ASK_DETAIL,
+        variables: {
+            id,
+            recommendationLimit: 3,
+            threadLimit: 20
+        },
+        operationName: "ProductRequestsPage"
+    };
+    return Rx.Observable.fromPromise(axiosInstance.post('/frontend/graphql', body))
         .map(response => response.data.data)
 }

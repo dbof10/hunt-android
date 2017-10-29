@@ -11,7 +11,8 @@ open class UserRealm(
         var username: String = "",
         var headline: String? = "",
         @SerializedName("image_url")
-        var imageUrl: ImageUrl = ImageUrl()) : RealmModel {
+        var imageUrl: ImageUrl? = ImageUrl() // ? by Realm requirement
+                 ) : RealmModel {
 
 
     companion object {
@@ -19,7 +20,7 @@ open class UserRealm(
     }
 
     fun makeUser(): User {
-        return User(id, name, headline, username, imageUrl)
+        return User(id, name, headline, username, imageUrl!!)
     }
 
     override fun equals(other: Any?): Boolean {
