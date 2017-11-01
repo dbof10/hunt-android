@@ -22,14 +22,14 @@ class ProductComponentSpec {
         fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
             return Column.create(c)
                     .child( HeaderComponent.create(c)
-                            .arg1(viewModel))
+                            .viewModel(viewModel))
                     .child(
                             BodyComponent.create(c)
-                                    .arg1(viewModel)
+                                    .viewModel(viewModel)
                     )
                     .child(
                             FooterComponent.create(c)
-                                    .arg1(viewModel)
+                                    .viewModel(viewModel)
                     )
                     .child(
                             SolidColor.create(c)

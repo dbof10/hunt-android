@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.home.component
 
 import android.graphics.Color
 import com.ctech.eaty.R
-import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
+import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.annotations.LayoutSpec
@@ -13,12 +13,12 @@ import com.facebook.yoga.YogaEdge
 
 
 @LayoutSpec
-class SectionComponentSpec {
+class DateComponentSpec {
     companion object {
 
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext, @Prop viewModel: SectionViewModel) =
+        fun onCreateLayout(c: ComponentContext, @Prop viewModel: DateItemViewModel) =
                 Column.create(c)
                         .backgroundColor(Color.WHITE)
                         .paddingPx(YogaEdge.BOTTOM, c.resources.getDimensionPixelSize(R.dimen.content_padding_vertical))

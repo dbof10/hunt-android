@@ -5,7 +5,7 @@ import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionDetailItemViewModel
 import com.ctech.eaty.util.Constants
 
-data class ProductItemViewModel(private val product: Product) : HomeItemViewModel, CollectionDetailItemViewModel {
+data class ProductItemViewModel(private val product: Product) : CollectionDetailItemViewModel {
     val id: Int get() = product.id
     val name get() = product.name
     val tagline get() = product.tagline

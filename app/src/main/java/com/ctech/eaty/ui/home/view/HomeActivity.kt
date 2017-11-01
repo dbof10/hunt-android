@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.home.view
 
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,14 +23,6 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_home_content.*
 import javax.inject.Inject
-import android.provider.SyncStateContract.Helpers.update
-import android.content.pm.PackageManager
-import android.content.pm.PackageInfo
-import android.support.v4.app.FragmentActivity
-import android.util.Base64
-import android.util.Log
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 
 class HomeActivity : BaseActivity(), HasSupportFragmentInjector {

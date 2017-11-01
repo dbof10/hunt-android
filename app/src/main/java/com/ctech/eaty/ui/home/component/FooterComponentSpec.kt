@@ -45,8 +45,8 @@ class FooterComponentSpec {
                                     .heightPx(c.resources.getDimensionPixelSize(R.dimen.feed_footer_height))
                                     .child(
                                             FooterActionComponent.create(c)
-                                                    .arg1(viewModel)
-                                                    .arg2(
+                                                    .viewModel(viewModel)
+                                                    .actionResId(
                                                             if (viewModel.liked)
                                                                 R.drawable.ic_heart_solid_grey
                                                             else
@@ -54,13 +54,13 @@ class FooterComponentSpec {
                                     )
                                     .child(
                                             FooterActionComponent.create(c)
-                                                    .arg1(viewModel)
-                                                    .arg2(R.drawable.ic_comment)
+                                                    .viewModel(viewModel)
+                                                    .actionResId(R.drawable.ic_comment)
                                     )
                                     .child(
                                             FooterActionComponent.create(c)
-                                                    .arg1(viewModel)
-                                                    .arg2(R.drawable.ic_share)
+                                                    .viewModel(viewModel)
+                                                    .actionResId(R.drawable.ic_share)
                                     )
                     )
                     .child(

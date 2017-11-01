@@ -1,5 +1,6 @@
 package com.ctech.eaty.util
 
+import android.support.annotation.DimenRes
 import android.view.View
 
 
