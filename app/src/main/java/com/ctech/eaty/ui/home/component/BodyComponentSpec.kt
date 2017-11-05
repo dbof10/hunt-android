@@ -38,29 +38,20 @@ class BodyComponentSpec {
 
             return Column.create(c)
                     .child(
+                            Text.create(c, 0, R.style.TextAppearance_Body)
+                                    .text(viewModel.tagline)
+                                    .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
+                                    .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
+                                    .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
+                                    .paddingRes(YogaEdge.RIGHT, R.dimen.content_padding_horizontal)
+                                    .backgroundRes(R.color.white_100)
+                    )
+                    .child(
                             FrescoImage
                                     .create(c)
                                     .controller(controller)
                                     .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                                     .heightPx(height)
-                    )
-                    .child(
-                            Text
-                                    .create(c, 0, R.style.TextAppearance_HomeProductTitle)
-                                    .text(viewModel.name)
-                                    .verticalGravity(VerticalGravity.CENTER)
-                                    .isSingleLine(true)
-                                    .backgroundColor(ContextCompat.getColor(c, R.color.black_25))
-                                    .positionPx(YogaEdge.LEFT, 0)
-                                    .positionPx(YogaEdge.RIGHT, 0)
-                                    .positionPx(YogaEdge.TOP,
-                                            c.resources.getDimensionPixelSize(R.dimen.feed_product_height) -
-                                                    c.resources.getDimensionPixelSize(R.dimen.feed_title_height))
-                                    .positionPx(YogaEdge.BOTTOM, 0)
-                                    .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
-                                    .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
-                                    .positionType(YogaPositionType.ABSOLUTE)
-
                     )
                     .clickHandler(BodyComponent.onClick(c))
                     .build()

@@ -92,4 +92,8 @@
     <string name="meetup_title">Product hunt meetup</string>
 
 
+    <!-- Home -->
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+
 </resources>

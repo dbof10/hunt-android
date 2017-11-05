@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import PropTypes from 'prop-types';
-import {getAvatarUrl} from "../util/stringUtils";
+import {getAvatarUrl, trimHtml} from "../util/stringUtils";
 import TextStyle from '../style/textStyle';
 import {formatRelativeDate} from "../util/dateUtils";
-import {colors} from "../style/color";
 import * as navigator from '../navigator/ask';
+import Styles from '../style/style';
 
 const ACTION_SHARE = "SHARE";
 const ACTION_NAVIGATE = "NAVIGATE";
@@ -19,7 +19,7 @@ export default class AskItem extends Component {
     onActionClick(action) {
         const ask = this.props.ask;
 
-        switch (action){
+        switch (action) {
             case ACTION_SHARE:
                 navigator.shareUrl(ask.url);
                 break;
@@ -47,19 +47,14 @@ export default class AskItem extends Component {
                         source={{uri: getAvatarUrl(user.id, 64)}}/>
 
                     <View style={styles.verticalLayout}>
-                        <Text style={styles.name}>
-                            {
-                                user.username
-                            }
+                        <Text style={[TextStyle.userName, {marginLeft: 8}]}>
+                            {user.name}
                         </Text>
 
                         <Text style={[styles.subInfo, TextStyle.subInfo]}>
-                            {
-                                formatRelativeDate(ask.created_at)
-                            }
+                            {formatRelativeDate(ask.created_at)}
                         </Text>
                     </View>
-
 
                 </View>
 
@@ -67,17 +62,18 @@ export default class AskItem extends Component {
                 <Text
                     onPress={this.onActionClick.bind(this, ACTION_NAVIGATE)}
                     style={[TextStyle.title, styles.title]}
-                      numberOfLines={2}
-                      ellipsizeMode="tail">
+                    numberOfLines={2}
+                    ellipsizeMode="tail">
                     {ask.title}
                 </Text>
 
+
                 <Text numberOfLines={3}
                       ellipsizeMode="tail">
-                    {ask.body_html}
+                    {trimHtml(ask.body_html)}
                 </Text>
 
-                <View style={styles.divider}/>
+                <View style={Styles.separator}/>
 
                 <View style={[styles.horizontalLayout, styles.footer]}>
                     <View style={[styles.horizontalLayout, styles.footerAction]}>
@@ -92,12 +88,10 @@ export default class AskItem extends Component {
 
                     <TouchableWithoutFeedback
                         onPress={this.onActionClick.bind(this, ACTION_SHARE)}>
-                        <View style={[styles.horizontalLayout, styles.footerAction]}>
 
-                            <Image style={styles.footerIcon}
-                                   source={{uri: 'ic_share_home'}}/>
+                        <Image style={[styles.footerAction, styles.footerIcon]}
+                               source={{uri: 'ic_share_home'}}/>
 
-                        </View>
                     </TouchableWithoutFeedback>
 
                 </View>
@@ -123,7 +117,6 @@ const styles = StyleSheet.create({
     },
 
     verticalLayout: {
-        flex: 1,
         flexDirection: 'column',
     },
 
@@ -148,14 +141,9 @@ const styles = StyleSheet.create({
 
     avatar: {
         resizeMode: 'contain',
-        height: 32,
-        width: 32,
-        borderRadius: 32
-    },
-
-    name: {
-        marginLeft: 8,
-        color: 'rgba(0, 0, 0, 0.87)'
+        height: 36,
+        width: 36,
+        borderRadius: 36
     },
 
     title: {
@@ -167,14 +155,8 @@ const styles = StyleSheet.create({
     },
 
     indicator: {
-        marginLeft: 4,
+        paddingLeft: 4,
         textAlignVertical: 'bottom'
     },
 
-    divider: {
-        marginTop: 8,
-        backgroundColor: colors.divider,
-        height: 1,
-        flex: 1
-    }
 });

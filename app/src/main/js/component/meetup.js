@@ -167,9 +167,9 @@ const styles = StyleSheet.create({
     avatar: {
         marginRight: 4,
         resizeMode: 'contain',
-        height: 32,
-        width: 32,
-        borderRadius: 32
+        height: 36,
+        width: 36,
+        borderRadius: 36
     },
 
     title: {

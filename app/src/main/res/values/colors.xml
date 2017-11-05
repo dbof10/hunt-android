@@ -5,22 +5,22 @@
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#03A9F4</color>
     <color name="windowBackground">#eaeaea</color>
-    <color name="colorPrimaryHighlight">#2800aa8d</color>
+
+    <color name="colorHighlight">#3203a9f4</color>
 
     <color name="black_60">#99000000</color>
     <color name="black_12">#1f000000</color>
     <color name="black_25">#40000000</color>
     <color name="gray_600">#757575</color>
-    <color name="grey_300">#e0e0e0</color>
     <color name="gray_50">#fafafa</color>
-    <color name="white_100">#ffffffff</color>
+    <color name="white_100">#ffffff</color>
 
     <color name="text_primary_dark">#de000000</color> <!-- 87% -->
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
     <color name="text_primary_light">@color/white_100</color>
     <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
 
-    <color name="hunt">#ff2196F3</color>
+    <color name="hunt">@color/colorAccent</color>
     <color name="hunt_link_highlight">#b31976D2</color>
     <color name="hunt_super_dark">#ff33292d</color>
 
@@ -31,38 +31,26 @@
     <color name="overlap_background_light">#fafafa</color>
     <color name="ripple_light">#99ffffff</color>
 
-
-    <color name="background_dark">#ff333333</color>
-    <color name="background_super_dark">#ff292929</color>
+    <color name="background_dark">#333333</color>
+    <color name="background_super_dark">#292929</color>
 
 
     <color name="divider_color">#50B6B6B6</color>
 
-    <!-- Error -->
-    <color name="error_view_text">#656565</color>
-    <color name="error_view_text_dark">#CC000000</color>
-    <color name="error_view_text_light">#858585</color>
-
     <color name="content_placeholder">#ffe0e0e0</color>
 
     <color name="hint_disabled_dark">#43000000</color> <!-- 26% black -->
-    <color name="text_on_accent">#8f000000</color>
 
     <!-- Product Detail -->
     <color name="mid_grey">#40808080</color>
-    <color name="light_grey">#fff5f5f5</color>
+    <color name="light_grey">#f5f5f5</color>
 
     <!-- Comment -->
     <color name="selected_comment_background">@color/white_100</color>
     <color name="news_story_comment_background">@android:color/transparent</color>
 
     <!-- Search -->
-    <color name="searchback_stroke_color">#fff</color>
-    <array name="loading_placeholders_dark">
-        <item>#ff191919</item>
-        <item>#ff212121</item>
-        <item>#ff232323</item>
-    </array>
-    <color name="gif_badge_dark_image">#b3ffffff</color>
+    <color name="searchback_stroke_color">@color/white_100</color>
+
 
 </resources>

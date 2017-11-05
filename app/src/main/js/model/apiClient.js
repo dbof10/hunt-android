@@ -104,7 +104,7 @@ export function getAskDetail(id, offset) {
         query: QUERY_ASK_DETAIL,
         variables: {
             id,
-            recommendationLimit: 3,
+            recommendationLimit: 1,
             threadLimit: 20
         },
         operationName: "ProductRequestsPage"

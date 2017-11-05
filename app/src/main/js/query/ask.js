@@ -45,8 +45,7 @@ export const QUERY_ASK_CONST = `query ProductRequestsPage($cursor: String, $prod
                                                                         }   
                                                     ...ProductRequestFollowButton   
                                                     ...ProductRequestMenuButton   
-                                                    ...ProductRequestShareButton    
-                                                    
+                                                   
                                                     }
       
                fragment UserSpotlight on User {   
@@ -74,19 +73,7 @@ export const QUERY_ASK_CONST = `query ProductRequestsPage($cursor: String, $prod
                fragment ProductRequestMenuButton on ProductRequest {
                                     _id
                                     id 
-               } 
-               fragment ProductRequestShareButton on ProductRequest { 
-                                    _id
-                                    id
-                                    ...FacebookShare  
-                                    
-                           } 
-               fragment FacebookShare on Shareable {  
-                                    _id
-                                    id
-                                    url
-                                    
-                           }`;
+               }`;
 
 export const QUERY_ASK_DETAIL_CONST =
     `query ProductRequestPage($id: ID!, $recommendationCursor: String, $recommendationLimit: Int, $recommendedProductCursor: String, $threadCursor: String, $threadLimit: Int!) {
@@ -95,14 +82,8 @@ export const QUERY_ASK_DETAIL_CONST =
       _id
       id
       is_advice
-      duplicate_of {
-        _id
-        id
-        title
-      }
       ...ProductRequestAdviceContentProductRequest
       ...ProductRequestCard
-      ...ProductRequestPageRelatedProductRequests
       ...ProductRequestProductRequestContentProductRequest
     }
   }
@@ -151,7 +132,7 @@ fragment CommentListThread on Comment {
   _id
   id
   is_sticky
-  replies(first: 20) {
+  replies(first: 1) {
     edges {
       node {
         _id
@@ -167,18 +148,9 @@ fragment CommentListThreadComment on Comment {
   _id
   id
   body
-  body_html
   can_edit
   can_reply
   created_at
-  subject {
-    _id
-    id
-    ... on Commentable {
-      _id
-      id
-    }
-  }
   user {
     _id
     id
@@ -191,7 +163,6 @@ fragment CommentListThreadComment on Comment {
   ...CommentListThreadCommentDestroyButton
   ...CommentListThreadCommentVoteButton
   ...CommentListThreadPostNoticeComment
-  ...FacebookShare
 }
 
 fragment CommentListThreadCommentDestroyButton on Comment {
@@ -218,12 +189,6 @@ fragment CommentListThreadPostNoticeComment on Comment {
     _id
     id
   }
-}
-
-fragment FacebookShare on Shareable {
-  _id
-  id
-  url
 }
 
 fragment UserSpotlight on User {
@@ -261,7 +226,6 @@ fragment ProductRequestCard on ProductRequest {
   ...ProductRequestContent
   ...ProductRequestFollowButton
   ...ProductRequestMenuButton
-  ...ProductRequestShareButton
 }
 
 fragment ProductRequestCardComments on ProductRequest {
@@ -298,12 +262,6 @@ fragment ProductRequestMenuButton on ProductRequest {
   id
   can_destroy
   can_edit
-}
-
-fragment ProductRequestShareButton on ProductRequest {
-  _id
-  id
-  ...FacebookShare
 }
 
 fragment ProductRequestProductRequestContentProductRequest on ProductRequest {
@@ -394,7 +352,6 @@ fragment RecommendationCard on Recommendation {
     id
     comments_count
   }
-  ...FacebookShare
   ...RecommendationCardDestroyButton
   ...RecommendationCardMigrateButton
   ...RecommendationCardVoteButton
@@ -423,10 +380,6 @@ fragment RecommendationCardMigrateButton on Recommendation {
     product_request {
       _id
       id
-      duplicate_of {
-        _id
-        id
-      }
     }
   }
 }
@@ -454,7 +407,6 @@ fragment RecommendedProductCard on RecommendedProduct {
           _id
           id
           name
-          slug
           tagline
         }
       }
@@ -493,30 +445,6 @@ fragment RecommendedProductVoteButton on RecommendedProduct {
   }
 }
 
-fragment ProductRequestPageRelatedProductRequests on ProductRequest {
-  _id
-  id
-  related_product_requests(first: 10) {
-    edges {
-      node {
-        _id
-        id
-        ...ProductRequestPageRelatedProductRequestsItem
-      }
-    }
-  }
-}
-
-fragment ProductRequestPageRelatedProductRequestsItem on ProductRequest {
-  _id
-  id
-  title
-  user {
-    _id
-    id
-    ...UserSpotlight
-  }
-}
 
 fragment AskLayoutViewer on Viewer {
   id

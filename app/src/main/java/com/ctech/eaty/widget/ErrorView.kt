@@ -2,7 +2,6 @@ package com.ctech.eaty.widget
 
 import android.animation.LayoutTransition
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
@@ -17,9 +16,9 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 
 class ErrorView : LinearLayout {
-    val ALIGNMENT_LEFT = 0
-    val ALIGNMENT_CENTER = 1
-    val ALIGNMENT_RIGHT = 2
+    private val ALIGNMENT_LEFT = 0
+    private val ALIGNMENT_CENTER = 1
+    private val ALIGNMENT_RIGHT = 2
 
     @BindView(R.id.ivError)
     lateinit var ivError: ImageView
@@ -62,10 +61,8 @@ class ErrorView : LinearLayout {
         val imageRes: Int
 
         val reason: String?
-        val reasonColor: Int
 
         val explain: String?
-        val explainColor: Int
 
         val showReason: Boolean
         val showExplain: Boolean
@@ -73,23 +70,16 @@ class ErrorView : LinearLayout {
 
         val retryButtonText: String?
         val retryButtonBackground: Int
-        val retryButtonTextColor: Int
 
         try {
             imageRes = a.getResourceId(R.styleable.ErrorView_errorImage, 0)
             reason = a.getString(R.styleable.ErrorView_reason)
-            reasonColor = a.getColor(R.styleable.ErrorView_reasonColor,
-                    ContextCompat.getColor(context, R.color.error_view_text))
             explain = a.getString(R.styleable.ErrorView_explain)
-            explainColor = a.getColor(R.styleable.ErrorView_explainColor,
-                    ContextCompat.getColor(context, R.color.error_view_text_light))
             showReason = a.getBoolean(R.styleable.ErrorView_showReason, true)
             showExplain = a.getBoolean(R.styleable.ErrorView_showExplain, true)
             showRetryButton = a.getBoolean(R.styleable.ErrorView_showRetryButton, true)
             retryButtonText = a.getString(R.styleable.ErrorView_retryButtonText)
             retryButtonBackground = a.getResourceId(R.styleable.ErrorView_retryButtonBackground, 0)
-            retryButtonTextColor = a.getColor(R.styleable.ErrorView_retryButtonTextColor,
-                    ContextCompat.getColor(context, R.color.error_view_text_dark))
             val alignInt = a.getInt(R.styleable.ErrorView_explainAlignment, 1)
 
             if (imageRes != 0) {
@@ -120,11 +110,6 @@ class ErrorView : LinearLayout {
                 tvRetry.visibility = GONE
             }
 
-            tvReason.setTextColor(reasonColor)
-            tvExplain.setTextColor(explainColor)
-
-            tvRetry.setTextColor(retryButtonTextColor)
-
             if (retryButtonBackground != 0)
                 tvRetry.setBackgroundResource(retryButtonBackground)
 
@@ -151,16 +136,8 @@ class ErrorView : LinearLayout {
         tvReason.text = text
     }
 
-    fun setReasonColor(res: Int) {
-        tvReason.setTextColor(res)
-    }
-
     fun setExplain(exception: String) {
         tvExplain.text = exception
-    }
-
-    fun setExplainColor(res: Int) {
-        tvExplain.setTextColor(res)
     }
 
     fun setRetryButtonText(text: String) {
@@ -192,23 +169,19 @@ class ErrorView : LinearLayout {
     }
 
     fun setExplainAlignment(alignment: Int) {
-        if (alignment == ALIGNMENT_LEFT) {
-            tvExplain.gravity = Gravity.START
-        } else if (alignment == ALIGNMENT_CENTER) {
-            tvExplain.gravity = Gravity.CENTER_HORIZONTAL
-        } else {
-            tvExplain.gravity = Gravity.END
+        when (alignment) {
+            ALIGNMENT_LEFT -> tvExplain.gravity = Gravity.START
+            ALIGNMENT_CENTER -> tvExplain.gravity = Gravity.CENTER_HORIZONTAL
+            else -> tvExplain.gravity = Gravity.END
         }
     }
 
     fun getExplainAlignment(): Int {
         val gravity = tvExplain.gravity
-        if (gravity == Gravity.START) {
-            return ALIGNMENT_LEFT
-        } else if (gravity == Gravity.CENTER_HORIZONTAL) {
-            return ALIGNMENT_CENTER
-        } else {
-            return ALIGNMENT_RIGHT
+        return when (gravity) {
+            Gravity.START -> ALIGNMENT_LEFT
+            Gravity.CENTER_HORIZONTAL -> ALIGNMENT_CENTER
+            else -> ALIGNMENT_RIGHT
         }
     }
 

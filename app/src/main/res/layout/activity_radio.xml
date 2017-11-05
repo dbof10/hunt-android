@@ -75,7 +75,7 @@
 
             <com.ctech.eaty.widget.BaselineGridTextView
                 android:id="@+id/tvTrackTitle"
-                style="@style/TextAppearance.ListItemTitle"
+                style="@style/TextAppearance.Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_medium"

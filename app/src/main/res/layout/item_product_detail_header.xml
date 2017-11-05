@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:alignmentMode="alignBounds"
-    android:background="@android:color/transparent"
     android:clipToPadding="false"
     android:columnCount="3"
     android:rowCount="7"
@@ -43,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_comment"
+            android:drawableTop="@drawable/ic_comment_fill"
             tools:text="33 views" />
 
         <Button

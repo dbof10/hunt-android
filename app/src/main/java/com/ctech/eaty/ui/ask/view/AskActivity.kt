@@ -8,6 +8,7 @@ import com.ctech.eaty.base.BaseReactActivity
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.react.NativeInfraReactPackage
 import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.ask.support.AskBridgeReactPackage
 import com.ctech.eaty.ui.ask.support.NativeHostContract
 import com.ctech.eaty.ui.ask.viewmodel.AskViewModel
@@ -20,23 +21,28 @@ import javax.inject.Inject
 
 class AskActivity : BaseReactActivity(), Injectable, NativeHostContract {
 
+
     @Inject
     lateinit var appSettings: AppSettingsManager
 
     @Inject
     lateinit var viewModel: AskViewModel
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ask)
         setupToolbar()
         delegate.loadReact()
+        trackingManager.trackScreenView(getScreenName())
     }
 
 
     private fun setupToolbar() {
         toolbar.setNavigationOnClickListener {
-            finishAfterTransition()
+            onBackPressed()
         }
     }
 
@@ -74,5 +80,8 @@ class AskActivity : BaseReactActivity(), Injectable, NativeHostContract {
         viewModel.shareUrl(url)
     }
 
+    override fun navigateProduct(id: Int) {
+        viewModel.navigateProduct(id)
+    }
 
 }

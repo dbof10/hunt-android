@@ -10,7 +10,12 @@ class NativeNavigatorModule(context: ReactApplicationContext,
     override fun getName() = "AskBridge"
 
     @ReactMethod
-    fun shareUrl(url: String){
+    fun shareUrl(url: String) {
         hostContract.shareUrl(url)
+    }
+
+    @ReactMethod
+    fun navigateProduct(id: String) {
+        hostContract.navigateProduct(id.toInt())
     }
 }

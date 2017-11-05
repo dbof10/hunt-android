@@ -11,5 +11,11 @@ class AskViewModel @Inject constructor(private val navigator: AskNavigation) {
                 .subscribe(Functions.EMPTY, Timber::e)
     }
 
+    fun navigateProduct(id: Int) {
+        navigator.toProduct(id)
+                .subscribe(Functions.EMPTY, Timber::e)
+
+    }
+
 
 }

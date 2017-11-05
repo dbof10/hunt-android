@@ -18,8 +18,12 @@ data class ProductItemViewModel(private val product: Product) : CollectionDetail
             }
         }
 
-    val votesCount get() = product.votesCount.toString()
-    val commentsCount get() = product.commentsCount.toString()
+    val votesCountDisplay get() = product.votesCount.toString()
+    val votesCount get() = product.votesCount
+
+    val commentsCountDisplay get() = product.commentsCount.toString()
+    val commentsCount get() = product.commentsCount
+
     val discussUrl get() = product.discussionUrl
     val thumbnailUrl get() = product.thumbnail.imageUrl
     val userName get() = product.user.name

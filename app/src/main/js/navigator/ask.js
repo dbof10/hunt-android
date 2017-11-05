@@ -13,6 +13,10 @@ export function shareUrl(url) {
     AskBridge.shareUrl(url)
 }
 
+export function navigateProduct(id) {
+    AskBridge.navigateProduct(id)
+}
+
 export const AppNavigator = StackNavigator({
     AskDetail: {screen: AskDetailScreen},
     Ask: {screen: AskScreen},

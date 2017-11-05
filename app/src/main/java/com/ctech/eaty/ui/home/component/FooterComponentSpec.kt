@@ -24,15 +24,13 @@ class FooterComponentSpec {
         @OnCreateLayout
         fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
             return Column.create(c)
-                    .backgroundColor(Color.WHITE)
+                    .backgroundColor(ContextCompat.getColor(c,R.color.white_100))
                     .child(
-                            Text.create(c, 0, R.style.Widget_Hunt_ShotDescription)
-                                    .text(viewModel.tagline)
-                                    .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
-                                    .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
-                                    .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
-                                    .paddingRes(YogaEdge.RIGHT, R.dimen.content_padding_horizontal)
-
+                            FooterInfoComponent.create(c)
+                                    .viewModel(viewModel)
+                                    .marginRes(YogaEdge.TOP,R.dimen.content_padding_vertical)
+                                    .marginRes(YogaEdge.BOTTOM,R.dimen.content_padding_vertical)
+                                    .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                     )
                     .child(
                             SolidColor.create(c)
@@ -42,30 +40,30 @@ class FooterComponentSpec {
                     )
                     .child(
                             Row.create(c)
-                                    .heightRes(R.dimen.feed_footer_height)
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .viewModel(viewModel)
-                                                    .actionResId(
-                                                            if (viewModel.liked)
-                                                                R.drawable.ic_heart_solid_grey
-                                                            else
-                                                                R.drawable.ic_heart_empty_grey)
+                                                    .actionLabelResId(R.string.like)
+                                                    .actionResId(R.drawable.ic_like)
                                     )
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .viewModel(viewModel)
+                                                    .actionLabelResId(R.string.comment)
                                                     .actionResId(R.drawable.ic_comment)
                                     )
                                     .child(
                                             FooterActionComponent.create(c)
                                                     .viewModel(viewModel)
+                                                    .actionLabelResId(R.string.share)
                                                     .actionResId(R.drawable.ic_share_home)
                                     )
+                                    .marginRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
+                                    .marginRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
                     )
                     .child(
                             SolidColor.create(c)
-                                    .color(ContextCompat.getColor(c, R.color.divider_color))
+                                    .colorRes(R.color.divider_color)
                                     .flex(1F)
                                     .heightRes(R.dimen.divider_height))
                     .build()

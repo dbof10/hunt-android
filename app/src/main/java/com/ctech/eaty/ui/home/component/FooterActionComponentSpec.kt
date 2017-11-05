@@ -26,7 +26,9 @@ class FooterActionComponentSpec {
 
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop actionResId: Int): ComponentLayout {
+        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
+                           @Prop actionResId: Int,
+                           @Prop actionLabelResId: Int): ComponentLayout {
             return Row.create(c)
                     .child(
                             Image.create(c)
@@ -36,8 +38,8 @@ class FooterActionComponentSpec {
 
                     )
                     .child(
-                            Text.create(c, 0, R.style.TextAppearance_FooterIndicator)
-                                    .text(indicatorResolver(viewModel, actionResId))
+                            Text.create(c,0, R.style.TextAppearance_FooterIndicator)
+                                    .textRes(actionLabelResId)
                                     .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_small))
 
                     )
@@ -49,14 +51,6 @@ class FooterActionComponentSpec {
 
         }
 
-        private fun indicatorResolver(viewModel: ProductItemViewModel, actionResId: Int): String {
-            return when (actionResId) {
-                R.drawable.ic_heart_solid_grey -> viewModel.votesCount
-                R.drawable.ic_comment -> viewModel.commentsCount
-                R.drawable.ic_share_home -> ""
-                else -> ""
-            }
-        }
 
         @JvmStatic
         @OnEvent(ClickEvent::class)

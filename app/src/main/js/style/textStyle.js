@@ -11,6 +11,12 @@ export default StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.87)'
     },
 
+
+    userName: {
+        color: 'rgba(0,0,0,0.87)',
+        fontWeight: 'bold'
+    },
+
     subInfo: {
         fontSize: 12,
         color: 'rgba(0, 0, 0, 0.26)'

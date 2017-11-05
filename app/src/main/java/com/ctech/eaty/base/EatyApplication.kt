@@ -1,7 +1,6 @@
 package com.ctech.eaty.base
 
 import android.app.Activity
-import android.content.Intent
 import android.support.multidex.MultiDexApplication
 import android.util.Log
 import com.crashlytics.android.Crashlytics
@@ -32,9 +31,6 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-
-    @Inject
-    lateinit var reactNavigationDelegate: ReactNavigationDelegate
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingAndroidInjector
@@ -68,9 +64,7 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
                 .debug(BuildConfig.DEBUG)
                 .build()
         Twitter.initialize(config)
-        reactNavigationDelegate.onCreate()
     }
-
 
 
 }
