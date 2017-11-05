@@ -1,8 +1,6 @@
 package com.ctech.eaty.entity
 
 import com.google.gson.annotations.SerializedName
-import io.realm.RealmModel
-import io.realm.annotations.RealmClass
 
 
 data class Product(val id: Int = -1,

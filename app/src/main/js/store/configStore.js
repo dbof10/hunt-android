@@ -1,11 +1,7 @@
-/**
- * Created by daniel on 8/5/17.
- */
-
 
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import reducer from '../reducer';
+import reducer from '../reducer/index';
 import  {epic}  from '../epic';
 import { createEpicMiddleware } from 'redux-observable';
 

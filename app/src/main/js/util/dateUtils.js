@@ -21,3 +21,7 @@ export const getMonth = (date) => {
 export const getDate = (date) => {
     return date.getDate()
 };
+
+export const formatRelativeDate = (date) => {
+    return moment(date).fromNow();
+};

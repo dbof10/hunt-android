@@ -48,6 +48,7 @@ class Meetup extends Component {
                 return (
                     <MenuContext>
                         <FlatList
+                            showsVerticalScrollIndicator={false}
                             ItemSeparatorComponent={() => (
                                 <View style={styles.divider}/>
                             )}

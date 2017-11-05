@@ -1,8 +1,8 @@
 def versions = [
         support    : '26.1.0',
-        litho      : '0.7.0',
+        litho      : '0.7.1',
         autodispose: '0.3.0',
-        firebase : '11.4.2'
+        firebase   : '11.4.2'
 ]
 
 def build = [
@@ -112,13 +112,17 @@ def twitter = [
 ]
 
 def litho = [
-        "lib"       : "com.facebook.litho:litho-core:${versions.litho}",
-        "widget"    : "com.facebook.litho:litho-widget:${versions.litho}",
-        "annotation": "com.facebook.litho:litho-annotations:${versions.litho}",
-        "processor" : "com.facebook.litho:litho-processor:${versions.litho}",
-        "loader"    : 'com.facebook.soloader:soloader:0.2.0',
-        "fresco"    : "com.facebook.litho:litho-fresco:${versions.litho}",
-        "test"      : "com.facebook.litho:litho-testing:${versions.litho}",
+        "lib"              : "com.facebook.litho:litho-core:${versions.litho}",
+        "widget"           : "com.facebook.litho:litho-widget:${versions.litho}",
+        "annotation"       : "com.facebook.litho:litho-annotations:${versions.litho}",
+        "processor"        : "com.facebook.litho:litho-processor:${versions.litho}",
+        "loader"           : 'com.facebook.soloader:soloader:0.2.0',
+        "fresco"           : "com.facebook.litho:litho-fresco:${versions.litho}",
+        "test"             : "com.facebook.litho:litho-testing:${versions.litho}",
+        "sectionCore"      : "com.facebook.litho:litho-sections-core:${versions.litho}",
+        "sectionWidget"    : "com.facebook.litho:litho-sections-widget:${versions.litho}",
+        "sectionAnnotation": "com.facebook.litho:litho-sections-annotations:${versions.litho}",
+        "sectionProcessor" : "com.facebook.litho:litho-sections-processor:${versions.litho}"
 ]
 
 def autodispose = [

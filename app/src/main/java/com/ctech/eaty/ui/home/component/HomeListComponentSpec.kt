@@ -1,32 +1,39 @@
-package com.ctech.eaty.ui.home.component
+package com.ctech.eaty.ui.home.component;
 
-import android.support.v7.widget.RecyclerView
+import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.ui.home.state.HomeState
+import com.ctech.eaty.ui.home.viewmodel.HomeFeed
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
-import com.facebook.litho.widget.Recycler
-import com.facebook.litho.widget.RecyclerBinder
+import com.facebook.litho.sections.SectionContext
+import com.facebook.litho.sections.widget.RecyclerCollectionComponent
+import com.facebook.litho.sections.widget.RecyclerCollectionEventsController
 
 
 @LayoutSpec
-class HomeListComponentSpec {
+object HomeListComponentSpec {
 
-    companion object {
-        private val MAIN_SCREEN = "main_screen"
+    private val MAIN_SCREEN = "main_screen"
 
-        @JvmStatic
-        @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext,
-                           @Prop binder: RecyclerBinder,
-                           @Prop scrollListener: RecyclerView.OnScrollListener): ComponentLayout {
-            return Recycler.create(c)
-                    .binder(binder)
-                    .onScrollListener(scrollListener)
-                    .testKey(MAIN_SCREEN)
-                    .buildWithLayout()
-        }
+    @OnCreateLayout
+    fun onCreateLayout(c: ComponentContext,
+                       @Prop dataSource: List<HomeFeed>,
+                       @Prop store: Store<HomeState>,
+                       @Prop eventsController: RecyclerCollectionEventsController): ComponentLayout {
+        return RecyclerCollectionComponent.create(c)
+                .section(
+                        HomeFeedSection.create(SectionContext(c))
+                                .feeds(dataSource)
+                                .store(store)
+                                .build())
+
+                .eventsController(eventsController)
+                .disablePTR(false)
+                .testKey(MAIN_SCREEN)
+                .buildWithLayout()
     }
 
 }

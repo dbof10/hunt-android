@@ -12,25 +12,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/space_large"
+        tools:text="Internet connection"
+        />
 
     <TextView
         android:id="@+id/tvExplain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_medium"
         android:gravity="center_horizontal"
         tools:text="Couldn\'t load items" />
 
     <TextView
         android:id="@+id/tvRetry"
+        android:textAppearance="@style/Widget.Hunt.InlineActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/space_large"
+        tools:text="Retry"
+        />
 </merge>

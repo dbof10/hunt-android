@@ -4,16 +4,17 @@ import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.ui.home.result.*
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.HomeItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
+import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
+import com.ctech.eaty.ui.home.viewmodel.HomeFeed
+import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
 
 class HomeReducer : Reducer<HomeState> {
 
-    private val AD_ID = "1966287263602613_1966287926935880"
-    private val ADMOB_NATIVE_1 = "ca-app-pub-6007267266282978/2953025043"
+    private val FB_AD_ID = "1966287263602613_2031648393733166"
+    private val FB_AD_ID_2 = "1966287263602613_2032008040363868"
 
 
     override fun apply(state: HomeState, result: Result): HomeState {
@@ -23,7 +24,7 @@ class HomeReducer : Reducer<HomeState> {
                     result.loading -> state.copy(loading = true)
                     result.error != null -> state.copy(loading = false, loadError = result.error)
                     else -> state.copy(loading = false, loadError = null,
-                            content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content)
+                            content = listOf(HomeFeed(DateItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)))
                 }
             }
             is RefreshResult -> {
@@ -32,7 +33,7 @@ class HomeReducer : Reducer<HomeState> {
                     result.error != null -> state.copy(refreshing = false, refreshError = result.error)
                     else -> state.copy(refreshing = false, refreshError = null,
                             loadError = null,
-                            content = listOf(SectionViewModel(0, DateUtils.getRelativeTime(result.date))) + result.content,
+                            content = listOf(HomeFeed(DateItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
                             dayAgo = 0)
                 }
             }
@@ -59,12 +60,14 @@ class HomeReducer : Reducer<HomeState> {
         }
     }
 
-    private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeItemViewModel> {
-        return if (result.dayAgo < 2) {
-            state.content + //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
-                    listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
-        } else {
-            state.content + listOf(SectionViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date))) + result.content
+    //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
+    private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeFeed> {
+        return when {
+            result.dayAgo == 1 -> state.content.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
+                    result.content, listOf(HorizontalAdsItemViewModel(result.dayAgo, FB_AD_ID))))
+            result.dayAgo == 2 -> state.content.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
+                    result.content, listOf(HorizontalAdsItemViewModel(result.dayAgo, FB_AD_ID_2))))
+            else -> state.content.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)), result.content))
         }
     }
 }

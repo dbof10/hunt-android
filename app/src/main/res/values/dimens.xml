@@ -21,7 +21,7 @@
     <dimen name="elevation">4dp</dimen>
     <dimen name="horizontal_ad_height">300dp</dimen>
     <dimen name="single_ad_height">180dp</dimen>
-    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_height">0.5dp</dimen>
     <dimen name="divider_space">16dp</dimen>
     <dimen name="divider_horizontal_space">8dp</dimen>
     <dimen name="keyline_1">72dp</dimen>
@@ -90,5 +90,6 @@
     <dimen name="search_progress_bar_margin_top">64dp</dimen>
     <dimen name="search_empty_view_padding">64dp</dimen>
     <dimen name="search_container_width">96dp</dimen>
+    <dimen name="home_footer_action_icon">20dp</dimen>
 
 </resources>

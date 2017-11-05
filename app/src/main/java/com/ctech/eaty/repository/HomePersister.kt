@@ -60,7 +60,7 @@ class HomePersister : Persister<ProductResponse, BarCode>, RecordProvider<BarCod
             if (queryResult.isEmpty()) {
                 emitter.onError(RecordNotFoundException("Record for $key not found"))
             } else {
-                val shadow = realm.copyFromRealm(queryResult.first().value)
+                val shadow = realm.copyFromRealm(queryResult.first()!!.value)
                 val result = shadow.map { it.makeProduct() }
                 emitter.onSuccess(ProductResponse(result))
             }

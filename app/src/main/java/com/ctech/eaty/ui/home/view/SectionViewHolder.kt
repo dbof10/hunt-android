@@ -7,7 +7,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
-import com.ctech.eaty.ui.home.viewmodel.SectionViewModel
+import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
 import vn.tiki.noadapter2.AbsViewHolder
 
 class SectionViewHolder(view: View) : AbsViewHolder(view) {
@@ -29,7 +29,7 @@ class SectionViewHolder(view: View) : AbsViewHolder(view) {
 
     override fun bind(item: Any?) {
         super.bind(item)
-        val viewModel = item as SectionViewModel
+        val viewModel = item as DateItemViewModel
         with(viewModel) {
             tvSection.text = viewModel.date
         }

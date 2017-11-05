@@ -59,7 +59,7 @@ class NotificationViewHolder(view: View, private val imageLoader: GlideImageLoad
             tvSentence.text = formattedSentence
             tvTimeStamp.text = DateUtils.getRelativeTimeSpan(context, createdAt)
             if (!seen) {
-                itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryHighlight))
+                itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorHighlight))
             }
             when (type) {
                 "Recommendation" -> {

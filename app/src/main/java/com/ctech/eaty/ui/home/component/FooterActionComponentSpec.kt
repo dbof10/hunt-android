@@ -26,36 +26,31 @@ class FooterActionComponentSpec {
 
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop actionResId: Int): ComponentLayout {
+        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
+                           @Prop actionResId: Int,
+                           @Prop actionLabelResId: Int): ComponentLayout {
             return Row.create(c)
                     .child(
                             Image.create(c)
                                     .drawableRes(actionResId)
+                                    .widthRes(R.dimen.home_footer_action_icon)
+                                    .heightRes(R.dimen.home_footer_action_icon)
 
                     )
                     .child(
-                            Text.create(c, 0, R.style.TextAppearance_FooterIndicator)
-                                    .text(indicatorResolver(viewModel, actionResId))
+                            Text.create(c,0, R.style.TextAppearance_FooterIndicator)
+                                    .textRes(actionLabelResId)
                                     .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_small))
 
                     )
                     .flex(1F)
                     .alignItems(YogaAlign.CENTER)
                     .justifyContent(YogaJustify.CENTER)
-                    .backgroundRes(R.drawable.item_selectable_background)
                     .clickHandler(FooterActionComponent.onClick(c))
                     .build()
 
         }
 
-        private fun indicatorResolver(viewModel: ProductItemViewModel, actionResId: Int): String {
-            return when (actionResId) {
-                R.drawable.ic_heart_solid_grey -> viewModel.votesCount
-                R.drawable.ic_comment -> viewModel.commentsCount
-                R.drawable.ic_share -> ""
-                else -> ""
-            }
-        }
 
         @JvmStatic
         @OnEvent(ClickEvent::class)
@@ -69,7 +64,7 @@ class FooterActionComponentSpec {
                     val intent = CommentActivity.newIntent(c, viewModel.id)
                     c.startActivity(intent)
                 }
-                R.drawable.ic_share -> {
+                R.drawable.ic_share_home -> {
                     val shareIntent = Intent(Intent.ACTION_SEND)
                     shareIntent.type = "text/plain"
                     shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)

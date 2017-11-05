@@ -13,3 +13,7 @@ export function getImageUrl(uuid, size) {
 export function getAvatarUrl(uuid, size) {
     return `${CDN_AVATAR}/${uuid}/original?w=${size}`
 }
+
+export function trimHtml(html) {
+return html.replace(/<(?:.|\n)*?>/gm, '');
+}

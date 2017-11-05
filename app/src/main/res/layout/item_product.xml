@@ -103,7 +103,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/space_small"
                 android:paddingTop="2dp"
-                android:src="@drawable/ic_comment" />
+                android:src="@drawable/ic_comment_fill" />
 
         </LinearLayout>
 

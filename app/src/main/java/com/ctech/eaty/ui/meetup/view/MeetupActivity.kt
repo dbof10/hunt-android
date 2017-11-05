@@ -9,6 +9,7 @@ import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.MeetupEvent
 import com.ctech.eaty.react.NativeInfraReactPackage
 import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.meetup.support.MeetupBridgeReactPackage
 import com.ctech.eaty.ui.meetup.support.NativeHostContract
 import com.ctech.eaty.ui.meetup.viewmodel.MeetupViewModel
@@ -31,11 +32,15 @@ class MeetupActivity : BaseReactActivity(), Injectable, NativeHostContract {
     @Inject
     lateinit var viewModel: MeetupViewModel
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meetup)
         setupToolbar()
         delegate.loadReact()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun onStart() {
@@ -44,8 +49,8 @@ class MeetupActivity : BaseReactActivity(), Injectable, NativeHostContract {
     }
 
     override fun onStop() {
-        super.onStop()
         customTabActivityHelper.unbindCustomTabsService(this)
+        super.onStop()
     }
 
     private fun setupToolbar() {

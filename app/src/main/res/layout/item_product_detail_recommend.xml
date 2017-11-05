@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <com.ctech.eaty.widget.BaselineGridTextView
-        style="@style/TextAppearance.BodySection"
+        android:textAppearance="@style/TextAppearance.Section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/content_padding_vertical"

@@ -66,4 +66,5 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         Twitter.initialize(config)
     }
 
+
 }

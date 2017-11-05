@@ -1,7 +1,6 @@
 package com.ctech.eaty.ui.home.result
 
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import org.joda.time.DateTime
 
@@ -21,4 +20,17 @@ data class LoadMoreResult(val loading: Boolean = false, val error: Throwable? = 
             return LoadMoreResult(error = throwable)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null || javaClass != other.javaClass) return false
+
+        val that = other as LoadMoreResult?
+
+        return if (dayAgo != that!!.dayAgo)
+            false
+        else
+            content.size == content.size
+    }
+
+
 }

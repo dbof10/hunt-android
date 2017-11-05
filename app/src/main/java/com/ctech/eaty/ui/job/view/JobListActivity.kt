@@ -9,6 +9,7 @@ import com.ctech.eaty.base.BaseReactActivity
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.react.NativeInfraReactPackage
 import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.job.support.JobBridgeReactPackage
 import com.ctech.eaty.ui.job.support.NativeHostContract
 import com.ctech.eaty.ui.job.viewmodel.JobListViewModel
@@ -33,11 +34,15 @@ class JobListActivity : BaseReactActivity(), Injectable, NativeHostContract {
     @Inject
     lateinit var customTabActivityHelper: CustomTabActivityHelper
 
+    @Inject
+    lateinit var trackingManager: FirebaseTrackManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_list)
         setupToolbar()
         delegate.loadReact()
+        trackingManager.trackScreenView(getScreenName())
     }
 
     override fun onStart() {
@@ -46,8 +51,8 @@ class JobListActivity : BaseReactActivity(), Injectable, NativeHostContract {
     }
 
     override fun onStop() {
-        super.onStop()
         customTabActivityHelper.unbindCustomTabsService(this)
+        super.onStop()
     }
 
     private fun setupToolbar() {

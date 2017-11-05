@@ -38,8 +38,8 @@ class ProductDetailPersister : Persister<ProductDetailResponse, BarCode> {
                 emitter.onError(RecordNotFoundException("Record for $key not found"))
             } else {
 
-                val shadow = realm.copyFromRealm(queryResult.first().value)
-                val result = shadow.makeProductDetail()
+                val shadow = realm.copyFromRealm(queryResult.first()!!.value!!)
+                val result = shadow!!.makeProductDetail()
                 emitter.onSuccess(ProductDetailResponse(result))
             }
         }

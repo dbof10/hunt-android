@@ -12,14 +12,14 @@ open class ProductDetailRealm(var id: Int = -1,
                               var tagline: String = "",
                               var topics: RealmList<Topic> = RealmList(),
                               var makers: RealmList<UserRealm> = RealmList(),
-                              var thumbnail: ThumbNailRealm = ThumbNailRealm.EMPTY,
+                              var thumbnail: ThumbNailRealm? = ThumbNailRealm.EMPTY, // ? by Realm requirement
                               var redirectUrl: String = "",
-                              var hunter: UserRealm = UserRealm.ANONYMOUS,
+                              var hunter: UserRealm? = UserRealm.ANONYMOUS, //? by Realm requirement
                               var voteCount: Int = 0,
                               var comments: RealmList<CommentRealm> = RealmList(),
                               var relatedPosts: RealmList<ProductRealm> = RealmList(),
                               var installLinks: RealmList<InstallLinkRealm> = RealmList(),
-                              var currentUser: CurrentUser = CurrentUser(),
+                              var currentUser: CurrentUser? = CurrentUser(),// ? by Realm requirement
                               var media: RealmList<MediaRealm> = RealmList(),
                               var createdAt: String = "") : RealmModel {
 
@@ -32,12 +32,12 @@ open class ProductDetailRealm(var id: Int = -1,
         val fmt = ISODateTimeFormat.dateTimeParser()
 
         return ProductDetail(id, commentCount, name, tagline, topics.toList(),
-                makers.map { it.makeUser() }, thumbnail.makeThumbnail(), redirectUrl,
-                hunter.makeUser(), voteCount,
+                makers.map { it.makeUser() }, thumbnail!!.makeThumbnail(), redirectUrl,
+                hunter!!.makeUser(), voteCount,
                 comments.map { it.makeComment() },
                 relatedPosts.map { it.makeProduct() },
                 installLinks.map { it.makeInstallLink() },
-                currentUser,
+                currentUser!!,
                 media.map { it.makeMedia() },
                 fmt.parseDateTime(createdAt))
     }
