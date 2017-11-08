@@ -17,6 +17,8 @@ import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposeWith
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -78,6 +80,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         }
 
         trackingManager.trackScreenView(getScreenName())
+        store.startBinding()
+                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .subscribe()
     }
 
     private fun setupViewModel() {

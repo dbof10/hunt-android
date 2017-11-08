@@ -15,7 +15,7 @@
 
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvProductDescription"
-        style="@style/Widget.Hunt.ShotDescription"
+        android:textAppearance="@style/Text.Body"
         android:layout_columnSpan="3"
         android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingStart="@dimen/content_padding_horizontal"

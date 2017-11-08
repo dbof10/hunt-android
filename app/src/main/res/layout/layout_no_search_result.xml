@@ -8,5 +8,6 @@
     android:drawableTop="@drawable/ic_search"
     android:padding="@dimen/search_empty_view_padding"
     android:textAlignment="center"
-    android:textAppearance="@style/TextAppearance.EmptyText"
+    android:textColor="@color/white_100"
+    android:textAppearance="@style/Text.Body"
     tools:text="No search result" />

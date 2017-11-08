@@ -9,7 +9,10 @@ class ResizeImageUrlProvider {
     companion object {
         private val PROXY_DOMAIN = ".rsz.io"
 
-        fun overrideUrl(url: String, size: Int): String {
+        fun overrideUrl(url: String?, size: Int): String {
+            if(url.isNullOrEmpty()){
+                return ""
+            }
             val uri = Uri.parse(url)
             return StringBuilder("http://")
                     .append(uri.host)
@@ -20,7 +23,10 @@ class ResizeImageUrlProvider {
 
         }
 
-        fun getNewUrl(url: String, size: Int): String {
+        fun getNewUrl(url: String?, size: Int): String {
+            if(url.isNullOrEmpty()){
+                return ""
+            }
             val uri = Uri.parse(url)
             val inlineUrl = uri.getQueryParameter("url")
             if (inlineUrl != null) {

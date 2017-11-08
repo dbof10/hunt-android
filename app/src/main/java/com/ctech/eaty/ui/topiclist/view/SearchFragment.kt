@@ -11,6 +11,7 @@ import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
+import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.topiclist.action.SearchAction
 import com.ctech.eaty.ui.topiclist.navigation.SearchNavigation
@@ -93,7 +94,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
                 }
                 .viewHolderFactory { viewGroup, _ ->
-                    SearchViewHolder.create(viewGroup, imageLoader)
+                    ProductViewHolder.create(viewGroup, imageLoader)
                 }
                 .build()
     }
@@ -165,7 +166,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
         val layoutManager = LinearLayoutManager(context)
         rvSearch.adapter = adapter
         rvSearch.layoutManager = layoutManager
-        rvSearch.addItemDecoration(VerticalSpaceItemDecoration(SearchViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
+        rvSearch.addItemDecoration(VerticalSpaceItemDecoration(ProductViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_space)))
         rvSearch.addOnScrollListener(loadMoreCallback)
     }
 

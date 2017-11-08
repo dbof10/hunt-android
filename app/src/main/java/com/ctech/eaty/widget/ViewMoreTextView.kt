@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.TextView
 import com.ctech.eaty.R
 
-class ViewMoreTextView(context: Context, attrs: AttributeSet) : TextView(context, attrs) {
+open class ViewMoreTextView(context: Context, attrs: AttributeSet?) : TextView(context, attrs) {
     private val ELLIPSIS: String = "... "
     private var listener: OnViewMoreClickListener? = null
     private var maxCollapsedLines = 4

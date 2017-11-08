@@ -23,7 +23,7 @@
             android:gravity="center"
             android:layout_marginBottom="@dimen/space_medium"
             android:text="@string/need_login"
-            style="@style/Widget.Hunt.DialogText" />
+            android:textAppearance="@style/Text.Body"  />
 
         <Button
             android:id="@+id/btLogin"
@@ -33,7 +33,7 @@
             android:layout_marginBottom="@dimen/space_medium"
             android:text="@string/login"
             android:backgroundTint="@color/hunt"
-            android:textAppearance="@style/TextAppearance.DarkButton"
+            android:textColor="@color/white_100"
             android:onClick="doLogin" />
 
 

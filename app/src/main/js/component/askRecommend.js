@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Image, Text, View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Image, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {getAvatarUrl, getImageUrl, trimHtml} from "../util/stringUtils";
 import TextStyle from '../style/textStyle'
 import PropTypes from 'prop-types';
 import Styles from '../style/style';
-import {colors} from "../style/color";
+import {colors, dimens} from "../style/resource";
 
 export const ACTION_NAVIGATE = "NAVIGATE";
 
@@ -14,6 +14,13 @@ export default class AskRecommendItem extends Component {
         const recommend = this.props.recommend;
         const posts = recommend.product.posts.edges.map(item => item.node);
         const description = posts.length > 0 ? posts[0].tagline : "";
+        const descriptionView = description !== "" ? <Text style={[TextStyle.body, {
+            paddingTop: dimens.space_medium,
+            paddingBottom: dimens.space_medium
+        }]}>
+            {description}
+        </Text> : null;
+
         const comments = recommend.recommendations.edges
             .map(item => item.node);
 
@@ -22,29 +29,18 @@ export default class AskRecommendItem extends Component {
         return (
             <View style={styles.verticalLayout}>
                 <View style={styles.mainContainer}>
-                    <View style={styles.horizontalLayout}>
+                    <View style={styles.verticalLayout}>
                         <TouchableWithoutFeedback
                             onPress={this.props.onActionClick.bind(this, {
                                 type: ACTION_NAVIGATE,
                                 payload: recommend.product.id
                             })}>
                             <Image style={styles.product}
-                                   source={{uri: getImageUrl(recommend.product.thumbnail_media.image_uuid, 128)}}
+                                   source={{uri: getImageUrl(recommend.product.thumbnail_media.image_uuid, 384)}}
                             />
                         </TouchableWithoutFeedback>
 
-                        <View style={[styles.verticalLayout, {marginLeft: 8}]}>
-                            <Text style={TextStyle.title}
-                                  onPress={this.props.onActionClick.bind(this, {
-                                      type: ACTION_NAVIGATE,
-                                      payload: recommend.product.id
-                                  })}>
-                                {recommend.name}
-                            </Text>
-                            <Text>
-                                {description}
-                            </Text>
-                        </View>
+                        {descriptionView}
                     </View>
 
                     <View style={Styles.separator}/>
@@ -53,7 +49,7 @@ export default class AskRecommendItem extends Component {
                         <View style={[styles.horizontalLayout, styles.footerAction]}>
 
                             <Image style={styles.footerIcon}
-                                   source={{uri: 'ic_recommend'}}/>
+                                   source={{uri: 'ic_like'}}/>
 
                             <Text style={styles.indicator}>
                                 {recommend.votes_count}
@@ -148,9 +144,9 @@ const styles = StyleSheet.create({
     },
 
     product: {
-        resizeMode: 'contain',
-        height: 64,
-        width: 64,
+        flex: 1,
+        resizeMode: 'cover',
+        height: 220,
     },
 
     indicator: {

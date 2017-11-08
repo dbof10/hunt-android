@@ -35,7 +35,7 @@ export default class AskItem extends Component {
         const user = ask.user !== null ? ask.user : {username: 'Anonymous'};
         const recommendedCount = ask.recommended_products_count;
         const recommendOrAnswer = recommendedCount > 0 ? recommendedCount : ask.comments_count;
-        const recommendOrAnswerIcon = recommendedCount > 0 ? 'ic_recommend' : 'ic_answer';
+        const recommendOrAnswerIcon = recommendedCount > 0 ? 'ic_like' : 'ic_answer';
         return (
 
             <View style={[styles.verticalLayout, styles.container]}>
@@ -69,6 +69,7 @@ export default class AskItem extends Component {
 
 
                 <Text numberOfLines={3}
+                      style={TextStyle.body}
                       ellipsizeMode="tail">
                     {trimHtml(ask.body_html)}
                 </Text>
@@ -147,7 +148,8 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        marginTop: 8
+        marginTop: 8,
+        marginBottom: 4
     },
 
     subInfo: {

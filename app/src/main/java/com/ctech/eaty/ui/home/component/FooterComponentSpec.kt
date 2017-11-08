@@ -30,7 +30,6 @@ class FooterComponentSpec {
                                     .viewModel(viewModel)
                                     .marginRes(YogaEdge.TOP,R.dimen.content_padding_vertical)
                                     .marginRes(YogaEdge.BOTTOM,R.dimen.content_padding_vertical)
-                                    .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                     )
                     .child(
                             SolidColor.create(c)
@@ -66,6 +65,8 @@ class FooterComponentSpec {
                                     .colorRes(R.color.divider_color)
                                     .flex(1F)
                                     .heightRes(R.dimen.divider_height))
+                    .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
+                    .paddingRes(YogaEdge.END, R.dimen.content_padding_horizontal)
                     .build()
 
 

@@ -21,19 +21,19 @@ object FooterInfoComponentSpec {
         val resource = c.resources
         return Row.create(c)
                 .child(
-                        Text.create(c, 0, R.style.TextAppearance_Body)
+                        Text.create(c, 0, R.style.Text_Body)
                                 .text(resource.getQuantityString(R.plurals.like, viewModel.votesCount, viewModel.votesCount))
                                 .marginRes(YogaEdge.START, R.dimen.space_small)
                 )
                 .child(
-                        Text.create(c, 0, R.style.TextAppearance_Body)
+                        Text.create(c, 0, R.style.Text_Body)
                                 .text("•")
                                 .marginRes(YogaEdge.START, R.dimen.space_small)
                                 .marginRes(YogaEdge.END, R.dimen.space_small)
 
                 )
                 .child(
-                        Text.create(c, 0, R.style.TextAppearance_Body)
+                        Text.create(c, 0, R.style.Text_Body)
                                 .text(resource.getQuantityString(R.plurals.comment, viewModel.commentsCount, viewModel.commentsCount))
                                 .marginRes(YogaEdge.START, R.dimen.space_small)
                 )

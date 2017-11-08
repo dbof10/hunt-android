@@ -45,7 +45,8 @@ export const QUERY_ASK_CONST = `query ProductRequestsPage($cursor: String, $prod
                                                                         }   
                                                     ...ProductRequestFollowButton   
                                                     ...ProductRequestMenuButton   
-                                                   
+                                                    ...ProductRequestShareButton   
+
                                                     }
       
                fragment UserSpotlight on User {   
@@ -73,7 +74,18 @@ export const QUERY_ASK_CONST = `query ProductRequestsPage($cursor: String, $prod
                fragment ProductRequestMenuButton on ProductRequest {
                                     _id
                                     id 
-               }`;
+               }
+               fragment ProductRequestShareButton on ProductRequest { 
+                                    _id
+                                    id
+                                    ...FacebookShare  
+                                    
+               } 
+               fragment FacebookShare on Shareable {  
+                                    _id
+                                    id
+                                    url
+                }`;
 
 export const QUERY_ASK_DETAIL_CONST =
     `query ProductRequestPage($id: ID!, $recommendationCursor: String, $recommendationLimit: Int, $recommendedProductCursor: String, $threadCursor: String, $threadLimit: Int!) {

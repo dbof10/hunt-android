@@ -24,7 +24,6 @@ import com.ctech.eaty.util.MorphTransform
 import com.ctech.eaty.util.setHeight
 import com.ctech.eaty.util.setWidth
 import com.ctech.eaty.widget.transition.CircularTransform
-import com.uber.autodispose.LifecycleScopeProvider
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.kotlin.autoDisposeWith
 import kotlinx.android.synthetic.main.activity_login.*
@@ -115,8 +114,6 @@ class LoginActivity : BaseActivity(), Injectable {
     private fun renderError(throwable: Throwable) {
         Timber.e(throwable)
         progressBar.visibility = View.GONE
-        trackingManager.trackLoginFail(throwable.message)
-
     }
 
     private fun renderLoading() {

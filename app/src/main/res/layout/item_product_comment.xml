@@ -48,7 +48,7 @@
 
     <com.ctech.eaty.widget.ViewMoreTextView
         android:id="@+id/tvComment"
-        style="@style/Widget.Hunt.Comment"
+        android:textAppearance="@style/Text.Body"
         android:layout_marginTop="@dimen/space_small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,9 +68,9 @@
         android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
         android:background="?android:selectableItemBackgroundBorderless"
         android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.FooterAction"
         android:padding="@dimen/space_medium"
         android:paddingTop="@dimen/space_medium"
-        android:textColor="@color/black_60"
         android:visibility="gone"
         tools:text="11"
         tools:visibility="visible" />

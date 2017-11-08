@@ -26,7 +26,7 @@ class DateComponentSpec {
                         .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
                         .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                         .child(
-                                Text.create(c, 0, R.style.TextAppearance_Section)
+                                Text.create(c, 0, R.style.Text_Section)
                                         .text(viewModel.date)
                         ).build()
 

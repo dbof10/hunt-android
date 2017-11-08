@@ -84,13 +84,13 @@ dependencies {
     implementation deps.support.constraint
     implementation deps.litho.lib
     implementation deps.litho.widget
-    provided deps.litho.annotation
+    compileOnly deps.litho.annotation
     kapt deps.litho.processor
     implementation deps.litho.fresco
 
     implementation deps.litho.sectionCore
     implementation deps.litho.sectionWidget
-    provided deps.litho.sectionAnnotation
+    compileOnly deps.litho.sectionAnnotation
     kapt deps.litho.sectionProcessor
 
 

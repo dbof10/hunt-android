@@ -1,16 +1,13 @@
 package com.ctech.eaty.ui.home.component
 
-import android.util.Log
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeFeed
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
-import com.ctech.eaty.util.rx.plusAssign
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.facebook.litho.sections.widget.RecyclerCollectionEventsController
-import com.facebook.litho.widget.RecyclerEventsController
 import javax.inject.Inject
 
 
@@ -29,10 +26,10 @@ class LithoController @Inject constructor(private val context: ComponentContext,
 
     private fun internalSetup() {
         viewModel.content().subscribe { renderContent(it) }
-        viewModel.refreshSuccess().subscribe { refreshSuccess(it) }
+        viewModel.refreshSuccess().subscribe { refreshSuccess() }
     }
 
-    private fun refreshSuccess(items: List<HomeFeed>) {
+    private fun refreshSuccess() {
         eventsController.clearRefreshing()
     }
 

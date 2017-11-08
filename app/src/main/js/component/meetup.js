@@ -41,8 +41,7 @@ export default class MeetupItem extends Component {
                 <Text style={styles.subInfo}>
                     hosted by
                 </Text>
-                <View contentContainerStyle={styles.avatarContainer}
-                      horizontal={true}>
+                <View style={styles.avatarContainer}>
                     {
                         users.map(item =>
                             <Image
@@ -102,12 +101,12 @@ export default class MeetupItem extends Component {
                             <MenuOptions>
                                 <MenuOption onSelect={this.onMenuItemClick.bind(this, MENU_ID_ADD_CALENDAR)}
                                             value={TouchableNativeFeedback}>
-                                    <Text style={[styles.menuItem, TextStyle.textColorPrimary]}>Add to calendar</Text>
+                                    <Text style={[styles.menuItem, TextStyle.body]}>Add to calendar</Text>
                                 </MenuOption>
 
                                 <MenuOption onSelect={this.onMenuItemClick.bind(this, MENU_ID_SHARE)}
                                             value={TouchableNativeFeedback}>
-                                    <Text style={[styles.menuItem, TextStyle.textColorPrimary]}>Share</Text>
+                                    <Text style={[styles.menuItem, TextStyle.body]}>Share</Text>
                                 </MenuOption>
                             </MenuOptions>
                         </Menu>
@@ -161,7 +160,8 @@ const styles = StyleSheet.create({
 
     avatarContainer: {
         flex: 1,
-        marginTop: 8
+        marginTop: 8,
+        flexDirection: 'row'
     },
 
     avatar: {
