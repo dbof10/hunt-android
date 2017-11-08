@@ -20,6 +20,9 @@ class LoginViewModel(private val stateDispatcher: Observable<LoginState>, privat
         return stateDispatcher
                 .filter { it.loadError != null && !it.loading }
                 .map { it.loadError!! }
+                .doOnNext {
+                    trackManager.trackLoginFail(it.message)
+                }
     }
 
     fun tokenGrant(): Observable<LoginState> {
@@ -46,11 +49,11 @@ class LoginViewModel(private val stateDispatcher: Observable<LoginState>, privat
                             && it.loadError == null
                             && it.content != UserDetail.GUEST
                 }
+                .doOnNext {
+                    trackManager.trackLoginSuccess(it.loginSource)
+                }
                 .map {
                     it.content
-                }
-                .doOnNext {
-                    trackManager.trackLoginSuccess()
                 }
                 .flatMapCompletable {
                     navigation.toHome(it)

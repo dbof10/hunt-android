@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store

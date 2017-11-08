@@ -68,7 +68,7 @@
                 android:text="@string/follow"
                 android:visibility="gone"
                 tools:visibility="visible"
-                android:textAppearance="@style/TextAppearance.DarkButton"
+                android:textColor="@color/white_100"
                 android:theme="@style/LightRippleOverlay" />
 
             <Button
@@ -81,7 +81,7 @@
                 android:text="@string/edit_profile"
                 android:visibility="gone"
                 tools:visibility="visible"
-                android:textAppearance="@style/TextAppearance.DarkButton"
+                android:textColor="@color/white_100"
                 android:theme="@style/LightRippleOverlay" />
 
             <ProgressBar
@@ -96,13 +96,14 @@
 
         <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvBio"
-            style="@style/Widget.Hunt.ShotDescription"
+            android:textAppearance="@style/Text.Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingEnd="@dimen/space_medium"
             android:paddingStart="@dimen/space_medium"
             android:paddingTop="@dimen/space_medium"
+            android:paddingBottom="@dimen/space_medium"
             android:textColorHighlight="@color/hunt_link_highlight"
             android:textColorLink="@color/hunt_links"
             app:layout_constraintEnd_toEndOf="parent"

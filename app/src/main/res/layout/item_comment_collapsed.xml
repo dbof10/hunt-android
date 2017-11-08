@@ -28,6 +28,7 @@
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvTimeStamp"
         android:layout_width="wrap_content"
+        android:layout_alignBaseline="@id/tvUserName"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
@@ -50,6 +51,7 @@
         android:id="@+id/tvHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Headline"
         android:layout_below="@+id/tvUserName"
         android:layout_gravity="center_vertical"
         android:layout_toEndOf="@+id/ivAvatar"
@@ -57,7 +59,7 @@
 
     <com.ctech.eaty.widget.ViewMoreTextView
         android:id="@+id/tvComment"
-        style="@style/Widget.Hunt.Comment"
+        android:textAppearance="@style/Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvHeadline"

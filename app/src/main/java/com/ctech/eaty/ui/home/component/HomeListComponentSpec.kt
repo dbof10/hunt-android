@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.home.component;
 
+import com.ctech.eaty.R
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeFeed
@@ -29,8 +30,8 @@ object HomeListComponentSpec {
                                 .feeds(dataSource)
                                 .store(store)
                                 .build())
-
                 .eventsController(eventsController)
+                .refreshProgressBarColorRes(R.color.colorAccent)
                 .disablePTR(false)
                 .testKey(MAIN_SCREEN)
                 .buildWithLayout()

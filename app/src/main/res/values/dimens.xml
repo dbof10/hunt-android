@@ -17,13 +17,13 @@
 
     <!-- Common -->
     <dimen name="navigation_header">220dp</dimen>
-    <dimen name="collection_background_height">140dp</dimen>
+    <dimen name="collection_background_height">160dp</dimen>
     <dimen name="elevation">4dp</dimen>
     <dimen name="horizontal_ad_height">300dp</dimen>
     <dimen name="single_ad_height">180dp</dimen>
     <dimen name="divider_height">0.5dp</dimen>
     <dimen name="divider_space">16dp</dimen>
-    <dimen name="divider_horizontal_space">8dp</dimen>
+    <dimen name="divider_horizontal_space">16dp</dimen>
     <dimen name="keyline_1">72dp</dimen>
     <dimen name="dialog_corners">2dp</dimen>
     <dimen name="button_radius">4dp</dimen>
@@ -42,7 +42,7 @@
 
 
     <!--Collection Detail -->
-    <dimen name="collection_detail_background_height">180dp</dimen>
+    <dimen name="collection_detail_background_height">160dp</dimen>
 
     <!-- Product Detail -->
     <dimen name="shot_collapsed_app_bar_height">168dp</dimen>
@@ -53,7 +53,7 @@
     <dimen name="related_product_size">120dp</dimen>
 
     <!--Radio -->
-    <dimen name="radio_artwork_height">320dp</dimen>
+    <dimen name="radio_artwork_height">280dp</dimen>
     <dimen name="media_panel_height">64dp</dimen>
     <dimen name="play_size">48dp</dimen>
     <dimen name="media_progress_bar_height">2dp</dimen>

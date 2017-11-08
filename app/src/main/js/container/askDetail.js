@@ -99,9 +99,9 @@ class AskDetail extends Component {
                     ask.recommended_products.edges.map(item => item.node) :
                     ask.threads.edges.map(item => item.node);
 
-               const itemCountView = this.type === TYPE_RECOMMEND ?
-                   <Text>{`${ask.recommended_products_count} Recommendations`} </Text> :
-                   <Text>{`${ask.comments_count} Comments`} </Text>;
+                const itemCountView = this.type === TYPE_RECOMMEND ?
+                    <Text>{`${ask.recommended_products_count} Recommendations`} </Text> :
+                    <Text>{`${ask.comments_count} Comments`} </Text>;
 
                 return (
 
@@ -118,6 +118,7 @@ class AskDetail extends Component {
                                 </Text>
 
                                 <HTMLView
+                                    textComponentProps={{style: TextStyle.body}}
                                     style={styles.body}
                                     value={ask.body_html}
                                 />
@@ -126,7 +127,7 @@ class AskDetail extends Component {
                                 <View style={[styles.horizontalLayout,
                                     {
                                         justifyContent: 'flex-end',
-                                        marginTop: 8
+                                        marginTop: 12
                                     }]}>
 
                                     <Image

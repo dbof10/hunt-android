@@ -20,7 +20,7 @@
     <TextView
         tools:text="Game"
         android:id="@+id/tvTopicName"
-        style="@style/TextAppearance.Body"
+        style="@style/Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -20,12 +20,13 @@ class RequestTokenEpic(private val userRepository: UserRepository,
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<LoginState>): Observable<RequestTokenResult> {
         return action.ofType(LoginAction.REQUEST_TOKEN::class.java)
                 .flatMap {
+                    val source = it.loginProvider
                     userRepository.getUserToken(it.loginProvider, it.oauthToken, it.authTokenSecret)
                             .doOnNext {
                                 appSettings.setUserToken(it.accessToken)
                             }
                             .map {
-                                RequestTokenResult.success(AccessToken(it.accessToken, it.type), it.firstTime)
+                                RequestTokenResult.success(AccessToken(it.accessToken, it.type), it.firstTime, source)
                             }
                             .onErrorReturn {
                                 RequestTokenResult.fail(it)

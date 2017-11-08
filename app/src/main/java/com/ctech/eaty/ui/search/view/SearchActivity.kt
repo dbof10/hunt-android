@@ -28,11 +28,11 @@ import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.tracking.FirebaseTrackManager
+import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.search.action.SearchAction
 import com.ctech.eaty.ui.search.state.SearchState
 import com.ctech.eaty.ui.search.viewmodel.SearchViewModel
-import com.ctech.eaty.ui.topiclist.view.SearchViewHolder
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.TransitionUtils
 import com.ctech.eaty.util.hideIme
@@ -110,7 +110,7 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
                     }
                 }
                 .viewHolderFactory { viewGroup, _ ->
-                    SearchViewHolder.create(viewGroup, imageLoader, true)
+                    ProductViewHolder.create(viewGroup, imageLoader)
                 }
                 .build()
     }
@@ -153,7 +153,7 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
         rvSearchResult.layoutManager = layoutManager
         rvSearchResult.setHasFixedSize(true)
         rvSearchResult.addItemDecoration(
-                VerticalSpaceItemDecoration(SearchViewHolder::class.java,
+                VerticalSpaceItemDecoration(ProductViewHolder::class.java,
                         resources.getDimensionPixelSize(R.dimen.divider_space)))
 
         rvSearchResult.addOnScrollListener(loadMoreCallback)

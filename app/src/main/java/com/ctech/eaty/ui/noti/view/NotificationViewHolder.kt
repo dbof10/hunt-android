@@ -1,9 +1,11 @@
 package com.ctech.eaty.ui.noti.view
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +57,8 @@ class NotificationViewHolder(view: View, private val imageLoader: GlideImageLoad
             val context = itemView.context
             imageLoader.downloadInto(user.imageUrl.px48, ivAvatar)
             val formattedSentence = SpannableStringBuilder(sentence)
-            formattedSentence.setSpan(StyleSpan(Typeface.BOLD), 0, user.name.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            formattedSentence.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.text_primary_dark)), 0, user.name.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            formattedSentence.setSpan(StyleSpan(Typeface.BOLD), 0, user.name.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
             tvSentence.text = formattedSentence
             tvTimeStamp.text = DateUtils.getRelativeTimeSpan(context, createdAt)
             if (!seen) {

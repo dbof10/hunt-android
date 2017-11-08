@@ -4,10 +4,24 @@ import {getAvatarUrl} from "../util/stringUtils";
 import TextStyle from '../style/textStyle'
 import PropTypes from 'prop-types';
 import Styles from '../style/style';
-import {colors} from "../style/color";
+import {colors} from "../style/resource";
 import HTMLView from 'react-native-htmlview';
+import ParsedText from 'react-native-parsed-text';
 
 export default class AskDiscussItem extends Component {
+
+    renderHtml = (node) => {
+        return (
+            <ParsedText parse={
+                [
+                    {pattern: /@(\w+)/, style: TextStyle.mention},
+                    {pattern: /#(\w+)/, style: TextStyle.mention}
+                ]
+            } style={TextStyle.body}>
+                {node.children}
+            </ParsedText>);
+    };
+
 
     render() {
         const discuss = this.props.discuss;
@@ -29,13 +43,15 @@ export default class AskDiscussItem extends Component {
                             <Text style={TextStyle.userName}>
                                 {user.name}
                             </Text>
-                            <Text>
+                            <Text style={TextStyle.tagline}>
                                 {user.headline}
                             </Text>
                         </View>
                     </View>
 
                     <HTMLView
+                        TextComponent={this.renderHtml}
+                        textComponentProps={{style: TextStyle.body}}
                         style={styles.body}
                         value={discuss.body}
                     />
@@ -46,7 +62,7 @@ export default class AskDiscussItem extends Component {
                         <View style={[styles.horizontalLayout, styles.footerAction]}>
 
                             <Image style={styles.footerIcon}
-                                   source={{uri: 'ic_recommend'}}/>
+                                   source={{uri: 'ic_like'}}/>
 
                             <Text style={styles.indicator}>
                                 {discuss.votes_count}
@@ -87,10 +103,16 @@ class DiscussComment extends Component {
                 <Text style={TextStyle.userName}>
                     {item.user.name}
                 </Text>
-                <Text numberOfLines={4}
-                      ellipsizeMode="tail">
+                <ParsedText numberOfLines={4}
+                            parse={
+                                [
+                                    {pattern: /@(\w+)/, style: TextStyle.mention},
+                                    {pattern: /#(\w+)/, style: TextStyle.mention}
+                                ]
+                            }
+                            ellipsizeMode="tail">
                     {item.body}
-                </Text>
+                </ParsedText>
             </View>
         </View>
     );
@@ -143,6 +165,10 @@ const styles = StyleSheet.create({
         height: 36,
         width: 36,
         borderRadius: 36
+    },
+
+    body: {
+        marginTop: 8
     },
 
     product: {

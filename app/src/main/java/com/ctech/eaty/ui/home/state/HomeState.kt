@@ -7,4 +7,5 @@ data class HomeState(val loading: Boolean = false, val loadingMore: Boolean = fa
                      val refreshing: Boolean = false, val loadError: Throwable? = null,
                      val loadMoreError: Throwable? = null, val refreshError: Throwable? = null,
                      val dayAgo: Int = 0,
-                     val content: List<HomeFeed> = emptyList(), val user: UserDetail? = null)
+                     val user: UserDetail? = null,
+                     val content: List<HomeFeed> = emptyList())

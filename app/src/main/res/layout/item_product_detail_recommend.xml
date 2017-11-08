@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@color/white_100"
     android:orientation="vertical">
 
     <com.ctech.eaty.widget.BaselineGridTextView
-        android:textAppearance="@style/TextAppearance.Section"
+        android:textAppearance="@style/Text.Body2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/content_padding_vertical"
@@ -18,12 +18,7 @@
         android:paddingTop="@dimen/content_padding_vertical"
         android:text="@string/related_products" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_marginEnd="@dimen/content_padding_horizontal"
-        android:layout_marginStart="@dimen/content_padding_horizontal"
-        android:background="@color/divider_color" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvProducts"

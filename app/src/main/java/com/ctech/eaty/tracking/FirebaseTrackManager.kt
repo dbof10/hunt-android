@@ -20,9 +20,9 @@ class FirebaseTrackManager @Inject constructor(context: Context) {
         firebaseAnalytics.logEvent(SCREEN_VIEW, bundle)
     }
 
-    fun trackLoginSuccess() {
+    fun trackLoginSuccess(source: String?) {
         val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SOURCE, "success")
+        bundle.putString(FirebaseAnalytics.Param.SOURCE, source)
         firebaseAnalytics.logEvent(ATTEMPT_LOGIN, bundle)
     }
 

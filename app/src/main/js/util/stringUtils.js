@@ -15,5 +15,9 @@ export function getAvatarUrl(uuid, size) {
 }
 
 export function trimHtml(html) {
-return html.replace(/<(?:.|\n)*?>/gm, '');
+    if (html !== null) {
+        return html.replace(/<(?:.|\n)*?>/gm, '');
+    } else {
+        return ""
+    }
 }

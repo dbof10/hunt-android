@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.home.component
 
-import android.support.v4.content.ContextCompat
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -17,9 +16,7 @@ import com.facebook.litho.annotations.OnEvent
 import com.facebook.litho.annotations.Prop
 import com.facebook.litho.fresco.FrescoImage
 import com.facebook.litho.widget.Text
-import com.facebook.litho.widget.VerticalGravity
 import com.facebook.yoga.YogaEdge
-import com.facebook.yoga.YogaPositionType
 
 @LayoutSpec
 class BodyComponentSpec {
@@ -38,7 +35,7 @@ class BodyComponentSpec {
 
             return Column.create(c)
                     .child(
-                            Text.create(c, 0, R.style.TextAppearance_Body)
+                            Text.create(c, 0, R.style.Text_Body)
                                     .text(viewModel.tagline)
                                     .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
                                     .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)

@@ -19,8 +19,8 @@ class NotificationViewModel(private val stateDispatcher: Observable<Notification
     fun empty(): Observable<NotificationState> {
         return stateDispatcher
                 .filter {
-                    !it.loading
-                            && it.loadError == null
+                    !it.loading && it.loadError == null
+                    && it.content?.isEmpty() == true
                 }
     }
 
@@ -30,7 +30,7 @@ class NotificationViewModel(private val stateDispatcher: Observable<Notification
                 .filter {
                     !it.loading
                             && it.loadError == null
-                            && it.content.isNotEmpty()
+                            && it.content?.isNotEmpty() == true
 
                 }
                 .map { it.content }

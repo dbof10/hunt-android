@@ -2,17 +2,16 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -20,8 +19,7 @@
                 android:id="@+id/ivCollectionBackground"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/collection_detail_background_height"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar

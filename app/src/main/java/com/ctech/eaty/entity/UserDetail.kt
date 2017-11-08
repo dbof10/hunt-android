@@ -61,5 +61,9 @@ class UserDetail(
         dest.writeInt(productCount)
     }
 
+    override fun toString(): String {
+        return "UserDetail(email='$email', webUrl=$webUrl, notification=$notification, followerCount=$followerCount, followingCount=$followingCount, productCount=$productCount)"
+    }
+
 
 }

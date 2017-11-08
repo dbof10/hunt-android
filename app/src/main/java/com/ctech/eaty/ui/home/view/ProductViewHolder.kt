@@ -10,47 +10,27 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.util.GlideImageLoader
-import com.ctech.eaty.util.ResizeImageUrlProvider
 import vn.tiki.noadapter2.AbsViewHolder
 
 
 class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {
 
-    private val IMAGE_WIDTH = 500
-
-    @BindView(R.id.ivProduct)
-    lateinit var ivProduct: ImageView
-
-    @BindView(R.id.tvName)
-    lateinit var tvName: TextView
-
-    @BindView(R.id.tvDescription)
-    lateinit var tvDescription: TextView
-
-    @BindView(R.id.llUpvote)
-    lateinit var llUpvote: View
-
-    @BindView(R.id.llComment)
-    lateinit var llComment: View
-
-    @BindView(R.id.llShare)
-    lateinit var llShare: View
-
-    @BindView(R.id.tvUpvote)
-    lateinit var tvUpvote: TextView
-
-    @BindView(R.id.tvCommentCount)
-    lateinit var tvCommentCount: TextView
 
     @BindView(R.id.flProductHolder)
     lateinit var flProductHolder: View
 
+    @BindView(R.id.ivProduct)
+    lateinit var ivProduct: ImageView
+
+    @BindView(R.id.tvDescription)
+    lateinit var tvDescription: TextView
+
+    @BindView(R.id.tvName)
+    lateinit var tvName: TextView
+
     init {
         ButterKnife.bind(this, view)
         flProductHolder.setOnClickListener(this)
-        llUpvote.setOnClickListener(this)
-        llComment.setOnClickListener(this)
-        llShare.setOnClickListener(this)
     }
 
     companion object {
@@ -66,8 +46,6 @@ class ProductViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsView
         with(product) {
             tvName.text = name
             tvDescription.text = tagline
-            tvUpvote.text = votesCountDisplay
-            tvCommentCount.text = commentsCountDisplay
             imageLoader.downloadInto(imageUrl, ivProduct)
         }
     }

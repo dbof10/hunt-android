@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/flProductHolder"
@@ -35,97 +35,14 @@
 
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvDescription"
-        style="@style/Widget.Hunt.ShotDescription"
+        android:textAppearance="@style/Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/flProductHolder"
         android:background="@android:color/white"
-        android:paddingBottom="@dimen/space_small"
+        android:paddingBottom="@dimen/space_medium"
         android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingStart="@dimen/content_padding_horizontal"
-        android:paddingTop="@dimen/space_small"
+        android:paddingTop="@dimen/space_medium"
         tools:text="Adobe's free scan app with text recognition" />
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tvDescription"
-        android:background="@color/divider_color" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_below="@id/separator"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        >
-
-        <LinearLayout
-            android:id="@+id/llUpvote"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <com.ctech.eaty.widget.BaselineGridTextView
-                android:id="@+id/tvUpvote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="287" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/space_small"
-                android:src="@drawable/ic_heart_solid_grey" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/llComment"
-            android:background="?selectableItemBackground"
-            android:layout_width="0dp"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <com.ctech.eaty.widget.BaselineGridTextView
-                android:id="@+id/tvCommentCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="100" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/space_small"
-                android:paddingTop="2dp"
-                android:src="@drawable/ic_comment_fill" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llShare"
-            android:background="?selectableItemBackground"
-            android:layout_width="0dp"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <ImageView
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_share" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-
-</RelativeLayout>
-
+</LinearLayout>

@@ -75,8 +75,10 @@
         <item name="android:windowAnimationStyle">@style/SearchWindowAnimations</item>
         <item name="android:windowEnterTransition">@transition/search_enter</item>
         <item name="android:windowReturnTransition">@transition/search_return</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/search_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/search_shared_return</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/search_shared_enter
+        </item>
+        <item name="android:windowSharedElementReturnTransition">@transition/search_shared_return
+        </item>
         <item name="android:windowSharedElementsUseOverlay">true</item>
     </style>
 
@@ -86,6 +88,7 @@
     </style>
 
     <style name="HuntDarkOverlay" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+
     </style>
 
     <style name="SearchViewTheme" parent="HuntDarkOverlay">
@@ -120,29 +123,9 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
-    <style name="Widget.Hunt.DialogText">
-        <item name="android:textAppearance">@style/TextAppearance.DialogContent</item>
-        <item name="lineHeightHint">20sp</item>
-    </style>
-
-    <style name="Widget.Hunt.DialogTitle">
-        <item name="android:textAppearance">@style/TextAppearance.DialogTitle</item>
-        <item name="lineHeightHint">28sp</item>
-    </style>
-
     <style name="Widget.Hunt.ProductTitle">
-        <item name="android:textAppearance">@style/TextAppearance.ProductTitle</item>
+        <item name="android:textAppearance">@style/Text.Title</item>
         <item name="lineHeightHint">32sp</item>
-    </style>
-
-    <style name="Widget.Hunt.ShotDescription">
-        <item name="android:textAppearance">@style/TextAppearance.ShotDescription</item>
-        <item name="lineHeightHint">24sp</item>
-    </style>
-
-    <style name="Widget.Hunt.Comment">
-        <item name="android:textAppearance">@style/TextAppearance.Comment</item>
-        <item name="lineHeightHint">24sp</item>
     </style>
 
     <style name="Widget.Hunt.UserTitle">
@@ -150,74 +133,38 @@
         <item name="lineHeightHint">28sp</item>
     </style>
 
-    <style name="TextAppearance.DialogTitle" parent="@android:style/TextAppearance.Material.Title">
-        <item name="android:textColor">@color/text_primary_dark</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
+    <style name="Text.Body" parent="@android:style/TextAppearance.Material.Body1" />
 
-
-    <style name="TextAppearance.DialogContent" parent="@android:style/TextAppearance.Material.Subhead">
+    <style name="Text.Body2" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textColor">@color/text_secondary_dark</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextAppearance.EmptyText" parent="@style/TextAppearance.DialogContent">
-        <item name="android:textColor">@color/text_primary_light</item>
-        <item name="lineHeightHint">24sp</item>
+    <style name="Text.Section" parent="Text.Body">
+        <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="TextAppearance.Body" parent="@android:style/TextAppearance.Material.Body1"/>
-
-    <style name="TextAppearance.FooterIndicator" parent="@android:style/TextAppearance.Material.Body2">
-        <item name="android:textColor">@color/gray_600</item>
-    </style>
-
-    <style name="TextAppearance.Section" parent="@android:style/TextAppearance.Material.Headline" />
-
-    <style name="TextAppearance.TextIndicator" parent="@android:style/TextAppearance.Material.Small">
+    <style name="Text.Accent" parent="Text.Body">
         <item name="android:textColor">@color/hunt</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.ProductTitle" parent="@android:style/TextAppearance.Material.Headline">
+    <style name="Text.Title" parent="Text.Body">
         <item name="android:textColor">@color/text_primary_dark</item>
-    </style>
-
-    <style name="TextAppearance.LoginTitle" parent="@android:style/TextAppearance.Material.Headline">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/gray_50</item>
-    </style>
-
-    <style name="TextAppearance.ShotDescription" parent="@android:style/TextAppearance.Material.Subhead">
-        <item name="android:textColor">@color/text_tertiary_dark</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
-
-    <style name="TextAppearance.SmallNotification" parent="@android:style/TextAppearance.Material.Small">
-        <item name="android:textColor">@color/text_tertiary_dark</item>
-        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
 
-    <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_secondary_dark</item>
+    <style name="TextAppearance.Headline" parent="Text.Body2">
+        <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.Headline" parent="@android:style/TextAppearance.Material.Headline">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_secondary_dark</item>
-    </style>
-
-    <style name="TextAppearance.Timestamp" parent="@android:style/TextAppearance.Material.Caption">
+    <style name="TextAppearance.Timestamp" parent="Text.Body">
         <item name="android:textColor">@color/hint_disabled_dark</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <style name="TextAppearance.UserName" parent="@android:style/TextAppearance.Material.Caption">
+    <style name="TextAppearance.UserName" parent="Text.Body">
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_primary_dark</item>
@@ -228,12 +175,12 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="TextAppearance.DarkButton" parent="@android:style/TextAppearance.Material.Widget.Button">
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
     <style name="LightRippleOverlay">
         <item name="android:colorControlHighlight">@color/ripple_light</item>
+    </style>
+
+    <style name="TextAppearance.FooterAction" parent="@android:style/TextAppearance.Material.Body2">
+        <item name="android:textColor">@color/gray_600</item>
     </style>
 
 </resources>

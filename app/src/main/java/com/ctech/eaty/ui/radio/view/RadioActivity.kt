@@ -49,8 +49,6 @@ class RadioActivity : BaseActivity(), HasSupportFragmentInjector {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_radio)
         setupToolbar()

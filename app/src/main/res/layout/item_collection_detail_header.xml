@@ -52,7 +52,7 @@
 
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvCollectionDescription"
-        style="@style/Widget.Hunt.ShotDescription"
+        android:textAppearance="@style/Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
