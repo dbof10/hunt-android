@@ -26,10 +26,13 @@ class LithoController @Inject constructor(private val context: ComponentContext,
 
     private fun internalSetup() {
         viewModel.content().subscribe { renderContent(it) }
-        viewModel.refreshSuccess().subscribe { refreshSuccess() }
+        viewModel.refreshSuccess().subscribe { stopRefreshing() }
+        viewModel.loadingMore().subscribe { renderContent(it) }
+        viewModel.loadMoreError().subscribe { renderContent(it) }
+        viewModel.refreshError().subscribe { stopRefreshing() }
     }
 
-    private fun refreshSuccess() {
+    private fun stopRefreshing() {
         eventsController.clearRefreshing()
     }
 

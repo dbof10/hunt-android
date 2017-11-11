@@ -12,14 +12,13 @@
         android:layout_height="match_parent" />
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/vLottie"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="preloader.json"
-        app:lottie_loop="true" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
 
     <com.ctech.eaty.widget.ErrorView
         android:id="@+id/vError"
@@ -27,5 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
+        app:retryButtonText="@string/retry"
         app:errorImage="@drawable/network_error" />
 </FrameLayout>

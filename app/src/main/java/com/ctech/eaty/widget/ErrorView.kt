@@ -29,7 +29,7 @@ class ErrorView : LinearLayout {
     @BindView(R.id.tvRetry)
     lateinit var tvRetry: TextView
 
-    private lateinit var retry: () -> Unit
+    var onRetry: (() -> Unit)? = null
 
     constructor(context: Context) : this(context, null)
 
@@ -119,12 +119,12 @@ class ErrorView : LinearLayout {
         }
 
         tvRetry.setOnClickListener {
-            retry()
+            onRetry?.invoke()
         }
     }
 
     fun setOnRetryListener(retry: () -> Unit) {
-        this.retry = retry
+        this.onRetry = retry
     }
 
 

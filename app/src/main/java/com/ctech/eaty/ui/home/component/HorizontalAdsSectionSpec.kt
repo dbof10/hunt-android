@@ -11,6 +11,8 @@ import com.facebook.litho.sections.SectionContext
 import com.facebook.litho.sections.annotations.GroupSectionSpec
 import com.facebook.litho.sections.annotations.OnCreateChildren
 import com.facebook.litho.sections.common.DataDiffSection
+import com.facebook.litho.sections.common.OnCheckIsSameContentEvent
+import com.facebook.litho.sections.common.OnCheckIsSameItemEvent
 import com.facebook.litho.sections.common.RenderEvent
 import com.facebook.litho.viewcompat.SimpleViewBinder
 import com.facebook.litho.widget.RenderInfo
@@ -26,10 +28,13 @@ object HorizontalAdsSectionSpec {
             c: SectionContext,
             @Prop dataSource: List<HorizontalAdsItemViewModel>): Children {
         return Children.create()
-                .child(DataDiffSection.create<HorizontalAdsItemViewModel>(c)
-                        .data(dataSource)
-                        .key(dataSource.first().adId)
-                        .renderEventHandler(HorizontalAdsSection.render(c)))
+                .child(
+                        DataDiffSection.create<HorizontalAdsItemViewModel>(c)
+                                .data(dataSource)
+                                .renderEventHandler(HorizontalAdsSection.render(c))
+                                .onCheckIsSameItemEventHandler(HorizontalAdsSection.isSameItem(c))
+                                .onCheckIsSameContentEventHandler(HorizontalAdsSection.isSameContent(c))
+                )
                 .build()
     }
 
@@ -50,5 +55,21 @@ object HorizontalAdsSectionSpec {
                     }
                 })
                 .build()
+    }
+
+    @OnEvent(OnCheckIsSameItemEvent::class)
+    fun isSameItem(
+            c: SectionContext,
+            @FromEvent previousItem: HorizontalAdsItemViewModel,
+            @FromEvent nextItem: HorizontalAdsItemViewModel): Boolean {
+        return previousItem.id == nextItem.id
+    }
+
+    @OnEvent(OnCheckIsSameContentEvent::class)
+    fun isSameContent(
+            c: SectionContext,
+            @FromEvent previousItem: HorizontalAdsItemViewModel,
+            @FromEvent nextItem: HorizontalAdsItemViewModel): Boolean {
+        return previousItem == nextItem
     }
 }

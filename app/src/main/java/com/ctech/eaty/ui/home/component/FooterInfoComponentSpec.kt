@@ -35,7 +35,6 @@ object FooterInfoComponentSpec {
                 .child(
                         Text.create(c, 0, R.style.Text_Body)
                                 .text(resource.getQuantityString(R.plurals.comment, viewModel.commentsCount, viewModel.commentsCount))
-                                .marginRes(YogaEdge.START, R.dimen.space_small)
                 )
                 .flex(1F)
                 .justifyContent(YogaJustify.FLEX_START)

@@ -17,10 +17,15 @@
     <string name="ask">Ask</string>
 
 
+
     <!-- Message -->
     <string name="retry">Tap to retry</string>
-    <string name="no_internet">No connection</string>
     <string name="something_wrong">Something wrong happened</string>
+    <string name="error_no_network">No internet connection</string>
+    <string name="error_cannot_connect_server">Unable to connect to server</string>
+
+    <!--Explain -->
+    <string name="explain_cannot_connect_server">Your local time mismatches with server</string>
 
     <!-- Navigation -->
     <string name="navigation_header_guest">Guest</string>
@@ -95,5 +100,6 @@
     <!-- Home -->
     <string name="like">Like</string>
     <string name="comment">Comment</string>
+    <string name="cannot_load">Cannot load</string>
 
 </resources>

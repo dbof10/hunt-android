@@ -4,7 +4,6 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.repository.UserRepository
-import com.ctech.eaty.ui.home.action.BarCodeGenerator
 import com.ctech.eaty.ui.home.epic.*
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.reducer.HomeReducer
@@ -25,21 +24,16 @@ class HomeModule {
     @Provides
     fun provideComponentContext(activity: HomeActivity) = ComponentContext(activity)
 
-    @Provides
-    fun provideBarCodeGenerator(): BarCodeGenerator {
-        return BarCodeGenerator()
-    }
 
     @ActivityScope
     @Provides
     fun provideHomeStore(productRepository: ProductRepository,
                          userRepository: UserRepository,
-                         barCodeGenerator: BarCodeGenerator,
                          threadScheduler: ThreadScheduler): Store<HomeState> {
-        return Store<HomeState>(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, barCodeGenerator, threadScheduler),
-                RefreshEpic(productRepository, barCodeGenerator, threadScheduler),
+        return Store<HomeState>(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, threadScheduler),
+                RefreshEpic(productRepository, threadScheduler),
                 LoadUserEpic(userRepository, threadScheduler),
-                LoadMoreEpic(productRepository, barCodeGenerator, threadScheduler), CheckLoginEpic()))
+                LoadMoreEpic(productRepository, threadScheduler), CheckLoginEpic()))
 
     }
 

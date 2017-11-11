@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.Gravity
 import android.view.Gravity.START
 import android.view.View
 import android.widget.ImageView
@@ -139,4 +140,11 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         store.dispatch(HomeAction.CHECK_RESULT(requestCode, resultCode, data))
     }
 
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(Gravity.START)) {
+            drawer.closeDrawers()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

@@ -23,9 +23,10 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                 .filter { it.refreshing }
     }
 
-    fun loadingMore(): Observable<HomeState> {
+    fun loadingMore(): Observable<List<HomeFeed>> {
         return stateDispatcher
                 .filter { it.loadingMore }
+                .map { it.content }
     }
 
     fun loadError(): Observable<Throwable> {
@@ -40,10 +41,10 @@ class HomeViewModel(private val stateDispatcher: Observable<HomeState>,
                 .map { it.refreshError }
     }
 
-    fun loadMoreError(): Observable<Throwable> {
+    fun loadMoreError(): Observable<List<HomeFeed>> {
         return stateDispatcher
                 .filter { it.loadMoreError != null }
-                .map { it.loadMoreError }
+                .map { it.content }
     }
 
     fun refreshSuccess(): Observable<List<HomeFeed>> {

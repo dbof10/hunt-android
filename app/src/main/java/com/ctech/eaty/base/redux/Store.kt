@@ -7,6 +7,8 @@ import io.reactivex.subjects.PublishSubject
 
 class Store<State> constructor(initState: State, private val reducer: Reducer<State>, effects: Array<Epic<State>>) {
     val state: BehaviorSubject<State> = BehaviorSubject.createDefault(initState)
+    fun getState(): State = state.value
+
     private val actionDispatcher: PublishSubject<Action> = PublishSubject.create()
     private val result: Observable<Result>
 

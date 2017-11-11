@@ -35,12 +35,6 @@ object FeedSectionSpec {
                                         FeedSection.isSameItem(c))
                                 .onCheckIsSameContentEventHandler(FeedSection.isSameContent(c))
                 )
-        if (feed.horizontalAds.isNotEmpty()) {
-            builder.child(
-                    HorizontalAdsSection.create(c)
-                            .dataSource(feed.horizontalAds)
-            )
-        }
         return builder.build()
     }
 

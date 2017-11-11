@@ -109,6 +109,9 @@ dependencies {
     //Reactive
     implementation deps.rx.android
     implementation deps.rx.java
+    implementation deps.rx.network
+
+
     implementation deps.noadapter
     implementation deps.butterknife.lib
     kapt deps.butterknife.compiler
