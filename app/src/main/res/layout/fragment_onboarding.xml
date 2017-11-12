@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white_100"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Text.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        tools:text="Title" />
+
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/onboarding_scene_1" />
+
+
+    <TextView
+        android:id="@+id/tvDescription"
+        style="@style/Text.Body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/content_padding_horizontal"
+        android:layout_marginEnd="@dimen/content_padding_horizontal"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        tools:text="Description" />
+
+</LinearLayout>

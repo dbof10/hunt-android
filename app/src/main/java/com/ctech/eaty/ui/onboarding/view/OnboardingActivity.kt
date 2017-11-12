@@ -1,72 +1,86 @@
 package com.ctech.eaty.ui.onboarding.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
 import com.ctech.eaty.R
+import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.ui.home.view.HomeActivity
-import com.github.paolorotolo.appintro.AppIntro2
-import com.github.paolorotolo.appintro.AppIntroFragment
-import com.github.paolorotolo.appintro.model.SliderPage
+import kotlinx.android.synthetic.main.activity_onboarding.*
 import javax.inject.Inject
 
 
-class OnboardingActivity : AppIntro2(), Injectable {
+class OnboardingActivity : BaseActivity(), Injectable {
+
+    override fun getScreenName() = "Onboarding"
 
     @Inject
     lateinit var appSettingsManager: AppSettingsManager
+    private val adapter by lazy {
+        ViewPagerAdapter(supportFragmentManager)
+    }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        val page1 = SliderPage()
-        page1.description = getString(R.string.onboarding_first_scene)
-        page1.imageDrawable = R.drawable.onboarding_scene_1
-        page1.bgColor = Color.WHITE
-        page1.descColor = ContextCompat.getColor(this, R.color.text_secondary_dark)
-        page1.title = getString(R.string.onboarding_first_scene_title)
-        page1.titleColor = ContextCompat.getColor(this, R.color.text_primary_dark)
-        addSlide(AppIntroFragment.newInstance(page1))
-
-        val page2 = SliderPage()
-        page2.description = getString(R.string.onboarding_second_scene)
-        page2.imageDrawable = R.drawable.onboarding_scene_2
-        page2.bgColor = Color.WHITE
-        page2.descColor = ContextCompat.getColor(this, R.color.text_secondary_dark)
-
-        page2.title = getString(R.string.onboarding_second_scene_title)
-        page2.titleColor = ContextCompat.getColor(this, R.color.text_primary_dark)
-        addSlide(AppIntroFragment.newInstance(page2))
-
-
-        val page3 = SliderPage()
-        page3.description = getString(R.string.onboarding_third_scene)
-        page3.imageDrawable = R.drawable.onboarding_scene_3
-        page3.bgColor = Color.WHITE
-        page3.descColor = ContextCompat.getColor(this, R.color.text_secondary_dark)
-
-        page3.title = getString(R.string.onboarding_third_scene_title)
-        page3.titleColor = ContextCompat.getColor(this, R.color.text_primary_dark)
-        addSlide(AppIntroFragment.newInstance(page3))
-
-        setCustomTransformer(PageTransformer())
-
-        setBarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        setContentView(R.layout.activity_onboarding)
+        setupListener()
+        setupScene()
 
     }
 
-    override fun onSkipPressed(currentFragment: Fragment) {
-        super.onSkipPressed(currentFragment)
-        goHome()
+    private fun setupScene() {
+
+        val scenes = ArrayList<Fragment>(3)
+        val page1 = OnboardingFragment.newInstance(R.string.onboarding_first_scene, R.drawable.onboarding_scene_1, R.string.onboarding_first_scene_title)
+        val page2 = OnboardingFragment.newInstance(R.string.onboarding_second_scene, R.drawable.onboarding_scene_2, R.string.onboarding_second_scene_title)
+        val page3 = OnboardingFragment.newInstance(R.string.onboarding_third_scene, R.drawable.onboarding_scene_3, R.string.onboarding_third_scene_title)
+
+        scenes.run {
+            add(page1)
+            add(page2)
+            add(page3)
+        }
+        viewPager.adapter = adapter
+        adapter.setData(scenes)
+        indicator.setViewPager(viewPager)
+        viewPager.setPageTransformer(false, PageTransformer())
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                val count = adapter.count
+                if (position == count - 1) {
+                    btDone.visibility = View.VISIBLE
+                    btSkip.visibility = View.GONE
+                } else {
+                    btDone.visibility = View.GONE
+                    btSkip.visibility = View.VISIBLE
+                }
+            }
+
+        })
     }
+
+    private fun setupListener() {
+        btSkip.setOnClickListener {
+            goHome()
+        }
+        btDone.setOnClickListener {
+            goHome()
+        }
+    }
+
 
     private fun goHome() {
         appSettingsManager.setDidSeeOnboarding()
@@ -74,12 +88,6 @@ class OnboardingActivity : AppIntro2(), Injectable {
         startActivity(intent)
         finish()
     }
-
-    override fun onDonePressed(currentFragment: Fragment) {
-        super.onDonePressed(currentFragment)
-        goHome()
-    }
-
 
     class PageTransformer : ViewPager.PageTransformer {
 
@@ -91,7 +99,7 @@ class OnboardingActivity : AppIntro2(), Injectable {
 
             } else if (position <= 1) { // [-1,1]
 
-                val image = page.findViewById<ImageView>(R.id.image)
+                val image = page.findViewById<ImageView>(R.id.ivImage)
 
                 image.scaleX = 1.0f - absPosition * 2
                 image.scaleY = 1.0f - absPosition * 2

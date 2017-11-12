@@ -97,7 +97,6 @@ dependencies {
     implementation deps.ui.lottie
     implementation deps.ui.inkindicator
     implementation deps.ui.gradient
-    implementation deps.ui.appintro
 
     //Media
     implementation deps.exo.core
