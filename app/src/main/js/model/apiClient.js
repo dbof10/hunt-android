@@ -3,7 +3,7 @@ import Rx from "rxjs";
 import 'rxjs/add/operator/mergeMap';
 import {getClientToken, getUserToken} from "../util/nativeInfra"
 import {ApolloClient, createNetworkInterface, gql} from 'react-apollo';
-import {QUERY_ASK, QUERY_ASK_DETAIL, QUERY_JOB, QUERY_MEETUP} from "../query/index";
+import {QUERY_ASK, QUERY_ASK_DETAIL, QUERY_JOB, QUERY_MEETUP, QUERY_NEWS_LETTER} from "../query/index";
 
 const clientToken = Rx.Observable.fromPromise(getClientToken());
 const userToken = Rx.Observable.fromPromise(getUserToken());
@@ -111,4 +111,25 @@ export function getAskDetail(id, offset) {
     };
     return Rx.Observable.fromPromise(axiosInstance.post('/frontend/graphql', body))
         .map(response => response.data.data)
+}
+
+export function getNewsLetter(type, offset) {
+    return Rx.Observable.fromPromise(apolloClient.query({
+        query: gql`${QUERY_NEWS_LETTER}`,
+        variables: {
+            filter: type,
+            cursor: offset
+        },
+        operationName: "NewslettersPage"
+    }))
+        .map(response => response.data)
+}
+
+
+export function subscribeNewsLetter(email, status) {
+    let body = {
+        email,
+        status
+    };
+    return Rx.Observable.fromPromise(axiosInstance.post('/frontend/newsletter_subscriptions', body));
 }

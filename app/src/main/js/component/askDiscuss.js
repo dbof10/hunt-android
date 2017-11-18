@@ -136,7 +136,7 @@ DiscussComment.propTypes = {
 const styles = StyleSheet.create({
 
     commentContainer: {
-        backgroundColor: colors.commentSectionBackground,
+        backgroundColor: colors.light_grey,
         paddingTop: 8,
         paddingBottom: 8,
         paddingLeft: 16,

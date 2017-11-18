@@ -82,6 +82,10 @@ class OnboardingActivity : BaseActivity(), Injectable {
     }
 
 
+    override fun onBackPressed() {
+
+    }
+
     private fun goHome() {
         appSettingsManager.setDidSeeOnboarding()
         val intent = HomeActivity.newIntent(this)

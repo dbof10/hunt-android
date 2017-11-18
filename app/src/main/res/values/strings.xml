@@ -15,6 +15,7 @@
     <string name="job_list">Jobs</string>
     <string name="meet_up">Meetups</string>
     <string name="ask">Ask</string>
+    <string name="new_letter">NewLetters</string>
 
 
 
@@ -36,6 +37,7 @@
     <string name="navigation_jobs">Jobs</string>
     <string name="navigation_meetups">Meetups</string>
     <string name="navigation_ask">Ask</string>
+    <string name="navigation_new_letter">NewLetters</string>
 
     <!-- User Detail -->
     <string name="transition_user_background" translatable="false">transition_player_background</string>

@@ -27,6 +27,11 @@ export default StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.26)'
     },
 
+    error: {
+        fontSize: 10,
+        color: colors.primary
+    },
+
     mention: {
         color: colors.accent
     },

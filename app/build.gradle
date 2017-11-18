@@ -58,10 +58,6 @@ android {
         }
     }
 
-    kapt {
-        generateStubs = true
-    }
-
     packagingOptions {
         exclude '/lib/mips64/**'
         exclude '/lib/arm64-v8a/**'
@@ -171,6 +167,8 @@ dependencies {
 
     //React
     implementation deps.react.core
+    implementation deps.react.gif
+
 
     //Social
     implementation deps.facebook.login

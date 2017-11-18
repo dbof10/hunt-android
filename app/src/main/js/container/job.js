@@ -59,7 +59,7 @@ class Job extends Component {
                         keyExtractor={this.keyExtractor}
                         renderItem={this.renderItem}
                         onEndReached={this.loadMore}
-                        onEndReachedThreshold={2}
+                        onEndReachedThreshold={3}
                     />
                 )
             }
