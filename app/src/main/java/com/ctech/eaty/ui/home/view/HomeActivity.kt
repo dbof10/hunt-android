@@ -15,12 +15,12 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.home.action.HomeAction
+import com.ctech.eaty.ui.home.controller.HomeNetworkController
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.ctech.eaty.util.GlideImageLoader
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.kotlin.autoDisposeWith
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,12 +47,17 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var viewModel: HomeViewModel
 
-    private val ivHeaderAvatar: ImageView by lazy {
+    @Inject
+    lateinit var networkController: HomeNetworkController
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
+
+    private val ivHeaderAvatar by lazy {
         navigation.getHeaderView(0)
                 .findViewById<ImageView>(R.id.ivAvatar)
     }
 
-    private val tvHeaderUserName: TextView by lazy {
+    private val tvHeaderUserName by lazy {
         navigation.getHeaderView(0)
                 .findViewById<TextView>(R.id.tvUserName)
     }
@@ -84,15 +89,13 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         store.startBinding()
                 .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
                 .subscribe()
+        store.dispatch(HomeAction.LOAD_USER)
+        networkController.registerNetworkMonitor()
+
     }
 
     private fun setupViewModel() {
         viewModel.user().subscribe { renderNavigationHeader(it) }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        store.dispatch(HomeAction.LOAD_USER)
     }
 
     private fun renderNavigationHeader(user: UserDetail) {
@@ -126,8 +129,10 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
         }
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return dispatchingAndroidInjector
+
+    override fun onDestroy() {
+        networkController.unregisterNetworkMonitor()
+        super.onDestroy()
     }
 
     override fun onLowMemory() {

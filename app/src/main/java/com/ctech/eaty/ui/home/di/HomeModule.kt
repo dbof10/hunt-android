@@ -30,7 +30,7 @@ class HomeModule {
     fun provideHomeStore(productRepository: ProductRepository,
                          userRepository: UserRepository,
                          threadScheduler: ThreadScheduler): Store<HomeState> {
-        return Store<HomeState>(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, threadScheduler),
+        return Store(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, threadScheduler),
                 RefreshEpic(productRepository, threadScheduler),
                 LoadUserEpic(userRepository, threadScheduler),
                 LoadMoreEpic(productRepository, threadScheduler), CheckLoginEpic()))

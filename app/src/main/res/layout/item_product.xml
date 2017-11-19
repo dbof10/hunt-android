@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/feed_product_height"
             android:layout_gravity="center"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
         <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvName"

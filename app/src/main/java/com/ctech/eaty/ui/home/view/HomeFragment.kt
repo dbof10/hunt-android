@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,7 @@ class HomeFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var errorInterpreter: ErrorInterpreter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
 
@@ -61,6 +62,8 @@ class HomeFragment : BaseFragment(), Injectable {
         setupViewModel()
         setupLitho()
         setupListener()
+        store.dispatch(HomeAction.LOAD)
+
     }
 
     private fun setupListener() {
@@ -72,12 +75,6 @@ class HomeFragment : BaseFragment(), Injectable {
     private fun setupLitho() {
         lithoController.take(litho)
     }
-
-    override fun onStart() {
-        super.onStart()
-        store.dispatch(HomeAction.LOAD)
-    }
-
 
     private fun renderContent() {
         progressBar.visibility = View.GONE

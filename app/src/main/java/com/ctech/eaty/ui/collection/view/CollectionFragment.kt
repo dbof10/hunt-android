@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
@@ -79,11 +78,9 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
                 .build()
     }
 
-    override fun store(): Store<CollectionState> {
-        return store
-    }
+    override fun store(): Store<CollectionState> = store
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_collections, container, false)
     }
 
@@ -92,11 +89,8 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
         setupRecyclerView()
         setupViewModel()
         setupErrorView()
-    }
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(CollectionAction.LOAD)
+
     }
 
     private fun setupErrorView() {
@@ -107,9 +101,8 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
     }
 
     private fun renderContent(list: List<Collection>) {
-        vLottie.cancelAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         adapter.setItems(list)
     }
 
@@ -120,9 +113,8 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
 
 
     private fun renderLoadError() {
-        vLottie.cancelAnimation()
         vError.visibility = View.VISIBLE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -131,9 +123,8 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
 
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {
