@@ -74,11 +74,9 @@ class NotificationFragment : BaseReduxFragment<NotificationState>(), Injectable 
                 .build()
     }
 
-    override fun store(): Store<NotificationState> {
-        return store
-    }
+    override fun store(): Store<NotificationState> = store
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_notifications, container, false)
     }
 
@@ -87,10 +85,6 @@ class NotificationFragment : BaseReduxFragment<NotificationState>(), Injectable 
         setupRecyclerView()
         setupViewModel()
         setupErrorView()
-    }
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(NotificationAction.LOAD)
     }
 
@@ -102,42 +96,38 @@ class NotificationFragment : BaseReduxFragment<NotificationState>(), Injectable 
     }
 
     private fun renderContent(list: List<Notification>) {
-        vLottie.cancelAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vEmpty.visibility = View.GONE
         adapter.setItems(list)
     }
 
 
     private fun renderLoadError() {
-        vLottie.cancelAnimation()
         vError.visibility = View.VISIBLE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vEmpty.visibility = View.GONE
     }
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         vEmpty.visibility = View.GONE
     }
 
     private fun renderEmpty() {
-        vLottie.cancelAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vEmpty.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
-        disposeOnStop(viewModel.loadError().subscribe {
+        viewModel.loading().subscribe { renderLoading() }
+        viewModel.loadError().subscribe {
             renderLoadError()
-        })
-        disposeOnStop(viewModel.empty().subscribe{renderEmpty()})
-        disposeOnStop(viewModel.content().subscribe { renderContent(it) })
+        }
+        viewModel.empty().subscribe { renderEmpty() }
+        viewModel.content().subscribe { renderContent(it) }
     }
 
 

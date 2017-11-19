@@ -26,9 +26,9 @@
 
 
     <color name="scrim">#99323232</color>
-    <color name="immersive_bars">#99000000</color>
+    <color name="immersive_bars">@color/black_60</color>
     <color name="light_immersive_bars">@color/immersive_bars</color>
-    <color name="overlap_background_light">#fafafa</color>
+    <color name="overlap_background_light">@color/gray_50</color>
     <color name="ripple_light">#99ffffff</color>
 
     <color name="background_dark">#333333</color>

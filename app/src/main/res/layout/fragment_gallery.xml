@@ -16,9 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/keyline_1"
-        app:currentPageIndicatorColor="@android:color/white"
+        app:currentPageIndicatorColor="@color/white_100"
         app:dotDiameter="@dimen/indicator_diameter"
         app:dotGap="@dimen/indicator_gap"
-        app:pageIndicatorColor="@android:color/darker_gray" />
+        app:pageIndicatorColor="@color/black_25" />
 
 </RelativeLayout>

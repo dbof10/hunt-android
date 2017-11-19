@@ -8,7 +8,7 @@ import com.ctech.eaty.error.UnauthorizedActionException
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.repository.VoteRepository
-import com.ctech.eaty.ui.productdetail.action.BarCodeGenerator
+import com.ctech.eaty.repository.createProductDetailBarcode
 import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
 import com.ctech.eaty.ui.productdetail.result.LikeResult
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
@@ -21,7 +21,6 @@ import retrofit2.HttpException
 class LikeEpic(private val voteRepository: VoteRepository,
                private val userRepository: UserRepository,
                private val productRepository: ProductRepository,
-               private val barCodeGenerator: BarCodeGenerator,
                private val threadScheduler: ThreadScheduler) : Epic<ProductDetailState> {
 
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<ProductDetailState>): Observable<LikeResult> {
@@ -33,7 +32,7 @@ class LikeEpic(private val voteRepository: VoteRepository,
                             voteRepository
                                     .like(id)
                                     .doOnNext {
-                                        productRepository.purgeProductDetail(barCodeGenerator.get(id))
+                                        productRepository.purgeProductDetail(createProductDetailBarcode(id))
                                     }
                                     .map {
                                         LikeResult.success(it)

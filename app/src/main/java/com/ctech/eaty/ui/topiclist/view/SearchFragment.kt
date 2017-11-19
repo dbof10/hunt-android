@@ -111,22 +111,12 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupViewModel()
-    }
-
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(SearchAction.Load(topic.id))
     }
 
-    override fun onDestroyView() {
-        vLottie.cancelAnimation()
-        super.onDestroyView()
-    }
 
     private fun renderContent(list: List<ProductItemViewModel>) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.GONE
         adapter.setItems(list)
     }
@@ -137,8 +127,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
 
     private fun renderLoadError(error: Throwable) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.VISIBLE
         Timber.e(error)
     }
@@ -149,17 +138,16 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {
-        disposeOnStop(viewModel.loading().subscribe { renderLoading() })
-        disposeOnStop(viewModel.loadingMore().subscribe { renderLoadingMore() })
-        disposeOnStop(viewModel.loadError().subscribe { renderLoadError(it) })
-        disposeOnStop(viewModel.loadMoreError().subscribe { renderLoadMoreError() })
-        disposeOnStop(viewModel.content().subscribe { renderContent(it) })
+        viewModel.loading().subscribe { renderLoading() }
+        viewModel.loadingMore().subscribe { renderLoadingMore() }
+        viewModel.loadError().subscribe { renderLoadError(it) }
+        viewModel.loadMoreError().subscribe { renderLoadMoreError() }
+        viewModel.content().subscribe { renderContent(it) }
     }
 
     private fun setupRecyclerView() {

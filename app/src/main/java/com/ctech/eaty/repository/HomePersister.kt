@@ -4,7 +4,6 @@ import com.ctech.eaty.entity.HomeEntity
 import com.ctech.eaty.entity.ProductRealm
 import com.ctech.eaty.error.RecordNotFoundException
 import com.ctech.eaty.response.ProductResponse
-import com.nytimes.android.external.store3.base.Parser
 import com.nytimes.android.external.store3.base.Persister
 import com.nytimes.android.external.store3.base.RecordProvider
 import com.nytimes.android.external.store3.base.RecordState

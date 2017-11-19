@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
+import com.ctech.eaty.error.ErrorInterpreter
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.component.LithoController
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
@@ -48,7 +50,10 @@ class HomeFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var lithoController: LithoController
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    @Inject
+    lateinit var errorInterpreter: ErrorInterpreter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
 
@@ -56,45 +61,43 @@ class HomeFragment : BaseFragment(), Injectable {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupLitho()
+        setupListener()
+        store.dispatch(HomeAction.LOAD)
+
+    }
+
+    private fun setupListener() {
+        vError.onRetry = {
+            store.dispatch(HomeAction.LOAD)
+        }
     }
 
     private fun setupLitho() {
         lithoController.take(litho)
     }
 
-    override fun onStart() {
-        super.onStart()
-        store.dispatch(HomeAction.LOAD)
-    }
-
-    override fun onDestroyView() {
-        vLottie.cancelAnimation()
-        super.onDestroyView()
-    }
-
     private fun renderContent() {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
+        vError.visibility = View.GONE
     }
 
     private fun renderLoadError(error: Throwable) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
+        vError.visibility = View.VISIBLE
+        errorInterpreter.getErrorMessage(error).run {
+            vError.setReason(reason)
+            vError.setExplain(explain)
+        }
         Timber.e(error)
     }
 
-    private fun renderLoadingMore() {
-
-    }
-
     private fun renderLoading() {
-        vLottie.playAnimation()
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
+        vError.visibility = View.GONE
     }
 
     private fun setupViewModel() {
         viewModel.loading().subscribe { renderLoading() }
-        viewModel.loadingMore().subscribe { renderLoadingMore() }
         viewModel.loadError().subscribe { renderLoadError(it) }
         viewModel.content().subscribe { renderContent() }
     }

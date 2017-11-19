@@ -101,16 +101,12 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
         setupRecyclerView()
         setupErrorView()
         setupViewModel()
-    }
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(VoteAction.Load(postId))
     }
 
+
     private fun renderContent(list: List<Vote>) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.GONE
         adapter.setItems(list)
     }
@@ -127,8 +123,7 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
 
 
     private fun renderLoadError(error: Throwable) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.VISIBLE
         Timber.e(error)
     }
@@ -139,9 +134,8 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
 
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

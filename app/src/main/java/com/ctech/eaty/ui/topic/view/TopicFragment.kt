@@ -92,11 +92,6 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
         setupViewModel()
         setupRecyclerView()
         setupErrorView()
-    }
-
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(TopicAction.LOAD)
     }
 
@@ -107,8 +102,7 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
     }
 
     private fun renderContent(list: List<Topic>) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.GONE
         adapter.setItems(list)
     }
@@ -119,9 +113,8 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
 
 
     private fun renderLoadError() {
-        vLottie.cancelAnimation()
         vError.visibility = View.VISIBLE
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     private fun renderLoadingMore() {
@@ -130,9 +123,8 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
 
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

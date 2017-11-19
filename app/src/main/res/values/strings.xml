@@ -15,12 +15,18 @@
     <string name="job_list">Jobs</string>
     <string name="meet_up">Meetups</string>
     <string name="ask">Ask</string>
+    <string name="new_letter">NewLetters</string>
+
 
 
     <!-- Message -->
     <string name="retry">Tap to retry</string>
-    <string name="no_internet">No connection</string>
     <string name="something_wrong">Something wrong happened</string>
+    <string name="error_no_network">No internet connection</string>
+    <string name="error_cannot_connect_server">Unable to connect to server</string>
+
+    <!--Explain -->
+    <string name="explain_cannot_connect_server">Your local time mismatches with server</string>
 
     <!-- Navigation -->
     <string name="navigation_header_guest">Guest</string>
@@ -31,6 +37,7 @@
     <string name="navigation_jobs">Jobs</string>
     <string name="navigation_meetups">Meetups</string>
     <string name="navigation_ask">Ask</string>
+    <string name="navigation_new_letter">NewLetters</string>
 
     <!-- User Detail -->
     <string name="transition_user_background" translatable="false">transition_player_background</string>
@@ -78,7 +85,7 @@
     <!-- Onboarding -->
     <string name="onboarding_first_scene">Daily hunt is the place to discover your next favorite thing</string>
     <string name="onboarding_second_scene">Discover and share new things posted and liked by the community every day</string>
-    <string name="onboarding_third_scene">Discuss directly with makers and other friendly folks</string>
+    <string name="onboarding_third_scene">Have direct discussions with makers and other friendly folks</string>
     <string name="onboarding_first_scene_title">Discovery</string>
     <string name="onboarding_second_scene_title">Share</string>
     <string name="onboarding_third_scene_title">Community</string>
@@ -95,5 +102,6 @@
     <!-- Home -->
     <string name="like">Like</string>
     <string name="comment">Comment</string>
+    <string name="cannot_load">Cannot load</string>
 
 </resources>

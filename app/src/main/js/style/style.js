@@ -14,4 +14,15 @@ export default StyleSheet.create({
         height: 1,
         flex: 1
     },
+
+    dialogBackground: {
+        backgroundColor: colors.gray_50,
+        borderRadius: 2,
+        elevation: 4
+    },
+
+    dialogWindowBackground: {
+        flex: 1,
+        backgroundColor: colors.scrim
+    }
 });

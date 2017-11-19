@@ -43,5 +43,9 @@
         android:title="@string/navigation_ask"
         app:showAsAction="never" />
 
-
+    <item
+        android:id="@+id/action_new_letter"
+        android:icon="@drawable/ic_newsletter"
+        android:title="@string/navigation_new_letter"
+        app:showAsAction="never" />
 </menu>

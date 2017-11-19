@@ -11,6 +11,7 @@
         android:id="@+id/tvReason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Text.Body"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/space_large"
         tools:text="Internet connection"
@@ -20,17 +21,19 @@
         android:id="@+id/tvExplain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Text.Body2"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/space_medium"
         android:gravity="center_horizontal"
         tools:text="Couldn\'t load items" />
 
     <TextView
         android:id="@+id/tvRetry"
-        android:textAppearance="@style/Widget.Hunt.InlineActionButton"
+        android:textAppearance="@style/Text.InlineAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:drawableEnd="@drawable/ic_retry"
+        android:drawablePadding="@dimen/space_small"
         android:layout_marginTop="@dimen/space_large"
         tools:text="Retry"
         />

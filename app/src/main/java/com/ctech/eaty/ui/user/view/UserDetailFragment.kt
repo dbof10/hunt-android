@@ -113,14 +113,9 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupViewModel()
-    }
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(UserAction.Load(userId))
         store.dispatch(UserAction.LoadProduct(userId))
     }
-
 
     private fun renderContent(list: List<ProductItemViewModel>) {
         progressBar.visibility = View.GONE

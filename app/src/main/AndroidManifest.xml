@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -87,6 +88,11 @@
 
         <activity
             android:name=".ui.ask.view.AskActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.newletter.view.NewsLetterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -194,7 +200,8 @@
 
         <service android:name=".ui.web.support.KeepAliveService" />
 
-        <service android:name=".messaging.AppFirebaseMessagingService">
+        <service android:name=".messaging.AppFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

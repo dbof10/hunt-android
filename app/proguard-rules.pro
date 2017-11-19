@@ -114,7 +114,11 @@
 -keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactProp <methods>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactPropGroup <methods>; }
 
+##React
 -dontwarn com.facebook.react.**
+-keep class com.facebook.imagepipeline.animated.factory.AnimatedFactoryImpl {
+  public AnimatedFactoryImpl(com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory, com.facebook.imagepipeline.core.ExecutorSupplier);
+}
 
 ##Android
 -keepclassmembers class * implements android.os.Parcelable {

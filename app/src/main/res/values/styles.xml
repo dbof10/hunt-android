@@ -118,9 +118,7 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:drawablePadding">@dimen/space_small</item>
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
-        <item name="android:fontFeatureSettings">smcp, onum</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_secondary_dark</item>
+        <item name="android:textAppearance">@style/Text.InlineAction</item>
     </style>
 
     <style name="Widget.Hunt.ProductTitle">
@@ -133,9 +131,17 @@
         <item name="lineHeightHint">28sp</item>
     </style>
 
+    <style name="Text" />
+
     <style name="Text.Body" parent="@android:style/TextAppearance.Material.Body1" />
 
     <style name="Text.Body2" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
+    <style name="Text.InlineAction">
+        <item name="android:fontFeatureSettings">smcp, onum</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 

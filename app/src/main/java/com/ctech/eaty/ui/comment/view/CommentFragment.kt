@@ -110,16 +110,12 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
         setupRecyclerView()
         setupViewModel()
         setupErrorView()
-    }
-
-    override fun onStart() {
-        super.onStart()
         store.dispatch(CommentAction.Load(productId))
+
     }
 
     private fun renderContent(list: List<CommentItemViewModel>) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.GONE
         adapter.setItems(list)
     }
@@ -136,8 +132,7 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
 
 
     private fun renderLoadError(error: Throwable) {
-        vLottie.cancelAnimation()
-        vLottie.visibility = View.GONE
+        progressBar.visibility = View.GONE
         vError.visibility = View.VISIBLE
         Timber.e(error)
     }
@@ -148,9 +143,8 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
 
 
     private fun renderLoading() {
-        vLottie.playAnimation()
         vError.visibility = View.GONE
-        vLottie.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun setupViewModel() {

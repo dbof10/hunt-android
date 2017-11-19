@@ -6,8 +6,6 @@ import vn.tiki.noadapter2.AbsViewHolder
 
 class EmptyViewHolder(view: View) : AbsViewHolder(view) {
     companion object {
-        fun create(parent: ViewGroup): AbsViewHolder {
-            return EmptyViewHolder(View(parent.context))
-        }
+        fun create(parent: ViewGroup): AbsViewHolder = EmptyViewHolder(View(parent.context))
     }
 }

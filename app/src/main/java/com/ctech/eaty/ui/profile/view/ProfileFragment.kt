@@ -94,35 +94,35 @@ class ProfileFragment : BaseReduxFragment<ProfileState>(), Injectable {
     }
 
     private fun setupViewModel() {
-        disposables += viewModel.content().subscribe {
+        viewModel.content().subscribe {
             activity.finish()
         }
 
-        disposables += viewModel.loading().subscribe {
+        viewModel.loading().subscribe {
             progressBar.visibility = View.VISIBLE
         }
 
-        disposables += viewModel.emailError().subscribe {
+        viewModel.emailError().subscribe {
             ilEmail.isErrorEnabled = true
             ilEmail.error = it.message
             ilEmail.requestFocus()
         }
 
-        disposables += viewModel.nameError().subscribe {
+        viewModel.nameError().subscribe {
             ilName.isErrorEnabled = true
             ilName.error = it.message
             ilEmail.error = ""
             ilName.requestFocus()
         }
 
-        disposables += viewModel.headlineError().subscribe {
+        viewModel.headlineError().subscribe {
             ilBio.isErrorEnabled = true
             ilBio.error = it.message
             ilBio.error = ""
             ilEmail.error = ""
             ilBio.requestFocus()
         }
-        disposables += viewModel.submitError().subscribe {
+        viewModel.submitError().subscribe {
             progressBar.visibility = View.GONE
         }
     }

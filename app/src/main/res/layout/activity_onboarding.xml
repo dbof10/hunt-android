@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/keyline_1"
+        android:orientation="vertical">
+
+
+        <com.pixelcan.inkpageindicator.InkPageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:currentPageIndicatorColor="@color/white_100"
+            app:dotDiameter="@dimen/indicator_diameter"
+            app:dotGap="@dimen/indicator_gap"
+            app:pageIndicatorColor="@color/black_25" />
+
+        <ImageView
+            android:id="@+id/btSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/content_padding_horizontal"
+            android:src="@drawable/ic_skip_white"
+            tools:ignore="ContentDescription" />
+
+
+        <ImageView
+            android:id="@+id/btDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/content_padding_horizontal"
+            android:src="@drawable/ic_done_white"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+</LinearLayout>

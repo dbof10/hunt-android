@@ -3,8 +3,8 @@ package com.ctech.eaty.ui.home.epic
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.repository.ProductRepository
+import com.ctech.eaty.repository.createHomeNextBarCode
 import com.ctech.eaty.ui.home.action.HomeAction
-import com.ctech.eaty.ui.home.action.BarCodeGenerator
 import com.ctech.eaty.ui.home.result.RefreshResult
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
@@ -13,15 +13,17 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class RefreshEpic(val productRepository: ProductRepository,
-                  val barCodeGenerator: BarCodeGenerator,
-                  val threadScheduler: ThreadScheduler) : Epic<HomeState> {
+class RefreshEpic(private val productRepository: ProductRepository,
+                  private val threadScheduler: ThreadScheduler) : Epic<HomeState> {
 
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<HomeState>): Observable<RefreshResult> {
         return action.filter {
             it == HomeAction.REFRESH
         }.flatMap {
-            productRepository.getHomePosts(barCodeGenerator.currentBarCode, true)
+            productRepository.getHomePosts(createHomeNextBarCode(0), true)
+                    .map {
+                        it.products
+                    }
                     .map {
                         RefreshResult.success(it.map { ProductItemViewModel(it) })
                     }

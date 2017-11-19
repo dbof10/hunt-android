@@ -29,7 +29,7 @@ android {
         applicationId "com.ctech.eaty"
         minSdkVersion deps.build.minSdkVersion
         targetSdkVersion deps.build.targetSdkVersion
-        versionCode 13
+        versionCode 14
         versionName VERSION
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -53,10 +53,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-    }
-
-    kapt {
-        generateStubs = true
     }
 
     packagingOptions {
@@ -94,7 +90,6 @@ dependencies {
     implementation deps.ui.lottie
     implementation deps.ui.inkindicator
     implementation deps.ui.gradient
-    implementation deps.ui.appintro
 
     //Media
     implementation deps.exo.core
@@ -106,6 +101,9 @@ dependencies {
     //Reactive
     implementation deps.rx.android
     implementation deps.rx.java
+    implementation deps.rx.network
+
+
     implementation deps.noadapter
     implementation deps.butterknife.lib
     kapt deps.butterknife.compiler
@@ -166,6 +164,8 @@ dependencies {
 
     //React
     implementation deps.react.core
+    implementation deps.react.gif
+
 
     //Social
     implementation deps.facebook.login

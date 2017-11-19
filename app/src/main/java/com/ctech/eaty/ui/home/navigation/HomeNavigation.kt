@@ -15,6 +15,7 @@ import com.ctech.eaty.ui.job.view.JobListActivity
 import com.ctech.eaty.ui.live.view.LiveEventActivity
 import com.ctech.eaty.ui.login.view.LoginActivity
 import com.ctech.eaty.ui.meetup.view.MeetupActivity
+import com.ctech.eaty.ui.newletter.view.NewsLetterActivity
 import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.radio.view.RadioActivity
@@ -84,6 +85,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 }
                 R.id.action_ask -> {
                     intent.setClass(context, AskActivity::class.java)
+                }
+                R.id.action_new_letter -> {
+                    intent.setClass(context, NewsLetterActivity::class.java)
                 }
             }
             context.startActivity(intent)
