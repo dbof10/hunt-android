@@ -55,7 +55,7 @@ class NewsLetterActivity : BaseReactActivity(), Injectable, NativeHostContract {
 
     private fun setupToolbar() {
         toolbar.setNavigationOnClickListener {
-            finishAfterTransition()
+            onBackPressed()
         }
     }
 
@@ -69,7 +69,7 @@ class NewsLetterActivity : BaseReactActivity(), Injectable, NativeHostContract {
 
     override fun getJSBundleFile(): String? = null
 
-    override fun getBundleAssetName(): String? = "react/newletter/index.android.bundle"
+    override fun getBundleAssetName(): String? = "react/newsletter/index.android.bundle"
 
     override fun getLaunchOptions(): Bundle? = null
 

@@ -3,7 +3,10 @@ import Rx from "rxjs";
 import 'rxjs/add/operator/mergeMap';
 import {getClientToken, getUserToken} from "../util/nativeInfra"
 import {ApolloClient, createNetworkInterface, gql} from 'react-apollo';
-import {QUERY_ASK, QUERY_ASK_DETAIL, QUERY_JOB, QUERY_MEETUP, QUERY_NEWS_LETTER} from "../query/index";
+import {
+    QUERY_ASK, QUERY_ASK_DETAIL, QUERY_JOB, QUERY_MEETUP, QUERY_NEWS_LETTER,
+    QUERY_NEWS_LETTER_DETAIL
+} from "../query/index";
 
 const clientToken = Rx.Observable.fromPromise(getClientToken());
 const userToken = Rx.Observable.fromPromise(getUserToken());
@@ -124,6 +127,19 @@ export function getNewsLetter(type, offset) {
     }))
         .map(response => response.data)
 }
+
+
+export function getNewsLetterDetail(id) {
+    return Rx.Observable.fromPromise(apolloClient.query({
+        query: gql`${QUERY_NEWS_LETTER_DETAIL}`,
+        variables: {
+            id
+        },
+        operationName: "NewsletterPage"
+    }))
+        .map(response => response.data)
+}
+
 
 
 export function subscribeNewsLetter(email, status) {

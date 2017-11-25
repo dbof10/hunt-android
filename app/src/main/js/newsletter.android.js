@@ -4,8 +4,8 @@ import {
 } from 'react-native';
 
 import {Provider} from 'react-redux';
-import configureStore from './store/configStore';
-import NewsLetter from './container/newsletterContainer';
+import configureStore from './store/configNewsLetterStore';
+import AppNavigationState from './navigator/newsletter';
 
 const store = configureStore();
 
@@ -14,7 +14,7 @@ class NewsLetters extends Component {
     render() {
         return (
             <Provider store={store}>
-                <NewsLetter/>
+                <AppNavigationState/>
             </Provider>
 
         );

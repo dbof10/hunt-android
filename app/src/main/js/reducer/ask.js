@@ -34,11 +34,11 @@ const initialAskState = {
 
 };
 
-const intialNavState = AppNavigator.router.getStateForAction(
+const initialNavState = AppNavigator.router.getStateForAction(
     main,
 );
 
-export function askNav(state = intialNavState, action) {
+export function askNav(state = initialNavState, action) {
     let nextState;
 
     switch (action.type) {

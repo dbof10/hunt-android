@@ -43,7 +43,7 @@
         <activity
             android:name=".linking.UniversalLinkActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/AppTheme.Translucent.Overlap">
+            android:theme="@style/AppTheme.Translucent.Overlap.Login">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

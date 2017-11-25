@@ -48,6 +48,5 @@ const styles = StyleSheet.create({
             textAlign: 'center',
             textAlignVertical: 'center',
             borderRadius: 2,
-            maxWidth: 96
         },
     });

@@ -6,17 +6,62 @@ import {
     FETCH_MORE_LETTER_LOADING,
     FETCH_MORE_LETTER_SUCCESS,
     SUBSCRIBE_LETTER_FAILURE,
-    SUBSCRIBE_LETTER_SUCCESS
-} from '../action/newsletter'
-import _ from 'lodash/core';
+    SUBSCRIBE_LETTER_SUCCESS,
+    NAVIGATE_LETTER_DETAIL_SCREEN
+}
+    from '../action/newsletter';
 
-const initialState = {
+import {
+    FETCH_LETTER_DETAIL_FAIL,
+    FETCH_LETTER_DETAIL_LOADING,
+    FETCH_LETTER_DETAIL_SUCCESS,
+    NAVIGATE_BACK_LETTER_SCREEN
+} from '../action/newsletterDetail';
+
+import _ from 'lodash/core';
+import {NavigationActions} from 'react-navigation';
+import {AppNavigator} from '../navigator/newsletter';
+
+const main = AppNavigator.router.getActionForPathAndParams('NewsLetter'); //Reference navigator/ask
+
+const initialNavState = AppNavigator.router.getStateForAction(
+    main,
+);
+
+export function newsletterNav(state = initialNavState, action) {
+    let nextState;
+
+    switch (action.type) {
+        case NAVIGATE_LETTER_DETAIL_SCREEN:
+
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({routeName: 'NewsLetterDetail', params: action.payload}),
+                state
+            );
+            break;
+        case NAVIGATE_BACK_LETTER_SCREEN:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.back(),
+                state
+            );
+            break;
+        default:
+            nextState = AppNavigator.router.getStateForAction(action, state);
+    }
+
+
+    return nextState || state;
+
+
+}
+
+const initialLetterState = {
     tabs: [],
     subscribed: false,
     subscribedError: null
 };
 
-export default function newsletter(state = initialState, action) {
+export function newsletter(state = initialLetterState, action) {
     const key = action.key;
     let tabs = state.tabs;
 
@@ -107,6 +152,39 @@ export default function newsletter(state = initialState, action) {
             return {
                 ...state,
                 subscribedError: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+const initialLetterDetailState = {
+    isLoading: false,
+    error: null,
+    dataSource: null,
+};
+
+export function newsletterDetail(state = initialLetterDetailState, action) {
+    switch (action.type) {
+        case FETCH_LETTER_DETAIL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                dataSource: action.payload,
+            };
+
+        case FETCH_LETTER_DETAIL_LOADING:
+            return {
+                ...state,
+                error: null,
+                isLoading: true,
+            };
+
+        case FETCH_LETTER_DETAIL_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
             };
         default:
             return state;

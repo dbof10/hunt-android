@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "moment": "^2.19.1",
-    "react": "16.0.0",
+    "react": "16.1.1",
     "react-apollo": "^1.4.16",
     "react-native": "0.49.0",
     "react-native-htmlview": "^0.12.1",

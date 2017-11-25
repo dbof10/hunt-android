@@ -22,3 +22,22 @@ export const QUERY_NEWS_LETTER_CONST = 	`query NewslettersPage($cursor: String, 
                             layout      
             }  
     }`;
+
+export const QUERY_NEWS_LETTER_DETAIL_CONST = `query NewsletterPage($id: ID, $preview: String) {  
+    newsletter(id: $id, preview: $preview) {    
+                id    
+                date    
+                kind    
+                subject    
+                   
+                sections {     
+                        title      
+                        url      
+                        layout      
+                        content      
+                        image_uuid      
+                            
+                        }       
+           }
+    }`;
+

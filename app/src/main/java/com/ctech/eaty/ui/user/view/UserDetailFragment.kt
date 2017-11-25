@@ -101,9 +101,7 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
                 .build()
     }
 
-    override fun store(): Store<UserDetailState> {
-        return store
-    }
+    override fun store(): Store<UserDetailState> = store
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)

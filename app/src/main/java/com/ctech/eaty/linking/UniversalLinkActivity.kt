@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.ctech.eaty.R
 import com.ctech.eaty.di.Injectable
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposeWith
+import timber.log.Timber
 import javax.inject.Inject
 
 class UniversalLinkActivity : AppCompatActivity(), Injectable {
@@ -27,6 +30,15 @@ class UniversalLinkActivity : AppCompatActivity(), Injectable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
         universalLinkDispatcher.dispatch(intent.dataString)
+                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .subscribe(
+                        {
+                            finish()
+                        },
+                        {
+                            Timber.e(it)
+                            finish()
+                        })
     }
 
 

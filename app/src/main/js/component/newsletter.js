@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import PropTypes from 'prop-types';
 import TextStyle from '../style/textStyle';
 import {getImageUrl} from "../util/stringUtils";
@@ -9,32 +9,41 @@ export default class NewsLetterItem extends Component {
 
     constructor(props) {
         super(props);
+        this.onItemClick = this.onItemClick.bind(this)
     }
 
+    onItemClick(){
+        this.props.onNavigate(this.props.newsletter.id)
+    }
 
     render() {
         const newsletter = this.props.newsletter;
 
         return (
-            <View style={[styles.container, styles.verticalLayout]}>
-                <Text style={TextStyle.body}>
-                    {newsletter.subject}
-                </Text>
-                <Image style={styles.photo}
-                       source={{uri: getImageUrl(newsletter.primary_section.image_uuid, 256)}}
-                />
-                <View style={styles.subInfo}>
-                    <Text style={TextStyle.subInfo}>
-                        {newsletter.date}
+            <TouchableNativeFeedback
+                onPress={this.onItemClick}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={[styles.container, styles.verticalLayout]}>
+                    <Text style={TextStyle.body}>
+                        {newsletter.subject}
                     </Text>
+                    <Image style={styles.photo}
+                           source={{uri: getImageUrl(newsletter.primary_section.image_uuid, 256)}}
+                    />
+                    <View style={styles.subInfo}>
+                        <Text style={TextStyle.subInfo}>
+                            {newsletter.date}
+                        </Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableNativeFeedback>
         )
     }
 }
 
 NewsLetterItem.propTypes = {
     newsletter: PropTypes.object,
+    onNavigate: PropTypes.func
 };
 
 const styles = StyleSheet.create({

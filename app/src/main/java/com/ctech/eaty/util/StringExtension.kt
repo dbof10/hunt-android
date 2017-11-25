@@ -3,9 +3,7 @@ package com.ctech.eaty.util
 val INDEX_NOT_FOUND = -1
 
 
-fun String.substringBetween(str: String, tag: String): String {
-    return substringBetween(str, tag, tag)
-}
+fun String.substringBetween(str: String, tag: String): String = substringBetween(str, tag, tag)
 
 fun String.substringBetween(str: String, open: String, close: String): String {
     val start = str.indexOf(open)

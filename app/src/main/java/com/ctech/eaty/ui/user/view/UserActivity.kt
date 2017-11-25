@@ -24,7 +24,18 @@ import com.ctech.eaty.util.setPaddingTop
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.activity_user.*
+import kotlinx.android.synthetic.main.activity_user.btEdit
+import kotlinx.android.synthetic.main.activity_user.btFollow
+import kotlinx.android.synthetic.main.activity_user.container
+import kotlinx.android.synthetic.main.activity_user.fBody
+import kotlinx.android.synthetic.main.activity_user.flDraggable
+import kotlinx.android.synthetic.main.activity_user.ivAvatar
+import kotlinx.android.synthetic.main.activity_user.pbFollowing
+import kotlinx.android.synthetic.main.activity_user.tvBio
+import kotlinx.android.synthetic.main.activity_user.tvFollowerCount
+import kotlinx.android.synthetic.main.activity_user.tvFollowingCount
+import kotlinx.android.synthetic.main.activity_user.tvName
+import kotlinx.android.synthetic.main.activity_user.tvProductCount
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,11 +56,12 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
-    private val user: User by lazy {
-        if (intent.hasExtra(USER_KEY))
-            intent.getParcelableExtra<User>(USER_KEY)
-        else
-            intent.getParcelableExtra<UserDetail>(USER_DETAIL_KEY)
+    private val user: User? by lazy {
+        when {
+            intent.hasExtra(USER_KEY) -> intent.getParcelableExtra<User>(USER_KEY)
+            intent.hasExtra(USER_DETAIL_KEY) -> intent.getParcelableExtra<UserDetail>(USER_DETAIL_KEY)
+            else -> null
+        }
     }
 
     override fun getScreenName() = "User"
@@ -58,6 +70,8 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
         private val USER_DETAIL_KEY = "userDetail"
         private val USER_KEY = "user"
+        private val KEY_ID = "id"
+
 
         fun newIntent(context: Context, user: UserDetail): Intent {
             val intent = Intent(context, UserActivity::class.java)
@@ -65,6 +79,12 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
             return intent
         }
 
+
+        fun newIntent(context: Context, id: Int): Intent {
+            val intent = Intent(context, UserActivity::class.java)
+            intent.putExtra(KEY_ID, id)
+            return intent
+        }
 
         fun newIntent(context: Context, user: User): Intent {
             val intent = Intent(context, UserActivity::class.java)
@@ -96,16 +116,6 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
         setExitSharedElementCallback(createSharedElementReenterCallback(this))
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.checkRelationship(user.id).subscribe({
-            renderFollowing(it.first)
-            renderEditButton(it.second)
-        }, Timber::e, {
-            store.dispatch(UserAction.LoadRelationship(user.id))
-        })
-    }
-
     private fun renderEditButton(second: EditButtonViewModel) {
         btEdit.visibility = second.visibility
     }
@@ -114,7 +124,9 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
         btFollow.setOnClickListener {
             viewModel.followNavigation(btFollow).subscribe({
                 btFollow.isActivated = !btFollow.isActivated
-                store.dispatch(UserAction.FollowUserAction(user.id, btFollow.isActivated))
+                user?.run {
+                    store.dispatch(UserAction.FollowUserAction(id, btFollow.isActivated))
+                }
             }, Timber::e)
         }
         tvFollowerCount.setOnClickListener {
@@ -132,11 +144,20 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
     }
 
     private fun preRenderHeader() {
-        with(user) {
+        user?.run {
             imageLoader.downloadInto(imageUrl.px64, ivAvatar)
             tvName.text = name
             tvBio.text = headline
         }
+    }
+
+    private fun checkRelationship(id: Int) {
+        viewModel.checkRelationship(id).subscribe({
+            renderFollowing(it.first)
+            renderEditButton(it.second)
+        }, Timber::e, {
+            store.dispatch(UserAction.LoadRelationship(id))
+        })
     }
 
     private fun setupViewModel() {
@@ -163,13 +184,18 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
             tvProductCount.text = getString(R.string.product, productCount)
             tvFollowerCount.text = getString(R.string.follower, followerCount)
             tvFollowingCount.text = getString(R.string.following, followingCount)
+            imageLoader.downloadInto(imageUrl.px64, ivAvatar)
+            tvName.text = name
+            tvBio.text = headline
+            checkRelationship(id)
         }
     }
 
     private fun setupBodyFragment() {
         var fragment = supportFragmentManager.findFragmentById(R.id.fBody)
         if (fragment == null) {
-            fragment = UserDetailFragment.newInstance(user.id)
+            val userId = user?.id ?: intent.getIntExtra(KEY_ID, 0)
+            fragment = UserDetailFragment.newInstance(userId)
             supportFragmentManager.beginTransaction()
                     .add(R.id.fBody, fragment)
                     .commit()

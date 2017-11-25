@@ -5,6 +5,7 @@ import {fetchMeetupEpic} from "./meetup";
 import {fetchAskEpic, fetchMoreAskEpic} from './ask'
 import {fetchAskDetailEpic, fetchMoreRecommendAskEpic} from "./askDetail";
 import {fetchMoreNewsLetterEpic, fetchNewsLetterEpic, subscribeNewsLetterEpic} from "./newsletter";
+import {fetchNewsLetterDetailEpic} from "./newsletterDetail";
 
 export const epic = combineEpics(
     fetchEventEpic, fetchMoreEventEpic,
@@ -12,5 +13,6 @@ export const epic = combineEpics(
     fetchMeetupEpic,
     fetchAskEpic, fetchMoreAskEpic,
     fetchAskDetailEpic, fetchMoreRecommendAskEpic,
-    fetchNewsLetterEpic, fetchMoreNewsLetterEpic,subscribeNewsLetterEpic
+    fetchNewsLetterEpic, fetchMoreNewsLetterEpic,subscribeNewsLetterEpic,
+    fetchNewsLetterDetailEpic
 );

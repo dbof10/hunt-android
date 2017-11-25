@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, View} from 'react-native';
-import {Load, LoadMore} from '../action/newsletter';
+import {Load, LoadMore, NavigateDetail} from '../action/newsletter';
 import {bindActionCreators} from 'redux';
 import Loading from '../component/loading';
 import Error from '../component/error';
@@ -15,7 +15,13 @@ class NewsLetter extends Component {
     constructor(props) {
         super(props);
         this.loadMore = this.loadMore.bind(this);
+        this.onNavigateDetail = this.onNavigateDetail.bind(this);
     }
+
+    onNavigateDetail(id) {
+       this.props.navigateDetail(id);
+    }
+
 
     componentDidMount() {
         this.props.load(this.props.index, this.props.type)
@@ -27,6 +33,7 @@ class NewsLetter extends Component {
         return <NewsLetterItem
             id={item.id}
             newsletter={item}
+            onNavigate={this.onNavigateDetail}
         />
     };
 
@@ -92,7 +99,8 @@ NewsLetter.defaultProps = {
 function mapDispatchToProps(dispatch) {
     return {
         load: bindActionCreators(Load, dispatch),
-        loadMore: bindActionCreators(LoadMore, dispatch)
+        loadMore: bindActionCreators(LoadMore, dispatch),
+        navigateDetail: bindActionCreators(NavigateDetail, dispatch)
     }
 }
 

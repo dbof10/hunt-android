@@ -75,6 +75,7 @@ class AskDetail extends Component {
 
     render() {
         const askProps = this.props.ask;
+        let askId = this.props.navigation.state.params;
 
         if (askProps.isLoading || askProps.dataSource === null) {
             return <Loading/>;
@@ -86,9 +87,8 @@ class AskDetail extends Component {
                     errorMessage={askProps.error.errorMessage}
                     explainMessage={askProps.error.explainMessage}
                     onRetry={() => {
-                        this.props.load()
-                    }
-                    }/>;
+                        this.props.load(askId)
+                    }}/>;
 
             } else {
                 const ask = askProps.dataSource;

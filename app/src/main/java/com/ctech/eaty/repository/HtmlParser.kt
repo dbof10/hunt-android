@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class HtmlParser @Inject constructor() {
 
-    fun getProductIdBy(url: String): Single<String> {
+    fun getIdBy(url: String): Single<String> {
         return getProductIdUri(url)
                 .map {
                     Uri.parse(it).lastPathSegment
@@ -20,9 +20,9 @@ class HtmlParser @Inject constructor() {
             val document = Jsoup.connect(url).get()
             val matchedTag = document.select("script").map {
                 it.toString()
-            }.filter {
+            }.firstOrNull {
                 it.contains("mobileAppUrl")
-            }.firstOrNull()
+            }
 
             e.onSuccess(matchedTag?.substringBetween(matchedTag.toString(), "\'", "\'") ?: "")
         }

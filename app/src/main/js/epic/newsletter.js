@@ -12,6 +12,8 @@ import {
     SUBSCRIBE_LETTER_SUCCESS,
     LoadResult
 } from "../action/newsletter";
+
+
 import * as apiClient from "../model/apiClient";
 import 'rxjs/add/operator/mergeMap';
 import Rx from "rxjs";
@@ -51,6 +53,8 @@ export const fetchMoreNewsLetterEpic = (action$, store) =>
                 return Rx.Observable.empty()
             }
         });
+
+
 
 export const subscribeNewsLetterEpic = (action$, store) =>
     action$.filter(action => action.type === SUBSCRIBE)
