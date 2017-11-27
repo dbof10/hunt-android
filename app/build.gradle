@@ -29,7 +29,7 @@ android {
         applicationId "com.ctech.eaty"
         minSdkVersion deps.build.minSdkVersion
         targetSdkVersion deps.build.targetSdkVersion
-        versionCode 14
+        versionCode 15
         versionName VERSION
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
