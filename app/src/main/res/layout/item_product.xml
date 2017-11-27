@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,12 +11,13 @@
         android:layout_height="wrap_content"
         android:foreground="?selectableItemBackground">
 
-        <com.ctech.eaty.widget.ForegroundImageView
+
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/ivProduct"
             android:layout_width="match_parent"
             android:layout_height="@dimen/feed_product_height"
             android:layout_gravity="center"
-            android:scaleType="centerCrop" />
+            fresco:actualImageScaleType="fitCenter" />
 
         <com.ctech.eaty.widget.BaselineGridTextView
             android:id="@+id/tvName"
@@ -35,7 +37,6 @@
 
     <com.ctech.eaty.widget.BaselineGridTextView
         android:id="@+id/tvDescription"
-        android:textAppearance="@style/Text.Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -43,6 +44,7 @@
         android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingStart="@dimen/content_padding_horizontal"
         android:paddingTop="@dimen/space_medium"
+        android:textAppearance="@style/Text.Body"
         tools:text="Adobe's free scan app with text recognition" />
 
 </LinearLayout>

@@ -76,14 +76,14 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         val periodCount = timeline.periodCount
         val windowCount = timeline.windowCount
         Log.d(TAG, "sourceInfo [periodCount=$periodCount, windowCount=$windowCount")
-        for (i in 0..Math.min(periodCount, MAX_TIMELINE_ITEM_LINES) - 1) {
+        for (i in 0 until Math.min(periodCount, MAX_TIMELINE_ITEM_LINES)) {
             timeline.getPeriod(i, period)
             Log.d(TAG, "  " + "period [" + getTimeString(period.durationMs) + "]")
         }
         if (periodCount > MAX_TIMELINE_ITEM_LINES) {
             Log.d(TAG, "  ...")
         }
-        for (i in 0..Math.min(windowCount, MAX_TIMELINE_ITEM_LINES) - 1) {
+        for (i in 0 until Math.min(windowCount, MAX_TIMELINE_ITEM_LINES)) {
             timeline.getWindow(i, window)
             Log.d(TAG, "  " + "window [" + getTimeString(window.durationMs) + ", "
                     + window.isSeekable + ", " + window.isDynamic + "]")
@@ -111,12 +111,12 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
             val trackSelection = trackSelections.get(rendererIndex)
             if (rendererTrackGroups.length > 0) {
                 Log.d(TAG, "  Renderer:$rendererIndex [")
-                for (groupIndex in 0..rendererTrackGroups.length - 1) {
+                for (groupIndex in 0 until rendererTrackGroups.length) {
                     val trackGroup = rendererTrackGroups.get(groupIndex)
                     val adaptiveSupport = getAdaptiveSupportString(trackGroup.length,
                             mappedTrackInfo.getAdaptiveSupport(rendererIndex, groupIndex, false))
                     Log.d(TAG, "    Group:$groupIndex, adaptive_supported=$adaptiveSupport [")
-                    for (trackIndex in 0..trackGroup.length - 1) {
+                    for (trackIndex in 0 until trackGroup.length) {
                         val status = getTrackStatusString(trackSelection, trackGroup, trackIndex)
                         val formatSupport = getFormatSupportString(
                                 mappedTrackInfo.getTrackFormatSupport(rendererIndex, groupIndex, trackIndex))
@@ -300,38 +300,47 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     }
 
     private fun printMetadata(metadata: Metadata, prefix: String) {
-        (0..metadata.length() - 1)
+        (0 until metadata.length())
                 .map { metadata.get(it) }
                 .forEach {
-                    if (it is TextInformationFrame) {
-                        val textInformationFrame = it
-                        Log.d(TAG, prefix + String.format("%s: value=%s", textInformationFrame.id,
-                                textInformationFrame.value))
-                    } else if (it is UrlLinkFrame) {
-                        val urlLinkFrame = it
-                        Log.d(TAG, prefix + String.format("%s: url=%s", urlLinkFrame.id, urlLinkFrame.url))
-                    } else if (it is PrivFrame) {
-                        val privFrame = it
-                        Log.d(TAG, prefix + String.format("%s: owner=%s", privFrame.id, privFrame.owner))
-                    } else if (it is GeobFrame) {
-                        val geobFrame = it
-                        Log.d(TAG, prefix + String.format("%s: mimeType=%s, filename=%s, description=%s",
-                                geobFrame.id, geobFrame.mimeType, geobFrame.filename, geobFrame.description))
-                    } else if (it is ApicFrame) {
-                        val apicFrame = it
-                        Log.d(TAG, prefix + String.format("%s: mimeType=%s, description=%s",
-                                apicFrame.id, apicFrame.mimeType, apicFrame.description))
-                    } else if (it is CommentFrame) {
-                        val commentFrame = it
-                        Log.d(TAG, prefix + String.format("%s: language=%s, description=%s", commentFrame.id,
-                                commentFrame.language, commentFrame.description))
-                    } else if (it is Id3Frame) {
-                        val id3Frame = it
-                        Log.d(TAG, prefix + String.format("%s", id3Frame.id))
-                    } else if (it is EventMessage) {
-                        val eventMessage = it
-                        Log.d(TAG, prefix + String.format("EMSG: scheme=%s, id=%d, value=%s",
-                                eventMessage.schemeIdUri, eventMessage.id, eventMessage.value))
+                    when (it) {
+                        is TextInformationFrame -> {
+                            val textInformationFrame = it
+                            Log.d(TAG, prefix + String.format("%s: value=%s", textInformationFrame.id,
+                                    textInformationFrame.value))
+                        }
+                        is UrlLinkFrame -> {
+                            val urlLinkFrame = it
+                            Log.d(TAG, prefix + String.format("%s: url=%s", urlLinkFrame.id, urlLinkFrame.url))
+                        }
+                        is PrivFrame -> {
+                            val privFrame = it
+                            Log.d(TAG, prefix + String.format("%s: owner=%s", privFrame.id, privFrame.owner))
+                        }
+                        is GeobFrame -> {
+                            val geobFrame = it
+                            Log.d(TAG, prefix + String.format("%s: mimeType=%s, filename=%s, description=%s",
+                                    geobFrame.id, geobFrame.mimeType, geobFrame.filename, geobFrame.description))
+                        }
+                        is ApicFrame -> {
+                            val apicFrame = it
+                            Log.d(TAG, prefix + String.format("%s: mimeType=%s, description=%s",
+                                    apicFrame.id, apicFrame.mimeType, apicFrame.description))
+                        }
+                        is CommentFrame -> {
+                            val commentFrame = it
+                            Log.d(TAG, prefix + String.format("%s: language=%s, description=%s", commentFrame.id,
+                                    commentFrame.language, commentFrame.description))
+                        }
+                        is Id3Frame -> {
+                            val id3Frame = it
+                            Log.d(TAG, prefix + String.format("%s", id3Frame.id))
+                        }
+                        is EventMessage -> {
+                            val eventMessage = it
+                            Log.d(TAG, prefix + String.format("EMSG: scheme=%s, id=%d, value=%s",
+                                    eventMessage.schemeIdUri, eventMessage.id, eventMessage.value))
+                        }
                     }
                 }
     }
@@ -368,11 +377,11 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         if (trackCount < 2) {
             return "N/A"
         }
-        when (adaptiveSupport) {
-            RendererCapabilities.ADAPTIVE_SEAMLESS -> return "YES"
-            RendererCapabilities.ADAPTIVE_NOT_SEAMLESS -> return "YES_NOT_SEAMLESS"
-            RendererCapabilities.ADAPTIVE_NOT_SUPPORTED -> return "NO"
-            else -> return "?"
+        return when (adaptiveSupport) {
+            RendererCapabilities.ADAPTIVE_SEAMLESS -> "YES"
+            RendererCapabilities.ADAPTIVE_NOT_SEAMLESS -> "YES_NOT_SEAMLESS"
+            RendererCapabilities.ADAPTIVE_NOT_SUPPORTED -> "NO"
+            else -> "?"
         }
     }
 

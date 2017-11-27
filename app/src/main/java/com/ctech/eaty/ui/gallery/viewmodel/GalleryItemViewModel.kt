@@ -13,9 +13,9 @@ data class GalleryItemViewModel(private val media: Media) {
         return ResizeImageUrlProvider.overrideUrl(media.imageUrl, if (media.width >= 1000) (media.width / 3.5).toInt() else media.width)
     }
     val videoUrl: String? get() {
-        if (media.platform == Platform.YOUTUBE) {
-            return "youtube://videos/${media.videoId}"
+        return if (media.platform == Platform.YOUTUBE) {
+            "youtube://videos/${media.videoId}"
         } else
-            return media.videoId
+            media.videoId
     }
 }

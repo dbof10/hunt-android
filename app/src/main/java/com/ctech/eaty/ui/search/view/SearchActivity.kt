@@ -34,21 +34,28 @@ import com.ctech.eaty.ui.search.action.SearchAction
 import com.ctech.eaty.ui.search.state.SearchState
 import com.ctech.eaty.ui.search.viewmodel.SearchViewModel
 import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.ImeUtils.hideIme
+import com.ctech.eaty.util.ImeUtils.showIme
 import com.ctech.eaty.util.TransitionUtils
-import com.ctech.eaty.util.hideIme
-import com.ctech.eaty.util.showIme
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.SlideInItemAnimator
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import com.ctech.eaty.widget.transition.CircularReveal
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.kotlin.autoDisposeWith
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.container
+import kotlinx.android.synthetic.main.activity_search.progressBar
+import kotlinx.android.synthetic.main.activity_search.resultsScrim
+import kotlinx.android.synthetic.main.activity_search.rvSearchResult
+import kotlinx.android.synthetic.main.activity_search.scrim
+import kotlinx.android.synthetic.main.activity_search.searchBack
+import kotlinx.android.synthetic.main.activity_search.searchView
+import kotlinx.android.synthetic.main.activity_search.stub_no_search_results
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view.SearchView {
+class SearchActivity : BaseActivity(), Injectable {
 
     companion object {
 
@@ -69,9 +76,6 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
 
     @Inject
     lateinit var viewModel: SearchViewModel
-
-    @Inject
-    lateinit var imageLoader: GlideImageLoader
 
     private val tvNoResult: TextView by lazy {
         val view = stub_no_search_results.inflate() as TextView
@@ -110,7 +114,7 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
                     }
                 }
                 .viewHolderFactory { viewGroup, _ ->
-                    ProductViewHolder.create(viewGroup, imageLoader)
+                    ProductViewHolder.create(viewGroup)
                 }
                 .build()
     }
@@ -139,7 +143,6 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
                 .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
                 .subscribe()
 
-        viewModel.attachView(this)
         trackingManager.trackScreenView(getScreenName())
 
     }
@@ -160,35 +163,47 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
 
     }
 
-    override fun showLoading() {
+    private fun showLoading() {
         progressBar.visibility = View.VISIBLE
         hideIme(searchView)
         searchView.clearFocus()
+
     }
 
-    override fun showLoadError() {
+    private fun showLoadError() {
         progressBar.visibility = View.GONE
     }
 
-    override fun showEmpty() {
+    private fun showEmpty() {
         TransitionManager.beginDelayedTransition(
                 container, getTransition(R.transition.auto))
         progressBar.visibility = View.GONE
         setNoResultsVisibility(View.VISIBLE)
     }
 
-    override fun showContent(content: List<ProductItemViewModel>) {
+    private fun showContent(content: List<ProductItemViewModel>) {
         if (rvSearchResult.visibility != View.VISIBLE) {
             TransitionManager.beginDelayedTransition(container,
                     getTransition(R.transition.search_show_results))
-            progressBar.visibility = View.GONE
             rvSearchResult.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
         }
         adapter.setItems(content)
     }
 
     private fun setupViewModel() {
-        viewModel.render()
+        viewModel.empty().subscribe {
+            showEmpty()
+        }
+        viewModel.content().subscribe {
+            showContent(it)
+        }
+        viewModel.loadError().subscribe {
+            showLoadError()
+        }
+        viewModel.loading().subscribe {
+            showLoading()
+        }
     }
 
     private fun setupListener() {
@@ -216,11 +231,6 @@ class SearchActivity : BaseActivity(), Injectable, com.ctech.eaty.ui.search.view
     override fun onPause() {
         overridePendingTransition(0, 0)
         super.onPause()
-    }
-
-    override fun onDestroy() {
-        viewModel.detachView()
-        super.onDestroy()
     }
 
     override fun onEnterAnimationComplete() {

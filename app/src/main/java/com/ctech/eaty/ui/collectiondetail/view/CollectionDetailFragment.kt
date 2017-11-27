@@ -86,7 +86,7 @@ class CollectionDetailFragment : BaseReduxFragment<CollectionDetailState>(), Inj
                 .viewHolderFactory { viewGroup, type ->
                     when (type) {
                         1 -> CollectionHeaderViewHolder.create(viewGroup, imageLoader)
-                        2 -> ProductViewHolder.create(viewGroup, imageLoader)
+                        2 -> ProductViewHolder.create(viewGroup)
                         else -> EmptyViewHolder.create(viewGroup)
                     }
 

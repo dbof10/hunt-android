@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.home.component
 
-import android.util.Log
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.state.HomeState

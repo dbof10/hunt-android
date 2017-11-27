@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
@@ -14,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.ctech.eaty.R
 
 
-class GlideImageLoader(context: Context) {
+class GlideImageLoader(private val context: Context) {
 
     private val glide: Glide = Glide.get(context)
 
@@ -33,7 +34,7 @@ class GlideImageLoader(context: Context) {
         val options = RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
 
-        Glide.with(imageView.context)
+        Glide.with(context)
                 .load(url)
                 .apply(options)
                 .into(imageView)
@@ -51,7 +52,7 @@ class GlideImageLoader(context: Context) {
                 .placeholder(placeholderRes)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
 
-        Glide.with(imageView.context)
+        Glide.with(context)
                 .load(url)
                 .listener(listener)
                 .apply(options)
@@ -61,4 +62,5 @@ class GlideImageLoader(context: Context) {
     fun clearMemory() {
         glide.clearMemory()
     }
+
 }

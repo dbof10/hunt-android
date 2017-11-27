@@ -11,7 +11,10 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.collectiondetail.action.CollectionDetailAction
 import com.ctech.eaty.ui.collectiondetail.state.CollectionDetailState
 import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionDetailViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.ResizeImageUrlProvider
+import com.ctech.eaty.widget.drawable.CircleProgressBarDrawable
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.request.ImageRequest
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -35,8 +38,6 @@ class CollectionDetailActivity : BaseActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var viewModel: CollectionDetailViewModel
 
-    @Inject
-    lateinit var imageLoader: GlideImageLoader
 
     companion object {
         val COLLECTION_ID_KEY = "collectionId"
@@ -80,8 +81,13 @@ class CollectionDetailActivity : BaseActivity(), HasSupportFragmentInjector {
     }
 
     private fun renderHeader(imageUrl: String) {
-        imageLoader.downloadInto(imageUrl, ivCollectionBackground)
-
+        val thumbNailSize = resources.getDimensionPixelSize(R.dimen.thumbnail_preview_size)
+        val controller = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(ResizeImageUrlProvider.overrideUrl(imageUrl, thumbNailSize)))
+                .setImageRequest(ImageRequest.fromUri(imageUrl))
+                .build()
+        ivCollectionBackground.hierarchy.setProgressBarImage(CircleProgressBarDrawable(this))
+        ivCollectionBackground.controller = controller
     }
 
     private fun setupToolbar() {

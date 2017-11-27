@@ -26,11 +26,11 @@ def support = [
 ]
 
 def dagger = [
-        lib            : 'com.google.dagger:dagger:2.12',
-        compiler       : 'com.google.dagger:dagger-compiler:2.12',
-        android        : 'com.google.dagger:dagger-android:2.12',
-        androidSupport : 'com.google.dagger:dagger-android-support:2.12',
-        androidCompiler: 'com.google.dagger:dagger-android-processor:2.12'
+        lib            : 'com.google.dagger:dagger:2.13',
+        compiler       : 'com.google.dagger:dagger-compiler:2.13',
+        android        : 'com.google.dagger:dagger-android:2.13',
+        androidSupport : 'com.google.dagger:dagger-android-support:2.13',
+        androidCompiler: 'com.google.dagger:dagger-android-processor:2.13'
 ]
 
 def butterknife = [
@@ -67,9 +67,10 @@ def network = [
 ]
 
 def glide = [
-        lib         : 'com.github.bumptech.glide:glide:4.1.1',
-        compiler    : 'com.github.bumptech.glide:compiler:4.1.1',
-        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.1.1'
+        lib         : 'com.github.bumptech.glide:glide:4.3.1',
+        compiler    : 'com.github.bumptech.glide:compiler:4.3.1',
+        okhttp      : "com.github.bumptech.glide:okhttp3-integration:4.3.1",
+        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.3.1'
 ]
 
 def store = [
@@ -148,7 +149,7 @@ ext.deps = [
         "crashlytics": "com.crashlytics.sdk.android:crashlytics:2.6.8@aar",
         "test"       : test,
         "exo"        : exo,
-        "noadapter"  : "vn.tiki.noadapter2:noadapter:2.0.1-SNAPSHOT",
+        "noadapter"  : "vn.tiki.noadapter2:noadapter:2.0.2",
         "network"    : network,
         "glide"      : glide,
         "store"      : store,

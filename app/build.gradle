@@ -114,6 +114,7 @@ dependencies {
     implementation deps.autodispose.architecture
     implementation deps.autodispose.kotlin
 
+
     //Dagger
     implementation deps.dagger.lib
     implementation deps.dagger.androidSupport
@@ -128,10 +129,8 @@ dependencies {
     implementation deps.network.okhttpLog
     implementation deps.network.retrofitGsonConverter
     implementation deps.gson
+
     implementation deps.glide.lib
-    implementation (deps.glide.recyclerview) {
-        transitive = false
-    }
     kapt deps.glide.compiler
 
     implementation deps.jsoup
@@ -190,10 +189,10 @@ dependencies {
     testImplementation deps.litho.test
 
     androidTestImplementation deps.support.annotation
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'org.mockito:mockito-android:2.7.19'
 
     configurations.all {

@@ -3,6 +3,7 @@ package com.ctech.eaty.ui.topiclist.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,7 +95,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
                 }
                 .viewHolderFactory { viewGroup, _ ->
-                    ProductViewHolder.create(viewGroup, imageLoader)
+                    ProductViewHolder.create(viewGroup)
                 }
                 .build()
     }

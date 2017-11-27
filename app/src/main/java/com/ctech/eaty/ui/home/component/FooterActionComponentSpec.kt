@@ -20,58 +20,53 @@ import com.facebook.yoga.YogaJustify
 
 
 @LayoutSpec
-class FooterActionComponentSpec {
+object FooterActionComponentSpec {
 
-    companion object {
+    @OnCreateLayout
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
+                       @Prop actionResId: Int,
+                       @Prop actionLabelResId: Int): ComponentLayout {
+        return Row.create(c)
+                .child(
+                        Image.create(c)
+                                .drawableRes(actionResId)
+                                .widthRes(R.dimen.home_footer_action_icon)
+                                .heightRes(R.dimen.home_footer_action_icon)
 
-        @JvmStatic
-        @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
-                           @Prop actionResId: Int,
-                           @Prop actionLabelResId: Int): ComponentLayout {
-            return Row.create(c)
-                    .child(
-                            Image.create(c)
-                                    .drawableRes(actionResId)
-                                    .widthRes(R.dimen.home_footer_action_icon)
-                                    .heightRes(R.dimen.home_footer_action_icon)
+                )
+                .child(
+                        Text.create(c, 0, R.style.TextAppearance_FooterAction)
+                                .textRes(actionLabelResId)
+                                .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_small))
 
-                    )
-                    .child(
-                            Text.create(c,0, R.style.TextAppearance_FooterAction)
-                                    .textRes(actionLabelResId)
-                                    .marginPx(YogaEdge.START, c.resources.getDimensionPixelSize(R.dimen.space_small))
+                )
+                .flex(1F)
+                .alignItems(YogaAlign.CENTER)
+                .justifyContent(YogaJustify.CENTER)
+                .clickHandler(FooterActionComponent.onClick(c))
+                .build()
 
-                    )
-                    .flex(1F)
-                    .alignItems(YogaAlign.CENTER)
-                    .justifyContent(YogaJustify.CENTER)
-                    .clickHandler(FooterActionComponent.onClick(c))
-                    .build()
-
-        }
+    }
 
 
-        @JvmStatic
-        @OnEvent(ClickEvent::class)
-        fun onClick(
-                c: ComponentContext,
-                @Prop viewModel: ProductItemViewModel,
-                @Prop actionResId: Int) {
+    @OnEvent(ClickEvent::class)
+    fun onClick(
+            c: ComponentContext,
+            @Prop viewModel: ProductItemViewModel,
+            @Prop actionResId: Int) {
 
-            when (actionResId) {
-                R.drawable.ic_comment -> {
-                    val intent = CommentActivity.newIntent(c, viewModel.id)
-                    c.startActivity(intent)
-                }
-                R.drawable.ic_share_home -> {
-                    val shareIntent = Intent(Intent.ACTION_SEND)
-                    shareIntent.type = "text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)
-                    c.startActivity(Intent.createChooser(shareIntent, "Share link using"))
-                }
-
+        when (actionResId) {
+            R.drawable.ic_comment -> {
+                val intent = CommentActivity.newIntent(c, viewModel.id)
+                c.startActivity(intent)
             }
+            R.drawable.ic_share_home -> {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)
+                c.startActivity(Intent.createChooser(shareIntent, "Share link using"))
+            }
+
         }
     }
 

@@ -18,8 +18,8 @@ object LoadingFooterComponentSpec {
                     .justifyContent(YogaJustify.CENTER)
                     .child(
                             Progress.create(c)
-                                    .widthRes(R.dimen.progressBar_height)
-                                    .heightRes(R.dimen.progressBar_height)
+                                    .widthRes(R.dimen.progressbar_size)
+                                    .heightRes(R.dimen.progressbar_size)
                     )
                     .build()
 }

@@ -21,7 +21,7 @@
                 android:id="@+id/ivArtwork"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/radio_artwork_height"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar

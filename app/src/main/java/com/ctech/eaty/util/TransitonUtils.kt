@@ -12,7 +12,7 @@ class TransitionUtils private constructor() {
 
 
         fun findTransition(set: TransitionSet, clazz: Class<out Transition>): Transition? {
-            for (i in 0..set.transitionCount - 1) {
+            for (i in 0 until set.transitionCount) {
                 val transition = set.getTransitionAt(i)
                 if (transition.javaClass == clazz) {
                     return transition

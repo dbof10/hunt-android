@@ -28,7 +28,7 @@
     <dimen name="dialog_corners">2dp</dimen>
     <dimen name="button_radius">4dp</dimen>
     <dimen name="fab_size">56dp</dimen>
-    <dimen name="progressBar_height">40dp</dimen>
+    <dimen name="progressbar_size">40dp</dimen>
 
     <!-- Home -->
     <dimen name="noti_indicator_size">14dp</dimen>
@@ -41,6 +41,7 @@
     <dimen name="home_header_margin_top">8dp</dimen>
     <dimen name="home_header_margin_bottom">4dp</dimen>
     <dimen name="network_error_footer_size">56dp</dimen>
+    <dimen name="progress_stroke_width">4dp</dimen>
 
 
     <!--Collection Detail -->
@@ -55,7 +56,7 @@
     <dimen name="related_product_size">120dp</dimen>
 
     <!--Radio -->
-    <dimen name="radio_artwork_height">280dp</dimen>
+    <dimen name="radio_artwork_height">240dp</dimen>
     <dimen name="media_panel_height">64dp</dimen>
     <dimen name="play_size">48dp</dimen>
     <dimen name="media_progress_bar_height">2dp</dimen>
@@ -74,7 +75,7 @@
     <dimen name="z_app_bar">4dp</dimen>
     <dimen name="touch_raise">6dp</dimen>
     <dimen name="z_fab">6dp</dimen>
-    <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
+    <dimen name="z_fab_over_touchable_app_bar">8dp</dimen>
     <dimen name="z_card">2dp</dimen>
 
     <!-- Notification -->
@@ -93,5 +94,6 @@
     <dimen name="search_empty_view_padding">64dp</dimen>
     <dimen name="search_container_width">96dp</dimen>
     <dimen name="home_footer_action_icon">20dp</dimen>
+    <dimen name="thumbnail_preview_size">8dp</dimen>
 
 </resources>

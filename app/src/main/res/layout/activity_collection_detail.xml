@@ -2,11 +2,13 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -15,11 +17,11 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.ctech.eaty.widget.ForegroundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/ivCollectionBackground"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/collection_detail_background_height"
-                android:scaleType="fitXY"
+                fresco:actualImageScaleType="fitXY"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar

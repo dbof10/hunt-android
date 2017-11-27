@@ -19,6 +19,6 @@
         app:currentPageIndicatorColor="@color/white_100"
         app:dotDiameter="@dimen/indicator_diameter"
         app:dotGap="@dimen/indicator_gap"
-        app:pageIndicatorColor="@color/black_25" />
+        app:pageIndicatorColor="@color/gray_600" />
 
 </RelativeLayout>

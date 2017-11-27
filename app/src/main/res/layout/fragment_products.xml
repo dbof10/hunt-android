@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
-        app:retryButtonText="@string/retry"
-        app:errorImage="@drawable/network_error" />
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry" />
+
 </FrameLayout>

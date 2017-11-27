@@ -50,22 +50,16 @@ class ViewUtils private constructor() {
             var rippleColor = fallbackColor
             if (palette != null) {
                 // try the named swatches in preference order
-                if (palette.vibrantSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.vibrantSwatch!!.rgb, darkAlpha)
-
-                } else if (palette.lightVibrantSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.lightVibrantSwatch!!.rgb,
+                when {
+                    palette.vibrantSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.vibrantSwatch!!.rgb, darkAlpha)
+                    palette.lightVibrantSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.lightVibrantSwatch!!.rgb,
                             lightAlpha)
-                } else if (palette.darkVibrantSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.darkVibrantSwatch!!.rgb,
+                    palette.darkVibrantSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.darkVibrantSwatch!!.rgb,
                             darkAlpha)
-                } else if (palette.mutedSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.mutedSwatch!!.rgb, darkAlpha)
-                } else if (palette.lightMutedSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.lightMutedSwatch!!.rgb,
+                    palette.mutedSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.mutedSwatch!!.rgb, darkAlpha)
+                    palette.lightMutedSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.lightMutedSwatch!!.rgb,
                             lightAlpha)
-                } else if (palette.darkMutedSwatch != null) {
-                    rippleColor = ColorUtils.modifyAlpha(palette.darkMutedSwatch!!.rgb, darkAlpha)
+                    palette.darkMutedSwatch != null -> rippleColor = ColorUtils.modifyAlpha(palette.darkMutedSwatch!!.rgb, darkAlpha)
                 }
             }
             return RippleDrawable(ColorStateList.valueOf(rippleColor), null,

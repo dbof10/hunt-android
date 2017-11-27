@@ -96,7 +96,7 @@ class UserDetailFragment : BaseReduxFragment<UserDetailState>(), Injectable {
 
                 }
                 .viewHolderFactory { viewGroup, _ ->
-                    ProductViewHolder.create(viewGroup, imageLoader)
+                    ProductViewHolder.create(viewGroup)
                 }
                 .build()
     }

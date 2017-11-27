@@ -13,31 +13,27 @@ import com.facebook.litho.widget.SolidColor
 
 
 @LayoutSpec
-class ProductComponentSpec {
+object ProductComponentSpec {
 
-    companion object {
-
-        @JvmStatic
-        @OnCreateLayout
-        fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
-            return Column.create(c)
-                    .child( HeaderComponent.create(c)
-                            .viewModel(viewModel))
-                    .child(
-                            BodyComponent.create(c)
-                                    .viewModel(viewModel)
-                    )
-                    .child(
-                            FooterComponent.create(c)
-                                    .viewModel(viewModel)
-                    )
-                    .child(
-                            SolidColor.create(c)
-                                    .color(Color.TRANSPARENT)
-                                    .heightRes(R.dimen.divider_space)
-                    )
-                    .build()
-        }
-
+    @OnCreateLayout
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+        return Column.create(c)
+                .child(HeaderComponent.create(c)
+                        .viewModel(viewModel))
+                .child(
+                        BodyComponent.create(c)
+                                .viewModel(viewModel)
+                )
+                .child(
+                        FooterComponent.create(c)
+                                .viewModel(viewModel)
+                )
+                .child(
+                        SolidColor.create(c)
+                                .color(Color.TRANSPARENT)
+                                .heightRes(R.dimen.divider_space)
+                )
+                .build()
     }
+
 }
