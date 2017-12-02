@@ -1,5 +1,7 @@
 package com.ctech.eaty.ui.home.component
 
+import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeFeed
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.annotations.FromEvent
@@ -23,8 +25,10 @@ object FeedSectionSpec {
         val builder = Children.create()
                 .child(
                         SingleComponentSection.create(c)
-                                .component(DateComponent.create(c)
-                                        .viewModel(feed.date))
+                                .component(
+                                        DateComponent.create(c)
+                                                .viewModel(feed.date)
+                                                .build())
                                 .sticky(true))
                 .child(
                         DataDiffSection.create<ProductItemViewModel>(c)
@@ -40,11 +44,12 @@ object FeedSectionSpec {
 
     @OnEvent(RenderEvent::class)
     fun render(
-            context: SectionContext, @FromEvent model: ProductItemViewModel): RenderInfo {
+            context: SectionContext, @FromEvent model: ProductItemViewModel, @Prop store: Store<HomeState>): RenderInfo {
         return ComponentRenderInfo.create().component(
                 ProductComponent
                         .create(context)
                         .viewModel(model)
+                        .store(store)
                         .key(model.id.toString())
                         .build())
                 .build()

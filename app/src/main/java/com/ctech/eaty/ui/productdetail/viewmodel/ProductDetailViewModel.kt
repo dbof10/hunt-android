@@ -2,19 +2,15 @@ package com.ctech.eaty.ui.productdetail.viewmodel
 
 import android.app.ActivityOptions
 import android.support.customtabs.CustomTabsSession
-import android.util.Log
-import com.ctech.eaty.base.BasePresenter
-import com.ctech.eaty.entity.CurrentUser
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.productdetail.navigation.ProductDetailNavigation
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
-import com.ctech.eaty.ui.productdetail.view.ProductDetailView
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.util.rx.Functions
 import com.ctech.eaty.util.rx.ThreadScheduler
+import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -22,25 +18,42 @@ import timber.log.Timber
 
 class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<ProductDetailState>,
                              private val navigation: ProductDetailNavigation,
-                             private val threadScheduler: ThreadScheduler) : BasePresenter<ProductDetailView>() {
+                             private val threadScheduler: ThreadScheduler) {
     private val HEADER_IMAGE_SIZE = 300
     private val MAX_BODY_ITEM = 7
     private var body: List<ProductBodyItemViewModel> = emptyList()
     private val bodySubject: PublishSubject<List<ProductBodyItemViewModel>> = PublishSubject.create()
 
-    fun render(): Disposable {
+
+    fun requiredLoggedIn(): Completable {
         return stateDispatcher
-                .observeOn(threadScheduler.uiThread())
-                .subscribe {
-                    when {
-                        it.liking -> view?.showLiked(true)
-                        it.requiredLoggedIn -> view?.showLogin()
-                        it.unliking -> view?.showLiked(false)
-                        else -> {
-                            view?.showLiked(it.liked)
-                        }
-                    }
+                .filter {
+                    it.requiredLoggedIn
                 }
+                .flatMapCompletable {
+                    navigation.toLogin()
+                }
+                .observeOn(threadScheduler.uiThread())
+
+    }
+
+    fun liked(): Observable<Boolean> = stateDispatcher
+            .map { it.liked }
+
+    fun liking(): Observable<Boolean> {
+        return stateDispatcher
+                .filter {
+                    it.liking
+                }
+                .map { true }
+    }
+
+    fun unliking(): Observable<Boolean> {
+        return stateDispatcher
+                .filter {
+                    it.unliking
+                }
+                .map { false }
     }
 
     fun loading(): Observable<ProductDetailState> {
@@ -52,43 +65,49 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
 
     fun loadError(): Observable<Throwable> {
         return stateDispatcher
-                .observeOn(threadScheduler.uiThread())
                 .filter { it.error != null && !it.loading }
+                .observeOn(threadScheduler.uiThread())
                 .map { it.error }
 
+    }
+
+    fun dataSaver(): Observable<ProductDetailState> {
+        return content()
+                .filter {
+                    it.saveMode == true
+                }
     }
 
     fun header(): Observable<String> {
         return content()
                 .filter {
-                    it != ProductDetail.EMPTY
+                    it.saveMode == false
+                }
+                .map {
+                    it.content
                 }
                 .map {
                     ResizeImageUrlProvider.overrideUrl(it.thumbnail.imageUrl, HEADER_IMAGE_SIZE)
                 }
     }
 
-    fun currentUser(): Observable<CurrentUser> {
-        return content().map { it.currentUser }
-    }
 
-    fun content(): Observable<ProductDetail> {
+    fun content(): Observable<ProductDetailState> {
         return stateDispatcher
-                .observeOn(threadScheduler.uiThread())
+                .doOnNext {
+
+                }
                 .filter {
-                    !it.loading && it.error == null
+                    !it.loading && it.error == null && it.content != null && it.content != ProductDetail.EMPTY
                 }
-                .map {
-                    it.content ?: ProductDetail.EMPTY
-                }
+                .observeOn(threadScheduler.uiThread())
+
 
     }
 
     fun body(): Observable<List<ProductBodyItemViewModel>> {
         return content()
-                .filter {
-                    it != ProductDetail.EMPTY
-                }
+                .map { it.content }
                 .map {
                     val body = ArrayList<ProductBodyItemViewModel>(MAX_BODY_ITEM)
                     body += mapHeader(it)
@@ -159,7 +178,7 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
         }
     }
 
-    fun getProduct(session: CustomTabsSession) {
+    fun getProduct(session: CustomTabsSession?) {
         val product = stateDispatcher.value.content
         product?.run {
             navigation.toUrl(redirectUrl, session).subscribe({}, Timber::e)
@@ -183,8 +202,4 @@ class ProductDetailViewModel(private val stateDispatcher: BehaviorSubject<Produc
                 .subscribe(Functions.EMPTY, Timber::e)
     }
 
-    fun navigateLogin() {
-        navigation.toLogin()
-                .subscribe(Functions.EMPTY, Timber::e)
-    }
 }

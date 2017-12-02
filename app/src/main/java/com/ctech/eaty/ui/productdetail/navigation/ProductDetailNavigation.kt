@@ -25,7 +25,7 @@ import javax.inject.Inject
 @ActivityScope
 class ProductDetailNavigation @Inject constructor(private val context: ProductDetailActivity) {
 
-    fun toUrl(url: String, session: CustomTabsSession): Completable {
+    fun toUrl(url: String, session: CustomTabsSession?): Completable {
         return Completable.fromAction {
             val intentBuilder = CustomTabsIntent.Builder(session)
             intentBuilder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)

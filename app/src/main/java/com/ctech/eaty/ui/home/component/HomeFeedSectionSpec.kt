@@ -21,13 +21,14 @@ object HomeFeedSectionSpec {
 
     @OnCreateChildren
     fun onCreateChildren(c: SectionContext,
-                         @Prop feeds: List<HomeFeed>): Children {
+                         @Prop feeds: List<HomeFeed>, @Prop store: Store<HomeState>): Children {
         val builder = Children.create()
 
         feeds.forEach {
             builder.child(
                     FeedSection.create(c)
                             .feed(it)
+                            .store(store)
                             .key(it.date.date)
                             .build()
             )
@@ -42,7 +43,7 @@ object HomeFeedSectionSpec {
                 if (it.feedFooter.type == Type.LOADING) {
                     builder.child(
                             SingleComponentSection.create(c)
-                                    .component(LoadingFooterComponent.create(c))
+                                    .component(LoadingFooterComponent.create(c).build())
                     )
                 } else if (it.feedFooter.type == Type.ERROR) {
                     builder.child(
@@ -51,6 +52,7 @@ object HomeFeedSectionSpec {
                                     .component(
                                             ErrorFooterComponent.create(c)
                                                     .clickHandler(HomeFeedSection.onClick(c))
+                                                    .build()
                                     )
                     )
                 }

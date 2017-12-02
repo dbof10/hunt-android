@@ -29,7 +29,7 @@ data class ProductDetail(val id: Int = -1,
                          val currentUser: CurrentUser = CurrentUser(),
                          val media: List<Media> = emptyList(),
                          @SerializedName("created_at")
-                         val createdAt: DateTime = DateTime.now()) : RealmModel {
+                         val createdAt: DateTime = DateTime.now())  {
 
     companion object {
         val EMPTY = ProductDetail()

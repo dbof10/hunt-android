@@ -10,6 +10,7 @@ class AppSettingsManager(private val sharedPreferences: SharedPreferences, priva
     private val USER_ACCESS_TOKEN_KEY = "userAccessToken"
     private val USER_KEY = "user"
     private val KEY_BOARDING = "onboarding"
+    private val KEY_DATA_SAVER = "dataSaver"
 
     fun setClientToken(token: String) {
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_KEY, token).apply()
@@ -49,5 +50,12 @@ class AppSettingsManager(private val sharedPreferences: SharedPreferences, priva
 
     fun didSeeOnboarding() = sharedPreferences.getBoolean(KEY_BOARDING, false)
 
+    fun isDataServerEnabled() = sharedPreferences.getBoolean(KEY_DATA_SAVER, false)
+
+    fun setDataSaver(enabled: Boolean) {
+        sharedPreferences.edit()
+                .putBoolean(KEY_DATA_SAVER, enabled)
+                .apply()
+    }
 
 }

@@ -2,9 +2,18 @@ package com.ctech.eaty.ui.home.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.home.result.*
+import com.ctech.eaty.ui.home.result.CheckLoginResult
+import com.ctech.eaty.ui.home.result.DisableDataSaverResult
+import com.ctech.eaty.ui.home.result.LoadMoreResult
+import com.ctech.eaty.ui.home.result.LoadResult
+import com.ctech.eaty.ui.home.result.LoadUserResult
+import com.ctech.eaty.ui.home.result.RefreshResult
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.*
+import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
+import com.ctech.eaty.ui.home.viewmodel.FeedFooterItemViewModel
+import com.ctech.eaty.ui.home.viewmodel.HomeFeed
+import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
+import com.ctech.eaty.ui.home.viewmodel.Type
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
@@ -53,6 +62,14 @@ class HomeReducer : Reducer<HomeState> {
             }
             is CheckLoginResult -> {
                 return state.copy(user = result.content)
+            }
+            is DisableDataSaverResult -> {
+                val feed = state.content.map {
+                    return@map it.copy(products = it.products.map { it.copy(saveMode = result.enabled) })
+                }
+
+                return state.copy(content = feed)
+
             }
             else -> {
                 throw  IllegalArgumentException("Unknown result")

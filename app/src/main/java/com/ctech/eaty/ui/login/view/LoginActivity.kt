@@ -63,7 +63,7 @@ class LoginActivity : BaseActivity(), Injectable {
         if (!CircularTransform.setup(this, container)) {
             MorphTransform.setup(this, container,
                     ContextCompat.getColor(this, R.color.gray_50),
-                    resources.getDimensionPixelSize(R.dimen.dialog_corners))
+                    resources.getDimensionPixelSize(R.dimen.dialog_corner))
         }
         trackingManager.trackScreenView(getScreenName())
         store.startBinding()

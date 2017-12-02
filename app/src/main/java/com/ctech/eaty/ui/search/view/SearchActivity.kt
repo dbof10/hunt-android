@@ -105,7 +105,7 @@ class SearchActivity : BaseActivity(), Injectable {
     val adapter: OnlyAdapter by lazy {
         OnlyAdapter.builder()
                 .diffCallback(diffCallback)
-                .onItemClickListener { view, item, position ->
+                .onItemClickListener { view, item, _ ->
                     if (item is ProductItemViewModel) {
                         if (view.id == R.id.flProductHolder) {
                             viewModel.toProduct(item.id)

@@ -44,6 +44,8 @@ import com.ctech.eaty.ui.profile.view.ProfileActivity
 import com.ctech.eaty.ui.radio.di.RadioFragmentBuilderModule
 import com.ctech.eaty.ui.radio.di.RadioModule
 import com.ctech.eaty.ui.radio.view.RadioActivity
+import com.ctech.eaty.ui.settings.di.SettingsModule
+import com.ctech.eaty.ui.settings.view.SettingsActivity
 import com.ctech.eaty.ui.splash.view.SplashActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
@@ -160,5 +162,10 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(NewLetterModule::class))
     abstract fun contributeNewLetterActivity(): NewsLetterActivity
+
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = arrayOf(SettingsModule::class))
+    abstract fun contributeSettingsActivity(): SettingsActivity
 
 }

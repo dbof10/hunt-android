@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.support.transition.AutoTransition
 import android.support.transition.Transition
@@ -22,16 +23,23 @@ import com.ctech.eaty.base.BaseReduxFragment
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
-import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
+import com.ctech.eaty.ui.productdetail.action.CHECK_DATA_SAVER
+import com.ctech.eaty.ui.productdetail.action.Load
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
-import com.ctech.eaty.ui.productdetail.viewmodel.*
+import com.ctech.eaty.ui.productdetail.viewmodel.CommentItemViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductBodyItemViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
+import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.rx.plusAssign
 import com.ctech.eaty.widget.TransitionListenerAdapter
 import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration
-import kotlinx.android.synthetic.main.fragment_product_body.*
+import kotlinx.android.synthetic.main.fragment_product_body.progressBar
+import kotlinx.android.synthetic.main.fragment_product_body.rvBody
+import kotlinx.android.synthetic.main.fragment_product_body.vError
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
@@ -155,14 +163,18 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
                         }
                         R.id.btShare -> {
                             with(view as Button) {
-                                val drawable = (compoundDrawables[1] as AnimatedVectorDrawable)
-                                drawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
-                                    override fun onAnimationEnd(drawableCallback: Drawable) {
-                                        super.onAnimationEnd(drawableCallback)
-                                        viewModel.shareLink()
-                                    }
-                                })
-                                drawable.start()
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    val drawable = (compoundDrawables[1] as AnimatedVectorDrawable)
+                                    drawable.registerAnimationCallback(object : Animatable2.AnimationCallback() {
+                                        override fun onAnimationEnd(drawableCallback: Drawable) {
+                                            super.onAnimationEnd(drawableCallback)
+                                            viewModel.shareLink()
+                                        }
+                                    })
+                                    drawable.start()
+                                } else {
+                                    viewModel.shareLink()
+                                }
                             }
                         }
 
@@ -237,7 +249,8 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
         contractor.onFinishFragmentInflate()
         setupRecyclerView()
         setupViewModel()
-        store.dispatch(ProductDetailAction.Load(productId))
+        store.dispatch(CHECK_DATA_SAVER())
+        store.dispatch(Load(productId))
     }
 
     fun setSpacerBackground(drawable: Drawable) {

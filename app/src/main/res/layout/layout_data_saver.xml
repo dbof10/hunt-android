@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/llDataSaver"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    android:gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:visibility="gone"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_product_detail">
+
+    <ImageView
+        android:layout_width="@dimen/home_footer_action_icon"
+        android:layout_height="@dimen/home_footer_action_icon"
+        android:src="@drawable/ic_photo_placeholder" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/content_padding_vertical"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/content_padding_vertical"
+        android:text="@string/data_saver_mode_content"
+        android:textAppearance="@style/Text.Body3" />
+
+    <TextView
+        android:id="@+id/tvDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_border_rounded_background"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingEnd="@dimen/space_medium"
+        android:paddingStart="@dimen/space_medium"
+        android:paddingTop="@dimen/space_small"
+        android:text="@string/disable_data_saver"
+        android:textAppearance="@style/Text.InlineAction"
+        android:textColor="@color/colorPrimary" />
+
+</LinearLayout>

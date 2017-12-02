@@ -1,10 +1,13 @@
 package com.ctech.eaty.ui.productdetail.reducer
 
+import android.util.Log
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.error.LikeExistedException
 import com.ctech.eaty.error.UnauthorizedActionException
 import com.ctech.eaty.error.UnlikeExistedException
+import com.ctech.eaty.ui.productdetail.result.CheckDataSaverResult
+import com.ctech.eaty.ui.productdetail.result.DisableDataSaverResult
 import com.ctech.eaty.ui.productdetail.result.LikeResult
 import com.ctech.eaty.ui.productdetail.result.LoadResult
 import com.ctech.eaty.ui.productdetail.result.UnlikeResult
@@ -69,6 +72,12 @@ class ProductDetailReducer : Reducer<ProductDetailState> {
                     )
 
                 }
+            }
+            is CheckDataSaverResult -> {
+                return state.copy(saveMode = result.enabled)
+            }
+            is DisableDataSaverResult -> {
+                return state.copy(saveMode = result.enabled)
             }
             else -> {
                 throw  IllegalArgumentException("Unknown result")

@@ -17,21 +17,30 @@
         android:background="@color/overlap_background_light" />
 
 
-    <com.ctech.eaty.widget.ParallaxScrimageView
-        android:id="@+id/ivProduct"
+    <com.ctech.eaty.widget.ScrimFrameLayout
+        android:id="@+id/flProductHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_grey"
-        android:foreground="@drawable/mid_grey_ripple"
+        android:elevation="@dimen/elevation_clickable"
         android:minHeight="@dimen/shot_collapsed_app_bar_height"
-        android:scaleType="fitCenter"
-        android:stateListAnimator="@animator/app_bar_pin"
-        app:maxScrimAlpha="0.4"
-        app:parallaxFactor="-0.5"
-        app:scrimAlpha="0"
-        android:elevation="0.5dp"
-        app:scrimColor="@color/scrim" />
+        android:stateListAnimator="@animator/app_bar_pin">
 
+        <com.ctech.eaty.widget.ParallaxScrimageView
+            android:id="@+id/ivProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="@drawable/mid_grey_ripple"
+            android:scaleType="fitCenter"
+            android:visibility="invisible"
+            app:maxScrimAlpha="0.4"
+            app:parallaxFactor="-0.5"
+            app:scrimAlpha="0"
+            app:scrimColor="@color/scrim" />
+
+        <include layout="@layout/layout_data_saver" />
+
+    </com.ctech.eaty.widget.ScrimFrameLayout>
 
     <FrameLayout
         android:layout_width="?attr/actionBarSize"
@@ -67,13 +76,13 @@
         android:id="@+id/fab"
         android:layout_width="@dimen/fab_size"
         android:layout_height="@dimen/fab_size"
-        android:elevation="@dimen/z_fab_over_touchable_app_bar"
+        android:layout_gravity="end"
         android:layout_marginEnd="@dimen/content_padding_horizontal"
+        android:background="@drawable/fab_like"
+        android:elevation="@dimen/z_fab_over_touchable_app_bar"
         android:scaleX="0"
         android:scaleY="0"
-        android:background="@drawable/fab_like"
-        android:layout_gravity="end"
-        android:stateListAnimator="@animator/raise"
-        android:src="@drawable/asl_fab_heart" />
+        android:src="@drawable/asl_fab_heart"
+        android:stateListAnimator="@animator/raise" />
 
 </com.ctech.eaty.widget.ElasticDragDismissFrameLayout>

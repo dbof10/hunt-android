@@ -14,6 +14,7 @@ import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
+import com.ctech.eaty.ui.home.action.CHECK_RESULT
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.controller.HomeNetworkController
 import com.ctech.eaty.ui.home.state.HomeState
@@ -23,8 +24,12 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.kotlin.autoDisposeWith
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_home_content.*
+import kotlinx.android.synthetic.main.activity_main.drawer
+import kotlinx.android.synthetic.main.activity_main.navigation
+import kotlinx.android.synthetic.main.layout_home_content.ivNoti
+import kotlinx.android.synthetic.main.layout_home_content.ivSearch
+import kotlinx.android.synthetic.main.layout_home_content.toolbar
+import kotlinx.android.synthetic.main.layout_home_content.tvIndicator
 import javax.inject.Inject
 
 
@@ -142,7 +147,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        store.dispatch(HomeAction.CHECK_RESULT(requestCode, resultCode, data))
+        store.dispatch(CHECK_RESULT(requestCode, resultCode, data))
     }
 
     override fun onBackPressed() {

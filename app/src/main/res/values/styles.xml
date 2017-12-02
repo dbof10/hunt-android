@@ -139,8 +139,12 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
+    <style name="Text.Body3" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">@color/text_tertiary_dark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="Text.InlineAction">
-        <item name="android:fontFeatureSettings">smcp, onum</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>

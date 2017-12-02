@@ -6,7 +6,11 @@ import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.R
+import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.controller.NetworkController
 import com.ctech.eaty.di.AppInjector
+import com.ctech.eaty.ui.app.AppState
+import com.ctech.eaty.ui.app.action.NetworkChangeAction
 import com.facebook.cache.disk.DiskCacheConfig
 import com.facebook.common.util.ByteConstants
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -39,6 +43,11 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
+    @Inject
+    lateinit var networkController: NetworkController
+
+    @Inject
+    lateinit var store: Store<AppState>
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingAndroidInjector
@@ -72,6 +81,15 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
                 .debug(BuildConfig.DEBUG)
                 .build()
         Twitter.initialize(config)
+        monitorNetworkState()
+    }
+
+    private fun monitorNetworkState() {
+        networkController
+                .observeNetworkConnectivity()
+                .subscribe {
+                    store.dispatch(NetworkChangeAction(it))
+                }
     }
 
     private fun setupFresco() {

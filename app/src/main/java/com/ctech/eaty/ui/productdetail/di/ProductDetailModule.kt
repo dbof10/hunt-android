@@ -2,9 +2,13 @@ package com.ctech.eaty.ui.productdetail.di
 
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
+import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.repository.VoteRepository
+import com.ctech.eaty.ui.app.AppState
+import com.ctech.eaty.ui.productdetail.epic.CheckDataSaverEpic
+import com.ctech.eaty.ui.productdetail.epic.DisableDataSaverEpic
 import com.ctech.eaty.ui.productdetail.epic.LikeEpic
 import com.ctech.eaty.ui.productdetail.epic.LoadEpic
 import com.ctech.eaty.ui.productdetail.epic.UnlikeEpic
@@ -26,11 +30,15 @@ class ProductDetailModule {
     fun provideProductDetailStore(productRepository: ProductRepository,
                                   voteRepository: VoteRepository,
                                   userRepository: UserRepository,
+                                  settingsManager: AppSettingsManager,
+                                  appStore: Store<AppState>,
                                   threadScheduler: ThreadScheduler): Store<ProductDetailState> {
-        return Store<ProductDetailState>(ProductDetailState(), ProductDetailReducer(),
+        return Store(ProductDetailState(), ProductDetailReducer(),
                 arrayOf(LoadEpic(productRepository, threadScheduler),
-                        LikeEpic(voteRepository, userRepository, productRepository,threadScheduler),
-                        UnlikeEpic(voteRepository, userRepository,productRepository, threadScheduler)))
+                        LikeEpic(voteRepository, userRepository, productRepository, threadScheduler),
+                        CheckDataSaverEpic(appStore, settingsManager),
+                        DisableDataSaverEpic(settingsManager, threadScheduler),
+                        UnlikeEpic(voteRepository, userRepository, productRepository, threadScheduler)))
 
     }
 

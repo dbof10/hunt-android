@@ -20,6 +20,7 @@ import com.ctech.eaty.ui.noti.view.NotificationActivity
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
 import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.search.view.SearchActivity
+import com.ctech.eaty.ui.settings.view.SettingsActivity
 import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.user.view.UserActivity
 import com.ctech.eaty.widget.transition.CircularTransform
@@ -88,6 +89,9 @@ class HomeNavigation @Inject constructor(private val context: HomeActivity) {
                 }
                 R.id.action_new_letter -> {
                     intent.setClass(context, NewsLetterActivity::class.java)
+                }
+                R.id.action_settings -> {
+                    intent.setClass(context, SettingsActivity::class.java)
                 }
             }
             context.startActivity(intent)

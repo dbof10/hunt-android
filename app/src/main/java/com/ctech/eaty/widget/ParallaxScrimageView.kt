@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Property
 import com.ctech.eaty.R
 import com.ctech.eaty.util.AnimUtils
@@ -32,19 +33,6 @@ class ParallaxScrimageView(context: Context, attrs: AttributeSet) : FourThreeIma
     private var parallaxFactor = -0.5f
     private var isPinned = false
     private var immediatePin = false
-
-    private val OFFSET: Property<ParallaxScrimageView, Int> by lazy {
-        AnimUtils.createIntProperty(object : AnimUtils.IntProp<ParallaxScrimageView>("offset") {
-
-            override fun set(parallaxScrimageView: ParallaxScrimageView, offset: Int) {
-                parallaxScrimageView.setOffset(offset)
-            }
-
-            override fun get(parallaxScrimageView: ParallaxScrimageView): Int {
-                return parallaxScrimageView.getOffset()
-            }
-        })
-    }
 
 
     init {
@@ -148,10 +136,6 @@ class ParallaxScrimageView(context: Context, attrs: AttributeSet) : FourThreeIma
         return immediatePin
     }
 
-    /**
-     * As the pinned state is designed to work with a {@see StateListAnimator}, we may want to short
-     * circuit this animation in certain situations e.g. when flinging a list.
-     */
     fun setImmediatePin(immediatePin: Boolean) {
         this.immediatePin = immediatePin
     }

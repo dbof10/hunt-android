@@ -32,7 +32,7 @@ class UserDetailNavigation @Inject constructor(private val context: UserActivity
 
             val intent = LoginActivity.newIntent(context)
             MorphTransform.addExtras(intent,
-                    ContextCompat.getColor(context, R.color.hunt), context.resources.getDimensionPixelSize(R.dimen.dialog_corners))
+                    ContextCompat.getColor(context, R.color.hunt), context.resources.getDimensionPixelSize(R.dimen.dialog_corner))
             val options = ActivityOptions.makeSceneTransitionAnimation(context, btFollow, context.getString(R.string.transition_user_login))
             context.startActivity(intent, options.toBundle())
         }

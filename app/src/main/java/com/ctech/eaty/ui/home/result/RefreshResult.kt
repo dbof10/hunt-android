@@ -5,7 +5,7 @@ import com.ctech.eaty.entity.Product
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import org.joda.time.DateTime
 
-class RefreshResult(val refreshing: Boolean = false,
+data class RefreshResult(val refreshing: Boolean = false,
                     val error: Throwable? = null,
                     val content: List<ProductItemViewModel> = emptyList(),
                     val date: DateTime = DateTime.now()) : Result {

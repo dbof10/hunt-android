@@ -3,6 +3,6 @@
     android:shape="rectangle">
 
     <solid android:color="@color/overlap_background_light" />
-    <corners android:radius="@dimen/corner" />
+    <corners android:radius="@dimen/draggable_background_corner" />
 
 </shape>

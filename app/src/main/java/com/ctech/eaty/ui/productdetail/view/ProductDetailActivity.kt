@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
@@ -24,7 +25,9 @@ import com.ctech.eaty.annotation.Lightness
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.tracking.FirebaseTrackManager
-import com.ctech.eaty.ui.productdetail.action.ProductDetailAction
+import com.ctech.eaty.ui.productdetail.action.Like
+import com.ctech.eaty.ui.productdetail.action.USE_MOBILE_DATA
+import com.ctech.eaty.ui.productdetail.action.UnLike
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
@@ -33,17 +36,21 @@ import com.ctech.eaty.util.ColorUtils
 import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.ViewUtils
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.kotlin.autoDisposeWith
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.activity_product_detail.fab
+import kotlinx.android.synthetic.main.activity_product_detail.flDraggable
+import kotlinx.android.synthetic.main.activity_product_detail.flProductHolder
+import kotlinx.android.synthetic.main.activity_product_detail.ivBack
+import kotlinx.android.synthetic.main.activity_product_detail.ivProduct
+import kotlinx.android.synthetic.main.layout_data_saver.llDataSaver
+import kotlinx.android.synthetic.main.layout_data_saver.tvDisable
 import timber.log.Timber
 import javax.inject.Inject
 
 class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, FragmentContract,
-        CustomTabActivityHelper.ConnectionCallback, ProductDetailView {
+        CustomTabActivityHelper.ConnectionCallback {
 
     private val SCRIM_ADJUSTMENT = 0.075f
     private val FAB_SCALE_DURATION = 300L
@@ -191,8 +198,6 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         setupBodyFragment()
         setupHeader()
         setupToolbar()
-        viewModel.attachView(this)
-
         trackingManager.trackScreenView(getScreenName())
 
     }
@@ -209,9 +214,9 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun calculateFabPosition() {
-        fabOffset = ivProduct.height - (fab.height / 2)
+        fabOffset = flProductHolder.height - (fab.height / 2)
         fab.setOffset(fabOffset)
-        fab.setMinOffset(ivProduct.minimumHeight - (fab.height / 2))
+        fab.setMinOffset(flProductHolder.minimumHeight - (fab.height / 2))
     }
 
     override fun onResume() {
@@ -234,11 +239,6 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
         super.onStop()
     }
 
-    override fun onDestroy() {
-        viewModel.detachView()
-        super.onDestroy()
-    }
-
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return dispatchingAndroidInjector
     }
@@ -248,21 +248,46 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun setupViewModel() {
-        viewModel.render()
+        viewModel.liking().subscribe {
+            showLiked(it)
+        }
+        viewModel.unliking().subscribe {
+            showLiked(it)
+        }
+        viewModel.liked().subscribe {
+            showLiked(it)
+        }
         viewModel.header()
-                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
                 .subscribe {
                     renderHeader(it)
                 }
+        viewModel.requiredLoggedIn()
+                .subscribe()
+        viewModel.dataSaver().subscribe {
+            llDataSaver.visibility = View.VISIBLE
+        }
     }
 
     private fun setupListener() {
         fab.setOnClickListener {
 //            if (fab.isChecked) {
-//                store.dispatch(ProductDetailAction.UnLike(productId))
+//                store.dispatch(UnLike(productId))
 //            } else {
-//                store.dispatch(ProductDetailAction.Like(productId))
+//                store.dispatch(Like(productId))
 //            }
+        }
+
+        tvDisable.setOnClickListener {
+            AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.data_saver_confirm))
+                    .setPositiveButton(getString(android.R.string.ok), { dialog, _ ->
+                        store.dispatch(USE_MOBILE_DATA())
+                        dialog.dismiss()
+                    })
+                    .setNegativeButton(getString(android.R.string.no)) { dialog, _ ->
+                        dialog.dismiss()
+                    }.create()
+                    .show()
         }
     }
 
@@ -281,6 +306,8 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     private fun renderHeader(productUrl: String) {
+        ivProduct.visibility = View.VISIBLE
+        llDataSaver.visibility = View.GONE
         imageLoader.downloadInto(productUrl, ivProduct, imageLoaderCallback)
     }
 
@@ -301,20 +328,17 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
     }
 
     override fun onScrollStateChanged(newState: Int) {
-        // as we animate the main image's elevation change when it 'pins' at it's min height
-        // a fling can cause the title to go over the image before the animation has a chance to
-        // run. In this case we short circuit the animation and just jump to state.
         ivProduct.setImmediatePin(newState == RecyclerView.SCROLL_STATE_SETTLING)
     }
 
     override fun onScrolled(headerView: View) {
         val scrollY = headerView.top
         fab.setOffset(fabOffset + scrollY)
-        ivProduct.setOffset(scrollY)
+        flProductHolder.setOffset(scrollY)
     }
 
     override fun onFling() {
-        ivProduct.setImmediatePin(true)
+        flProductHolder.setImmediatePin(true)
     }
 
     override fun onCustomTabsConnected() {
@@ -325,11 +349,7 @@ class ProductDetailActivity : BaseActivity(), HasSupportFragmentInjector, Fragme
 
     }
 
-    override fun showLogin() {
-        viewModel.navigateLogin()
-    }
-
-    override fun showLiked(liked: Boolean) {
+    private fun showLiked(liked: Boolean) {
         fab.isChecked = liked
     }
 

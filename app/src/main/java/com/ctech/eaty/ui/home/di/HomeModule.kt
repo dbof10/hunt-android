@@ -2,9 +2,16 @@ package com.ctech.eaty.ui.home.di
 
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
+import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.repository.UserRepository
-import com.ctech.eaty.ui.home.epic.*
+import com.ctech.eaty.ui.app.AppState
+import com.ctech.eaty.ui.home.epic.CheckLoginEpic
+import com.ctech.eaty.ui.home.epic.DisableDataSaverEpic
+import com.ctech.eaty.ui.home.epic.LoadEpic
+import com.ctech.eaty.ui.home.epic.LoadMoreEpic
+import com.ctech.eaty.ui.home.epic.LoadUserEpic
+import com.ctech.eaty.ui.home.epic.RefreshEpic
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.reducer.HomeReducer
 import com.ctech.eaty.ui.home.state.HomeState
@@ -29,11 +36,18 @@ class HomeModule {
     @Provides
     fun provideHomeStore(productRepository: ProductRepository,
                          userRepository: UserRepository,
+                         appStore: Store<AppState>,
+                         settingsManager: AppSettingsManager,
                          threadScheduler: ThreadScheduler): Store<HomeState> {
-        return Store(HomeState(), HomeReducer(), arrayOf(LoadEpic(productRepository, threadScheduler),
-                RefreshEpic(productRepository, threadScheduler),
-                LoadUserEpic(userRepository, threadScheduler),
-                LoadMoreEpic(productRepository, threadScheduler), CheckLoginEpic()))
+        return Store(HomeState(), HomeReducer(),
+                arrayOf(
+                        LoadEpic(productRepository, appStore, settingsManager, threadScheduler),
+                        RefreshEpic(productRepository, appStore, settingsManager, threadScheduler),
+                        LoadUserEpic(userRepository, threadScheduler),
+                        LoadMoreEpic(productRepository, appStore, settingsManager, threadScheduler),
+                        CheckLoginEpic(),
+                        DisableDataSaverEpic(settingsManager, threadScheduler)
+                ))
 
     }
 

@@ -2,6 +2,8 @@ package com.ctech.eaty.ui.home.component
 
 import android.graphics.Color
 import com.ctech.eaty.R
+import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
@@ -16,12 +18,14 @@ import com.facebook.litho.widget.SolidColor
 object ProductComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
+                       @Prop store: Store<HomeState>): ComponentLayout {
         return Column.create(c)
                 .child(HeaderComponent.create(c)
                         .viewModel(viewModel))
                 .child(
                         BodyComponent.create(c)
+                                .store(store)
                                 .viewModel(viewModel)
                 )
                 .child(
