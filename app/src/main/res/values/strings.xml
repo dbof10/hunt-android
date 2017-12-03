@@ -105,10 +105,15 @@
     <string name="comment">Comment</string>
     <string name="cannot_load">Cannot load</string>
 
-    <!-- Settings -->
-    <string name="settings_data_saver">Data Saver</string>
+    <!-- Data saver -->
     <string name="data_saver_mode_content">No photo in data saver mode</string>
     <string name="disable_data_saver">Use mobile data to see Photos</string>
     <string name="data_saver_confirm">Are you sure to turn off Data Saver mode?</string>
+
+    <!-- Settings -->
+    <string name="settings_data_saver">Data Saver</string>
+    <string name="settings_clear_cache">Clear cache</string>
+    <string name="cache_cleaned">%1$s cleaned</string>
+
 
 </resources>

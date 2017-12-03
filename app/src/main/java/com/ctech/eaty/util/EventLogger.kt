@@ -23,6 +23,8 @@ import com.google.android.exoplayer2.video.VideoRendererEventListener
 import java.io.IOException
 import java.text.NumberFormat
 import java.util.*
+import com.google.android.exoplayer2.Player
+import timber.log.Timber
 
 
 class EventLogger(private val trackSelector: MappingTrackSelector) : Player.EventListener,
@@ -30,12 +32,36 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         ExtractorMediaSource.EventListener, DefaultDrmSessionManager.EventListener,
         MetadataRenderer.Output {
 
+    override fun onAudioSinkUnderrun(bufferSize: Int, bufferSizeMs: Long, elapsedSinceLastFeedMs: Long) {
+        printInternalError("audioTrackUnderrun [" + bufferSize + ", " + bufferSizeMs + ", "
+                + elapsedSinceLastFeedMs + "]", null);    }
+
+    private fun getDiscontinuityReasonString(@Player.DiscontinuityReason reason: Int): String {
+        return when (reason) {
+            Player.DISCONTINUITY_REASON_PERIOD_TRANSITION -> "PERIOD_TRANSITION"
+            Player.DISCONTINUITY_REASON_SEEK -> "SEEK"
+            Player.DISCONTINUITY_REASON_SEEK_ADJUSTMENT -> "SEEK_ADJUSTMENT"
+            Player.DISCONTINUITY_REASON_INTERNAL -> "INTERNAL"
+            else -> "?"
+        }
+    }
+
+    override fun onPositionDiscontinuity(reason: Int) {
+       Timber.d("positionDiscontinuity [%s]", getDiscontinuityReasonString(reason))
+    }
+
+    override fun onSeekProcessed() {
+        Timber.d("seekProcessed")
+    }
+
+    override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
+        Log.d(TAG, "shuffleModeEnabled [" + shuffleModeEnabled + "]");
+    }
+
     private val TAG = "EventLogger"
     private val MAX_TIMELINE_ITEM_LINES = 3
+    private val TIME_FORMAT = NumberFormat.getInstance(Locale.US)
 
-    companion object {
-        val TIME_FORMAT = NumberFormat.getInstance(Locale.US)
-    }
 
     private var window: Timeline.Window = Timeline.Window()
     private var period: Timeline.Period = Timeline.Period()
@@ -61,10 +87,6 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     override fun onPlayerStateChanged(playWhenReady: Boolean, state: Int) {
         Log.d(TAG, "state [" + getSessionTimeString() + ", " + playWhenReady + ", "
                 + getStateString(state) + "]")
-    }
-
-    override fun onPositionDiscontinuity() {
-        Log.d(TAG, "positionDiscontinuity")
     }
 
     override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
@@ -101,10 +123,10 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     override fun onTracksChanged(ignored: TrackGroupArray, trackSelections: TrackSelectionArray) {
         val mappedTrackInfo = trackSelector.currentMappedTrackInfo
         if (mappedTrackInfo == null) {
-            Log.d(TAG, "Tracks []")
+            Timber.d("Tracks []")
             return
         }
-        Log.d(TAG, "Tracks [")
+        Timber.d("Tracks [")
         // Log tracks associated to renderers.
         for (rendererIndex in 0..mappedTrackInfo.length - 1) {
             val rendererTrackGroups = mappedTrackInfo.getTrackGroups(rendererIndex)
@@ -124,27 +146,27 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
                                 + Format.toLogString(trackGroup.getFormat(trackIndex))
                                 + ", supported=" + formatSupport)
                     }
-                    Log.d(TAG, "    ]")
+                    Timber.d("    ]")
                 }
                 // Log metadata for at most one of the tracks selected for the renderer.
                 if (trackSelection != null) {
                     for (selectionIndex in 0..trackSelection.length() - 1) {
                         val metadata = trackSelection.getFormat(selectionIndex).metadata
                         if (metadata != null) {
-                            Log.d(TAG, "    Metadata [")
+                            Timber.d("    Metadata [")
                             printMetadata(metadata, "      ")
-                            Log.d(TAG, "    ]")
+                            Timber.d("    ]")
                             break
                         }
                     }
                 }
-                Log.d(TAG, "  ]")
+                Timber.d("  ]")
             }
         }
         // Log tracks not associated with a renderer.
         val unassociatedTrackGroups = mappedTrackInfo.unassociatedTrackGroups
         if (unassociatedTrackGroups.length > 0) {
-            Log.d(TAG, "  Renderer:None [")
+            Timber.d("  Renderer:None [")
             for (groupIndex in 0..unassociatedTrackGroups.length - 1) {
                 Log.d(TAG, "    Group:$groupIndex [")
                 val trackGroup = unassociatedTrackGroups.get(groupIndex)
@@ -156,19 +178,19 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
                             + Format.toLogString(trackGroup.getFormat(trackIndex))
                             + ", supported=" + formatSupport)
                 }
-                Log.d(TAG, "    ]")
+                Timber.d("    ]")
             }
-            Log.d(TAG, "  ]")
+            Timber.d("  ]")
         }
-        Log.d(TAG, "]")
+        Timber.d("]")
     }
 
     // MetadataRenderer.Output
 
     override fun onMetadata(metadata: Metadata) {
-        Log.d(TAG, "onMetadata [")
+        Timber.d("onMetadata [")
         printMetadata(metadata, "  ")
-        Log.d(TAG, "]")
+        Timber.d("]")
     }
 
     // AudioRendererEventListener
@@ -193,11 +215,6 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
 
     override fun onAudioDisabled(counters: DecoderCounters) {
         Log.d(TAG, "audioDisabled [" + getSessionTimeString() + "]")
-    }
-
-    override fun onAudioTrackUnderrun(bufferSize: Int, bufferSizeMs: Long, elapsedSinceLastFeedMs: Long) {
-        printInternalError("audioTrackUnderrun [" + bufferSize + ", " + bufferSizeMs + ", "
-                + elapsedSinceLastFeedMs + "]", null)
     }
 
     // VideoRendererEventListener

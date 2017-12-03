@@ -20,11 +20,12 @@
 
     <TextView
         android:id="@+id/tvDataSaver"
+        style="@style/Text.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/content_padding_horizontal"
         android:layout_marginTop="@dimen/content_padding_vertical"
-        style="@style/Text.Body"
+        android:layout_marginBottom="@dimen/content_padding_vertical"
         android:text="@string/settings_data_saver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -37,6 +38,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvClearCache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Text.Body"
+        android:layout_marginTop="@dimen/content_padding_vertical"
+        android:text="@string/settings_clear_cache"
+        app:layout_constraintStart_toStartOf="@+id/tvDataSaver"
+        app:layout_constraintTop_toBottomOf="@+id/tvDataSaver" />
 
 
 </android.support.constraint.ConstraintLayout>

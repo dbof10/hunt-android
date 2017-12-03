@@ -61,6 +61,12 @@ android {
         exclude '/lib/x86_64/**'
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+
 }
 
 dependencies {

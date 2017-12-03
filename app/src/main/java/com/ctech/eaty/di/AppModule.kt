@@ -34,6 +34,10 @@ class AppModule {
     @Singleton
     fun provideResourceProvider(context: Context): ResourceProvider {
         return object : ResourceProvider {
+            override fun getString(resId: Int, vararg args: Any) = context.getString(resId, *args)
+
+            override fun getCacheDir() = context.cacheDir
+
             override fun getString(id: Int) = context.getString(id)
         }
     }

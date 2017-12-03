@@ -1,7 +1,7 @@
 def versions = [
         support    : '26.1.0',
         litho      : '0.9.0',
-        autodispose: '0.3.0',
+        autodispose: '0.4.0',
         firebase   : '11.4.2'
 ]
 
@@ -51,11 +51,11 @@ def test = [
 ]
 
 def exo = [
-        core           : 'com.google.android.exoplayer:exoplayer-core:r2.5.3',
-        ui             : 'com.google.android.exoplayer:exoplayer-ui:r2.5.3',
-        dash           : 'com.google.android.exoplayer:exoplayer-dash:r2.5.3',
-        hls            : 'com.google.android.exoplayer:exoplayer-hls:r2.5.3',
-        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.5.3'
+        core           : 'com.google.android.exoplayer:exoplayer-core:2.6.0',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.6.0',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.6.0',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.6.0',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.6.0'
 ]
 
 def network = [
@@ -107,11 +107,11 @@ def react = [
 ]
 
 def facebook = [
-        "login": "com.facebook.android:facebook-android-sdk:4.26.0"
+        "login": "com.facebook.android:facebook-android-sdk:4.28.0"
 ]
 
 def twitter = [
-        "core": 'com.twitter.sdk.android:twitter-core:3.1.1'
+        "core": 'com.twitter.sdk.android:twitter-core:3.2.0'
 ]
 
 def litho = [
@@ -140,7 +140,7 @@ ext.deps = [
         "versions"   : versions,
         "support"    : support,
         "kotlin"     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-        "timber"     : "com.jakewharton.timber:timber:4.5.1",
+        "timber"     : "com.jakewharton.timber:timber:4.6.0",
         "jodatime"   : "net.danlew:android.joda:2.9.9",
         "dagger"     : dagger,
         "butterknife": butterknife,
