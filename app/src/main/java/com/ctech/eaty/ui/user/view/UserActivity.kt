@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.SharedElementCallback
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.ctech.eaty.R
@@ -100,6 +101,7 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
         setupBodyFragment()
         setupListener()
         preRenderHeader()
+        checkRelationship()
         chromeFader = ElasticDragDismissFrameLayout.SystemChromeFader(this)
         flDraggable.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         flDraggable.setOnApplyWindowInsetsListener { _, insets ->
@@ -114,6 +116,11 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
             insets
         }
         setExitSharedElementCallback(createSharedElementReenterCallback(this))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkRelationship()
     }
 
     private fun renderEditButton(second: EditButtonViewModel) {
@@ -145,23 +152,29 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
 
     private fun preRenderHeader() {
         user?.run {
-            imageLoader.downloadInto(imageUrl.px64, ivAvatar)
+            imageLoader.downloadInto(imageUrl.px120, ivAvatar)
             tvName.text = name
             tvBio.text = headline
         }
     }
 
-    private fun checkRelationship(id: Int) {
-        viewModel.checkRelationship(id).subscribe({
-            renderFollowing(it.first)
-            renderEditButton(it.second)
-        }, Timber::e, {
-            store.dispatch(UserAction.LoadRelationship(id))
-        })
+    private fun checkRelationship() {
+        val id = user?.id ?: intent.getIntExtra(KEY_ID, -1)
+
+        if (id != -1) {
+            viewModel.checkRelationship(id).subscribe({
+                renderFollowing(it.first)
+                renderEditButton(it.second)
+            }, Timber::e, {
+                store.dispatch(UserAction.LoadRelationship(id))
+            })
+        }
     }
 
     private fun setupViewModel() {
-        viewModel.header().subscribe { renderHeader(it) }
+        viewModel.header().subscribe {
+            renderHeader(it)
+        }
         viewModel.loadingRelationship().subscribe {
             pbFollowing.visibility = View.VISIBLE
             btFollow.visibility = View.GONE
@@ -184,10 +197,9 @@ class UserActivity : BaseActivity(), HasSupportFragmentInjector {
             tvProductCount.text = getString(R.string.product, productCount)
             tvFollowerCount.text = getString(R.string.follower, followerCount)
             tvFollowingCount.text = getString(R.string.following, followingCount)
-            imageLoader.downloadInto(imageUrl.px64, ivAvatar)
+            imageLoader.downloadInto(imageUrl.px120, ivAvatar)
             tvName.text = name
             tvBio.text = headline
-            checkRelationship(id)
         }
     }
 

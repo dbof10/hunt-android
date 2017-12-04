@@ -5,7 +5,7 @@ import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.topiclist.action.BarCodeGenerator
-import com.ctech.eaty.ui.topiclist.action.SearchAction
+import com.ctech.eaty.ui.topiclist.action.TopicList
 import com.ctech.eaty.ui.topiclist.result.LoadResult
 import com.ctech.eaty.ui.topiclist.state.SearchState
 import com.ctech.eaty.util.rx.ThreadScheduler
@@ -17,7 +17,7 @@ class LoadEpic(val productRepository: ProductRepository,
                val barCodeGenerator: BarCodeGenerator,
                val threadScheduler: ThreadScheduler) : Epic<SearchState> {
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<SearchState>): Observable<LoadResult> {
-        return action.ofType(SearchAction.Load::class.java)
+        return action.ofType(TopicList.Load::class.java)
                 .filter {
                     state.value.content.isEmpty()
                 }

@@ -12,6 +12,8 @@ open class ImageUrl(@SerializedName("48px")
                     var px48: String = "",
                     @SerializedName("64px")
                     var px64: String = "",
+                    @SerializedName("120px")
+                    var px120: String = "",
                     @SerializedName("300px")
                     var px300: String = "",
                     @SerializedName("850px")
@@ -44,4 +46,10 @@ open class ImageUrl(@SerializedName("48px")
     public override fun clone(): ImageUrl {
         return ImageUrl(px48 + "", px64 + "", px300 + "", px850 + "")
     }
+
+    override fun toString(): String {
+        return "ImageUrl(px48='$px48', px64='$px64', px300='$px300', px850='$px850')"
+    }
+
+
 }

@@ -65,4 +65,10 @@ open class User(
     fun makeRealm(): UserRealm {
         return UserRealm(id, name, username, headline, imageUrl)
     }
+
+    override fun toString(): String {
+        return "User(id=$id, name='$name', headline=$headline, username='$username', imageUrl=$imageUrl)"
+    }
+
+
 }

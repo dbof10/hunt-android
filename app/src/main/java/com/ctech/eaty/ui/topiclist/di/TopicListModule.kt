@@ -27,7 +27,7 @@ class TopicListModule {
     @Provides
     fun provideSearchStore(productRepository: ProductRepository, barCodeGenerator: BarCodeGenerator,
                            threadScheduler: ThreadScheduler): Store<SearchState> {
-        return Store<SearchState>(SearchState(), SearchReducer(), arrayOf(LoadEpic(productRepository, barCodeGenerator, threadScheduler),
+        return Store(SearchState(), SearchReducer(), arrayOf(LoadEpic(productRepository, barCodeGenerator, threadScheduler),
                 LoadMoreEpic(productRepository, barCodeGenerator, threadScheduler)))
 
     }

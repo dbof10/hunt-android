@@ -4,14 +4,14 @@ import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.entity.Product
 
 data class LoadMoreProductResult(val loading: Boolean = false, val error: Throwable? = null,
-                             val content: List<Product> = emptyList(), val page: Int = 2) : Result {
+                                 val content: List<Product> = emptyList(), val page: Int = 2) : Result {
     companion object {
         fun inProgress(): LoadMoreProductResult {
             return LoadMoreProductResult(true)
         }
 
-        fun success(content: List<Product>): LoadMoreProductResult {
-            return LoadMoreProductResult(content = content)
+        fun success(page: Int, content: List<Product>): LoadMoreProductResult {
+            return LoadMoreProductResult(page = page, content = content)
         }
 
         fun fail(throwable: Throwable): LoadMoreProductResult {

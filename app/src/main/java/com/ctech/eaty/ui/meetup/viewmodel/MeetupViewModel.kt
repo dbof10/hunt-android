@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class MeetupViewModel @Inject constructor(private val navigator: MeetupNavigator) {
 
-    fun navigateEventDetail(url: String, session: CustomTabsSession) {
+    fun navigateEventDetail(url: String, session: CustomTabsSession?) {
         navigator.toUrl(url, session)
                 .subscribe(Functions.EMPTY, Timber::e)
     }

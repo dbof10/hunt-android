@@ -12,6 +12,7 @@ import com.uber.autodispose.kotlin.autoDisposeWith
 import timber.log.Timber
 import javax.inject.Inject
 
+//TODO Ask- deal - topic
 class UniversalLinkActivity : AppCompatActivity(), Injectable {
 
     companion object {

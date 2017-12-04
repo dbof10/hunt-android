@@ -50,7 +50,7 @@ import com.ctech.eaty.ui.splash.view.SplashActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
-import com.ctech.eaty.ui.topiclist.di.SearchFragmentBuilderModule
+import com.ctech.eaty.ui.topiclist.di.TopicListFragmentBuilderModule
 import com.ctech.eaty.ui.topiclist.di.TopicListModule
 import com.ctech.eaty.ui.topiclist.view.TopicListActivity
 import com.ctech.eaty.ui.user.di.UserDetailFragmentBuilderModule
@@ -65,62 +65,62 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBindingModule {
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(HomeModule::class, HomeFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(HomeModule::class), (HomeFragmentBuilderModule::class)])
     abstract fun contributeHomeActivity(): HomeActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(CommentModule::class, CommentFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(CommentModule::class), (CommentFragmentBuilderModule::class)])
     abstract fun contributeCommentActivity(): CommentActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(CollectionModule::class, CollectionFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(CollectionModule::class), (CollectionFragmentBuilderModule::class)])
     abstract fun contributeCollectionActivity(): CollectionActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(CollectionDetailModule::class, CollectionDetailFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(CollectionDetailModule::class), (CollectionDetailFragmentBuilderModule::class)])
     abstract fun contributeCollectionDetailActivity(): CollectionDetailActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(TopicModule::class, TopicFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(TopicModule::class), (TopicFragmentBuilderModule::class)])
     abstract fun contributeTopicActivity(): TopicActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ProductDetailModule::class, ProductDetailFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(ProductDetailModule::class), (ProductDetailFragmentBuilderModule::class)])
     abstract fun contributeProductDetailActivity(): ProductDetailActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(VoteModule::class, VoteFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(VoteModule::class), (VoteFragmentBuilderModule::class)])
     abstract fun contributeVoteActivity(): VoteActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(TopicListModule::class, SearchFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(TopicListModule::class), (TopicListFragmentBuilderModule::class)])
     abstract fun contributeTopicListActivity(): TopicListActivity
 
     @ContributesAndroidInjector()
     abstract fun contributeDeepLinkActivity(): UniversalLinkActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(RadioModule::class, RadioFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(RadioModule::class), (RadioFragmentBuilderModule::class)])
     abstract fun contributeRadioActivity(): RadioActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(GalleryModule::class, GalleryFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(GalleryModule::class), (GalleryFragmentBuilderModule::class)])
     abstract fun contributeGalleryActivity(): GalleryActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(GalleryModule::class))
+    @ContributesAndroidInjector(modules = [(GalleryModule::class)])
     abstract fun contributeYoutubeActivity(): YoutubeActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(LoginModule::class))
+    @ContributesAndroidInjector(modules = [(LoginModule::class)])
     abstract fun contributeLoginActivity(): LoginActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(UserDetailModule::class, UserDetailFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(UserDetailModule::class), (UserDetailFragmentBuilderModule::class)])
     abstract fun contributeUserActivity(): UserActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(FollowModule::class, FollowFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(FollowModule::class), (FollowFragmentBuilderModule::class)])
     abstract fun contributeFollowActivity(): FollowActivity
 
     @ActivityScope
@@ -128,11 +128,11 @@ abstract class ActivityBindingModule {
     abstract fun contributeLiveEventActivity(): LiveEventActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(NotificationModule::class, NotificationFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(NotificationModule::class), (NotificationFragmentBuilderModule::class)])
     abstract fun contributeNotificationActivity(): NotificationActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ProfileModule::class, ProfileFragmentBuilderModule::class))
+    @ContributesAndroidInjector(modules = [(ProfileModule::class), (ProfileFragmentBuilderModule::class)])
     abstract fun contributeProfileActivity(): ProfileActivity
 
     @ActivityScope
@@ -144,28 +144,28 @@ abstract class ActivityBindingModule {
     abstract fun contributeOnboardingActivity(): OnboardingActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(JobListModule::class))
+    @ContributesAndroidInjector(modules = [(JobListModule::class)])
     abstract fun contributeJobsActivity(): JobListActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(com.ctech.eaty.ui.search.di.SearchModule::class))
+    @ContributesAndroidInjector(modules = [(com.ctech.eaty.ui.search.di.SearchModule::class)])
     abstract fun contributeSearchActivity(): com.ctech.eaty.ui.search.view.SearchActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(MeetupModule::class))
+    @ContributesAndroidInjector(modules = [(MeetupModule::class)])
     abstract fun contributeMeetupActivity(): MeetupActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(AskModule::class))
+    @ContributesAndroidInjector(modules = [(AskModule::class)])
     abstract fun contributeAskActivity(): AskActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(NewLetterModule::class))
+    @ContributesAndroidInjector(modules = [(NewLetterModule::class)])
     abstract fun contributeNewLetterActivity(): NewsLetterActivity
 
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(SettingsModule::class))
+    @ContributesAndroidInjector(modules = [(SettingsModule::class)])
     abstract fun contributeSettingsActivity(): SettingsActivity
 
 }

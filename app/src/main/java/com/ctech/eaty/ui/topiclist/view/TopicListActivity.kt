@@ -11,7 +11,7 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.layout_home_content.*
+import kotlinx.android.synthetic.main.layout_home_content.toolbar
 import javax.inject.Inject
 
 
@@ -44,7 +44,7 @@ class TopicListActivity : BaseActivity(), HasSupportFragmentInjector {
         var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
         if (fragment == null) {
-            fragment = SearchFragment.newInstance(topic)
+            fragment = TopicListFragment.newInstance(topic)
             supportFragmentManager
                     .beginTransaction()
                     .add(R.id.fragmentContainer, fragment)

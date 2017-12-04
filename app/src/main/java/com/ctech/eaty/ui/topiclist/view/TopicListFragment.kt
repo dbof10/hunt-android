@@ -3,7 +3,6 @@ package com.ctech.eaty.ui.topiclist.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.ui.topiclist.action.SearchAction
+import com.ctech.eaty.ui.topiclist.action.TopicList
 import com.ctech.eaty.ui.topiclist.navigation.SearchNavigation
 import com.ctech.eaty.ui.topiclist.state.SearchState
 import com.ctech.eaty.ui.topiclist.viewmodel.SearchViewModel
@@ -28,7 +27,7 @@ import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
+class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     companion object {
         val TOPIC_ID_KEY = "topicId"
@@ -37,7 +36,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
             val args = Bundle()
 
-            val fragment = SearchFragment()
+            val fragment = TopicListFragment()
             args.putParcelable(TOPIC_ID_KEY, topic)
             fragment.arguments = args
             return fragment
@@ -62,7 +61,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     private val loadMoreCallback by lazy {
         InfiniteScrollListener(rvSearch.layoutManager as LinearLayoutManager, 3) {
-            store.dispatch(SearchAction.LoadMore(topic.id))
+            store.dispatch(TopicList.LoadMore(topic.id))
         }
     }
 
@@ -112,7 +111,7 @@ class SearchFragment : BaseReduxFragment<SearchState>(), Injectable {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupViewModel()
-        store.dispatch(SearchAction.Load(topic.id))
+        store.dispatch(TopicList.Load(topic.id))
     }
 
 

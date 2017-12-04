@@ -4,8 +4,11 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.repository.UserRepository
-import com.ctech.eaty.ui.user.action.BarCodeGenerator
-import com.ctech.eaty.ui.user.epic.*
+import com.ctech.eaty.ui.user.epic.FollowUserEpic
+import com.ctech.eaty.ui.user.epic.LoadEpic
+import com.ctech.eaty.ui.user.epic.LoadProductEpic
+import com.ctech.eaty.ui.user.epic.LoadRelationshipEpic
+import com.ctech.eaty.ui.user.epic.LoreMoreProductEpic
 import com.ctech.eaty.ui.user.navigation.UserDetailNavigation
 import com.ctech.eaty.ui.user.reducer.UserDetailReducer
 import com.ctech.eaty.ui.user.state.UserDetailState
@@ -19,19 +22,15 @@ import dagger.Provides
 @Module
 class UserDetailModule {
 
-    @Provides
-    fun provideBarCodeGenerator(): BarCodeGenerator {
-        return BarCodeGenerator()
-    }
 
     @ActivityScope
     @Provides
-    fun provideUserDetailStore(apiClient: ProductHuntApi, userRepository: UserRepository, barCodeGenerator: BarCodeGenerator,
+    fun provideUserDetailStore(apiClient: ProductHuntApi, userRepository: UserRepository,
                                threadScheduler: ThreadScheduler): Store<UserDetailState> {
-        return Store<UserDetailState>(UserDetailState(), UserDetailReducer(),
-                arrayOf(LoadEpic(userRepository, barCodeGenerator, threadScheduler), LoadRelationshipEpic(apiClient, threadScheduler),
-                        FollowUserEpic(apiClient, threadScheduler), LoadProductEpic(userRepository, barCodeGenerator, threadScheduler),
-                LoreMoreProductEpic(userRepository, barCodeGenerator, threadScheduler)))
+        return Store(UserDetailState(), UserDetailReducer(),
+                arrayOf(LoadEpic(userRepository, threadScheduler), LoadRelationshipEpic(apiClient, threadScheduler),
+                        FollowUserEpic(apiClient, threadScheduler), LoadProductEpic(userRepository, threadScheduler),
+                        LoreMoreProductEpic(userRepository, threadScheduler)))
 
     }
 

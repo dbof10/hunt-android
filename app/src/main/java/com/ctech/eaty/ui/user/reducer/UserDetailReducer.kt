@@ -2,7 +2,11 @@ package com.ctech.eaty.ui.user.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.user.result.*
+import com.ctech.eaty.ui.user.result.FollowUserResult
+import com.ctech.eaty.ui.user.result.LoadMoreProductResult
+import com.ctech.eaty.ui.user.result.LoadProductResult
+import com.ctech.eaty.ui.user.result.LoadRelationshipResult
+import com.ctech.eaty.ui.user.result.LoadResult
 import com.ctech.eaty.ui.user.state.UserDetailState
 import java.lang.IllegalArgumentException
 

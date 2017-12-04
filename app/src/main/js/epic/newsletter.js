@@ -36,8 +36,8 @@ export const fetchMoreNewsLetterEpic = (action$, store) =>
     action$.filter(action => action.type === LOAD_MORE)
         .mergeMap(action => {
 
-            let pageInfo = store.getState().newsletter.pageInfo;
             let key = action.key;
+            let pageInfo = store.getState().newsletter.tabs[key].pageInfo;
 
             if (pageInfo.hasNextPage) {
                 let nextOffset = pageInfo.endCursor;

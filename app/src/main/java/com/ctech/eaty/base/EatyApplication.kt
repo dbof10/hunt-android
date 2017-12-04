@@ -29,6 +29,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import io.fabric.sdk.android.Fabric
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
@@ -72,7 +73,9 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         }
         LeakCanary.install(this)
         SoLoader.init(this, false)
-        Realm.init(this)
+
+
+        setupRealm()
         setupFresco()
         val config = TwitterConfig.Builder(this)
                 .logger(DefaultLogger(Log.DEBUG))
@@ -82,6 +85,14 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
                 .build()
         Twitter.initialize(config)
         monitorNetworkState()
+    }
+
+    private fun setupRealm() {
+        Realm.init(this)
+        val config =  RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build()
+        Realm.setDefaultConfiguration(config)
     }
 
     private fun monitorNetworkState() {

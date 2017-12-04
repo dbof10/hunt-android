@@ -100,11 +100,10 @@ export function newsletter(state = initialLetterState, action) {
                 tabs
             };
         case FETCH_MORE_LETTER_SUCCESS:
-            const oldDataSource = state.dataSource;
+            const oldDataSource = tabs[key].dataSource;
             const newDataSource = action.payload.edges.map((item) => item.node);
 
             const combine = _.concat(oldDataSource, newDataSource);
-
 
             tabs[key] = {
                 ...state.tabs[key],
@@ -121,7 +120,6 @@ export function newsletter(state = initialLetterState, action) {
         case FETCH_MORE_LETTER_LOADING:
             tabs[key] = {
                 ...state.tabs[key],
-                error: null,
                 moreError: null,
                 isLoadingMore: true,
             };
