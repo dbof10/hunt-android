@@ -83,7 +83,7 @@ class ErrorView : LinearLayout {
             val alignInt = a.getInt(R.styleable.ErrorView_explainAlignment, 1)
 
             if (imageRes != 0) {
-                setImage(ContextCompat.getDrawable(context, imageRes))
+                setImage(ContextCompat.getDrawable(context, imageRes)!!)
             }
 
             if (reason != null) {

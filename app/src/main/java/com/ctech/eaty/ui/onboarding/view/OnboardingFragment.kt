@@ -39,9 +39,9 @@ class OnboardingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val titleRes = arguments.getInt(KEY_TITLE)
-        val imageRes = arguments.getInt(KEY_IMAGE)
-        val descriptionRes = arguments.getInt(KEY_DESCRIPTION)
+        val titleRes = arguments!!.getInt(KEY_TITLE)
+        val imageRes = arguments!!.getInt(KEY_IMAGE)
+        val descriptionRes = arguments!!.getInt(KEY_DESCRIPTION)
 
         tvTitle.setText(titleRes)
         ivImage.setImageResource(imageRes)

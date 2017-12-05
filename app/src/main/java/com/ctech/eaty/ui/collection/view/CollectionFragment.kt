@@ -71,8 +71,8 @@ class CollectionFragment : BaseReduxFragment<CollectionState>(), Injectable {
                 }
                 .onItemClickListener { _, item, _ ->
                     (item as Collection).run {
-                        val intent = CollectionDetailActivity.newIntent(context, id)
-                        context.startActivity(intent)
+                        val intent = CollectionDetailActivity.newIntent(context!!, id)
+                        context?.startActivity(intent)
                     }
                 }
                 .build()

@@ -51,7 +51,7 @@ class CommentFragment : BaseReduxFragment<CommentState>(), Injectable {
     lateinit var imageLoader: GlideImageLoader
 
     private val productId by lazy {
-        arguments.getInt(PRODUCT_ID)
+        arguments!!.getInt(PRODUCT_ID)
     }
 
     private val diffCallback = object : DiffCallback {

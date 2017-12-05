@@ -43,7 +43,7 @@ class GalleryFragment : Fragment(), Injectable {
 
 
     private val pagerAdapter: PagerAdapter by lazy {
-        val adapter = PagerAdapter(activity)
+        val adapter = PagerAdapter(activity!!)
         adapter.apply {
             onThumbnailLoad { view, url ->
                 thumbnailLoader.loadThumbnailInto(view, url)
@@ -72,7 +72,7 @@ class GalleryFragment : Fragment(), Injectable {
     }
 
     private fun setupViewModel() {
-        val media = arguments.getParcelableArrayList<Media>(MEDIA_KEY)
+        val media = arguments!!.getParcelableArrayList<Media>(MEDIA_KEY)
         viewModel.content().subscribe {
             pagerAdapter.setItems(it)
         }

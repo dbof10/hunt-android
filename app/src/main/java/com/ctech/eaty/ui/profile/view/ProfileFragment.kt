@@ -75,7 +75,7 @@ class ProfileFragment : BaseReduxFragment<ProfileState>(), Injectable {
     }
 
     private fun bindUser() {
-        val user = arguments.getParcelable<UserDetail>(KEY_USER)
+        val user = arguments!!.getParcelable<UserDetail>(KEY_USER)
         etEmail.setText(user?.email ?: "", TextView.BufferType.EDITABLE)
         etName.setText(user?.name ?: "", TextView.BufferType.EDITABLE)
         etBio.setText(user?.headline ?: "", TextView.BufferType.EDITABLE)
@@ -95,7 +95,7 @@ class ProfileFragment : BaseReduxFragment<ProfileState>(), Injectable {
 
     private fun setupViewModel() {
         viewModel.content().subscribe {
-            activity.finish()
+            activity?.finish()
         }
 
         viewModel.loading().subscribe {

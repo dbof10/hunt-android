@@ -74,7 +74,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
     lateinit var customTabActivityHelper: CustomTabActivityHelper
 
     private val productId by lazy {
-        arguments.getInt(KEY_PRODUCT_ID, 0)
+        arguments!!.getInt(KEY_PRODUCT_ID, 0)
     }
 
     private val diffCallback = object : DiffCallback {
@@ -195,11 +195,11 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
 
                         }
                         R.id.ivAvatar -> {
-                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getString(R.string.transition_user_avatar))
+                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, getString(R.string.transition_user_avatar))
                             viewModel.navigateUser((item as CommentItemViewModel).user, options)
                         }
                         R.id.ivHunterAvatar -> {
-                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, activity.getString(R.string.transition_user_avatar))
+                            val options = ActivityOptions.makeSceneTransitionAnimation(activity, view, getString(R.string.transition_user_avatar))
                             viewModel.navigateUser((item as ProductHeaderItemViewModel).user, options)
                         }
                     }
@@ -284,7 +284,7 @@ class ProductBodyFragment : BaseReduxFragment<ProductDetailState>(), Injectable 
         rvBody.layoutManager = layoutManager
         rvBody.itemAnimator = CommentAnimator()
         rvBody.addItemDecoration(InsetDividerDecoration(ProductCommentViewHolder::class.java, resources.getDimensionPixelSize(R.dimen.divider_height),
-                resources.getDimensionPixelSize(R.dimen.keyline_1), ContextCompat.getColor(context, R.color.black_12)))
+                resources.getDimensionPixelSize(R.dimen.keyline_1), ContextCompat.getColor(context!!, R.color.black_12)))
 
         rvBody.addOnScrollListener(scrollListener)
         rvBody.onFlingListener = flingListener

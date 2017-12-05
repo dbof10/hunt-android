@@ -52,7 +52,7 @@ class VoteFragment : BaseReduxFragment<VoteState>(), Injectable {
     lateinit var imageLoader: GlideImageLoader
 
     private val postId by lazy {
-        arguments.getInt(POST_ID)
+        arguments!!.getInt(POST_ID)
     }
 
     private val diffCallback = object : DiffCallback {

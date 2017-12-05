@@ -144,7 +144,7 @@ class CircularTransform : Transition {
         view.getOverlay().add(fabColor)
 
         // Add an icon overlay again to fake the appearance of the FAB
-        val fabIcon = ContextCompat.getDrawable(sceneRoot.context, icon).mutate()
+        val fabIcon = ContextCompat.getDrawable(sceneRoot.context, icon)!!.mutate()
         val iconLeft = (dialogBounds.width() - fabIcon.intrinsicWidth) / 2
         val iconTop = (dialogBounds.height() - fabIcon.intrinsicHeight) / 2
         fabIcon.setBounds(iconLeft, iconTop,

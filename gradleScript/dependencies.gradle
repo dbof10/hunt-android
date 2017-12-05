@@ -1,6 +1,6 @@
 def versions = [
-        support    : '26.1.0',
-        litho      : '0.9.0',
+        support    : '27.0.2',
+        litho      : '0.11.0',
         autodispose: '0.4.0',
         firebase   : '11.4.2'
 ]

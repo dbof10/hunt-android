@@ -133,7 +133,10 @@
 
     <style name="Text" />
 
-    <style name="Text.Body" parent="@android:style/TextAppearance.Material.Body1" />
+    <style name="Text.Body" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">@color/text_primary_dark</item>
+    </style>
+
 
     <style name="Text.Body2" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textColor">@color/text_secondary_dark</item>

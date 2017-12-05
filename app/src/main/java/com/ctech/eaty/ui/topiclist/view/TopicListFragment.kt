@@ -56,7 +56,7 @@ class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
     lateinit var navigator: SearchNavigation
 
     private val topic by lazy {
-        arguments.getParcelable<Topic>(TOPIC_ID_KEY)
+        arguments!!.getParcelable<Topic>(TOPIC_ID_KEY)
     }
 
     private val loadMoreCallback by lazy {

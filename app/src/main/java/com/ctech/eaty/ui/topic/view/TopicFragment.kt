@@ -70,8 +70,8 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
                 }
                 .onItemClickListener { _, item, _ ->
                     (item as Topic).run {
-                        val intent = TopicListActivity.newIntent(context, this)
-                        context.startActivity(intent)
+                        val intent = TopicListActivity.newIntent(context!!, this)
+                        context?.startActivity(intent)
                     }
 
                 }

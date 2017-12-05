@@ -54,11 +54,11 @@ class FollowFragment : BaseReduxFragment<FollowState>(), Injectable {
     lateinit var imageLoader: GlideImageLoader
 
     private val userId by lazy {
-        arguments.getInt(USER_ID_KEY)
+        arguments!!.getInt(USER_ID_KEY)
     }
 
     private val relationship by lazy {
-        arguments.getSerializable(RELATIONSHIP_KEY)
+        arguments!!.getSerializable(RELATIONSHIP_KEY)
     }
 
     private val diffCallback = object : DiffCallback {
