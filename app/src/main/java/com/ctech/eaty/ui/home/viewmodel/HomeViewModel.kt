@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.repository.UserRepository
+import com.ctech.eaty.ui.home.model.HomeFeed
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.util.rx.Functions

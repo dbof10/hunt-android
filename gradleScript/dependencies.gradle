@@ -135,6 +135,12 @@ def autodispose = [
         "kotlin"      : "com.uber.autodispose:autodispose-kotlin:${versions.autodispose}"
 ]
 
+def graphql = [
+        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.3",
+        "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.4.3',
+        "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.4.3'
+]
+
 ext.deps = [
         "build"      : build,
         "versions"   : versions,
@@ -162,5 +168,6 @@ ext.deps = [
         "litho"      : litho,
         "facebook"   : facebook,
         "twitter"    : twitter,
-        "autodispose": autodispose
+        "autodispose": autodispose,
+        "graphql"    : graphql
 ]

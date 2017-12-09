@@ -50,6 +50,10 @@
     <dimen name="network_error_footer_size">56dp</dimen>
     <dimen name="navigation_header">220dp</dimen>
 
+    <!-- Upcoming Product -->
+    <dimen name="upcoming_product_height">164dp</dimen>
+    <dimen name="upcoming_foreground_product_size">96dp</dimen>
+
 
     <!--Collection Detail -->
     <dimen name="collection_detail_background_height">160dp</dimen>

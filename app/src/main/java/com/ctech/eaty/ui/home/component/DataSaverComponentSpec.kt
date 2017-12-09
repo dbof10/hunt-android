@@ -63,7 +63,7 @@ object DataSaverComponentSpec {
                                                 .build()
 
                                 )
-                                .clickHandler(BodyComponent.onClick(c))
+                                .clickHandler(DataSaverComponent.onClick(c))
                 )
                 .alignItems(YogaAlign.CENTER)
                 .justifyContent(YogaJustify.CENTER)

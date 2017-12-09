@@ -2,18 +2,20 @@ package com.ctech.eaty.ui.home.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
+import com.ctech.eaty.ui.home.model.DailyProducts
+import com.ctech.eaty.ui.home.model.FeedFooter
+import com.ctech.eaty.ui.home.model.HomeFeed
+import com.ctech.eaty.ui.home.model.Type
+import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.result.CheckLoginResult
 import com.ctech.eaty.ui.home.result.DisableDataSaverResult
 import com.ctech.eaty.ui.home.result.LoadMoreResult
-import com.ctech.eaty.ui.home.result.LoadResult
+import com.ctech.eaty.ui.home.result.LoadUpcomingProductResult
 import com.ctech.eaty.ui.home.result.LoadUserResult
 import com.ctech.eaty.ui.home.result.RefreshResult
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.FeedFooterItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.HomeFeed
 import com.ctech.eaty.ui.home.viewmodel.HorizontalAdsItemViewModel
-import com.ctech.eaty.ui.home.viewmodel.Type
+import com.ctech.eaty.ui.home.viewmodel.StickyItemViewModel
 import com.ctech.eaty.util.DateUtils
 import org.joda.time.DateTime
 import java.lang.IllegalArgumentException
@@ -26,21 +28,13 @@ class HomeReducer : Reducer<HomeState> {
 
     override fun apply(state: HomeState, result: Result): HomeState {
         when (result) {
-            is LoadResult -> {
-                return when {
-                    result.loading -> state.copy(loading = true, loadError = null)
-                    result.error != null -> state.copy(loading = false, loadError = result.error)
-                    else -> state.copy(loading = false, loadError = null,
-                            content = listOf(HomeFeed(DateItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)))
-                }
-            }
             is RefreshResult -> {
                 return when {
                     result.refreshing -> state.copy(refreshing = true)
                     result.error != null -> state.copy(refreshing = false, refreshError = result.error)
                     else -> state.copy(refreshing = false, refreshError = null,
                             loadError = null,
-                            content = listOf(HomeFeed(DateItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
+                            content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
                             dayAgo = 0)
                 }
             }
@@ -65,11 +59,23 @@ class HomeReducer : Reducer<HomeState> {
             }
             is DisableDataSaverResult -> {
                 val feed = state.content.map {
-                    return@map it.copy(products = it.products.map { it.copy(saveMode = result.enabled) })
+                    if (it is DailyProducts) {
+                        return@map it.copy(products = it.products.map { it.copy(saveMode = result.enabled) })
+                    } else {
+                        it
+                    }
                 }
 
                 return state.copy(content = feed)
 
+            }
+            is LoadUpcomingProductResult -> {
+                return when {
+                    result.loading -> state.copy(loading = true, loadError = null)
+                    result.error != null -> state.copy(loading = false, loadError = result.error)
+                    else -> state.copy(loading = false, loadError = null,
+                            content = listOf(UpcomingProducts(StickyItemViewModel(0, "Upcoming Products"), result.content)))
+                }
             }
             else -> {
                 throw  IllegalArgumentException("Unknown result")
@@ -78,21 +84,15 @@ class HomeReducer : Reducer<HomeState> {
     }
 
     private fun addError(state: HomeState): List<HomeFeed> {
-        val lastFeed = state.content.last()
-        val newLastFeed = lastFeed.copy(feedFooter = FeedFooterItemViewModel(Type.ERROR))
-        return state.content.dropLast(1).plus(newLastFeed)
+        return state.content.plus(FeedFooter(Type.ERROR))
     }
 
     private fun removeLoading(state: HomeState): List<HomeFeed> {
-        val lastFeed = state.content.last()
-        val newLastFeed = lastFeed.copy(feedFooter = null)
-        return state.content.dropLast(1).plus(newLastFeed)
+        return state.content.dropLast(1)
     }
 
     private fun addLoading(state: HomeState): List<HomeFeed> {
-        val lastFeed = state.content.last()
-        val newLastFeed = lastFeed.copy(feedFooter = FeedFooterItemViewModel(Type.LOADING))
-        return state.content.dropLast(1).plus(newLastFeed)
+        return state.content.plus(FeedFooter(Type.LOADING))
     }
 
     //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
@@ -100,11 +100,11 @@ class HomeReducer : Reducer<HomeState> {
 
         val lastFeed = removeLoading(state)
         return when {
-            result.dayAgo == 1 -> lastFeed.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
+            result.dayAgo == 1 -> lastFeed.plus(DailyProducts(StickyItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
                     result.content, listOf(HorizontalAdsItemViewModel(result.dayAgo, FB_AD_ID))))
-            result.dayAgo == 2 -> lastFeed.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
+            result.dayAgo == 2 -> lastFeed.plus(DailyProducts(StickyItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)),
                     result.content, listOf(HorizontalAdsItemViewModel(result.dayAgo, FB_AD_ID_2))))
-            else -> lastFeed.plus(HomeFeed(DateItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)), result.content))
+            else -> lastFeed.plus(DailyProducts(StickyItemViewModel(result.dayAgo, DateUtils.getRelativeTime(DateTime.now(), result.date)), result.content))
         }
     }
 }

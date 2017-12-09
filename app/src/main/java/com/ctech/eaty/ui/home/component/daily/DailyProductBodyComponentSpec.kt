@@ -1,7 +1,8 @@
-package com.ctech.eaty.ui.home.component
+package com.ctech.eaty.ui.home.component.daily
 
 import com.ctech.eaty.R
 import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.ui.home.component.DataSaverComponent
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
@@ -24,7 +25,7 @@ import com.facebook.yoga.YogaEdge
 
 
 @LayoutSpec
-object BodyComponentSpec {
+object DailyProductBodyComponentSpec {
 
 
     @OnCreateLayout
@@ -63,7 +64,7 @@ object BodyComponentSpec {
                 .child(
                         body
                 )
-                .clickHandler(BodyComponent.onClick(c))
+                .clickHandler(DailyProductBodyComponent.onClick(c))
                 .build()
     }
 

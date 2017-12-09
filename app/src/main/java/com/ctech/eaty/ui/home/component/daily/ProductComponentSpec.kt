@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.home.component
+package com.ctech.eaty.ui.home.component.daily
 
 import android.graphics.Color
 import com.ctech.eaty.R
@@ -24,7 +24,7 @@ object ProductComponentSpec {
                 .child(HeaderComponent.create(c)
                         .viewModel(viewModel))
                 .child(
-                        BodyComponent.create(c)
+                        DailyProductBodyComponent.create(c)
                                 .store(store)
                                 .viewModel(viewModel)
                 )

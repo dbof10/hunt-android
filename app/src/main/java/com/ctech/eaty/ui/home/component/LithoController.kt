@@ -3,7 +3,8 @@ package com.ctech.eaty.ui.home.component
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.HomeFeed
+import com.ctech.eaty.ui.home.model.DailyProducts
+import com.ctech.eaty.ui.home.model.HomeFeed
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView

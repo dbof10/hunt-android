@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.home.component
+package com.ctech.eaty.ui.home.component.daily
 
 import android.content.Intent
 import com.ctech.eaty.R

@@ -247,7 +247,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
             this.activity = activity;
             statusBarAlpha = Color.alpha(activity.getWindow().getStatusBarColor());
             navBarAlpha = Color.alpha(activity.getWindow().getNavigationBarColor());
-            fadeNavBar = ViewUtils.Companion.isNavBarOnBottom(activity);
+            fadeNavBar = ViewUtils.INSTANCE.isNavBarOnBottom(activity);
         }
 
         @Override

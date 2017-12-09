@@ -2,8 +2,8 @@ package com.ctech.eaty.ui.home.component;
 
 import com.ctech.eaty.R
 import com.ctech.eaty.base.redux.Store
+import com.ctech.eaty.ui.home.model.HomeFeed
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.HomeFeed
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec

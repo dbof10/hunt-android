@@ -6,6 +6,7 @@ import com.ctech.eaty.base.redux.Action
 object HomeAction : Action() {
     val LOAD: Action = Action()
     val LOAD_MORE: Action = Action()
+    val LOAD_UPCOMING: Action = Action()
     val REFRESH: Action = Action()
     val LOAD_USER: Action = Action()
     val USE_MOBILE_DATA: Action = Action()

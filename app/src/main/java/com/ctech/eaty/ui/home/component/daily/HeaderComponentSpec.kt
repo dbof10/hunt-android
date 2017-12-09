@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.home.component
+package com.ctech.eaty.ui.home.component.daily
 
 import android.graphics.Color
 import com.ctech.eaty.R

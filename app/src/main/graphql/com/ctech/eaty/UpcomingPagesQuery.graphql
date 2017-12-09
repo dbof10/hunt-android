@@ -1,0 +1,50 @@
+query UpcomingPagesPage($cursor: String) {
+  upcomingPages: upcoming_pages(first: 20, after: $cursor) {
+    edges {
+      node {
+        id
+        ...UpcomingPageItem
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+fragment UpcomingPageItem on UpcomingPage {
+  id
+  name
+  tagline
+  slug
+  background_image_uuid
+  logo_uuid
+  subscriber_count
+  popular_subscribers {
+    id
+    twitter_username
+    ...UserSpotlight
+  }
+}
+
+fragment UserSpotlight on User {
+  _id
+  id
+  headline
+  name
+  username
+  ...UserImageLink
+}
+
+fragment UserImageLink on User {
+  id
+  _id
+  username
+  ...UserImage
+}
+
+fragment UserImage on User {
+  id
+  post_upvote_streak
+}

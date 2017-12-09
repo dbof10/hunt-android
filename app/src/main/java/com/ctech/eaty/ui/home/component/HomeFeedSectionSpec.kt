@@ -2,9 +2,14 @@ package com.ctech.eaty.ui.home.component
 
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.action.HomeAction
+import com.ctech.eaty.ui.home.component.daily.DailyProductsGroupSection
+import com.ctech.eaty.ui.home.component.upcoming.UpcomingProductsGroupSection
+import com.ctech.eaty.ui.home.model.DailyProducts
+import com.ctech.eaty.ui.home.model.FeedFooter
+import com.ctech.eaty.ui.home.model.HomeFeed
+import com.ctech.eaty.ui.home.model.Type
+import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.state.HomeState
-import com.ctech.eaty.ui.home.viewmodel.HomeFeed
-import com.ctech.eaty.ui.home.viewmodel.Type
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.annotations.OnEvent
 import com.facebook.litho.annotations.Prop
@@ -19,33 +24,45 @@ import com.facebook.litho.sections.common.SingleComponentSection
 @GroupSectionSpec
 object HomeFeedSectionSpec {
 
+    private val KEY_FOOTER_LOADING = "loading"
+    private val KEY_FOOTER_ERROR = "error"
+
     @OnCreateChildren
     fun onCreateChildren(c: SectionContext,
                          @Prop feeds: List<HomeFeed>, @Prop store: Store<HomeState>): Children {
         val builder = Children.create()
-
         feeds.forEach {
-            builder.child(
-                    FeedSection.create(c)
-                            .feed(it)
-                            .store(store)
-                            .key(it.date.date)
-                            .build()
-            )
-            if (it.horizontalAds.isNotEmpty()) {
+            if (it is DailyProducts) {
                 builder.child(
-                        HorizontalAdsSection.create(c)
-                                .dataSource(it.horizontalAds)
-                                .key(it.horizontalAds.first().adId)
+                        DailyProductsGroupSection.create(c)
+                                .products(it)
+                                .store(store)
+                                .key(it.label)
+                                .build()
                 )
-            }
-            if (it.feedFooter != null) {
-                if (it.feedFooter.type == Type.LOADING) {
+                if (it.horizontalAds.isNotEmpty()) {
+                    builder.child(
+                            HorizontalAdsSection.create(c)
+                                    .dataSource(it.horizontalAds)
+                                    .key(it.horizontalAds.first().adId)
+                    )
+                }
+            } else if (it is UpcomingProducts) {
+                builder.child(
+                        UpcomingProductsGroupSection.create(c)
+                                .products(it)
+                                .store(store)
+                                .key(it.label)
+                                .build()
+                )
+            } else if (it is FeedFooter) {
+                if (it.type == Type.LOADING) {
                     builder.child(
                             SingleComponentSection.create(c)
                                     .component(LoadingFooterComponent.create(c).build())
+                                    .key(KEY_FOOTER_LOADING)
                     )
-                } else if (it.feedFooter.type == Type.ERROR) {
+                } else if (it.type == Type.ERROR) {
                     builder.child(
                             SingleComponentSection
                                     .create(c)
@@ -54,6 +71,7 @@ object HomeFeedSectionSpec {
                                                     .clickHandler(HomeFeedSection.onClick(c))
                                                     .build()
                                     )
+                                    .key(KEY_FOOTER_ERROR)
                     )
                 }
             }
@@ -64,7 +82,9 @@ object HomeFeedSectionSpec {
 
     @OnEvent(ClickEvent::class)
     fun onClick(c: SectionContext, @Prop store: Store<HomeState>) {
+        val state = store.getState()
         store.dispatch(HomeAction.LOAD_MORE)
+
     }
 
     @OnViewportChanged
@@ -77,8 +97,10 @@ object HomeFeedSectionSpec {
             lastFullyVisible: Int,
             @Prop store: Store<HomeState>) {
         val threshold = 6
-        if (totalCount - lastVisible < threshold && store.getState().loadMoreError == null) {
+        val state = store.getState()
+        if (totalCount - lastVisible < threshold && state.loadMoreError == null) {
             store.dispatch(HomeAction.LOAD_MORE)
+
         }
     }
 

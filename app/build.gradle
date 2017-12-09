@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.apollographql.android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -128,6 +129,10 @@ dependencies {
     kapt deps.dagger.androidCompiler
 
     //Networking
+    implementation deps.graphql.apollo
+    implementation deps.graphql.apolloCache
+    implementation deps.graphql.apolloRx
+
     implementation deps.network.retrofit
     implementation deps.network.retrofitRxAdapter
     implementation deps.network.okhttp
@@ -137,7 +142,7 @@ dependencies {
 
     implementation deps.glide.lib
     kapt deps.glide.compiler
-
+    
     implementation deps.jsoup
 
     //Caching

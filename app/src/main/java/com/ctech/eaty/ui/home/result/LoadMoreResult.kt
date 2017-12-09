@@ -5,8 +5,9 @@ import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import org.joda.time.DateTime
 
 data class LoadMoreResult(val loading: Boolean = false, val error: Throwable? = null,
-                          val content: List<ProductItemViewModel> = emptyList(), val dayAgo: Int = 1,
-                          val date: DateTime = DateTime.now().minusDays(dayAgo)) : Result {
+                          val dayAgo: Int = 0,
+                          val date: DateTime = DateTime.now().minusDays(dayAgo),
+                          val content: List<ProductItemViewModel> = emptyList()) : Result {
     companion object {
         fun inProgress(): LoadMoreResult {
             return LoadMoreResult(true)
@@ -20,17 +21,4 @@ data class LoadMoreResult(val loading: Boolean = false, val error: Throwable? = 
             return LoadMoreResult(error = throwable)
         }
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (other == null || javaClass != other.javaClass) return false
-
-        val that = other as LoadMoreResult?
-
-        return if (dayAgo != that!!.dayAgo)
-            false
-        else
-            content.size == content.size
-    }
-
-
 }

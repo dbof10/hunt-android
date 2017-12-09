@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment(), Injectable {
         setupViewModel()
         setupLitho()
         setupListener()
-        store.dispatch(HomeAction.LOAD)
+        store.dispatch(HomeAction.LOAD_UPCOMING)
 
     }
 

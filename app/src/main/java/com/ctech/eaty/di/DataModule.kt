@@ -1,5 +1,6 @@
 package com.ctech.eaty.di
 
+import com.apollographql.apollo.ApolloClient
 import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.network.AlgoliaApi
 import com.ctech.eaty.network.ProductHuntApi
@@ -33,8 +34,9 @@ class DataModule {
                                  productStore: Store<ProductDetailResponse, BarCode>,
                                  searchStore: Store<ProductResponse, SearchBarCode>,
                                  apiClient: ProductHuntApi,
+                                 apolloClient: ApolloClient,
                                  appSettingsManager: AppSettingsManager): ProductRepository {
-        return ProductRepository(homeStore, productStore, searchStore, apiClient, appSettingsManager)
+        return ProductRepository(homeStore, productStore, searchStore, apiClient, apolloClient, appSettingsManager)
     }
 
     @Provides

@@ -1,7 +1,7 @@
 package com.ctech.eaty.ui.home.state
 
 import com.ctech.eaty.entity.UserDetail
-import com.ctech.eaty.ui.home.viewmodel.HomeFeed
+import com.ctech.eaty.ui.home.model.HomeFeed
 
 data class HomeState(val loading: Boolean = false, val loadingMore: Boolean = false,
                      val refreshing: Boolean = false, val loadError: Throwable? = null,

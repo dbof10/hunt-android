@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.home.component
 
 import android.graphics.Color
 import com.ctech.eaty.R
-import com.ctech.eaty.ui.home.viewmodel.DateItemViewModel
+import com.ctech.eaty.ui.home.viewmodel.StickyItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
@@ -14,10 +14,10 @@ import com.facebook.yoga.YogaEdge
 
 
 @LayoutSpec
-object DateComponentSpec {
+object StickyLabelComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: DateItemViewModel): ComponentLayout =
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: StickyItemViewModel): ComponentLayout =
             Column.create(c)
                     .backgroundColor(Color.WHITE)
                     .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
@@ -26,7 +26,7 @@ object DateComponentSpec {
                     .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                     .child(
                             Text.create(c, 0, R.style.Text_Section)
-                                    .text(viewModel.date)
+                                    .text(viewModel.label)
                     ).build()
 
 }

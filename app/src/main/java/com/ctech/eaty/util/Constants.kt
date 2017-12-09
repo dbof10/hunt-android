@@ -2,6 +2,7 @@ package com.ctech.eaty.util;
 
 object Constants {
     val API_URL = "https://api.producthunt.com"
+    val GRAPHQL_URL = "https://www.producthunt.com/frontend/graphql"
     val SOUND_CLOUD_API = "https://api.soundcloud.com"
     val ALGOLIA_CLOUD_API = "https://0H4SMABBSG-dsn.algolia.net"
     val ALGOLIA_USER_AGENT = "Algolia for Swift (4.8.1); iOS (11.0.3);"
@@ -15,4 +16,6 @@ object Constants {
     val USER_GRANT_TYPE = "authorization_code"
     val YOUTUBE_API_KEY = "AIzaSyBr7lR2WMwmd9SSts9P9cADLz1sIZfVb_8"
     val REDIRECT_URI = "https://www.producthunt.com"
+    val PRODUCT_CDN_URL = "https://ph-files.imgix.net"
+    val USER_CDN_URL = "https://ph-avatars.imgix.net"
 }
