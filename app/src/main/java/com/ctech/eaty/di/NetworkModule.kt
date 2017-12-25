@@ -12,14 +12,16 @@ import com.ctech.eaty.BuildConfig
 import com.ctech.eaty.network.AlgoliaApi
 import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.network.SoundCloudApi
+import com.ctech.eaty.network.adapter.ApolloTypedAdapterFactory
 import com.ctech.eaty.network.cache.ApolloSql
 import com.ctech.eaty.network.cache.SqlNormalizedCacheFactory
 import com.ctech.eaty.repository.AccessTokenInterceptor
 import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.type.CustomType
 import com.ctech.eaty.util.Constants
 import com.ctech.eaty.util.Constants.GRAPHQL_URL
 import com.ctech.eaty.util.DateTimeConverter
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.NetworkManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -49,6 +51,7 @@ class NetworkModule {
                 .create()
     }
 
+
     @Singleton
     @Provides
     fun provideOkHttpClient(appSettingsManager: AppSettingsManager): OkHttpClient {
@@ -65,6 +68,7 @@ class NetworkModule {
             })
 
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
             builder.addInterceptor(loggingInterceptor)
         }
         return builder
@@ -149,6 +153,7 @@ class NetworkModule {
         return ApolloClient.builder()
                 .serverUrl(GRAPHQL_URL)
                 .normalizedCache(memoryFirstThenDBCacheFactory, resolver)
+                .addCustomTypeAdapter(CustomType.JSON, ApolloTypedAdapterFactory.TYPED_JSON)
                 .okHttpClient(okHttpClient)
                 .build()
     }

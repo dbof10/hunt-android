@@ -5,8 +5,8 @@ import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.repository.BarcodeGenerator.createHomeNextBarCode
 import com.ctech.eaty.repository.ProductRepository
-import com.ctech.eaty.repository.createHomeNextBarCode
 import com.ctech.eaty.ui.app.AppState
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.result.LoadResult

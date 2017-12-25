@@ -33,7 +33,6 @@ import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.search.action.SearchAction
 import com.ctech.eaty.ui.search.state.SearchState
 import com.ctech.eaty.ui.search.viewmodel.SearchViewModel
-import com.ctech.eaty.util.GlideImageLoader
 import com.ctech.eaty.util.ImeUtils.hideIme
 import com.ctech.eaty.util.ImeUtils.showIme
 import com.ctech.eaty.util.TransitionUtils
@@ -42,7 +41,7 @@ import com.ctech.eaty.widget.recyclerview.SlideInItemAnimator
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import com.ctech.eaty.widget.transition.CircularReveal
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.kotlin.autoDisposeWith
+import com.uber.autodispose.kotlin.autoDisposable
 import kotlinx.android.synthetic.main.activity_search.container
 import kotlinx.android.synthetic.main.activity_search.progressBar
 import kotlinx.android.synthetic.main.activity_search.resultsScrim
@@ -140,7 +139,7 @@ class SearchActivity : BaseActivity(), Injectable {
 
         store
                 .startBinding()
-                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .autoDisposable(AndroidLifecycleScopeProvider.from(this))
                 .subscribe()
 
         trackingManager.trackScreenView(getScreenName())

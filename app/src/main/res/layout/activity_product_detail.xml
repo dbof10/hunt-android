@@ -45,7 +45,6 @@
     <FrameLayout
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
         android:elevation="@dimen/z_fab_over_touchable_app_bar">
 
         <ImageView

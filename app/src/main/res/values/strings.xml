@@ -104,6 +104,9 @@
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="cannot_load">Cannot load</string>
+    <string name="number_subscriber">%d subscribers</string>
+    <string name="invalid_email">Email invalid</string>
+    <string name="action_subscribe">Subscribe</string>
 
     <!-- Data saver -->
     <string name="data_saver_mode_content">No photo in data saver mode</string>
@@ -115,5 +118,8 @@
     <string name="settings_clear_cache">Clear cache</string>
     <string name="cache_cleaned">%1$s cleaned</string>
 
+    <!-- Upcoming detail -->
+    <string name="top_subscribers">%1$s, %2$s, %3$s and others</string>
+    <string name="more_upcoming_products">More upcoming products</string>
 
 </resources>

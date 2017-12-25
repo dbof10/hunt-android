@@ -9,7 +9,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import vn.tiki.noadapter2.AbsViewHolder
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.ctech.eaty.base.redux.Store
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.kotlin.autoDisposable
 import com.uber.autodispose.kotlin.autoDisposeWith
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -21,7 +22,7 @@ abstract class BaseReduxFragment<State> : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         store().startBinding()
-                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .autoDisposable(AndroidLifecycleScopeProvider.from(this))
                 .subscribe()
     }
 

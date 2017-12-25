@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/content_padding_horizontal"
+            android:layout_marginStart="@dimen/content_padding_horizontal"
+            android:layout_marginTop="?actionBarSize"
+            android:background="@drawable/rounded_background">
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/content_padding_vertical"
+                android:paddingEnd="@dimen/content_padding_vertical"
+                android:paddingStart="@dimen/content_padding_vertical"
+                android:paddingTop="@dimen/content_padding_vertical" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_medium"
+            android:text="@string/more_upcoming_products"
+            android:textAllCaps="true"
+            android:textAppearance="@style/Text.Body"
+            android:textColor="@color/white_100" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:orientation="horizontal"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_upcoming_product" />
+
+    </LinearLayout>
+</ScrollView>

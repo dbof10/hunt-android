@@ -17,7 +17,7 @@ import com.ctech.eaty.ui.topiclist.action.TopicList
 import com.ctech.eaty.ui.topiclist.navigation.SearchNavigation
 import com.ctech.eaty.ui.topiclist.state.SearchState
 import com.ctech.eaty.ui.topiclist.viewmodel.SearchViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -30,7 +30,7 @@ import javax.inject.Inject
 class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     companion object {
-        val TOPIC_ID_KEY = "topicId"
+       private val TOPIC_ID_KEY = "topicId"
 
         fun newInstance(topic: Topic): Fragment {
 

@@ -32,14 +32,13 @@ fragment UserSpotlight on User {
   _id
   id
   headline
-  name
-  username
   ...UserImageLink
 }
 
 fragment UserImageLink on User {
   id
   _id
+  name
   username
   ...UserImage
 }

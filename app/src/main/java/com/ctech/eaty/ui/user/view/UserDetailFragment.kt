@@ -15,7 +15,7 @@ import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.user.action.UserAction
 import com.ctech.eaty.ui.user.state.UserDetailState
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.rx.plusAssign
 import com.ctech.eaty.util.setPaddingTop
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener

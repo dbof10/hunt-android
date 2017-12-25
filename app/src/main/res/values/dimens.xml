@@ -53,6 +53,7 @@
     <!-- Upcoming Product -->
     <dimen name="upcoming_product_height">164dp</dimen>
     <dimen name="upcoming_foreground_product_size">96dp</dimen>
+    <dimen name="top_user_avatar_size">24dp</dimen>
 
 
     <!--Collection Detail -->
@@ -109,5 +110,12 @@
 
     <!-- Collection -->
     <dimen name="collection_background_height">160dp</dimen>
+
+    <!-- Upcoming Detail -->
+    <dimen name="upcoming_product_width">256dp</dimen>
+    <dimen name="upcoming_avatar_size">64dp</dimen>
+    <dimen name="upcoming_avatar_margin_bottom">84dp</dimen>
+    <dimen name="upcoming_logo_height">64dp</dimen>
+    <dimen name="upcoming_background_height">128dp</dimen>
 
 </resources>

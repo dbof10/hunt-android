@@ -16,4 +16,7 @@
     <integer name="searchback_show_arrow_head_delay">350</integer>
     <integer name="searchback_show_hide_arrow_head_duration">250</integer>
 
+    <!-- Upcoming Detail -->
+    <integer name="message_rise_duration">1500</integer>
+
 </resources>

@@ -9,7 +9,7 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
 import com.ctech.eaty.util.DateUtils
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
 class ProductHeaderViewHolder(view: View, val imageLoader: GlideImageLoader) : AbsViewHolder(view) {

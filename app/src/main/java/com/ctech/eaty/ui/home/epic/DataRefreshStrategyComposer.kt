@@ -1,8 +1,8 @@
 package com.ctech.eaty.ui.home.epic
 
 import com.ctech.eaty.entity.Product
+import com.ctech.eaty.repository.BarcodeGenerator.createHomeNextBarCode
 import com.ctech.eaty.repository.ProductRepository
-import com.ctech.eaty.repository.createHomeNextBarCode
 import com.ctech.eaty.response.ProductResponse
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer

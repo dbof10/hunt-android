@@ -10,6 +10,7 @@ import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.result.CheckLoginResult
 import com.ctech.eaty.ui.home.result.DisableDataSaverResult
 import com.ctech.eaty.ui.home.result.LoadMoreResult
+import com.ctech.eaty.ui.home.result.LoadResult
 import com.ctech.eaty.ui.home.result.LoadUpcomingProductResult
 import com.ctech.eaty.ui.home.result.LoadUserResult
 import com.ctech.eaty.ui.home.result.RefreshResult
@@ -24,15 +25,35 @@ class HomeReducer : Reducer<HomeState> {
 
     private val FB_AD_ID = "1966287263602613_2031648393733166"
     private val FB_AD_ID_2 = "1966287263602613_2032008040363868"
-
+    private val SEARCH_NOT_FOUND = -1
 
     override fun apply(state: HomeState, result: Result): HomeState {
         when (result) {
+            is LoadResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loading = true,
+                            loadError = null
+                    )
+                    result.error != null -> state.copy(
+                            loading = false,
+                            loadError = result.error)
+                    else -> state.copy(
+                            loading = false,
+                            loadError = null,
+                            content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
+                            cursor = result.cursor)
+                }
+            }
             is RefreshResult -> {
                 return when {
                     result.refreshing -> state.copy(refreshing = true)
-                    result.error != null -> state.copy(refreshing = false, refreshError = result.error)
-                    else -> state.copy(refreshing = false, refreshError = null,
+                    result.error != null -> state.copy(
+                            refreshing = false,
+                            refreshError = result.error)
+                    else -> state.copy(
+                            refreshing = false,
+                            refreshError = null,
                             loadError = null,
                             content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
                             dayAgo = 0)
@@ -40,15 +61,23 @@ class HomeReducer : Reducer<HomeState> {
             }
             is LoadMoreResult -> {
                 return when {
-                    result.loading -> state.copy(loadingMore = true, content = addLoading(state),
-                            loadMoreError = null)
-                    result.error != null -> state.copy(loadingMore = false, loadMoreError = result.error,
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null
+                    )
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
                             content = addError(state))
-                    else -> state.copy(loadingMore = false, loadError = null,
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
                             refreshError = null,
                             loadMoreError = null,
-                            content = computeNextBody(state, result),
-                            dayAgo = result.dayAgo)
+                            content = addFeed(state, result),
+                            dayAgo = result.dayAgo,
+                            cursor = result.cursor)
                 }
             }
             is LoadUserResult -> {
@@ -71,10 +100,22 @@ class HomeReducer : Reducer<HomeState> {
             }
             is LoadUpcomingProductResult -> {
                 return when {
-                    result.loading -> state.copy(loading = true, loadError = null)
-                    result.error != null -> state.copy(loading = false, loadError = result.error)
-                    else -> state.copy(loading = false, loadError = null,
-                            content = listOf(UpcomingProducts(StickyItemViewModel(0, "Upcoming Products"), result.content)))
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null)
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            cursor = result.cursor
+                    )
                 }
             }
             else -> {
@@ -95,8 +136,30 @@ class HomeReducer : Reducer<HomeState> {
         return state.content.plus(FeedFooter(Type.LOADING))
     }
 
+    private fun addFeed(state: HomeState, result: LoadUpcomingProductResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        var searchIndex = SEARCH_NOT_FOUND
+        lastFeed.forEachIndexed { index, feed ->
+            if (feed is UpcomingProducts) {
+                searchIndex = index
+                return@forEachIndexed
+            }
+        }
+        if (searchIndex == SEARCH_NOT_FOUND) {
+            return lastFeed.plus(UpcomingProducts(StickyItemViewModel(0, "Upcoming Products"), result.content))
+        } else {
+            return lastFeed.mapIndexed { index, feed ->
+                if (index == searchIndex) {
+                    return@mapIndexed UpcomingProducts(StickyItemViewModel(0, "Upcoming Products"), result.content)
+                } else {
+                    return@mapIndexed feed
+                }
+            }
+        }
+    }
+
     //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
-    private fun computeNextBody(state: HomeState, result: LoadMoreResult): List<HomeFeed> {
+    private fun addFeed(state: HomeState, result: LoadMoreResult): List<HomeFeed> {
 
         val lastFeed = removeLoading(state)
         return when {

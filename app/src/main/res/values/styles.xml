@@ -127,7 +127,7 @@
     </style>
 
     <style name="Widget.Hunt.UserTitle">
-        <item name="android:textAppearance">@style/TextAppearance.Author.Title</item>
+        <item name="android:textAppearance">@style/TextAppearance.Author</item>
         <item name="lineHeightHint">28sp</item>
     </style>
 
@@ -145,6 +145,10 @@
     <style name="Text.Body3" parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textColor">@color/text_tertiary_dark</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text.Body4" parent="Text.Body3">
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="Text.InlineAction">
@@ -184,7 +188,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Author.Title" parent="@style/TextAppearance.UserName">
+    <style name="TextAppearance.Author" parent="@style/TextAppearance.UserName">
         <item name="android:textSize">20sp</item>
     </style>
 

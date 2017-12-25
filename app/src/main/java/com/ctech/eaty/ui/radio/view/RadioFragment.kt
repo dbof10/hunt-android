@@ -16,7 +16,7 @@ import com.ctech.eaty.ui.radio.action.RadioAction
 import com.ctech.eaty.ui.radio.state.RadioState
 import com.ctech.eaty.ui.radio.viewmodel.RadioViewModel
 import com.ctech.eaty.ui.radio.viewmodel.TrackItemViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_radio.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter

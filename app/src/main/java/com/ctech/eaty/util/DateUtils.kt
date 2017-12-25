@@ -36,11 +36,10 @@ class DateUtils private constructor() {
             return relativeDateFormatter.print(time)
         }
 
-        fun getFormattedDate(current: DateTime): String {
-            return dateFormatter.print(current)
-        }
-
         fun getFormattedPastDate(current: DateTime, dayAgo: Int): String {
+            if (dayAgo == 0) {
+                return dateFormatter.print(current)
+            }
             val pastDateTime = current.minusDays(dayAgo)
             return dateFormatter.print(pastDateTime)
         }

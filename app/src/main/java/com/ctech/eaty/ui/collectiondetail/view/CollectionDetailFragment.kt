@@ -18,7 +18,7 @@ import com.ctech.eaty.ui.collectiondetail.viewmodel.CollectionHeaderItemViewMode
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
 import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_collection_detail.*
 import vn.tiki.noadapter2.DiffCallback

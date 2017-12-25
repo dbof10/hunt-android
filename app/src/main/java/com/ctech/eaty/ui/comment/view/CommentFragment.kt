@@ -16,7 +16,7 @@ import com.ctech.eaty.ui.comment.state.CommentState
 import com.ctech.eaty.ui.comment.viewmodel.CommentItemViewModel
 import com.ctech.eaty.ui.comment.viewmodel.CommentViewModel
 import com.ctech.eaty.ui.home.view.EmptyViewHolder
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_comments.*
 import timber.log.Timber

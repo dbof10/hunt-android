@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/vConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/upcoming_avatar_size"
+            android:layout_height="@dimen/upcoming_avatar_size"
+            android:layout_marginBottom="@dimen/upcoming_avatar_margin_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            fresco:roundAsCircle="true" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMessage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:layout_marginStart="@dimen/space_medium"
+            android:layout_marginTop="?actionBarSize"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/ivAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSubscriberCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_small"
+            android:layout_marginStart="@dimen/space_medium"
+            android:textAppearance="@style/TextAppearance.Author"
+            android:textColor="@color/white_100"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/tvTopSubscribers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="94 Subscribers"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvTopSubscribers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_large"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:layout_marginStart="@dimen/space_medium"
+            android:textAppearance="@style/Text.Body3"
+            android:textColor="@color/white_100"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="John, Abby, Fres and others"
+            tools:visibility="visible" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
+
+    <com.ctech.eaty.widget.ErrorView
+        android:id="@+id/vError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:errorImage="@drawable/network_error"
+        app:retryButtonText="@string/retry" />
+
+</FrameLayout>

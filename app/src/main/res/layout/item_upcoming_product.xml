@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/upcoming_product_width"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/upcoming_background_height">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            fresco:roundBottomLeft="false"
+            fresco:roundBottomRight="false"
+            fresco:roundedCornerRadius="@dimen/draggable_background_corner" />
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/ivForeground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/upcoming_logo_height"
+            android:layout_gravity="center"
+            fresco:actualImageScaleType="fitCenter" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_medium"
+        android:textAppearance="@style/Text.Body"
+        tools:text="Kyo" />
+
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/content_padding_vertical"
+        android:layout_marginEnd="@dimen/content_padding_horizontal"
+        android:layout_marginStart="@dimen/content_padding_horizontal"
+        android:layout_marginTop="@dimen/space_small"
+        android:gravity="center"
+        android:lines="2"
+        android:maxLines="2"
+        android:textAppearance="@style/Text.Body3"
+        tools:text="A personal media app" />
+</LinearLayout>

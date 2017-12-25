@@ -1,0 +1,80 @@
+query UpcomingShowPage($slug: String!, $variant: String) {
+  upcomingPage: upcoming_page(slug: $slug) {
+    ...UpcomingShowPageContent
+    __typename
+  }
+  upcomingPages: upcoming_pages(first: 3, filter: RELATED, exclude: $slug) {
+    edges {
+      node {
+        id
+        ...UpcomingPageCard
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment UpcomingShowPageContent on UpcomingPage {
+  _id
+  id
+  name
+  slug
+  subscriber_count
+  facebook_url
+  twitter_url
+  angellist_url
+  jobs_url
+  collect_phone_numbers
+  success_text
+  popular_subscribers {
+    id
+    name
+    ...UserImageLink
+    __typename
+  }
+  user {
+    id
+    ...UpcomingShowPageUser
+    __typename
+  }
+  variant(preferred_kind: $variant) {
+    id
+    _id
+    kind
+    who_text
+    what_text
+    why_text
+    brand_color
+    logo_uuid
+    background_image_uuid
+    __typename
+  }
+  survey(used_in_upcoming_page: true) {
+    id
+    __typename
+  }
+  __typename
+}
+
+fragment UpcomingShowPageUser on User {
+  name
+  headline
+  ...UserImageLink
+  __typename
+}
+
+fragment UpcomingPageCard on UpcomingPage {
+  id
+  name
+  tagline
+  slug
+  background_image_uuid
+  logo_uuid
+  user {
+    ...UserSpotlight
+    __typename
+  }
+  __typename
+}

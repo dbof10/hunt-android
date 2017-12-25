@@ -10,7 +10,7 @@ import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Media
 import com.ctech.eaty.ui.gallery.loader.YoutubeThumbnailLoader
 import com.ctech.eaty.ui.gallery.viewmodel.GalleryViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import javax.inject.Inject
 

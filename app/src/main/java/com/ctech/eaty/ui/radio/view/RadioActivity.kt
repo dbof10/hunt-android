@@ -12,7 +12,7 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.player.MediaController
 import com.ctech.eaty.ui.radio.state.MediaPlayerState
 import com.ctech.eaty.ui.radio.viewmodel.RadioViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

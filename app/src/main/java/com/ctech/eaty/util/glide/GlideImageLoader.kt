@@ -1,4 +1,4 @@
-package com.ctech.eaty.util
+package com.ctech.eaty.util.glide
 
 import android.content.Context
 import android.graphics.Bitmap

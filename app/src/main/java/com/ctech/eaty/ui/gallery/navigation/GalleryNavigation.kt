@@ -2,7 +2,7 @@ package com.ctech.eaty.ui.gallery.navigation
 
 import android.net.Uri
 import com.ctech.eaty.ui.gallery.view.GalleryActivity
-import com.ctech.eaty.ui.gallery.view.YoutubeActivity
+import com.ctech.eaty.ui.video.view.YoutubeActivity
 import io.reactivex.Completable
 import javax.inject.Inject
 

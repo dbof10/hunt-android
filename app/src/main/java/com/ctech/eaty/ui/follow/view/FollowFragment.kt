@@ -17,7 +17,7 @@ import com.ctech.eaty.entity.User
 import com.ctech.eaty.ui.follow.action.FollowAction
 import com.ctech.eaty.ui.follow.state.FollowState
 import com.ctech.eaty.ui.follow.viewmodel.FollowViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_follow.*
 import timber.log.Timber

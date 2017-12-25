@@ -4,8 +4,26 @@ import com.apollographql.apollo.ApolloClient
 import com.ctech.eaty.entity.Comments
 import com.ctech.eaty.network.AlgoliaApi
 import com.ctech.eaty.network.ProductHuntApi
-import com.ctech.eaty.repository.*
-import com.ctech.eaty.response.*
+import com.ctech.eaty.repository.AppSettingsManager
+import com.ctech.eaty.repository.CollectionRepository
+import com.ctech.eaty.repository.CommentRepository
+import com.ctech.eaty.repository.NotificationRepository
+import com.ctech.eaty.repository.ProductRepository
+import com.ctech.eaty.repository.RadioRepository
+import com.ctech.eaty.repository.SearchRepository
+import com.ctech.eaty.repository.TopicRepository
+import com.ctech.eaty.repository.UserRepository
+import com.ctech.eaty.repository.VoteRepository
+import com.ctech.eaty.repository.mapper.ProductMapper
+import com.ctech.eaty.response.CollectionDetailResponse
+import com.ctech.eaty.response.CollectionResponse
+import com.ctech.eaty.response.NotificationResponse
+import com.ctech.eaty.response.ProductDetailResponse
+import com.ctech.eaty.response.ProductResponse
+import com.ctech.eaty.response.RadioResponse
+import com.ctech.eaty.response.TopicResponse
+import com.ctech.eaty.response.UserResponse
+import com.ctech.eaty.response.VoteResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
 import com.ctech.eaty.ui.topiclist.action.SearchBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
@@ -19,7 +37,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 
-@Module(includes = arrayOf(NetworkModule::class, StoreModule::class))
+@Module(includes = [(NetworkModule::class), (StoreModule::class)])
 class DataModule {
 
     @Provides
@@ -35,8 +53,9 @@ class DataModule {
                                  searchStore: Store<ProductResponse, SearchBarCode>,
                                  apiClient: ProductHuntApi,
                                  apolloClient: ApolloClient,
+                                 productMapper: ProductMapper,
                                  appSettingsManager: AppSettingsManager): ProductRepository {
-        return ProductRepository(homeStore, productStore, searchStore, apiClient, apolloClient, appSettingsManager)
+        return ProductRepository(homeStore, productStore, searchStore, apiClient, apolloClient, productMapper, appSettingsManager)
     }
 
     @Provides

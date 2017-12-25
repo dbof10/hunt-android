@@ -25,15 +25,13 @@ import com.ctech.eaty.annotation.Lightness
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.tracking.FirebaseTrackManager
-import com.ctech.eaty.ui.productdetail.action.Like
 import com.ctech.eaty.ui.productdetail.action.USE_MOBILE_DATA
-import com.ctech.eaty.ui.productdetail.action.UnLike
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
 import com.ctech.eaty.util.ColorUtils
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.ViewUtils
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout
 import dagger.android.AndroidInjector

@@ -17,7 +17,7 @@ import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.noti.action.NotificationAction
 import com.ctech.eaty.ui.noti.state.NotificationState
 import com.ctech.eaty.ui.noti.viewmodel.NotificationViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_notifications.*
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter

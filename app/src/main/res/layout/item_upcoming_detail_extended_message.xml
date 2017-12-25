@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/content_padding_vertical"
+    android:paddingEnd="@dimen/space_medium"
+    android:paddingStart="@dimen/space_medium"
+    android:paddingTop="@dimen/content_padding_vertical">
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Text.Body"
+        tools:text="Lorem isum" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:textAppearance="@style/Text.Body2" />
+
+    <Button
+        android:id="@+id/btSubscribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/content_padding_vertical"
+        android:layout_marginTop="@dimen/space_small"
+        android:enabled="false"
+        android:text="@string/action_subscribe"
+        android:textColor="@color/white_100" />
+
+</LinearLayout>

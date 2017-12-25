@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.Gravity
 import android.view.Gravity.START
 import android.view.View
@@ -14,26 +13,23 @@ import com.ctech.eaty.R
 import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.UserDetail
-import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.ui.home.action.CHECK_RESULT
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.controller.HomeNetworkController
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.kotlin.autoDisposeWith
+import com.uber.autodispose.kotlin.autoDisposable
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.drawer
 import kotlinx.android.synthetic.main.activity_main.navigation
 import kotlinx.android.synthetic.main.layout_home_content.ivNoti
 import kotlinx.android.synthetic.main.layout_home_content.ivSearch
 import kotlinx.android.synthetic.main.layout_home_content.toolbar
 import kotlinx.android.synthetic.main.layout_home_content.tvIndicator
-import java.util.concurrent.RecursiveTask
 import javax.inject.Inject
 
 
@@ -78,7 +74,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
             return intent
         }
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -96,7 +92,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
         trackingManager.trackScreenView(getScreenName())
         store.startBinding()
-                .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
+                .autoDisposable(AndroidLifecycleScopeProvider.from(this))
                 .subscribe()
         store.dispatch(HomeAction.LOAD_USER)
         networkController.registerNetworkMonitor()

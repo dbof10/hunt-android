@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.SharedElementCallback
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.ctech.eaty.R
@@ -19,7 +18,7 @@ import com.ctech.eaty.ui.user.state.UserDetailState
 import com.ctech.eaty.ui.user.viewmodel.EditButtonViewModel
 import com.ctech.eaty.ui.user.viewmodel.FollowButtonViewModel
 import com.ctech.eaty.ui.user.viewmodel.UserDetailViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.setPaddingBottom
 import com.ctech.eaty.util.setPaddingTop
 import com.ctech.eaty.widget.ElasticDragDismissFrameLayout

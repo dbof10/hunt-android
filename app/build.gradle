@@ -67,6 +67,9 @@ android {
         targetCompatibility 1.8
     }
 
+    apollo {
+        customTypeMapping['JSON'] = "java.lang.String"
+    }
 }
 
 dependencies {
@@ -96,6 +99,8 @@ dependencies {
     implementation deps.ui.lottie
     implementation deps.ui.inkindicator
     implementation deps.ui.gradient
+    implementation deps.ui.viewanimator
+    implementation deps.ui.htmlBuilder
 
     //Media
     implementation deps.exo.core

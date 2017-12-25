@@ -11,7 +11,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductDetailViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration
 import vn.tiki.noadapter2.AbsViewHolder
 import vn.tiki.noadapter2.DiffCallback

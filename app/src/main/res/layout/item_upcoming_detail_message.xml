@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/tvMessage"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/space_medium"
+    android:paddingEnd="@dimen/space_medium"
+    android:paddingTop="@dimen/content_padding_vertical"
+    android:paddingBottom="@dimen/content_padding_vertical"
+    android:background="@drawable/rounded_background"
+    android:textAppearance="@style/Text.Body" />

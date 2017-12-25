@@ -1,0 +1,15 @@
+mutation CreateUpcomingPageSubscriber($input: CreateUpcomingPageSubscriberInput!) {
+  response: createUpcomingPageSubscriber(input: $input) {
+    node {
+      id
+      email
+      __typename
+    }
+    errors {
+      field
+      messages
+      __typename
+    }
+    __typename
+  }
+}

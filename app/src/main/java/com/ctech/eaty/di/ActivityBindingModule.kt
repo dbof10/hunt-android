@@ -18,7 +18,7 @@ import com.ctech.eaty.ui.follow.view.FollowActivity
 import com.ctech.eaty.ui.gallery.di.GalleryFragmentBuilderModule
 import com.ctech.eaty.ui.gallery.di.GalleryModule
 import com.ctech.eaty.ui.gallery.view.GalleryActivity
-import com.ctech.eaty.ui.gallery.view.YoutubeActivity
+import com.ctech.eaty.ui.video.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
@@ -53,6 +53,9 @@ import com.ctech.eaty.ui.topic.view.TopicActivity
 import com.ctech.eaty.ui.topiclist.di.TopicListFragmentBuilderModule
 import com.ctech.eaty.ui.topiclist.di.TopicListModule
 import com.ctech.eaty.ui.topiclist.view.TopicListActivity
+import com.ctech.eaty.ui.upcomingdetail.di.UpcomingDetailBuilderModule
+import com.ctech.eaty.ui.upcomingdetail.di.UpcomingProductModule
+import com.ctech.eaty.ui.upcomingdetail.view.UpcomingProductDetailActivity
 import com.ctech.eaty.ui.user.di.UserDetailFragmentBuilderModule
 import com.ctech.eaty.ui.user.di.UserDetailModule
 import com.ctech.eaty.ui.user.view.UserActivity
@@ -167,5 +170,9 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [(SettingsModule::class)])
     abstract fun contributeSettingsActivity(): SettingsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [(UpcomingProductModule::class), (UpcomingDetailBuilderModule::class)])
+    abstract fun contributeUpcomingProductDetailActivity(): UpcomingProductDetailActivity
 
 }

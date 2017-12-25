@@ -17,7 +17,7 @@ import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
 import com.ctech.eaty.ui.topiclist.view.TopicListActivity
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
 import vn.tiki.noadapter2.DiffCallback

@@ -5,6 +5,11 @@ import android.net.Uri
 object ResizeImageUrlProvider {
 
     private val PROXY_DOMAIN = ".rsz.io"
+    private val YOUTUBE_PLACEHOLDER = "https://img.youtube.com/vi/%s/hqdefault.jpg"
+
+    fun getThumbnailUrl(videoId: String): String{
+        return String.format(YOUTUBE_PLACEHOLDER, videoId)
+    }
 
     fun overrideUrl(url: String?, size: Int): String {
         if (url.isNullOrEmpty()) {

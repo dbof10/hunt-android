@@ -1,5 +1,6 @@
 package com.ctech.eaty.ui.home.component
 
+import android.util.Log
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.component.daily.DailyProductsGroupSection
@@ -100,7 +101,6 @@ object HomeFeedSectionSpec {
         val state = store.getState()
         if (totalCount - lastVisible < threshold && state.loadMoreError == null) {
             store.dispatch(HomeAction.LOAD_MORE)
-
         }
     }
 

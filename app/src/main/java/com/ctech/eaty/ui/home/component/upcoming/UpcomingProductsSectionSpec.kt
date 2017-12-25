@@ -43,7 +43,7 @@ object UpcomingProductsSectionSpec {
     fun onCreateChildren(c: ComponentContext, @Prop products: UpcomingProducts): ComponentLayout {
         return Column.create(c)
                 .child(
-                        Text.create(c, 0, R.style.Text_Body)
+                        Text.create(c, 0, R.style.Text_Body2)
                                 .text(products.label)
                                 .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
                                 .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)

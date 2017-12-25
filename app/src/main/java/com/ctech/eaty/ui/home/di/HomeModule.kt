@@ -10,7 +10,6 @@ import com.ctech.eaty.ui.home.epic.CheckLoginEpic
 import com.ctech.eaty.ui.home.epic.DisableDataSaverEpic
 import com.ctech.eaty.ui.home.epic.LoadEpic
 import com.ctech.eaty.ui.home.epic.LoadMoreEpic
-import com.ctech.eaty.ui.home.epic.LoadUpcomingProductEpic
 import com.ctech.eaty.ui.home.epic.LoadUserEpic
 import com.ctech.eaty.ui.home.epic.RefreshEpic
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
@@ -47,8 +46,7 @@ class HomeModule {
                         LoadUserEpic(userRepository, threadScheduler),
                         LoadMoreEpic(productRepository, appStore, settingsManager, threadScheduler),
                         CheckLoginEpic(),
-                        DisableDataSaverEpic(settingsManager, threadScheduler),
-                        LoadUpcomingProductEpic(productRepository, appStore, settingsManager, threadScheduler)
+                        DisableDataSaverEpic(settingsManager, threadScheduler)
                 ))
 
     }

@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.gallery.view
+package com.ctech.eaty.ui.video.view
 
 import android.content.Context
 import android.content.Intent

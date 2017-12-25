@@ -33,7 +33,7 @@ import com.ctech.eaty.ui.productdetail.viewmodel.ProductHeaderItemViewModel
 import com.ctech.eaty.ui.productdetail.viewmodel.ProductRecommendItemViewModel
 import com.ctech.eaty.ui.web.support.CustomTabActivityHelper
 import com.ctech.eaty.util.AnimUtils.getFastOutSlowInInterpolator
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.util.rx.plusAssign
 import com.ctech.eaty.widget.TransitionListenerAdapter
 import com.ctech.eaty.widget.recyclerview.InsetDividerDecoration

@@ -16,4 +16,6 @@ data class UpcomingProductItemProps(private val product: UpcomingProduct, val sa
 
 
     val subscriberCount get() = product.subscriberCount
+
+    val topSubscribers get() = product.topSubscribers
 }

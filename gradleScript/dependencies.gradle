@@ -1,16 +1,16 @@
 def versions = [
         support    : '27.0.2',
         litho      : '0.11.0',
-        autodispose: '0.4.0',
+        autodispose: '0.5.1',
         firebase   : '11.4.2'
 ]
 
 def build = [
-        buildToolsVersion: '26.0.2',
-        compileSdkVersion: 26,
+        buildToolsVersion: '27.0.1',
+        compileSdkVersion: 27,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
-        targetSdkVersion : 26,
+        targetSdkVersion : 27,
 
 ]
 
@@ -39,7 +39,7 @@ def butterknife = [
 ]
 
 def rx = [
-        java   : 'io.reactivex.rxjava2:rxjava:2.0.9',
+        java   : 'io.reactivex.rxjava2:rxjava:2.1.7',
         android: 'io.reactivex.rxjava2:rxandroid:2.0.1',
         network: 'com.github.pwittchen:reactivenetwork-rx2:0.12.1'
 ]
@@ -98,6 +98,8 @@ def ui = [
         lottie      : 'com.airbnb.android:lottie:2.2.5',
         inkindicator: 'com.pacioianu.david:ink-page-indicator:1.2.0',
         gradient    : 'com.dynamitechetan.flowinggradient:flowinggradient:1.1',
+        viewanimator: 'com.github.florent37:viewanimator:1.0.5',
+        htmlBuilder : 'com.jaredrummler:html-builder:1.0.0'
 ]
 
 def react = [
@@ -136,7 +138,7 @@ def autodispose = [
 ]
 
 def graphql = [
-        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.3",
+        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.4-SNAPSHOT",
         "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.4.3',
         "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.4.3'
 ]

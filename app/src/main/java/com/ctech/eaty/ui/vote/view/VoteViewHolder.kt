@@ -10,7 +10,7 @@ import butterknife.ButterKnife
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Vote
 import com.ctech.eaty.util.DateUtils
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
 

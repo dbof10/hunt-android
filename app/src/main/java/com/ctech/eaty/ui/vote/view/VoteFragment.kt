@@ -17,7 +17,7 @@ import com.ctech.eaty.entity.Vote
 import com.ctech.eaty.ui.vote.action.VoteAction
 import com.ctech.eaty.ui.vote.state.VoteState
 import com.ctech.eaty.ui.vote.viewmodel.VoteViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_votes.*
 import timber.log.Timber

@@ -1,6 +1,5 @@
 package com.ctech.eaty.ui.noti.view
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat
 import android.text.Spannable
@@ -18,7 +17,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.entity.Notification
 import com.ctech.eaty.tracking.FirebaseTrackManager
 import com.ctech.eaty.util.DateUtils
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import vn.tiki.noadapter2.AbsViewHolder
 
 

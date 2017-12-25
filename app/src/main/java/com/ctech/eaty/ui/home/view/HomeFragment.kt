@@ -2,7 +2,6 @@ package com.ctech.eaty.ui.home.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.ctech.eaty.ui.home.component.LithoController
 import com.ctech.eaty.ui.home.navigation.HomeNavigation
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.HomeViewModel
-import com.ctech.eaty.util.GlideImageLoader
+import com.ctech.eaty.util.glide.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_products.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -62,7 +61,7 @@ class HomeFragment : BaseFragment(), Injectable {
         setupViewModel()
         setupLitho()
         setupListener()
-        store.dispatch(HomeAction.LOAD_UPCOMING)
+        store.dispatch(HomeAction.LOAD)
 
     }
 

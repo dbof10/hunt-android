@@ -32,14 +32,16 @@ object HeaderComponentSpec {
         return Row.create(c)
                 .child(
                         Card.create(c)
-                                .cornerRadiusPx(c.resources.getDimensionPixelSize(R.dimen.avatar_size) / 2.2F)
+                                .cornerRadiusPx(c.resources.getDimensionPixelSize(R.dimen.avatar_size) / 2F)
                                 .content(
                                         FrescoImage
                                                 .create(c)
                                                 .controller(controller)
                                                 .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
+                                                .heightRes(R.dimen.avatar_size)
+                                                .widthRes(R.dimen.avatar_size)
                                 )
-                                .heightRes(R.dimen.avatar_size)
+
                                 .marginRes(YogaEdge.TOP, R.dimen.home_header_margin_top)
                                 .marginRes(YogaEdge.BOTTOM, R.dimen.home_header_margin_bottom)
                                 .marginRes(YogaEdge.START, R.dimen.content_padding_horizontal)
