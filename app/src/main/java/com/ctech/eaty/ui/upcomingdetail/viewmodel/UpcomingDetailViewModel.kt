@@ -72,7 +72,12 @@ class UpcomingDetailViewModel(private val stateDispatcher: Observable<UpcomingPr
                     val who = it.body.whoText.getDisplayNode()
                     messages.add(MessageViewModel(MessageViewModel.TYPE_DEFAULT, who))
                     messages.add(MessageViewModel(MessageViewModel.TYPE_DEFAULT, what))
-                    messages.add(MessageViewModel(MessageViewModel.TYPE_EXTENDED, why, Color.parseColor(it.body.brandColor)))
+                    messages.add(MessageViewModel(MessageViewModel.TYPE_EXTENDED, why,
+                            if (it.body.brandColor != null)
+                                Color.parseColor(it.body.brandColor)
+                            else
+                                Color.BLACK)
+                    )
                     return@map messages
                 }
 

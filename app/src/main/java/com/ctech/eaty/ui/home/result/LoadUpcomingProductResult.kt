@@ -5,15 +5,15 @@ import com.ctech.eaty.ui.home.model.Cursor
 import com.ctech.eaty.ui.home.viewmodel.UpcomingProductItemProps
 
 data class LoadUpcomingProductResult(val loading: Boolean = false, val error: Throwable? = null,
-                                     val cursor: Cursor = Cursor.DAILY,
+                                     val page: Int = 1,
                                      val content: List<UpcomingProductItemProps> = emptyList()) : Result {
     companion object {
         fun inProgress(): LoadUpcomingProductResult {
             return LoadUpcomingProductResult(true)
         }
 
-        fun success(content: List<UpcomingProductItemProps>): LoadUpcomingProductResult {
-            return LoadUpcomingProductResult(content = content)
+        fun success(content: List<UpcomingProductItemProps>, page: Int): LoadUpcomingProductResult {
+            return LoadUpcomingProductResult(content = content, page = page)
         }
 
         fun fail(throwable: Throwable): LoadUpcomingProductResult {

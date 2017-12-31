@@ -69,6 +69,7 @@ android {
 
     apollo {
         customTypeMapping['JSON'] = "java.lang.String"
+        customTypeMapping['DateTime'] = "org.joda.time.DateTime"
     }
 }
 

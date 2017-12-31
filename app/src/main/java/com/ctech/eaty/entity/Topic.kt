@@ -3,14 +3,11 @@ package com.ctech.eaty.entity
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import io.realm.RealmModel
-import io.realm.annotations.RealmClass
 
-@RealmClass
-open class Topic(var id: Int = -1,
-                 var name: String = "",
+data class Topic(val id: Int = -1,
+                 val name: String = "",
                  @SerializedName("image")
-                 var imageUrl: String = "") : RealmModel, Parcelable {
+                 val imageUrl: String = "") : Parcelable {
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Topic> = object : Parcelable.Creator<Topic> {
@@ -31,5 +28,9 @@ open class Topic(var id: Int = -1,
         dest.writeInt(id)
         dest.writeString(name)
         dest.writeString(imageUrl)
+    }
+
+    fun makeRealm(): TopicRealm {
+        return TopicRealm(id, name, imageUrl)
     }
 }

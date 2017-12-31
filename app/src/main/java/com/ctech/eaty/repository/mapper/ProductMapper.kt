@@ -1,13 +1,21 @@
 package com.ctech.eaty.repository.mapper
 
+import android.util.Log
 import com.ctech.eaty.UpcomingPagesPageQuery
 import com.ctech.eaty.UpcomingShowPageQuery
+import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.entity.ImageUrl
+import com.ctech.eaty.entity.Product
+import com.ctech.eaty.entity.ThumbNail
+import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.entity.UpcomingBody
 import com.ctech.eaty.entity.UpcomingBodyMessage
 import com.ctech.eaty.entity.UpcomingDetail
 import com.ctech.eaty.entity.UpcomingProduct
 import com.ctech.eaty.entity.User
+import com.ctech.eaty.fragment.PostItem
+import com.ctech.eaty.fragment.TopicCard
+import com.ctech.eaty.fragment.UpcomingPageItem
 import com.ctech.eaty.fragment.UpcomingShowPageUser
 import com.ctech.eaty.fragment.UserImageLink
 import com.ctech.eaty.fragment.UserSpotlight
@@ -15,6 +23,7 @@ import com.ctech.eaty.util.Constants
 import com.google.gson.Gson
 import javax.inject.Inject
 
+@ActivityScope
 class ProductMapper @Inject constructor(private val gson: Gson) {
 
 
@@ -24,7 +33,9 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
         return nodes.map {
             val payload = it.fragments().upcomingPageCard()
 
-            UpcomingProduct(payload.id(), payload.name(), payload.tagline() ?: "", payload.background_image_uuid() ?: "",
+            UpcomingProduct(payload.id(), payload.name(),
+                    payload.tagline() ?: "",
+                    payload.background_image_uuid() ?: "",
                     payload.logo_uuid() ?: "")
         }
     }
@@ -34,14 +45,18 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
 
         return nodes.map {
             val payload = it.fragments().upcomingPageItem()
-            UpcomingProduct(payload.id(), payload.name(), payload.tagline() ?: "", payload.background_image_uuid() ?: "",
-                    payload.logo_uuid() ?: "", payload.subscriber_count().toInt(), payload.popular_subscribers()
-                    .map {
-                        val userPayload = it.fragments().userSpotlight()
-                        val imageUrl = it.fragments().userSpotlight().fragments().userImageLink()
-                        toUser(userPayload, imageUrl!!)
-                    })
+            toUpcomingProduct(payload)
         }
+    }
+
+    fun toUpcomingProduct(item: UpcomingPageItem): UpcomingProduct {
+        return UpcomingProduct(item.id(), item.name(), item.tagline() ?: "", item.background_image_uuid() ?: "",
+                item.logo_uuid() ?: "", item.subscriber_count().toInt(), item.popular_subscribers()
+                .map {
+                    val userPayload = it.fragments().userSpotlight()
+                    val imageUrl = it.fragments().userSpotlight().fragments().userImageLink()
+                    toUser(userPayload, imageUrl!!)
+                })
     }
 
     fun toUpcomingDetail(item: UpcomingShowPageQuery.Data): UpcomingDetail {
@@ -59,7 +74,7 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
 
         val body = UpcomingBody(Constants.PRODUCT_CDN_URL + "/" + variant.background_image_uuid(), Constants.PRODUCT_CDN_URL + "/" + variant.logo_uuid()!!,
                 variant.kind(),
-                variant.brand_color()!!, whoText, whatText, whyText)
+                variant.brand_color(), whoText, whatText, whyText)
 
         val user = fragment.user().fragments().upcomingShowPageUser()
         return UpcomingDetail(fragment.id(), fragment.name(),
@@ -90,5 +105,28 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
         return User(payload.id().toInt(), payload.name(), "", payload.username(),
                 ImageUrl(px64 = Constants.USER_CDN_URL + "/" + payload.id() + "/original"))
     }
+
+    fun toProduct(node: PostItem): Product {
+        return with(node) {
+            val voteCount = fragments().postVoteButton()!!.votes_count().toInt()
+            val rawThumbnail = fragments().postThumbnail()!!.thumbnail()!!.fragments().mediaThumbnail()
+            val thumbnail = ThumbNail(id = rawThumbnail.id().toInt(), imageUUID = rawThumbnail.image_uuid())
+            Product(id = id().toInt(), name = name(), tagline = tagline(),
+                    commentsCount = comments_count().toInt(),
+                    votesCount = voteCount,
+                    thumbnail = thumbnail)
+        }
+    }
+
+    fun toProduct(node: TopicCard.Node): Product {
+
+        return with(node) {
+            val rawThumbnail = node.thumbnail()!!
+            val thumbnail = ThumbNail(id = rawThumbnail.id().toInt(), imageUUID = rawThumbnail.image_uuid())
+            Product(id = id().toInt(), name = name(), tagline = tagline(),
+                    thumbnail = thumbnail)
+        }
+    }
+
 
 }

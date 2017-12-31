@@ -6,35 +6,33 @@ import android.view.View
 import android.widget.FrameLayout
 import com.ctech.eaty.R
 import com.ctech.eaty.util.setPaddingBottom
-import com.facebook.ads.*
-import kotlinx.android.synthetic.main.item_horizontal_ads.view.*
+import com.facebook.ads.AdError
+import com.facebook.ads.NativeAd
+import com.facebook.ads.NativeAdScrollView
+import com.facebook.ads.NativeAdView
+import com.facebook.ads.NativeAdsManager
+import kotlinx.android.synthetic.main.item_horizontal_ads.view.flAdsContainer
+import kotlinx.android.synthetic.main.item_horizontal_ads.view.progressBar
 import timber.log.Timber
 
 class HorizontalAdsView(context: Context) : FrameLayout(context) {
 
-    private var itemId = -1
+
+    private lateinit var adsManager: NativeAdsManager
 
     init {
         LayoutInflater.from(context).inflate(R.layout.item_horizontal_ads, this, true)
         setPaddingBottom(context.resources.getDimensionPixelSize(R.dimen.divider_space))
     }
 
-    fun with(id: Int): HorizontalAdsView {
-        this.itemId = id
-        return this
-    }
-
     fun bind(adsManager: NativeAdsManager) {
+        this.adsManager = adsManager
         adsManager.setListener(object : NativeAdsManager.Listener {
             override fun onAdsLoaded() {
                 progressBar.visibility = View.GONE
-
-                val adsScrollView = findViewById<NativeAdScrollView>(itemId)
-                if (adsScrollView == null) {
-                    val view = NativeAdScrollView(context, adsManager, NativeAdView.Type.HEIGHT_300)
-                    view.id = itemId
-                    flAdsContainer.addView(view)
-                }
+                flAdsContainer.removeAllViews()
+                val view = NativeAdScrollView(context, adsManager, NativeAdView.Type.HEIGHT_300)
+                flAdsContainer.addView(view)
             }
 
             override fun onAdError(adError: AdError) {
@@ -47,6 +45,10 @@ class HorizontalAdsView(context: Context) : FrameLayout(context) {
         if (!adsManager.isLoaded) {
             progressBar.visibility = View.VISIBLE
         }
+    }
+
+    fun unbind() {
+        adsManager.setListener(null)
     }
 
 }

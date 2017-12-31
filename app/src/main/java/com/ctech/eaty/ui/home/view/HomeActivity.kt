@@ -96,7 +96,6 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
                 .subscribe()
         store.dispatch(HomeAction.LOAD_USER)
         networkController.registerNetworkMonitor()
-
     }
 
     private fun setupViewModel() {

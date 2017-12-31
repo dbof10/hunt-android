@@ -1,14 +1,18 @@
 package com.ctech.eaty.ui.home.component
 
-import android.util.Log
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.component.daily.DailyProductsGroupSection
-import com.ctech.eaty.ui.home.component.upcoming.UpcomingProductsGroupSection
+import com.ctech.eaty.ui.home.component.popular.NewProductsComponent
+import com.ctech.eaty.ui.home.component.topic.TopicsComponent
+import com.ctech.eaty.ui.home.component.upcoming.UpcomingProductsComponent
 import com.ctech.eaty.ui.home.model.DailyProducts
 import com.ctech.eaty.ui.home.model.FeedFooter
+import com.ctech.eaty.ui.home.model.FooterType
 import com.ctech.eaty.ui.home.model.HomeFeed
-import com.ctech.eaty.ui.home.model.Type
+import com.ctech.eaty.ui.home.model.NewProducts
+import com.ctech.eaty.ui.home.model.SuggestedProducts
+import com.ctech.eaty.ui.home.model.SuggestedTopics
 import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.state.HomeState
 import com.facebook.litho.ClickEvent
@@ -50,20 +54,22 @@ object HomeFeedSectionSpec {
                 }
             } else if (it is UpcomingProducts) {
                 builder.child(
-                        UpcomingProductsGroupSection.create(c)
-                                .products(it)
-                                .store(store)
+                        SingleComponentSection.create(c)
+                                .component(
+                                        UpcomingProductsComponent.create(c)
+                                                .products(it)
+                                                .store(store)
+                                )
                                 .key(it.label)
-                                .build()
                 )
             } else if (it is FeedFooter) {
-                if (it.type == Type.LOADING) {
+                if (it.type == FooterType.LOADING) {
                     builder.child(
                             SingleComponentSection.create(c)
                                     .component(LoadingFooterComponent.create(c).build())
                                     .key(KEY_FOOTER_LOADING)
                     )
-                } else if (it.type == Type.ERROR) {
+                } else if (it.type == FooterType.ERROR) {
                     builder.child(
                             SingleComponentSection
                                     .create(c)
@@ -75,6 +81,39 @@ object HomeFeedSectionSpec {
                                     .key(KEY_FOOTER_ERROR)
                     )
                 }
+            } else if (it is NewProducts) {
+                builder.child(
+                        SingleComponentSection.create(c)
+                                .component(
+                                        NewProductsComponent.create(c)
+                                                .products(it)
+                                                .store(store)
+                                                .build()
+                                )
+                                .key(it.label)
+                )
+            } else if (it is SuggestedProducts) {
+                builder.child(
+                        SingleComponentSection.create(c)
+                                .component(
+                                        NewProductsComponent.create(c)
+                                                .products(it)
+                                                .store(store)
+                                                .build()
+                                )
+                                .key(it.label)
+                )
+            } else if (it is SuggestedTopics) {
+                builder.child(
+                        SingleComponentSection.create(c)
+                                .component(
+                                        TopicsComponent.create(c)
+                                                .topics(it)
+                                                .store(store)
+                                                .build()
+                                )
+                                .key(it.label)
+                )
             }
         }
 
@@ -97,7 +136,7 @@ object HomeFeedSectionSpec {
             fistFullyVisible: Int,
             lastFullyVisible: Int,
             @Prop store: Store<HomeState>) {
-        val threshold = 6
+        val threshold = 10
         val state = store.getState()
         if (totalCount - lastVisible < threshold && state.loadMoreError == null) {
             store.dispatch(HomeAction.LOAD_MORE)

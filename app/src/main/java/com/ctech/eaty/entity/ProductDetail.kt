@@ -2,7 +2,6 @@ package com.ctech.eaty.entity
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
-import io.realm.RealmModel
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 
@@ -29,7 +28,7 @@ data class ProductDetail(val id: Int = -1,
                          val currentUser: CurrentUser = CurrentUser(),
                          val media: List<Media> = emptyList(),
                          @SerializedName("created_at")
-                         val createdAt: DateTime = DateTime.now())  {
+                         val createdAt: DateTime = DateTime.now()) {
 
     companion object {
         val EMPTY = ProductDetail()
@@ -40,8 +39,8 @@ data class ProductDetail(val id: Int = -1,
         val commentList = RealmList<CommentRealm>()
         commentList.addAll(comments.map { it.makeRealm() })
 
-        val topicList = RealmList<Topic>()
-        topicList.addAll(topics)
+        val topicList = RealmList<TopicRealm>()
+        topicList.addAll(topics.map { it.makeRealm() })
 
         val makersList = RealmList<UserRealm>()
         makersList.addAll(makers.map { it.makeRealm() })

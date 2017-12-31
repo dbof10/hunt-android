@@ -154,6 +154,7 @@ class NetworkModule {
                 .serverUrl(GRAPHQL_URL)
                 .normalizedCache(memoryFirstThenDBCacheFactory, resolver)
                 .addCustomTypeAdapter(CustomType.JSON, ApolloTypedAdapterFactory.TYPED_JSON)
+                .addCustomTypeAdapter(CustomType.DATETIME, ApolloTypedAdapterFactory.TYPED_DATE_TIME)
                 .okHttpClient(okHttpClient)
                 .build()
     }

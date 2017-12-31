@@ -23,7 +23,7 @@ import com.facebook.yoga.YogaJustify
 object FooterActionComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
+    fun onCreateLayout(c: ComponentContext,
                        @Prop actionResId: Int,
                        @Prop actionLabelResId: Int): ComponentLayout {
         return Row.create(c)

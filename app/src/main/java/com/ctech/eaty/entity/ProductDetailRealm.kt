@@ -10,7 +10,7 @@ open class ProductDetailRealm(var id: Int = -1,
                               var commentCount: Int = 0,
                               var name: String = "",
                               var tagline: String = "",
-                              var topics: RealmList<Topic> = RealmList(),
+                              var topics: RealmList<TopicRealm> = RealmList(),
                               var makers: RealmList<UserRealm> = RealmList(),
                               var thumbnail: ThumbNailRealm? = ThumbNailRealm.EMPTY, // ? by Realm requirement
                               var redirectUrl: String = "",
@@ -31,7 +31,7 @@ open class ProductDetailRealm(var id: Int = -1,
 
         val fmt = ISODateTimeFormat.dateTimeParser()
 
-        return ProductDetail(id, commentCount, name, tagline, topics.toList(),
+        return ProductDetail(id, commentCount, name, tagline, topics.map { it.makeTopic() },
                 makers.map { it.makeUser() }, thumbnail!!.makeThumbnail(), redirectUrl,
                 hunter!!.makeUser(), voteCount,
                 comments.map { it.makeComment() },

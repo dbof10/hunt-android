@@ -20,39 +20,18 @@ object FooterComponentSpec {
 
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
-        val resources = c.resources
 
         return Column.create(c)
                 .backgroundColor(ContextCompat.getColor(c, R.color.white_100))
                 .child(
-                        Row.create(c)
-                                .child(
-                                        Text.create(c, 0, R.style.Text_Body)
-                                                .text(resources.getQuantityString(R.plurals.like, viewModel.votesCount, viewModel.votesCount))
-                                                .marginRes(YogaEdge.START, R.dimen.space_small)
-                                )
-                                .child(
-                                        Text.create(c, 0, R.style.Text_Body)
-                                                .text("•")
-                                                .marginRes(YogaEdge.START, R.dimen.space_small)
-                                                .marginRes(YogaEdge.END, R.dimen.space_small)
-
-                                )
-                                .child(
-                                        Text.create(c, 0, R.style.Text_Body)
-                                                .text(resources.getQuantityString(R.plurals.comment, viewModel.commentsCount, viewModel.commentsCount))
-                                )
-                                .flex(1F)
-                                .marginRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
-                                .marginRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
-                                .justifyContent(YogaJustify.FLEX_START)
-                                .build()
+                        FooterSocialComponent.create(c)
+                                .viewModel(viewModel)
                 )
                 .child(
                         SolidColor.create(c)
                                 .colorRes(R.color.divider_color)
                                 .flex(1F)
-                                .heightPx(2)
+                                .heightRes(R.dimen.divider_height)
                 )
                 .child(
                         Row.create(c)

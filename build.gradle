@@ -20,7 +20,7 @@ buildscript {
         classpath('com.google.firebase:firebase-plugins:1.1.0') {
             exclude group: 'com.google.guava', module: 'guava-jdk5'
         }
-        classpath 'com.uber:okbuck:0.31.4'
+        classpath 'com.uber:okbuck:0.32.1'
 
 
         // NOTE: Do not place your application dependencies here; they belong

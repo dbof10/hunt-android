@@ -50,8 +50,11 @@ object HorizontalAdsSectionSpec {
                 .viewBinder(object : SimpleViewBinder<HorizontalAdsView>() {
                     override fun bind(adsView: HorizontalAdsView) {
                         val adsManager = NativeAdsManager(adsView.context, model.adId, 5)
-                        adsView.with(model.id)
-                                .bind(adsManager)
+                        adsView.bind(adsManager)
+                    }
+
+                    override fun unbind(view: HorizontalAdsView) {
+                        view.unbind()
                     }
                 })
                 .build()

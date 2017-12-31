@@ -1,0 +1,185 @@
+query SidebarCardsLayout($page: String, $slug: String) {
+  sidebarCards: cards(first: 5, kind: SIDEBAR, page: $page, page_slug: $slug) {
+    edges {
+      node {
+        ...SidebarCards
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment SidebarCards on Card {
+  ...AchievementsPathCard
+  ...AskSidebarCard
+  ...CollectionsCard
+  ...EmailDigestCard
+  ...GiveAwayCard
+  ...BookCard
+  ...NewsletterCard
+  ...UpcomingPagesCard
+  ...UpcomingPageEarlyAccessCard
+  ...BestOfPageCard
+  __typename
+}
+
+fragment AchievementsPathCard on AchievementsPathCard {
+  is_dismissed
+  contributor_path {
+    achievements_completed {
+      name
+      __typename
+    }
+    achievements_left {
+      name
+      __typename
+    }
+    achievements_left_count
+    complete
+    percentage_complete
+    user_eligible
+    __typename
+  }
+  __typename
+}
+
+fragment AskSidebarCard on AskProductHuntCard {
+  is_dismissed
+  product_request {
+    id
+    title
+    body_html
+    path
+    recommended_products_count
+    user {
+      id
+      twitter_username
+      ...UserSpotlight
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+
+fragment CollectionsCard on CollectionsCard {
+  is_dismissed
+  collections {
+    ...CollectionCard
+    __typename
+  }
+  __typename
+}
+
+fragment CollectionCard on Collection {
+  id
+  name
+  title
+  path
+  ...CollectionHeaderImageUrl
+  ...CollectionCurators
+  __typename
+}
+
+fragment CollectionHeaderImageUrl on Collection {
+  background_image_banner_url
+  __typename
+}
+
+fragment CollectionCurators on Collection {
+  id
+  user {
+    id
+    name
+    ...UserImageLink
+    __typename
+  }
+  curators {
+    id
+    name
+    ...UserImageLink
+    __typename
+  }
+  __typename
+}
+
+fragment EmailDigestCard on EmailDigestCard {
+  is_dismissed
+  subject {
+    id
+    name
+    __typename
+  }
+  __typename
+}
+
+fragment GiveAwayCard on GiveAwayCard {
+  is_dismissed
+  give_away {
+    id
+    title
+    link
+    image_url
+    button_text
+    __typename
+  }
+  __typename
+}
+
+fragment BookCard on BookCard {
+  is_dismissed
+  book {
+    id
+    title
+    link
+    image_url
+    button_text
+    __typename
+  }
+  __typename
+}
+
+fragment NewsletterCard on NewsletterCard {
+  is_dismissed
+  newsletter {
+    id
+    date
+    subject
+    primary_section {
+      image_uuid
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment UpcomingPagesCard on UpcomingPagesCard {
+  is_dismissed
+  upcoming_pages {
+    ...UpcomingPageCard
+    __typename
+  }
+  __typename
+}
+
+fragment UpcomingPageEarlyAccessCard on UpcomingPageEarlyAccessCard {
+  is_dismissed
+  __typename
+}
+
+fragment BestOfPageCard on BestOfPageCard {
+  is_dismissed
+  best_of_page {
+    id
+    name
+    description
+    slug
+    thumbnail_uuid
+    __typename
+  }
+  __typename
+}

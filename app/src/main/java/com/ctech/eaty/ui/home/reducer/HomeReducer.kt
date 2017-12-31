@@ -4,13 +4,19 @@ import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.ui.home.model.DailyProducts
 import com.ctech.eaty.ui.home.model.FeedFooter
+import com.ctech.eaty.ui.home.model.FooterType
 import com.ctech.eaty.ui.home.model.HomeFeed
-import com.ctech.eaty.ui.home.model.Type
+import com.ctech.eaty.ui.home.model.NewProducts
+import com.ctech.eaty.ui.home.model.SuggestedProducts
+import com.ctech.eaty.ui.home.model.SuggestedTopics
 import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.result.CheckLoginResult
 import com.ctech.eaty.ui.home.result.DisableDataSaverResult
 import com.ctech.eaty.ui.home.result.LoadMoreResult
+import com.ctech.eaty.ui.home.result.LoadNewPostResult
 import com.ctech.eaty.ui.home.result.LoadResult
+import com.ctech.eaty.ui.home.result.LoadSuggestedProductsResult
+import com.ctech.eaty.ui.home.result.LoadTopicResult
 import com.ctech.eaty.ui.home.result.LoadUpcomingProductResult
 import com.ctech.eaty.ui.home.result.LoadUserResult
 import com.ctech.eaty.ui.home.result.RefreshResult
@@ -41,8 +47,7 @@ class HomeReducer : Reducer<HomeState> {
                     else -> state.copy(
                             loading = false,
                             loadError = null,
-                            content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
-                            cursor = result.cursor)
+                            content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)))
                 }
             }
             is RefreshResult -> {
@@ -56,7 +61,8 @@ class HomeReducer : Reducer<HomeState> {
                             refreshError = null,
                             loadError = null,
                             content = listOf(DailyProducts(StickyItemViewModel(0, DateUtils.getRelativeTime(result.date)), result.content)),
-                            dayAgo = 0)
+                            dayAgo = 0,
+                            page = 0)
                 }
             }
             is LoadMoreResult -> {
@@ -77,7 +83,47 @@ class HomeReducer : Reducer<HomeState> {
                             loadMoreError = null,
                             content = addFeed(state, result),
                             dayAgo = result.dayAgo,
-                            cursor = result.cursor)
+                            page = result.page)
+                }
+            }
+            is LoadNewPostResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null
+                    )
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            page = result.page)
+                }
+            }
+            is LoadSuggestedProductsResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null
+                    )
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            page = result.page)
                 }
             }
             is LoadUserResult -> {
@@ -114,7 +160,27 @@ class HomeReducer : Reducer<HomeState> {
                             refreshError = null,
                             loadMoreError = null,
                             content = addFeed(state, result),
-                            cursor = result.cursor
+                            page = result.page
+                    )
+                }
+            }
+            is LoadTopicResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null)
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            page = result.page
                     )
                 }
             }
@@ -125,7 +191,7 @@ class HomeReducer : Reducer<HomeState> {
     }
 
     private fun addError(state: HomeState): List<HomeFeed> {
-        return state.content.plus(FeedFooter(Type.ERROR))
+        return state.content.plus(FeedFooter(FooterType.ERROR))
     }
 
     private fun removeLoading(state: HomeState): List<HomeFeed> {
@@ -133,7 +199,7 @@ class HomeReducer : Reducer<HomeState> {
     }
 
     private fun addLoading(state: HomeState): List<HomeFeed> {
-        return state.content.plus(FeedFooter(Type.LOADING))
+        return state.content.plus(FeedFooter(FooterType.LOADING))
     }
 
     private fun addFeed(state: HomeState, result: LoadUpcomingProductResult): List<HomeFeed> {
@@ -158,7 +224,21 @@ class HomeReducer : Reducer<HomeState> {
         }
     }
 
-    //HorizontalAdsItemViewModel(result.dayAgo, AD_ID) +
+    private fun addFeed(state: HomeState, result: LoadNewPostResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(NewProducts(StickyItemViewModel(0, "Popular this month"), result.content))
+    }
+
+    private fun addFeed(state: HomeState, result: LoadSuggestedProductsResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(SuggestedProducts(StickyItemViewModel(0, "Suggested products for you"), result.content))
+    }
+
+    private fun addFeed(state: HomeState, result: LoadTopicResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(SuggestedTopics(StickyItemViewModel(0, "Topic you may be interested"), result.content))
+    }
+
     private fun addFeed(state: HomeState, result: LoadMoreResult): List<HomeFeed> {
 
         val lastFeed = removeLoading(state)

@@ -50,6 +50,15 @@
     <dimen name="network_error_footer_size">56dp</dimen>
     <dimen name="navigation_header">220dp</dimen>
 
+    <!-- New product -->
+    <dimen name="feed_horizontal_product_height">256dp</dimen>
+    <dimen name="feed_horizontal_product_width">308dp</dimen>
+
+    <!-- Topic -->
+    <dimen name="feed_topic_height">128dp</dimen>
+    <dimen name="feed_topic_width">128dp</dimen>
+
+
     <!-- Upcoming Product -->
     <dimen name="upcoming_product_height">164dp</dimen>
     <dimen name="upcoming_foreground_product_size">96dp</dimen>

@@ -4,13 +4,17 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.fetcher.ApolloResponseFetchers
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.ctech.eaty.CreateUpcomingPageSubscriberMutation
+import com.ctech.eaty.HomeCardsQuery
 import com.ctech.eaty.UpcomingPagesPageQuery
 import com.ctech.eaty.UpcomingShowPageQuery
+import com.ctech.eaty.entity.HomeCard
+import com.ctech.eaty.entity.HomeCardType
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.entity.UpcomingDetail
 import com.ctech.eaty.entity.UpcomingProduct
 import com.ctech.eaty.network.ProductHuntApi
+import com.ctech.eaty.repository.mapper.HomeCardMapper
 import com.ctech.eaty.repository.mapper.ProductMapper
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.ProductResponse
@@ -20,15 +24,19 @@ import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
 import timber.log.Timber
+import javax.inject.Inject
 
 
-class ProductRepository(private val homeStore: Store<ProductResponse, BarCode>,
-                        private val productStore: Store<ProductDetailResponse, BarCode>,
-                        private val searchStore: Store<ProductResponse, SearchBarCode>,
-                        private val apiClient: ProductHuntApi,
-                        private val apolloClient: ApolloClient,
-                        private val mapper: ProductMapper,
-                        private val appSettingsManager: AppSettingsManager) {
+class ProductRepository @Inject constructor(
+        private val homeStore: Store<ProductResponse, BarCode>,
+        private val productStore: Store<ProductDetailResponse, BarCode>,
+        private val searchStore: Store<ProductResponse, SearchBarCode>,
+        private val apiClient: ProductHuntApi,
+        private val apolloClient: ApolloClient,
+        private val productMapper: ProductMapper,
+        private val cardMapper: HomeCardMapper,
+        private val appSettingsManager: AppSettingsManager
+) {
     fun getHomePosts(barcode: BarCode, forcedLoad: Boolean = false): Observable<ProductResponse> {
         val stream = if (forcedLoad) homeStore.fetch(barcode) else homeStore.get(barcode)
         return stream
@@ -56,25 +64,6 @@ class ProductRepository(private val homeStore: Store<ProductResponse, BarCode>,
                 .retryWhen(RefreshTokenFunc(apiClient, appSettingsManager))
     }
 
-    fun getUpcomingProducts(cursor: String?): Observable<List<UpcomingProduct>> {
-
-        val query = UpcomingPagesPageQuery.builder()
-                .cursor(cursor)
-                .build()
-
-        val apolloCall = apolloClient.query(query)
-                .responseFetcher(ApolloResponseFetchers.CACHE_AND_NETWORK)
-
-        return Rx2Apollo.from(apolloCall)
-                .filter {
-                    it.data() != null
-                }
-                .map {
-                    mapper.toUpcomingProducts(it.data()!!.upcomingPages()!!)
-                }
-
-    }
-
     fun getUpcomingProductDetail(slug: String): Observable<UpcomingDetail> {
 
         val query = UpcomingShowPageQuery.builder()
@@ -90,7 +79,7 @@ class ProductRepository(private val homeStore: Store<ProductResponse, BarCode>,
                     it.data() != null
                 }
                 .map {
-                    mapper.toUpcomingDetail(it.data()!!)
+                    productMapper.toUpcomingDetail(it.data()!!)
                 }
     }
 
@@ -117,6 +106,25 @@ class ProductRepository(private val homeStore: Store<ProductResponse, BarCode>,
                         return@flatMap Observable.just(true)
                     }
                 }
+    }
+
+    fun getHomeCard(@HomeCardType type: String): Observable<HomeCard> {
+
+        val query = HomeCardsQuery.builder()
+                .cursor(null)
+                .page("home")
+                .build()
+        val apolloCall = apolloClient.query(query)
+                .responseFetcher(ApolloResponseFetchers.CACHE_FIRST)
+
+        return Rx2Apollo.from(apolloCall)
+                .filter {
+                    it.data() != null
+                }
+                .map {
+                    cardMapper.toCard(type, it.data()!!)
+                }
+
     }
 
 

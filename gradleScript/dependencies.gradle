@@ -26,11 +26,11 @@ def support = [
 ]
 
 def dagger = [
-        lib            : 'com.google.dagger:dagger:2.13',
-        compiler       : 'com.google.dagger:dagger-compiler:2.13',
-        android        : 'com.google.dagger:dagger-android:2.13',
-        androidSupport : 'com.google.dagger:dagger-android-support:2.13',
-        androidCompiler: 'com.google.dagger:dagger-android-processor:2.13'
+        lib            : 'com.google.dagger:dagger:2.14.1',
+        compiler       : 'com.google.dagger:dagger-compiler:2.14.1',
+        android        : 'com.google.dagger:dagger-android:2.14.1',
+        androidSupport : 'com.google.dagger:dagger-android-support:2.14.1',
+        androidCompiler: 'com.google.dagger:dagger-android-processor:2.14.1'
 ]
 
 def butterknife = [
@@ -67,10 +67,10 @@ def network = [
 ]
 
 def glide = [
-        lib         : 'com.github.bumptech.glide:glide:4.3.1',
-        compiler    : 'com.github.bumptech.glide:compiler:4.3.1',
-        okhttp      : "com.github.bumptech.glide:okhttp3-integration:4.3.1",
-        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.3.1'
+        lib         : 'com.github.bumptech.glide:glide:4.4.0',
+        compiler    : 'com.github.bumptech.glide:compiler:4.4.0',
+        okhttp      : "com.github.bumptech.glide:okhttp3-integration:4.4.0",
+        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.4.0'
 ]
 
 def store = [

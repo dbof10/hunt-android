@@ -1,0 +1,342 @@
+query HomePage($cursor: String, $page: String) {
+     cards(first: 10, after: $cursor, kind: FEED, page: $page) {
+          edges {
+            node {
+              ...FeedCards
+              __typename
+            }
+          }
+        }
+}
+
+fragment PostItemList on Post {
+  id
+  ...PostItem
+}
+
+fragment PostItem on Post {
+  id
+  comments_count
+  name
+  tagline
+  ...CollectButton
+  ...PostThumbnail
+  ...PostVoteButton
+}
+
+fragment CollectButton on Post {
+  id
+  name
+}
+
+fragment PostThumbnail on Post {
+  id
+  thumbnail {
+    id
+    media_type
+    ...MediaThumbnail
+  }
+  ...PostStatusIcons
+}
+
+fragment MediaThumbnail on Media {
+  id
+  image_uuid
+}
+
+fragment PostStatusIcons on Post {
+  name
+  product_state
+}
+
+fragment PostVoteButton on Post {
+  _id
+  id
+  featured_at
+  disabled_when_scheduled
+  ... on Votable {
+    id
+    votes_count
+  }
+}
+
+fragment TopicFollowButtonList on Topicable {
+  id
+  topics {
+    edges {
+      node {
+        id
+        ...TopicFollowButton
+      }
+    }
+  }
+}
+
+fragment TopicFollowButton on Topic {
+  id
+  name
+  __typename
+}
+
+fragment FeedCards on Card {
+  ...AskProductHuntCard
+  ...CollectionFeedCard
+  ...FeedUpcomingPagesCard
+  ...JobsCard
+  ...LiveChatCard
+  ...NewPostsCard
+  ...TopicCard
+  ...TopicsCard
+  __typename
+}
+
+fragment AskProductHuntCard on AskProductHuntCard {
+  is_dismissed
+  product_request {
+    _id
+    id
+    ...ProductRequestItem
+  }
+}
+
+fragment ProductRequestItem on ProductRequest {
+  _id
+  id
+  body_html
+  created_at
+  is_advice
+  path
+  recommended_products_count
+  title
+  recommended_products(first: 3, filter: FEATURED, order: VOTES) {
+    edges {
+      node {
+        _id
+        id
+        ...ProductRequestItemRecommendedProduct
+      }
+    }
+  }
+  user {
+    _id
+    id
+    ...UserSpotlight
+  }
+  ... on Commentable {
+    _id
+    id
+    comments_count
+  }
+  ...ProductRequestFollowButton
+  ...ProductRequestItemModerationInfo
+  ...ProductRequestMenuButton
+  ...ProductRequestShareButton
+  ...TopicFollowButtonList
+}
+
+fragment ProductRequestItemModerationInfo on ProductRequest {
+  _id
+  id
+  featured_at
+  related_product_requests_count
+  seo_description
+  seo_title
+}
+
+fragment ProductRequestItemRecommendedProduct on RecommendedProduct {
+  _id
+  id
+  product {
+    id
+    posts(first: 1, filter: FEATURED) {
+      edges {
+        node {
+          _id
+          id
+          name
+          path
+          slug
+          tagline
+        }
+      }
+    }
+    thumbnail_media {
+      id
+      ...MediaThumbnail
+    }
+  }
+  ...RecommendedProductVoteButton
+}
+
+fragment RecommendedProductVoteButton on RecommendedProduct {
+  _id
+  id
+  ... on Votable {
+    _id
+    id
+    has_voted
+    votes_count
+  }
+}
+
+
+fragment ProductRequestFollowButton on ProductRequest {
+  _id
+  id
+  has_followed
+}
+
+fragment ProductRequestMenuButton on ProductRequest {
+  _id
+  id
+  can_destroy
+  can_edit
+  path
+}
+
+fragment ProductRequestShareButton on ProductRequest {
+  _id
+  id
+  ...FacebookShare
+}
+
+fragment FacebookShare on Shareable {
+  _id
+  id
+  url
+}
+
+fragment CollectionFeedCard on CollectionCard {
+  is_dismissed
+  collection {
+    id
+    name
+    title
+    background_image_banner_url
+    path
+    user {
+      id
+      name
+    }
+    items(first: 5) {
+      edges {
+        node {
+          post {
+            id
+            name
+            tagline
+            thumbnail {
+              id
+              image_uuid
+              media_type
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment JobsCard on JobsCard {
+  is_dismissed
+  jobs(first: 10) {
+    edges {
+      node {
+        id
+        company_name
+        job_title
+        image_uuid
+        url
+      }
+    }
+  }
+}
+
+fragment LiveChatCard on LiveChatCard {
+  is_dismissed
+  upcoming_live_chats {
+    id
+    name
+    tagline
+    slug
+    ...LiveChatImage
+    ...AmaEventSubscribeButton
+  }
+  upcoming_featured {
+    id
+    name
+    tagline
+    starts_at
+    ends_at
+    subscriber_count
+    slug
+    ...LiveChatImage
+    ...AmaEventSubscribeButton
+  }
+}
+
+fragment LiveChatImage on LiveChat {
+  schedule_image_uuid
+  guests {
+    id
+  }
+}
+
+fragment AmaEventSubscribeButton on LiveChat {
+  starts_at
+  ends_at
+  twitter_username
+  name
+  id
+}
+
+fragment NewPostsCard on NewPostsCard {
+  is_dismissed
+  kind
+  posts {
+    ...PostItemList
+  }
+}
+
+fragment TopicCard on TopicCard {
+  is_dismissed
+  topic {
+    id
+    name
+    ...TopicImage
+    posts(first: 10) {
+      edges {
+        node {
+          id
+          name
+          tagline
+          thumbnail {
+            id
+            image_uuid
+            media_type
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment TopicImage on Topic {
+  image_uuid
+}
+
+fragment TopicsCard on TopicsCard {
+  is_dismissed
+  topics {
+    id
+    name
+    ...TopicImage
+  }
+}
+
+fragment FeedUpcomingPagesCard on UpcomingPagesCard {
+  is_dismissed
+  upcoming_pages {
+    ...UpcomingPageItem
+  }
+}
