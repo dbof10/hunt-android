@@ -1,4 +1,4 @@
-query HomePage($cursor: String, $page: String) {
+query HomeCards($cursor: String, $page: String) {
      cards(first: 10, after: $cursor, kind: FEED, page: $page) {
           edges {
             node {
