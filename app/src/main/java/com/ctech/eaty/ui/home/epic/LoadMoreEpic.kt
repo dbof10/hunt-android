@@ -9,6 +9,8 @@ import com.ctech.eaty.repository.AppSettingsManager
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.ui.app.AppState
 import com.ctech.eaty.ui.home.action.HomeAction
+import com.ctech.eaty.ui.home.result.LoadCollectionResult
+import com.ctech.eaty.ui.home.result.LoadJobResult
 import com.ctech.eaty.ui.home.result.LoadMoreResult
 import com.ctech.eaty.ui.home.result.LoadNewPostResult
 import com.ctech.eaty.ui.home.result.LoadSuggestedProductsResult
@@ -51,11 +53,12 @@ class LoadMoreEpic(productRepository: ProductRepository,
                                     internalState = EpicProgress.IDLE
                                 }
                                 .startWith(LoadUpcomingProductResult.inProgress())
-                        5 -> return@flatMap loadStrategy.fetchNewProducts(page)
+
+                        5 -> return@flatMap loadStrategy.fetchCollection(page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE
                                 }
-                                .startWith(LoadNewPostResult.inProgress())
+                                .startWith(LoadCollectionResult.inProgress())
                         7 -> return@flatMap loadStrategy.fetchSuggestedTopics(page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE
@@ -67,6 +70,16 @@ class LoadMoreEpic(productRepository: ProductRepository,
                                 }
                                 .startWith(LoadSuggestedProductsResult.inProgress())
 
+                        11 -> return@flatMap loadStrategy.fetchHotJobs(page)
+                                .doOnNext {
+                                    internalState = EpicProgress.IDLE
+                                }
+                                .startWith(LoadJobResult.inProgress())
+                        13 -> return@flatMap loadStrategy.fetchNewProducts(page)
+                                .doOnNext {
+                                    internalState = EpicProgress.IDLE
+                                }
+                                .startWith(LoadNewPostResult.inProgress())
                         else -> return@flatMap loadStrategy.fetchDailyProducts(dayAgo, page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE

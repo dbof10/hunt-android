@@ -213,11 +213,6 @@ fragment CollectionFeedCard on CollectionCard {
     name
     title
     background_image_banner_url
-    path
-    user {
-      id
-      name
-    }
     items(first: 5) {
       edges {
         node {

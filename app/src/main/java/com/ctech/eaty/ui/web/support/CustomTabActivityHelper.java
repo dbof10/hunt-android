@@ -1,6 +1,7 @@
 package com.ctech.eaty.ui.web.support;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsClient;
 import android.support.customtabs.CustomTabsIntent;
@@ -13,19 +14,19 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
     private CustomTabsServiceConnection mConnection;
     private ConnectionCallback mConnectionCallback;
 
-    public static void openCustomTab(Activity activity,
+    public static void openCustomTab(Context context,
                                      CustomTabsIntent customTabsIntent,
                                      Uri uri,
                                      CustomTabFallback fallback) {
-        String packageName = CustomTabsHelper.getPackageNameToUse(activity);
+        String packageName = CustomTabsHelper.getPackageNameToUse(context);
 
         if (packageName == null) {
             if (fallback != null) {
-                fallback.openUri(activity, uri);
+                fallback.openUri(context, uri);
             }
         } else {
             customTabsIntent.intent.setPackage(packageName);
-            customTabsIntent.launchUrl(activity, uri);
+            customTabsIntent.launchUrl(context, uri);
         }
     }
 
@@ -96,6 +97,6 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
 
     public interface CustomTabFallback {
 
-        void openUri(Activity activity, Uri uri);
+        void openUri(Context activity, Uri uri);
     }
 }

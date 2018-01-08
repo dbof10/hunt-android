@@ -2,7 +2,9 @@ package com.ctech.eaty.ui.home.component
 
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.action.HomeAction
+import com.ctech.eaty.ui.home.component.collection.CollectionComponent
 import com.ctech.eaty.ui.home.component.daily.DailyProductsGroupSection
+import com.ctech.eaty.ui.home.component.job.JobsComponent
 import com.ctech.eaty.ui.home.component.popular.NewProductsComponent
 import com.ctech.eaty.ui.home.component.topic.TopicsComponent
 import com.ctech.eaty.ui.home.component.upcoming.UpcomingProductsComponent
@@ -10,7 +12,9 @@ import com.ctech.eaty.ui.home.model.DailyProducts
 import com.ctech.eaty.ui.home.model.FeedFooter
 import com.ctech.eaty.ui.home.model.FooterType
 import com.ctech.eaty.ui.home.model.HomeFeed
+import com.ctech.eaty.ui.home.model.Jobs
 import com.ctech.eaty.ui.home.model.NewProducts
+import com.ctech.eaty.ui.home.model.SuggestedCollection
 import com.ctech.eaty.ui.home.model.SuggestedProducts
 import com.ctech.eaty.ui.home.model.SuggestedTopics
 import com.ctech.eaty.ui.home.model.UpcomingProducts
@@ -110,6 +114,26 @@ object HomeFeedSectionSpec {
                                         TopicsComponent.create(c)
                                                 .topics(it)
                                                 .store(store)
+                                                .build()
+                                )
+                                .key(it.label)
+                )
+            } else if (it is Jobs) {
+                builder.child(
+                        SingleComponentSection.create(c)
+                                .component(
+                                        JobsComponent.create(c)
+                                                .jobs(it)
+                                                .build()
+                                )
+                                .key(it.label)
+                )
+            } else if (it is SuggestedCollection) {
+                builder.child(
+                        SingleComponentSection.create(c)
+                                .component(
+                                        CollectionComponent.create(c)
+                                                .collection(it)
                                                 .build()
                                 )
                                 .key(it.label)

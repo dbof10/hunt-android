@@ -43,7 +43,7 @@
         android:layout_toStartOf="@id/tvTimeStamp"
         android:ellipsize="end"
         android:lines="1"
-        android:textAppearance="@style/TextAppearance.UserName"
+        android:textAppearance="@style/Text.Title3"
         tools:text="Nick B" />
 
     <com.ctech.eaty.widget.ViewMoreTextView

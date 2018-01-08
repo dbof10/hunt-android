@@ -39,7 +39,7 @@ object TopicComponentSpec {
                                 .create(c)
                                 .progressBarImage(CircleProgressBarDrawable(c))
                                 .controller(controller)
-                                .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
+                                .actualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                                 .heightRes(R.dimen.feed_topic_height)
                 )
                 .child(

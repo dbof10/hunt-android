@@ -59,6 +59,14 @@
     <dimen name="feed_topic_width">128dp</dimen>
 
 
+    <!-- Job -->
+    <dimen name="feed_job_size">96dp</dimen>
+
+    <!-- Collection -->
+    <dimen name="collection_product_width">112dp</dimen>
+    <dimen name="collection_product_height">@dimen/feed_job_size</dimen>
+
+
     <!-- Upcoming Product -->
     <dimen name="upcoming_product_height">164dp</dimen>
     <dimen name="upcoming_foreground_product_size">96dp</dimen>

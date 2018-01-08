@@ -1,18 +1,16 @@
 package com.ctech.eaty.repository.mapper
 
-import android.util.Log
-import com.ctech.eaty.UpcomingPagesPageQuery
 import com.ctech.eaty.UpcomingShowPageQuery
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.entity.ImageUrl
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.ThumbNail
-import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.entity.UpcomingBody
 import com.ctech.eaty.entity.UpcomingBodyMessage
 import com.ctech.eaty.entity.UpcomingDetail
 import com.ctech.eaty.entity.UpcomingProduct
 import com.ctech.eaty.entity.User
+import com.ctech.eaty.fragment.CollectionFeedCard
 import com.ctech.eaty.fragment.PostItem
 import com.ctech.eaty.fragment.TopicCard
 import com.ctech.eaty.fragment.UpcomingPageItem
@@ -37,15 +35,6 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
                     payload.tagline() ?: "",
                     payload.background_image_uuid() ?: "",
                     payload.logo_uuid() ?: "")
-        }
-    }
-
-    fun toUpcomingProducts(item: UpcomingPagesPageQuery.UpcomingPages): List<UpcomingProduct> {
-        val nodes = item.edges()!!.map { it.node()!! }
-
-        return nodes.map {
-            val payload = it.fragments().upcomingPageItem()
-            toUpcomingProduct(payload)
         }
     }
 
@@ -129,4 +118,12 @@ class ProductMapper @Inject constructor(private val gson: Gson) {
     }
 
 
+    fun toProduct(node: CollectionFeedCard.Post): Product {
+        return with(node) {
+            val rawThumbnail = node.thumbnail()!!
+            val thumbnail = com.ctech.eaty.entity.ThumbNail(id = rawThumbnail.id().toInt(), imageUUID = rawThumbnail.image_uuid())
+            Product(id = id().toInt(), name = name(), tagline = tagline(),
+                    thumbnail = thumbnail)
+        }
+    }
 }

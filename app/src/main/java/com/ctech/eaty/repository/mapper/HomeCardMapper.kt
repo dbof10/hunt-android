@@ -1,8 +1,13 @@
 package com.ctech.eaty.repository.mapper
 
 import com.ctech.eaty.HomeCardsQuery
+import com.ctech.eaty.entity.COLLECTION
+import com.ctech.eaty.entity.CollectionCard
 import com.ctech.eaty.entity.HomeCard
 import com.ctech.eaty.entity.HomeCardType
+import com.ctech.eaty.entity.JOBS
+import com.ctech.eaty.entity.Job
+import com.ctech.eaty.entity.JobCard
 import com.ctech.eaty.entity.NEW_POSTS
 import com.ctech.eaty.entity.NewPostCard
 import com.ctech.eaty.entity.SUGGESTED_PRODUCTS
@@ -27,12 +32,26 @@ class HomeCardMapper @Inject constructor(private val productMapper: ProductMappe
                 it.node()!!.__typename() == NEW_POSTS -> handledNodes.add(toNewPosts(it!!))
                 it.node()!!.__typename() == SUGGESTED_TOPIC -> handledNodes.add(toTopics(it!!))
                 it.node()!!.__typename() == SUGGESTED_PRODUCTS -> handledNodes.add(toSuggestedProducts(it!!))
+                it.node()!!.__typename() == JOBS -> handledNodes.add(toJobs(it!!))
+                it.node()!!.__typename() == COLLECTION -> handledNodes.add(toCollection(it!!))
+
             }
         }
 
         return handledNodes.first {
             it.type == type
         }
+    }
+
+    private fun toCollection(edge: HomeCardsQuery.Edge): CollectionCard {
+        val card = edge.node()!!.fragments().feedCards().fragments().collectionFeedCard()!!
+        val collection = card.collection()!!
+        return CollectionCard(collection.id(), collection.name(), collection.title() ?: "",
+                collection.background_image_banner_url()!!,
+                collection.items()!!.edges()!!.map {
+                    productMapper.toProduct(it.node()!!.post())
+                }
+        )
     }
 
     private fun toSuggestedProducts(edge: HomeCardsQuery.Edge): TopicCard {
@@ -73,5 +92,17 @@ class HomeCardMapper @Inject constructor(private val productMapper: ProductMappe
         )
     }
 
+    private fun toJobs(edge: HomeCardsQuery.Edge): JobCard {
+        val card = edge.node()!!.fragments().feedCards().fragments().jobsCard()!!
+        return JobCard(
+                card.jobs()!!.edges()!!.map {
+                    val node = it.node()!!
+                    val imageUrl = StringBuilder(Constants.PRODUCT_CDN_URL)
+                            .append("/")
+                            .append(node.image_uuid())
+                    Job(node.id(), node.company_name(), node.job_title(), imageUrl.toString(), node.url())
+                }
+        )
+    }
 
 }

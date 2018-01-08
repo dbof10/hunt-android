@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/space_medium"
         android:clickable="false"
         android:gravity="end"
-        android:textAppearance="@style/TextAppearance.UserName"
+        android:textAppearance="@style/Text.Title3"
         tools:text="—Nick B" />
 
     <com.ctech.eaty.widget.CircularImageView

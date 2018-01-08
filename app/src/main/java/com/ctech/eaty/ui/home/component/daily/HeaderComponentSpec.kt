@@ -49,7 +49,7 @@ object HeaderComponentSpec {
                 )
                 .child(
                         Text
-                                .create(c, 0, R.style.TextAppearance_UserName)
+                                .create(c, 0, R.style.Text_Title3)
                                 .text(viewModel.userName)
                                 .verticalGravity(VerticalGravity.CENTER)
                                 .marginRes(YogaEdge.START, R.dimen.space_medium)

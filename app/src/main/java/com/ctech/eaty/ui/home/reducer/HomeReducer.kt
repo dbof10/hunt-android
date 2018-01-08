@@ -6,12 +6,15 @@ import com.ctech.eaty.ui.home.model.DailyProducts
 import com.ctech.eaty.ui.home.model.FeedFooter
 import com.ctech.eaty.ui.home.model.FooterType
 import com.ctech.eaty.ui.home.model.HomeFeed
+import com.ctech.eaty.ui.home.model.Jobs
 import com.ctech.eaty.ui.home.model.NewProducts
 import com.ctech.eaty.ui.home.model.SuggestedProducts
 import com.ctech.eaty.ui.home.model.SuggestedTopics
 import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.result.CheckLoginResult
 import com.ctech.eaty.ui.home.result.DisableDataSaverResult
+import com.ctech.eaty.ui.home.result.LoadCollectionResult
+import com.ctech.eaty.ui.home.result.LoadJobResult
 import com.ctech.eaty.ui.home.result.LoadMoreResult
 import com.ctech.eaty.ui.home.result.LoadNewPostResult
 import com.ctech.eaty.ui.home.result.LoadResult
@@ -184,6 +187,46 @@ class HomeReducer : Reducer<HomeState> {
                     )
                 }
             }
+            is LoadJobResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null)
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            page = result.page
+                    )
+                }
+            }
+            is LoadCollectionResult -> {
+                return when {
+                    result.loading -> state.copy(
+                            loadingMore = true,
+                            content = addLoading(state),
+                            loadMoreError = null)
+                    result.error != null -> state.copy(
+                            loadingMore = false,
+                            loadMoreError = result.error,
+                            content = addError(state))
+                    else -> state.copy(
+                            loadingMore = false,
+                            loadError = null,
+                            refreshError = null,
+                            loadMoreError = null,
+                            content = addFeed(state, result),
+                            page = result.page
+                    )
+                }
+            }
             else -> {
                 throw  IllegalArgumentException("Unknown result")
             }
@@ -237,6 +280,16 @@ class HomeReducer : Reducer<HomeState> {
     private fun addFeed(state: HomeState, result: LoadTopicResult): List<HomeFeed> {
         val lastFeed = removeLoading(state)
         return lastFeed.plus(SuggestedTopics(StickyItemViewModel(0, "Topic you may be interested"), result.content))
+    }
+
+    private fun addFeed(state: HomeState, result: LoadJobResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(Jobs(StickyItemViewModel(0, "Hot Start-up jobs"), result.content))
+    }
+
+    private fun addFeed(state: HomeState, result: LoadCollectionResult): List<HomeFeed> {
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(result.content!!)
     }
 
     private fun addFeed(state: HomeState, result: LoadMoreResult): List<HomeFeed> {

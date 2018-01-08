@@ -55,7 +55,7 @@ object NewProductBodyComponentSpec {
 
         return Column.create(c)
                 .child(
-                        Text.create(c, 0, R.style.TextAppearance_UserName)
+                        Text.create(c, 0, R.style.Text_Title)
                                 .text(viewModel.name)
                                 .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
                                 .paddingRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)

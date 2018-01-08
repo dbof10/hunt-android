@@ -44,7 +44,7 @@
             android:layout_marginEnd="@dimen/space_medium"
             android:layout_marginBottom="@dimen/space_small"
             android:layout_marginStart="@dimen/space_medium"
-            android:textAppearance="@style/TextAppearance.Author"
+            android:textAppearance="@style/Text.Title2"
             android:textColor="@color/white_100"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/tvTopSubscribers"

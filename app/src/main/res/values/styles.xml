@@ -127,7 +127,7 @@
     </style>
 
     <style name="Widget.Hunt.UserTitle">
-        <item name="android:textAppearance">@style/TextAppearance.Author</item>
+        <item name="android:textAppearance">@style/Text.Title2</item>
         <item name="lineHeightHint">28sp</item>
     </style>
 
@@ -181,14 +181,14 @@
         <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <style name="TextAppearance.UserName" parent="Text.Body">
+    <style name="Text.Title3" parent="Text.Title">
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_primary_dark</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Author" parent="@style/TextAppearance.UserName">
+    <style name="Text.Title2" parent="Text.Title">
         <item name="android:textSize">20sp</item>
     </style>
 
