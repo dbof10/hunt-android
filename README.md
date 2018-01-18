@@ -32,6 +32,10 @@ https://medium.com/@Cuong.Le/open-sourcing-hunt-d49919960ef1
 To play with React Native:
    - In JS directory
         `npm install` first
+Script
+   Build and start: `script/build.sh`
+   Update React Bundle: `script/build.sh react`
+
 
 ## Influences
 

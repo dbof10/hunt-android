@@ -8,7 +8,6 @@ import android.graphics.drawable.LayerDrawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.drawable.DrawableWrapper
 import android.util.Size
-import android.view.View
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -20,6 +19,7 @@ class DrawableTarget(private val context: Context,
                      content: Size,
                      container: Size,
                      private val type: DisplayNodeType) : SimpleTarget<Drawable>(content.width, content.height) {
+
 
     private val transparentDrawable = ColorDrawable(Color.TRANSPARENT)
     private val wrapper = DrawableWrapper(null)
@@ -42,7 +42,7 @@ class DrawableTarget(private val context: Context,
     }
 
 
-    override fun onResourceReady(drawable: Drawable?, transition: Transition<in Drawable>) {
+    override fun onResourceReady(drawable: Drawable, transition: Transition<in Drawable>?) {
         if (drawable is GifDrawable) {
             drawable.setLoopCount(GifDrawable.LOOP_FOREVER)
             drawable.start()
@@ -56,6 +56,7 @@ class DrawableTarget(private val context: Context,
             setDrawable(layerDrawable)
         }
     }
+
 
     override fun onLoadCleared(placeholder: Drawable?) {
         setDrawable(placeholder)
