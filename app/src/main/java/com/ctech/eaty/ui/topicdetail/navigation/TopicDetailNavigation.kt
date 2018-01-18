@@ -1,14 +1,14 @@
-package com.ctech.eaty.ui.topiclist.navigation
+package com.ctech.eaty.ui.topicdetail.navigation
 
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.ui.productdetail.view.ProductDetailActivity
-import com.ctech.eaty.ui.topiclist.view.TopicListActivity
+import com.ctech.eaty.ui.topicdetail.view.TopicDetailActivity
 import io.reactivex.Completable
 import javax.inject.Inject
 
 
 @ActivityScope
-class SearchNavigation @Inject constructor(private val context: TopicListActivity) {
+class TopicDetailNavigation @Inject constructor(private val context: TopicDetailActivity) {
 
     fun toProduct(id: Int): Completable {
         return Completable.fromAction {

@@ -2,8 +2,8 @@ package com.ctech.eaty.ui.productdetail.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
+import com.ctech.eaty.repository.BarcodeGenerator.createProductDetailBarCode
 import com.ctech.eaty.repository.ProductRepository
-import com.ctech.eaty.repository.createProductDetailBarcode
 import com.ctech.eaty.ui.productdetail.action.Load
 import com.ctech.eaty.ui.productdetail.result.LoadResult
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
@@ -17,7 +17,7 @@ class LoadEpic(private val productRepository: ProductRepository,
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<ProductDetailState>): Observable<LoadResult> {
         return action.ofType(Load::class.java)
                 .flatMap {
-                    productRepository.getProductDetail(createProductDetailBarcode(it.id))
+                    productRepository.getProductDetail(createProductDetailBarCode(it.id))
                             .map {
                                 LoadResult.success(it)
                             }

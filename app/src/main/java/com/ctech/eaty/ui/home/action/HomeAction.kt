@@ -10,6 +10,7 @@ object HomeAction {
     val REFRESH: Action = Action()
     val LOAD_USER: Action = Action()
     val USE_MOBILE_DATA: Action = Action()
+
+    data class CHECK_RESULT(val requestCode: Int, val resultCode: Int, val data: Intent?) : Action()
 }
 
-data class CHECK_RESULT(val requestCode: Int, val resultCode: Int, val data: Intent?) : Action()

@@ -5,10 +5,10 @@ import com.ctech.eaty.base.redux.Epic
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.error.LikeExistedException
 import com.ctech.eaty.error.UnauthorizedActionException
+import com.ctech.eaty.repository.BarcodeGenerator.createProductDetailBarCode
 import com.ctech.eaty.repository.ProductRepository
 import com.ctech.eaty.repository.UserRepository
 import com.ctech.eaty.repository.VoteRepository
-import com.ctech.eaty.repository.createProductDetailBarcode
 import com.ctech.eaty.ui.productdetail.action.Like
 import com.ctech.eaty.ui.productdetail.result.LikeResult
 import com.ctech.eaty.ui.productdetail.state.ProductDetailState
@@ -32,7 +32,7 @@ class LikeEpic(private val voteRepository: VoteRepository,
                             voteRepository
                                     .like(id)
                                     .doOnNext {
-                                        productRepository.purgeProductDetail(createProductDetailBarcode(id))
+                                        productRepository.purgeProductDetail(createProductDetailBarCode(id))
                                     }
                                     .map {
                                         LikeResult.success(it)

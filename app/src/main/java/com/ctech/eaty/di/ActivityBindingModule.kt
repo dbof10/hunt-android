@@ -18,7 +18,6 @@ import com.ctech.eaty.ui.follow.view.FollowActivity
 import com.ctech.eaty.ui.gallery.di.GalleryFragmentBuilderModule
 import com.ctech.eaty.ui.gallery.di.GalleryModule
 import com.ctech.eaty.ui.gallery.view.GalleryActivity
-import com.ctech.eaty.ui.video.view.YoutubeActivity
 import com.ctech.eaty.ui.home.di.HomeFragmentBuilderModule
 import com.ctech.eaty.ui.home.di.HomeModule
 import com.ctech.eaty.ui.home.view.HomeActivity
@@ -44,21 +43,24 @@ import com.ctech.eaty.ui.profile.view.ProfileActivity
 import com.ctech.eaty.ui.radio.di.RadioFragmentBuilderModule
 import com.ctech.eaty.ui.radio.di.RadioModule
 import com.ctech.eaty.ui.radio.view.RadioActivity
+import com.ctech.eaty.ui.search.di.SearchModule
+import com.ctech.eaty.ui.search.view.SearchActivity
 import com.ctech.eaty.ui.settings.di.SettingsModule
 import com.ctech.eaty.ui.settings.view.SettingsActivity
 import com.ctech.eaty.ui.splash.view.SplashActivity
 import com.ctech.eaty.ui.topic.di.TopicFragmentBuilderModule
 import com.ctech.eaty.ui.topic.di.TopicModule
 import com.ctech.eaty.ui.topic.view.TopicActivity
-import com.ctech.eaty.ui.topiclist.di.TopicListFragmentBuilderModule
-import com.ctech.eaty.ui.topiclist.di.TopicListModule
-import com.ctech.eaty.ui.topiclist.view.TopicListActivity
+import com.ctech.eaty.ui.topicdetail.di.TopicDetailFragmentBuilderModule
+import com.ctech.eaty.ui.topicdetail.di.TopicDetailModule
+import com.ctech.eaty.ui.topicdetail.view.TopicDetailActivity
 import com.ctech.eaty.ui.upcomingdetail.di.UpcomingDetailBuilderModule
 import com.ctech.eaty.ui.upcomingdetail.di.UpcomingProductModule
 import com.ctech.eaty.ui.upcomingdetail.view.UpcomingProductDetailActivity
 import com.ctech.eaty.ui.user.di.UserDetailFragmentBuilderModule
 import com.ctech.eaty.ui.user.di.UserDetailModule
 import com.ctech.eaty.ui.user.view.UserActivity
+import com.ctech.eaty.ui.video.view.YoutubeActivity
 import com.ctech.eaty.ui.vote.di.VoteFragmentBuilderModule
 import com.ctech.eaty.ui.vote.di.VoteModule
 import com.ctech.eaty.ui.vote.view.VoteActivity
@@ -96,8 +98,8 @@ abstract class ActivityBindingModule {
     abstract fun contributeVoteActivity(): VoteActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [(TopicListModule::class), (TopicListFragmentBuilderModule::class)])
-    abstract fun contributeTopicListActivity(): TopicListActivity
+    @ContributesAndroidInjector(modules = [(TopicDetailModule::class), (TopicDetailFragmentBuilderModule::class)])
+    abstract fun contributeTopicListActivity(): TopicDetailActivity
 
     @ContributesAndroidInjector()
     abstract fun contributeDeepLinkActivity(): UniversalLinkActivity
@@ -151,8 +153,8 @@ abstract class ActivityBindingModule {
     abstract fun contributeJobsActivity(): JobListActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [(com.ctech.eaty.ui.search.di.SearchModule::class)])
-    abstract fun contributeSearchActivity(): com.ctech.eaty.ui.search.view.SearchActivity
+    @ContributesAndroidInjector(modules = [(SearchModule::class)])
+    abstract fun contributeSearchActivity(): SearchActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [(MeetupModule::class)])

@@ -3,7 +3,6 @@ package com.ctech.eaty.ui.comment.di
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.CommentRepository
-import com.ctech.eaty.ui.comment.action.BarCodeGenerator
 import com.ctech.eaty.ui.comment.epic.LoadEpic
 import com.ctech.eaty.ui.comment.epic.LoadMoreEpic
 import com.ctech.eaty.ui.comment.reducer.CommentReducer
@@ -18,17 +17,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 @Module
 class CommentModule {
 
-    @Provides
-    fun provideBarCodeGenerator(): BarCodeGenerator {
-        return BarCodeGenerator()
-    }
-
     @ActivityScope
     @Provides
-    fun provideCommentStore(commentRepository: CommentRepository, barCodeGenerator: BarCodeGenerator,
+    fun provideCommentStore(commentRepository: CommentRepository,
                             threadScheduler: ThreadScheduler): Store<CommentState> {
-        return Store<CommentState>(CommentState(), CommentReducer(), arrayOf(LoadEpic(commentRepository, barCodeGenerator, threadScheduler),
-                LoadMoreEpic(commentRepository, barCodeGenerator, threadScheduler)))
+        return Store<CommentState>(CommentState(), CommentReducer(), arrayOf(LoadEpic(commentRepository, threadScheduler),
+                LoadMoreEpic(commentRepository, threadScheduler)))
 
     }
 

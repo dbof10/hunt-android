@@ -1,16 +1,17 @@
-package com.ctech.eaty.ui.topiclist.viewmodel
+package com.ctech.eaty.ui.topicdetail.viewmodel
 
+import android.util.Log
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.ui.topiclist.state.SearchState
+import com.ctech.eaty.ui.topicdetail.state.TopicDetailState
 import io.reactivex.Observable
 
-class SearchViewModel(private val stateDispatcher: Observable<SearchState>) {
-    fun loading(): Observable<SearchState> {
+class TopicDetailViewModel(private val stateDispatcher: Observable<TopicDetailState>) {
+    fun loading(): Observable<TopicDetailState> {
         return stateDispatcher
                 .filter { it.loading }
     }
 
-    fun loadingMore(): Observable<SearchState> {
+    fun loadingMore(): Observable<TopicDetailState> {
         return stateDispatcher
                 .filter { it.loadingMore }
     }

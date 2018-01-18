@@ -3,7 +3,6 @@ package com.ctech.eaty.ui.collectiondetail.di
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.di.ActivityScope
 import com.ctech.eaty.repository.CollectionRepository
-import com.ctech.eaty.ui.collectiondetail.action.BarCodeGenerator
 import com.ctech.eaty.ui.collectiondetail.epic.LoadEpic
 import com.ctech.eaty.ui.collectiondetail.reducer.CollectionDetailReducer
 import com.ctech.eaty.ui.collectiondetail.state.CollectionDetailState
@@ -17,17 +16,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 @Module
 class CollectionDetailModule {
 
-    @Provides
-    fun provideBarCodeGenerator(): BarCodeGenerator {
-        return BarCodeGenerator()
-    }
-
     @ActivityScope
     @Provides
-    fun provideCollectionDetailStore(collectionRepository: CollectionRepository, barCodeGenerator: BarCodeGenerator,
+    fun provideCollectionDetailStore(collectionRepository: CollectionRepository,
                                      threadScheduler: ThreadScheduler): Store<CollectionDetailState> {
         return Store<CollectionDetailState>(CollectionDetailState(), CollectionDetailReducer(),
-                arrayOf(LoadEpic(collectionRepository, barCodeGenerator, threadScheduler)))
+                arrayOf(LoadEpic(collectionRepository, threadScheduler)))
 
     }
 

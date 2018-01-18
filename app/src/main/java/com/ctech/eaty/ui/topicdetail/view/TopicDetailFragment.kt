@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.topiclist.view
+package com.ctech.eaty.ui.topicdetail.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,30 +13,32 @@ import com.ctech.eaty.di.Injectable
 import com.ctech.eaty.entity.Topic
 import com.ctech.eaty.ui.home.view.ProductViewHolder
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
-import com.ctech.eaty.ui.topiclist.action.TopicList
-import com.ctech.eaty.ui.topiclist.navigation.SearchNavigation
-import com.ctech.eaty.ui.topiclist.state.SearchState
-import com.ctech.eaty.ui.topiclist.viewmodel.SearchViewModel
+import com.ctech.eaty.ui.topicdetail.action.TopicDetailAction
+import com.ctech.eaty.ui.topicdetail.navigation.TopicDetailNavigation
+import com.ctech.eaty.ui.topicdetail.state.TopicDetailState
+import com.ctech.eaty.ui.topicdetail.viewmodel.TopicDetailViewModel
 import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import com.ctech.eaty.widget.recyclerview.VerticalSpaceItemDecoration
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.progressBar
+import kotlinx.android.synthetic.main.fragment_search.rvSearch
+import kotlinx.android.synthetic.main.fragment_search.vError
 import timber.log.Timber
 import vn.tiki.noadapter2.DiffCallback
 import vn.tiki.noadapter2.OnlyAdapter
 import javax.inject.Inject
 
 
-class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
+class TopicDetailFragment : BaseReduxFragment<TopicDetailState>(), Injectable {
 
     companion object {
-       private val TOPIC_ID_KEY = "topicId"
+        private val TOPIC_ID_KEY = "topicId"
 
         fun newInstance(topic: Topic): Fragment {
 
             val args = Bundle()
 
-            val fragment = TopicListFragment()
+            val fragment = TopicDetailFragment()
             args.putParcelable(TOPIC_ID_KEY, topic)
             fragment.arguments = args
             return fragment
@@ -44,16 +46,16 @@ class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
     }
 
     @Inject
-    lateinit var store: Store<SearchState>
+    lateinit var store: Store<TopicDetailState>
 
     @Inject
-    lateinit var viewModel: SearchViewModel
+    lateinit var viewModel: TopicDetailViewModel
 
     @Inject
     lateinit var imageLoader: GlideImageLoader
 
     @Inject
-    lateinit var navigator: SearchNavigation
+    lateinit var navigator: TopicDetailNavigation
 
     private val topic by lazy {
         arguments!!.getParcelable<Topic>(TOPIC_ID_KEY)
@@ -61,7 +63,7 @@ class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
 
     private val loadMoreCallback by lazy {
         InfiniteScrollListener(rvSearch.layoutManager as LinearLayoutManager, 3) {
-            store.dispatch(TopicList.LoadMore(topic.id))
+            store.dispatch(TopicDetailAction.LoadMore(topic.id))
         }
     }
 
@@ -99,7 +101,7 @@ class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
                 .build()
     }
 
-    override fun store(): Store<SearchState> {
+    override fun store(): Store<TopicDetailState> {
         return store
     }
 
@@ -111,7 +113,7 @@ class TopicListFragment : BaseReduxFragment<SearchState>(), Injectable {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupViewModel()
-        store.dispatch(TopicList.Load(topic.id))
+        store.dispatch(TopicDetailAction.Load(topic.id))
     }
 
 

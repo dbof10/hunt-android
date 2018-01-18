@@ -5,21 +5,19 @@ import com.apollographql.apollo.fetcher.ApolloResponseFetchers
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.ctech.eaty.CreateUpcomingPageSubscriberMutation
 import com.ctech.eaty.HomeCardsQuery
-import com.ctech.eaty.UpcomingPagesPageQuery
 import com.ctech.eaty.UpcomingShowPageQuery
 import com.ctech.eaty.entity.HomeCard
 import com.ctech.eaty.entity.HomeCardType
 import com.ctech.eaty.entity.Product
 import com.ctech.eaty.entity.ProductDetail
 import com.ctech.eaty.entity.UpcomingDetail
-import com.ctech.eaty.entity.UpcomingProduct
 import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.repository.mapper.HomeCardMapper
 import com.ctech.eaty.repository.mapper.ProductMapper
 import com.ctech.eaty.response.ProductDetailResponse
 import com.ctech.eaty.response.ProductResponse
 import com.ctech.eaty.type.CreateUpcomingPageSubscriberInput
-import com.ctech.eaty.ui.topiclist.action.SearchBarCode
+import com.ctech.eaty.ui.topicdetail.action.TopicDetailBarCode
 import com.nytimes.android.external.store3.base.impl.BarCode
 import com.nytimes.android.external.store3.base.impl.Store
 import io.reactivex.Observable
@@ -30,7 +28,7 @@ import javax.inject.Inject
 class ProductRepository @Inject constructor(
         private val homeStore: Store<ProductResponse, BarCode>,
         private val productStore: Store<ProductDetailResponse, BarCode>,
-        private val searchStore: Store<ProductResponse, SearchBarCode>,
+        private val searchStore: Store<ProductResponse, TopicDetailBarCode>,
         private val apiClient: ProductHuntApi,
         private val apolloClient: ApolloClient,
         private val productMapper: ProductMapper,
@@ -57,7 +55,7 @@ class ProductRepository @Inject constructor(
         productStore.clear(barcode)
     }
 
-    fun getPostsByTopic(barcode: SearchBarCode): Observable<List<Product>> {
+    fun getPostsByTopic(barcode: TopicDetailBarCode): Observable<List<Product>> {
         return searchStore.get(barcode)
                 .toObservable()
                 .map { it.products }

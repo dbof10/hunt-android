@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.topiclist.view
+package com.ctech.eaty.ui.topicdetail.view
 
 import android.content.Context
 import android.content.Intent
@@ -15,9 +15,9 @@ import kotlinx.android.synthetic.main.layout_home_content.toolbar
 import javax.inject.Inject
 
 
-class TopicListActivity : BaseActivity(), HasSupportFragmentInjector {
+class TopicDetailActivity : BaseActivity(), HasSupportFragmentInjector {
 
-    override fun getScreenName(): String = "TopicList"
+    override fun getScreenName(): String = "TopicDetailAction"
 
     @Inject
     lateinit var trackingManager: FirebaseTrackManager
@@ -29,7 +29,7 @@ class TopicListActivity : BaseActivity(), HasSupportFragmentInjector {
         val TOPIC_ID_KEY = "topicId"
 
         fun newIntent(context: Context, topic: Topic): Intent {
-            val intent = Intent(context, TopicListActivity::class.java)
+            val intent = Intent(context, TopicDetailActivity::class.java)
             intent.putExtra(TOPIC_ID_KEY, topic)
             return intent
         }
@@ -44,7 +44,7 @@ class TopicListActivity : BaseActivity(), HasSupportFragmentInjector {
         var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
         if (fragment == null) {
-            fragment = TopicListFragment.newInstance(topic)
+            fragment = TopicDetailFragment.newInstance(topic)
             supportFragmentManager
                     .beginTransaction()
                     .add(R.id.fragmentContainer, fragment)

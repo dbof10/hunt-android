@@ -2,8 +2,8 @@ package com.ctech.eaty.ui.user.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
+import com.ctech.eaty.repository.BarcodeGenerator.createUserProductBarCode
 import com.ctech.eaty.repository.UserRepository
-import com.ctech.eaty.repository.createUserProductBarCode
 import com.ctech.eaty.ui.user.action.UserAction
 import com.ctech.eaty.ui.user.result.LoadProductResult
 import com.ctech.eaty.ui.user.state.UserDetailState

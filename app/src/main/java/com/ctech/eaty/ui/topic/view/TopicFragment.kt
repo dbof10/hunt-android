@@ -16,7 +16,7 @@ import com.ctech.eaty.ui.comment.action.CommentAction
 import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.state.TopicState
 import com.ctech.eaty.ui.topic.viewmodel.TopicViewModel
-import com.ctech.eaty.ui.topiclist.view.TopicListActivity
+import com.ctech.eaty.ui.topicdetail.view.TopicDetailActivity
 import com.ctech.eaty.util.glide.GlideImageLoader
 import com.ctech.eaty.widget.recyclerview.InfiniteScrollListener
 import kotlinx.android.synthetic.main.fragment_topics.*
@@ -70,7 +70,7 @@ class TopicFragment : BaseReduxFragment<TopicState>(), Injectable {
                 }
                 .onItemClickListener { _, item, _ ->
                     (item as Topic).run {
-                        val intent = TopicListActivity.newIntent(context!!, this)
+                        val intent = TopicDetailActivity.newIntent(context!!, this)
                         context?.startActivity(intent)
                     }
 

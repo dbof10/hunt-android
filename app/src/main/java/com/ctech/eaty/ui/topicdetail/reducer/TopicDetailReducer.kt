@@ -1,15 +1,15 @@
-package com.ctech.eaty.ui.topiclist.reducer
+package com.ctech.eaty.ui.topicdetail.reducer
 
 import com.ctech.eaty.base.redux.Reducer
 import com.ctech.eaty.base.redux.Result
-import com.ctech.eaty.ui.topiclist.result.LoadMoreResult
-import com.ctech.eaty.ui.topiclist.result.LoadResult
-import com.ctech.eaty.ui.topiclist.state.SearchState
+import com.ctech.eaty.ui.topicdetail.result.LoadMoreResult
+import com.ctech.eaty.ui.topicdetail.result.LoadResult
+import com.ctech.eaty.ui.topicdetail.state.TopicDetailState
 import java.lang.IllegalArgumentException
 
-class SearchReducer : Reducer<SearchState> {
+class TopicDetailReducer : Reducer<TopicDetailState> {
 
-    override fun apply(state: SearchState, result: Result): SearchState {
+    override fun apply(state: TopicDetailState, result: Result): TopicDetailState {
         when (result) {
             is LoadResult -> {
                 return when {
