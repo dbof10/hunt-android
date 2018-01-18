@@ -34,9 +34,11 @@ To play with React Native:
         `npm install` first
 
 Script
-   Build and start: `script/build.sh`
-   Update React Bundle: `script/build.sh react`
+   - Build and start
+        `script/build.sh`
 
+   - Update React Bundle
+        `script/build.sh react`
 
 ## Influences
 
