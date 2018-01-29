@@ -3,7 +3,7 @@ package com.ctech.eaty.ui.home.component.topic
 import android.text.Layout
 import com.ctech.eaty.R
 import com.ctech.eaty.entity.Topic
-import com.ctech.eaty.ui.topiclist.view.TopicListActivity
+import com.ctech.eaty.ui.topicdetail.view.TopicDetailActivity
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.ctech.eaty.widget.drawable.CircleProgressBarDrawable
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -62,7 +62,7 @@ object TopicComponentSpec {
             c: ComponentContext,
             @Prop viewModel: Topic) {
 
-        val intent = TopicListActivity.newIntent(c, viewModel)
+        val intent = TopicDetailActivity.newIntent(c, viewModel)
         c.startActivity(intent)
     }
 }

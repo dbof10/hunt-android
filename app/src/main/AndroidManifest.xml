@@ -143,7 +143,7 @@
             android:theme="@style/AppTheme.NoStatusBar" />
 
         <activity
-            android:name=".ui.topiclist.view.TopicListActivity"
+            android:name=".ui.topicdetail.view.TopicDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

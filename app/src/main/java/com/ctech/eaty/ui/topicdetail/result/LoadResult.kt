@@ -1,4 +1,4 @@
-package com.ctech.eaty.ui.topiclist.result
+package com.ctech.eaty.ui.topicdetail.result
 
 import com.ctech.eaty.base.redux.Result
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel

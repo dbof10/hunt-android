@@ -14,7 +14,6 @@ import com.ctech.eaty.base.BaseActivity
 import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.entity.UserDetail
 import com.ctech.eaty.tracking.FirebaseTrackManager
-import com.ctech.eaty.ui.home.action.CHECK_RESULT
 import com.ctech.eaty.ui.home.action.HomeAction
 import com.ctech.eaty.ui.home.controller.HomeNetworkController
 import com.ctech.eaty.ui.home.state.HomeState
@@ -146,7 +145,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        store.dispatch(CHECK_RESULT(requestCode, resultCode, data))
+        store.dispatch(HomeAction.CHECK_RESULT(requestCode, resultCode, data))
     }
 
     override fun onBackPressed() {

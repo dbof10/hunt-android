@@ -2,8 +2,8 @@ package com.ctech.eaty.ui.topic.epic
 
 import com.ctech.eaty.base.redux.Action
 import com.ctech.eaty.base.redux.Epic
+import com.ctech.eaty.repository.BarcodeGenerator.createTopicListBarCode
 import com.ctech.eaty.repository.TopicRepository
-import com.ctech.eaty.ui.topic.action.BarCodeGenerator
 import com.ctech.eaty.ui.topic.action.TopicAction
 import com.ctech.eaty.ui.topic.result.LoadResult
 import com.ctech.eaty.ui.topic.state.TopicState
@@ -12,9 +12,8 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-class LoadEpic(val topicRepository: TopicRepository,
-               val barCodeGenerator: BarCodeGenerator,
-               val threadScheduler: ThreadScheduler) : Epic<TopicState> {
+class LoadEpic(private val topicRepository: TopicRepository,
+               private val threadScheduler: ThreadScheduler) : Epic<TopicState> {
     override fun apply(action: PublishSubject<Action>, state: BehaviorSubject<TopicState>): Observable<LoadResult> {
         return action.filter {
             it == TopicAction.LOAD
@@ -23,7 +22,7 @@ class LoadEpic(val topicRepository: TopicRepository,
                     state.value.content.isEmpty()
                 }
                 .flatMap {
-                    topicRepository.getTopics(barCodeGenerator.get(0))
+                    topicRepository.getTopics(createTopicListBarCode(0))
                             .map {
                                 LoadResult.success(it)
                             }

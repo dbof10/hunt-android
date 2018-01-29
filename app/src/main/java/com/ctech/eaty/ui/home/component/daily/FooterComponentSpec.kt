@@ -20,13 +20,37 @@ object FooterComponentSpec {
 
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
-
-        return Column.create(c)
-                .backgroundColor(ContextCompat.getColor(c, R.color.white_100))
+        val resources = c.resources
+        val interaction = Row.create(c)
                 .child(
-                        FooterSocialComponent.create(c)
-                                .viewModel(viewModel)
+                        Text.create(c, 0, R.style.Text_Body)
+                                .text(resources.getQuantityString(R.plurals.like, viewModel.votesCount, viewModel.votesCount))
+                                .marginRes(YogaEdge.START, R.dimen.space_small)
                 )
+                .child(
+                        Text.create(c, 0, R.style.Text_Body)
+                                .text("•")
+                                .marginRes(YogaEdge.START, R.dimen.space_small)
+                                .marginRes(YogaEdge.END, R.dimen.space_small)
+
+                )
+                .child(
+                        Text.create(c, 0, R.style.Text_Body)
+                                .text(resources.getQuantityString(R.plurals.comment, viewModel.commentsCount, viewModel.commentsCount))
+                )
+                .flex(1F)
+                .paddingRes(YogaEdge.TOP, R.dimen.content_padding_vertical)
+                .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)
+                .justifyContent(YogaJustify.FLEX_START)
+                .build()
+
+        val builder = Column.create(c)
+
+        if (viewModel.commentsCount != -1 && viewModel.votesCount != -1) {
+            builder.child(interaction)
+        }
+
+        builder.backgroundColor(ContextCompat.getColor(c, R.color.white_100))
                 .child(
                         SolidColor.create(c)
                                 .colorRes(R.color.divider_color)
@@ -64,8 +88,7 @@ object FooterComponentSpec {
                 .paddingRes(YogaEdge.START, R.dimen.content_padding_horizontal)
                 .paddingRes(YogaEdge.END, R.dimen.content_padding_horizontal)
                 .build()
-
-
+        return builder.build()
     }
 
 

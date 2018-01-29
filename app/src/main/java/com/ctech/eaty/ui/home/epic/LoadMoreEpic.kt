@@ -54,11 +54,12 @@ class LoadMoreEpic(productRepository: ProductRepository,
                                 }
                                 .startWith(LoadUpcomingProductResult.inProgress())
 
-                        5 -> return@flatMap loadStrategy.fetchCollection(page)
+                        5 -> return@flatMap loadStrategy.fetchNewProducts(page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE
                                 }
-                                .startWith(LoadCollectionResult.inProgress())
+                                .startWith(LoadNewPostResult.inProgress())
+
                         7 -> return@flatMap loadStrategy.fetchSuggestedTopics(page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE
@@ -75,11 +76,11 @@ class LoadMoreEpic(productRepository: ProductRepository,
                                     internalState = EpicProgress.IDLE
                                 }
                                 .startWith(LoadJobResult.inProgress())
-                        13 -> return@flatMap loadStrategy.fetchNewProducts(page)
+                        14 -> return@flatMap loadStrategy.fetchCollection(page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE
                                 }
-                                .startWith(LoadNewPostResult.inProgress())
+                                .startWith(LoadCollectionResult.inProgress())
                         else -> return@flatMap loadStrategy.fetchDailyProducts(dayAgo, page)
                                 .doOnNext {
                                     internalState = EpicProgress.IDLE

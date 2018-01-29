@@ -2,13 +2,21 @@ package com.ctech.eaty.di
 
 import android.content.Context
 import com.ctech.eaty.entity.Comments
-import com.ctech.eaty.repository.HomePersister
 import com.ctech.eaty.network.ProductHuntApi
 import com.ctech.eaty.network.SoundCloudApi
-import com.ctech.eaty.repository.*
-import com.ctech.eaty.response.*
+import com.ctech.eaty.repository.HomePersister
+import com.ctech.eaty.repository.ProductDetailPersister
+import com.ctech.eaty.response.CollectionDetailResponse
+import com.ctech.eaty.response.CollectionResponse
+import com.ctech.eaty.response.NotificationResponse
+import com.ctech.eaty.response.ProductDetailResponse
+import com.ctech.eaty.response.ProductResponse
+import com.ctech.eaty.response.RadioResponse
+import com.ctech.eaty.response.TopicResponse
+import com.ctech.eaty.response.UserResponse
+import com.ctech.eaty.response.VoteResponse
 import com.ctech.eaty.ui.comment.action.CommentBarCode
-import com.ctech.eaty.ui.topiclist.action.SearchBarCode
+import com.ctech.eaty.ui.topicdetail.action.TopicDetailBarCode
 import com.ctech.eaty.ui.user.action.UserProductBarCode
 import com.ctech.eaty.ui.vote.action.VoteBarCode
 import com.ctech.eaty.util.Constants
@@ -68,8 +76,8 @@ class StoreModule {
 
     @Provides
     fun providePersistedSearchStore(apiClient: ProductHuntApi, gson: Gson)
-            : Store<ProductResponse, SearchBarCode> {
-        return StoreBuilder.parsedWithKey<SearchBarCode, BufferedSource, ProductResponse>()
+            : Store<ProductResponse, TopicDetailBarCode> {
+        return StoreBuilder.parsedWithKey<TopicDetailBarCode, BufferedSource, ProductResponse>()
                 .fetcher { barcode -> apiClient.getProductsByTopic(barcode.id, SEARCH_LIMIT, barcode.page).map { it.source() } }
                 .parser(GsonParserFactory.createSourceParser(gson, ProductResponse::class.java))
                 .open()
@@ -79,7 +87,7 @@ class StoreModule {
     fun provideProductDetailStore(apiClient: ProductHuntApi, persister: Persister<ProductDetailResponse, BarCode>)
             : Store<ProductDetailResponse, BarCode> {
         return StoreBuilder.parsedWithKey<BarCode, ProductDetailResponse, ProductDetailResponse>()
-                .fetcher { barcode -> apiClient.getProductDetail(barcode.key.toInt())}
+                .fetcher { barcode -> apiClient.getProductDetail(barcode.key.toInt()) }
                 .persister(persister)
                 .networkBeforeStale()
                 .open()
