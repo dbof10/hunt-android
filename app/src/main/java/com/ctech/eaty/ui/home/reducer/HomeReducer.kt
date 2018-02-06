@@ -213,10 +213,20 @@ class HomeReducer : Reducer<HomeState> {
                             loadingMore = true,
                             content = addLoading(state),
                             loadMoreError = null)
-                    result.error != null -> state.copy(
-                            loadingMore = false,
-                            loadMoreError = result.error,
-                            content = addError(state))
+                    result.error != null -> {
+                        return if (result.error is NoSuchElementException) {
+                            state.copy(
+                                    loadingMore = false,
+                                    content = removeLoading(state),
+                                    page = result.page
+                            )
+                        } else {
+                            state.copy(
+                                    loadingMore = false,
+                                    loadMoreError = result.error,
+                                    content = addError(state))
+                        }
+                    }
                     else -> state.copy(
                             loadingMore = false,
                             loadError = null,
@@ -234,7 +244,8 @@ class HomeReducer : Reducer<HomeState> {
     }
 
     private fun addError(state: HomeState): List<HomeFeed> {
-        return state.content.plus(FeedFooter(FooterType.ERROR))
+        val lastFeed = removeLoading(state)
+        return lastFeed.plus(FeedFooter(FooterType.ERROR))
     }
 
     private fun removeLoading(state: HomeState): List<HomeFeed> {

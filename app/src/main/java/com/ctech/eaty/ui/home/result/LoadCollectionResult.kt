@@ -16,8 +16,8 @@ data class LoadCollectionResult(val loading: Boolean = false,
             return LoadCollectionResult(content = content, page = page)
         }
 
-        fun fail(throwable: Throwable): LoadCollectionResult {
-            return LoadCollectionResult(error = throwable)
+        fun fail(throwable: Throwable, page: Int = 1): LoadCollectionResult {
+            return LoadCollectionResult(error = throwable, page = page)
         }
     }
 }

@@ -151,7 +151,11 @@ class LoadMoreDelegate(
                     LoadCollectionResult.success(it, page)
                 }
                 .onErrorReturn {
-                    LoadCollectionResult.fail(it)
+                    if (it is NoSuchElementException) {
+                        LoadCollectionResult.fail(it, page)
+                    } else {
+                        LoadCollectionResult.fail(it)
+                    }
                 }
                 .subscribeOn(threadScheduler.workerThread())
     }
