@@ -14,7 +14,10 @@ import com.google.firebase.messaging.RemoteMessage
 class AppFirebaseMessagingService : FirebaseMessagingService() {
 
 
-    private val KEY_URL = "url"
+    companion object {
+        private const val KEY_URL = "url"
+
+    }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
 
@@ -33,8 +36,8 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(message.notification.title)
-                .setContentText(message.notification.body)
+                .setContentTitle(message.notification?.title)
+                .setContentText(message.notification?.body)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)

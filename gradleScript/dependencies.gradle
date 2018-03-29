@@ -1,12 +1,12 @@
 def versions = [
-        support    : '27.0.2',
-        litho      : '0.11.0',
-        autodispose: '0.5.1',
-        firebase   : '11.4.2'
+        support    : '27.1.0',
+        litho      : '0.13.1',
+        autodispose: '0.7.0',
+        firebase   : '12.0.0'
 ]
 
 def build = [
-        buildToolsVersion: '27.0.1',
+        buildToolsVersion: '27.0.3',
         compileSdkVersion: 27,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
@@ -50,11 +50,11 @@ def test = [
 ]
 
 def exo = [
-        core           : 'com.google.android.exoplayer:exoplayer-core:2.6.0',
-        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.6.0',
-        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.6.0',
-        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.6.0',
-        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.6.0'
+        core           : 'com.google.android.exoplayer:exoplayer-core:2.7.1',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.7.1',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.7.1',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.7.1',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.7.1'
 ]
 
 def network = [
@@ -73,11 +73,11 @@ def glide = [
 ]
 
 def store = [
-        lib       : 'com.nytimes.android:store3:3.0.0-beta',
-        cache     : 'com.nytimes.android:cache3:3.0.0-beta',
-        middleware: 'com.nytimes.android:middleware3:3.0.0-beta',
-        filesystem: 'com.nytimes.android:filesystem3:3.0.0-beta',
-        kotlin    : 'com.nytimes.android:store-kotlin3:3.0.0-beta'
+        lib       : 'com.nytimes.android:store3:3.0.1',
+        cache     : 'com.nytimes.android:cache3:3.0.1',
+        middleware: 'com.nytimes.android:middleware3:3.0.1',
+        filesystem: 'com.nytimes.android:filesystem3:3.0.1',
+        kotlin    : 'com.nytimes.android:store-kotlin3:3.0.1'
 ]
 
 def firebase = [
@@ -147,7 +147,7 @@ ext.deps = [
         "versions"   : versions,
         "support"    : support,
         "kotlin"     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-        "timber"     : "com.jakewharton.timber:timber:4.6.0",
+        "timber"     : "com.jakewharton.timber:timber:4.7.0",
         "jodatime"   : "net.danlew:android.joda:2.9.9",
         "dagger"     : dagger,
         "butterknife": butterknife,

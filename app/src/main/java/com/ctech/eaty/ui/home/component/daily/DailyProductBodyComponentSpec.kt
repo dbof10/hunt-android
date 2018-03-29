@@ -13,6 +13,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
@@ -29,7 +30,7 @@ object DailyProductBodyComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop store: Store<HomeState>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop store: Store<HomeState>): Component {
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_product_height)
         val controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(ResizeImageUrlProvider.overrideUrl(viewModel.imageUrl, c.resources.getDimensionPixelSize(R.dimen.thumbnail_preview_size))))

@@ -3,14 +3,26 @@ package com.ctech.eaty.util
 import android.os.SystemClock
 import android.util.Log
 import android.view.Surface
-import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.ExoPlaybackException
+import com.google.android.exoplayer2.Format
+import com.google.android.exoplayer2.PlaybackParameters
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.RendererCapabilities
+import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.audio.AudioRendererEventListener
 import com.google.android.exoplayer2.decoder.DecoderCounters
 import com.google.android.exoplayer2.drm.DefaultDrmSessionManager
 import com.google.android.exoplayer2.metadata.Metadata
 import com.google.android.exoplayer2.metadata.MetadataRenderer
 import com.google.android.exoplayer2.metadata.emsg.EventMessage
-import com.google.android.exoplayer2.metadata.id3.*
+import com.google.android.exoplayer2.metadata.id3.ApicFrame
+import com.google.android.exoplayer2.metadata.id3.CommentFrame
+import com.google.android.exoplayer2.metadata.id3.GeobFrame
+import com.google.android.exoplayer2.metadata.id3.Id3Frame
+import com.google.android.exoplayer2.metadata.id3.PrivFrame
+import com.google.android.exoplayer2.metadata.id3.TextInformationFrame
+import com.google.android.exoplayer2.metadata.id3.UrlLinkFrame
 import com.google.android.exoplayer2.source.AdaptiveMediaSourceEventListener
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.TrackGroup
@@ -20,11 +32,10 @@ import com.google.android.exoplayer2.trackselection.TrackSelection
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.video.VideoRendererEventListener
+import timber.log.Timber
 import java.io.IOException
 import java.text.NumberFormat
-import java.util.*
-import com.google.android.exoplayer2.Player
-import timber.log.Timber
+import java.util.Locale
 
 
 class EventLogger(private val trackSelector: MappingTrackSelector) : Player.EventListener,
@@ -32,9 +43,10 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         ExtractorMediaSource.EventListener, DefaultDrmSessionManager.EventListener,
         MetadataRenderer.Output {
 
+
     override fun onAudioSinkUnderrun(bufferSize: Int, bufferSizeMs: Long, elapsedSinceLastFeedMs: Long) {
         printInternalError("audioTrackUnderrun [" + bufferSize + ", " + bufferSizeMs + ", "
-                + elapsedSinceLastFeedMs + "]", null);    }
+                + elapsedSinceLastFeedMs + "]", null); }
 
     private fun getDiscontinuityReasonString(@Player.DiscontinuityReason reason: Int): String {
         return when (reason) {
@@ -47,7 +59,7 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     }
 
     override fun onPositionDiscontinuity(reason: Int) {
-       Timber.d("positionDiscontinuity [%s]", getDiscontinuityReasonString(reason))
+        Timber.d("positionDiscontinuity [%s]", getDiscontinuityReasonString(reason))
     }
 
     override fun onSeekProcessed() {
@@ -55,7 +67,7 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
     }
 
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
-        Log.d(TAG, "shuffleModeEnabled [" + shuffleModeEnabled + "]");
+        Timber.d("%s]", "shuffleModeEnabled [$shuffleModeEnabled");
     }
 
     private val TAG = "EventLogger"
@@ -94,26 +106,26 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
                 "[speed=%.2f, pitch=%.2f]", playbackParameters.speed, playbackParameters.pitch))
     }
 
-    override fun onTimelineChanged(timeline: Timeline, manifest: Any) {
+    override fun onTimelineChanged(timeline: Timeline, manifest: Any?, reason: Int) {
         val periodCount = timeline.periodCount
         val windowCount = timeline.windowCount
-        Log.d(TAG, "sourceInfo [periodCount=$periodCount, windowCount=$windowCount")
+        Timber.d("sourceInfo [periodCount=$periodCount, windowCount=$windowCount")
         for (i in 0 until Math.min(periodCount, MAX_TIMELINE_ITEM_LINES)) {
             timeline.getPeriod(i, period)
-            Log.d(TAG, "  " + "period [" + getTimeString(period.durationMs) + "]")
+            Timber.d("  " + "period [" + getTimeString(period.durationMs) + "]")
         }
         if (periodCount > MAX_TIMELINE_ITEM_LINES) {
-            Log.d(TAG, "  ...")
+            Timber.d("  ...")
         }
         for (i in 0 until Math.min(windowCount, MAX_TIMELINE_ITEM_LINES)) {
             timeline.getWindow(i, window)
-            Log.d(TAG, "  " + "window [" + getTimeString(window.durationMs) + ", "
+            Timber.d("  " + "window [" + getTimeString(window.durationMs) + ", "
                     + window.isSeekable + ", " + window.isDynamic + "]")
         }
         if (windowCount > MAX_TIMELINE_ITEM_LINES) {
-            Log.d(TAG, "  ...")
+            Timber.d("  ...")
         }
-        Log.d(TAG, "]")
+        Timber.d("]")
     }
 
     override fun onPlayerError(e: ExoPlaybackException) {
@@ -128,7 +140,7 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         }
         Timber.d("Tracks [")
         // Log tracks associated to renderers.
-        for (rendererIndex in 0..mappedTrackInfo.length - 1) {
+        for (rendererIndex in 0 until mappedTrackInfo.length) {
             val rendererTrackGroups = mappedTrackInfo.getTrackGroups(rendererIndex)
             val trackSelection = trackSelections.get(rendererIndex)
             if (rendererTrackGroups.length > 0) {
@@ -150,7 +162,7 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
                 }
                 // Log metadata for at most one of the tracks selected for the renderer.
                 if (trackSelection != null) {
-                    for (selectionIndex in 0..trackSelection.length() - 1) {
+                    for (selectionIndex in 0 until trackSelection.length()) {
                         val metadata = trackSelection.getFormat(selectionIndex).metadata
                         if (metadata != null) {
                             Timber.d("    Metadata [")
@@ -167,10 +179,10 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
         val unassociatedTrackGroups = mappedTrackInfo.unassociatedTrackGroups
         if (unassociatedTrackGroups.length > 0) {
             Timber.d("  Renderer:None [")
-            for (groupIndex in 0..unassociatedTrackGroups.length - 1) {
+            for (groupIndex in 0 until unassociatedTrackGroups.length) {
                 Log.d(TAG, "    Group:$groupIndex [")
                 val trackGroup = unassociatedTrackGroups.get(groupIndex)
-                for (trackIndex in 0..trackGroup.length - 1) {
+                for (trackIndex in 0 until trackGroup.length) {
                     val status = getTrackStatusString(false)
                     val formatSupport = getFormatSupportString(
                             RendererCapabilities.FORMAT_UNSUPPORTED_TYPE)
@@ -321,11 +333,6 @@ class EventLogger(private val trackSelector: MappingTrackSelector) : Player.Even
                 .map { metadata.get(it) }
                 .forEach {
                     when (it) {
-                        is TextInformationFrame -> {
-                            val textInformationFrame = it
-                            Log.d(TAG, prefix + String.format("%s: value=%s", textInformationFrame.id,
-                                    textInformationFrame.value))
-                        }
                         is UrlLinkFrame -> {
                             val urlLinkFrame = it
                             Log.d(TAG, prefix + String.format("%s: url=%s", urlLinkFrame.id, urlLinkFrame.url))

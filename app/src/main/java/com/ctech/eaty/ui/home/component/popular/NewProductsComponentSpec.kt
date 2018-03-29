@@ -12,6 +12,7 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.FromEvent
@@ -42,7 +43,7 @@ object NewProductsComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_TO_CENTER)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop products: HorizontalProduct): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop products: HorizontalProduct): Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

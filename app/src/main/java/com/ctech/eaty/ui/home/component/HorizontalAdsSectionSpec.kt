@@ -44,7 +44,7 @@ object HorizontalAdsSectionSpec {
             c: SectionContext,
             @FromEvent model: HorizontalAdsItemViewModel): RenderInfo {
         return ViewRenderInfo.create()
-                .viewCreator { context ->
+                .viewCreator { context, _ ->
                     return@viewCreator HorizontalAdsView(context)
                 }
                 .viewBinder(object : SimpleViewBinder<HorizontalAdsView>() {

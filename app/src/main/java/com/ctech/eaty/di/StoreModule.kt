@@ -37,12 +37,14 @@ import okio.BufferedSource
 @Module
 class StoreModule {
 
-    private val PRODUCT_LIMIT = 10
-    private val COMMENT_LIMIT = 10
-    private val COLLECTION_LIMIT = 10
-    private val TOPIC_LIMIT = 10
-    private val VOTE_LIMIT = 10
-    private val SEARCH_LIMIT = 10
+    companion object {
+        private const val PRODUCT_LIMIT = 10
+        private const val COMMENT_LIMIT = 10
+        private const val COLLECTION_LIMIT = 10
+        private const val TOPIC_LIMIT = 10
+        private const val VOTE_LIMIT = 10
+        private const val SEARCH_LIMIT = 10
+    }
 
     @Provides
     fun providerRealmPersister(): Persister<ProductResponse, BarCode> {

@@ -2,6 +2,7 @@ package com.ctech.eaty.ui.home.component
 
 import com.ctech.eaty.R
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -17,7 +18,7 @@ import com.facebook.yoga.YogaJustify
 object ErrorFooterComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext): ComponentLayout =
+    fun onCreateLayout(c: ComponentContext): Component =
             Column.create(c)
                     .justifyContent(YogaJustify.CENTER)
                     .alignItems(YogaAlign.CENTER)
