@@ -16,6 +16,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.FromEvent
@@ -46,7 +47,7 @@ object CollectionComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_NONE)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop collection: SuggestedCollection): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop collection: SuggestedCollection): Component {
 
         val width = c.resources.getDimensionPixelSize(R.dimen.upcoming_product_width)
         val controller = Fresco.newDraweeControllerBuilder()

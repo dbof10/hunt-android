@@ -12,12 +12,12 @@ interface NetworkManager {
     fun isConnected(): Boolean
 
     @ConnectionType
-    fun connectionType(): Long
+    fun connectionType(): Int
 
     class IMPL(private val context: Context) : NetworkManager {
         private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        override fun connectionType(): Long {
+        override fun connectionType(): Int {
             return if (isConnected()) {
                 if (connectivityManager.activeNetworkInfo.type == ConnectivityManager.TYPE_WIFI) {
                     WIFI

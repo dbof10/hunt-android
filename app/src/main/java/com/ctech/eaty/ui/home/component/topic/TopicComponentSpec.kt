@@ -11,6 +11,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
@@ -25,7 +26,7 @@ import com.facebook.yoga.YogaEdge
 object TopicComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Topic): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Topic): Component {
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_horizontal_product_height)
         val controller = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(ImageRequest.fromUri(ResizeImageUrlProvider.overrideUrl(viewModel.imageUrl, height / 2)))

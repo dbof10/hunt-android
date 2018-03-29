@@ -1,12 +1,14 @@
 def versions = [
-        support    : '27.0.2',
-        litho      : '0.11.0',
-        autodispose: '0.5.1',
-        firebase   : '11.4.2'
+        support    : '27.1.1',
+        litho      : '0.14.0',
+        autodispose: '0.8.0',
+        firebase   : '15.0.2',
+        store: '3.0.1',
+        glide : '4.7.1'
 ]
 
 def build = [
-        buildToolsVersion: '27.0.1',
+        buildToolsVersion: '27.0.3',
         compileSdkVersion: 27,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
@@ -25,11 +27,11 @@ def support = [
 ]
 
 def dagger = [
-        lib            : 'com.google.dagger:dagger:2.14.1',
-        compiler       : 'com.google.dagger:dagger-compiler:2.14.1',
-        android        : 'com.google.dagger:dagger-android:2.14.1',
-        androidSupport : 'com.google.dagger:dagger-android-support:2.14.1',
-        androidCompiler: 'com.google.dagger:dagger-android-processor:2.14.1'
+        lib            : 'com.google.dagger:dagger:2.16',
+        compiler       : 'com.google.dagger:dagger-compiler:2.16',
+        android        : 'com.google.dagger:dagger-android:2.16',
+        androidSupport : 'com.google.dagger:dagger-android-support:2.16',
+        androidCompiler: 'com.google.dagger:dagger-android-processor:2.16'
 ]
 
 def butterknife = [
@@ -50,11 +52,11 @@ def test = [
 ]
 
 def exo = [
-        core           : 'com.google.android.exoplayer:exoplayer-core:2.6.0',
-        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.6.0',
-        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.6.0',
-        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.6.0',
-        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.6.0'
+        core           : 'com.google.android.exoplayer:exoplayer-core:2.7.1',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.7.1',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.7.1',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.7.1',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.7.1'
 ]
 
 def network = [
@@ -66,25 +68,25 @@ def network = [
 ]
 
 def glide = [
-        lib         : 'com.github.bumptech.glide:glide:4.5.0',
-        compiler    : 'com.github.bumptech.glide:compiler:4.5.0',
-        okhttp      : "com.github.bumptech.glide:okhttp3-integration:4.5.0",
-        recyclerview: 'com.github.bumptech.glide:recyclerview-integration:4.5.0'
+        lib         : "com.github.bumptech.glide:glide:${versions.glide}",
+        compiler    : "com.github.bumptech.glide:compiler:${versions.glide}",
+        okhttp      : "com.github.bumptech.glide:okhttp3-integration:${versions.glide}",
+        recyclerview: "com.github.bumptech.glide:recyclerview-integration:${versions.glide}"
 ]
 
 def store = [
-        lib       : 'com.nytimes.android:store3:3.0.0-beta',
-        cache     : 'com.nytimes.android:cache3:3.0.0-beta',
-        middleware: 'com.nytimes.android:middleware3:3.0.0-beta',
-        filesystem: 'com.nytimes.android:filesystem3:3.0.0-beta',
-        kotlin    : 'com.nytimes.android:store-kotlin3:3.0.0-beta'
+        lib       : "com.nytimes.android:store3:${versions.store}",
+        cache     : "com.nytimes.android:cache3:${versions.store}",
+        middleware: "com.nytimes.android:middleware3:${versions.store}",
+        filesystem: "com.nytimes.android:filesystem3:${versions.store}",
+        kotlin    : "com.nytimes.android:store-kotlin3:${versions.store}"
 ]
 
 def firebase = [
         core     : "com.google.firebase:firebase-core:${versions.firebase}",
-        perf     : "com.google.firebase:firebase-perf:${versions.firebase}",
-        indexing : "com.google.firebase:firebase-appindexing:${versions.firebase}",
-        ads      : "com.google.firebase:firebase-ads:${versions.firebase}",
+        perf     : "com.google.firebase:firebase-perf:15.2.0",
+        indexing : "com.google.firebase:firebase-appindexing:15.0.0",
+        ads      : "com.google.firebase:firebase-ads:15.0.0",
         messaging: "com.google.firebase:firebase-messaging:${versions.firebase}"
 ]
 
@@ -108,7 +110,7 @@ def react = [
 ]
 
 def facebook = [
-        "login": "com.facebook.android:facebook-android-sdk:4.28.0"
+        "login": "com.facebook.android:facebook-android-sdk:4.33.0"
 ]
 
 def twitter = [
@@ -137,9 +139,9 @@ def autodispose = [
 ]
 
 def graphql = [
-        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.4-SNAPSHOT",
-        "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.4.3',
-        "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.4.3'
+        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.5.0",
+        "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.5.0',
+        "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.5.0'
 ]
 
 ext.deps = [
@@ -147,7 +149,7 @@ ext.deps = [
         "versions"   : versions,
         "support"    : support,
         "kotlin"     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-        "timber"     : "com.jakewharton.timber:timber:4.6.0",
+        "timber"     : "com.jakewharton.timber:timber:4.7.0",
         "jodatime"   : "net.danlew:android.joda:2.9.9",
         "dagger"     : dagger,
         "butterknife": butterknife,

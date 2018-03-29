@@ -10,6 +10,7 @@ import com.ctech.eaty.ui.home.model.SuggestedTopics
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.FromEvent
@@ -38,7 +39,7 @@ object TopicsComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_NONE)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop topics: SuggestedTopics): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop topics: SuggestedTopics): Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

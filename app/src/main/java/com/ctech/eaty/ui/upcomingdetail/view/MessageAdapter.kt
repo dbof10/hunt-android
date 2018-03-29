@@ -27,13 +27,13 @@ class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): MessageViewHolder? {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): MessageViewHolder {
         if (type == TYPE_DEFAULT) {
             return MessageViewHolder.create(viewGroup)
         } else if (type == TYPE_EXTENDED) {
             return MessageExtendedViewHolder.create(viewGroup)
         }
-        return null
+        throw IllegalArgumentException("Unsupported type $type")
     }
 
     override fun onViewRecycled(holder: MessageViewHolder) {

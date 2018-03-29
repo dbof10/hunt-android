@@ -16,6 +16,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -36,7 +37,7 @@ object UpcomingProductComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: UpcomingProductItemProps, @Prop store: Store<HomeState>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: UpcomingProductItemProps, @Prop store: Store<HomeState>): Component {
         val backgroundSize = c.resources.getDimensionPixelSize(R.dimen.upcoming_product_height)
         val foregroundSize = c.resources.getDimensionPixelSize(R.dimen.upcoming_foreground_product_size)
 
@@ -57,7 +58,7 @@ object UpcomingProductComponentSpec {
         val body = if (viewModel.saveMode) {
             DataSaverComponent.create(c)
                     .store(store)
-                    .buildWithLayout()
+                    .build()
         } else {
             Column.create(c)
                     .child(

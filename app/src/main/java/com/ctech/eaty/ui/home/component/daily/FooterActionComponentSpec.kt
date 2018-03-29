@@ -5,6 +5,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.ClickEvent
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -25,7 +26,7 @@ object FooterActionComponentSpec {
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext,
                        @Prop actionResId: Int,
-                       @Prop actionLabelResId: Int): ComponentLayout {
+                       @Prop actionLabelResId: Int): Component {
         return Row.create(c)
                 .child(
                         Image.create(c)
