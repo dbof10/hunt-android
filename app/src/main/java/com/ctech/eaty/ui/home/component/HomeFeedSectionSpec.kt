@@ -33,8 +33,8 @@ import com.facebook.litho.sections.common.SingleComponentSection
 @GroupSectionSpec
 object HomeFeedSectionSpec {
 
-    private val KEY_FOOTER_LOADING = "loading"
-    private val KEY_FOOTER_ERROR = "error"
+    private const val KEY_FOOTER_LOADING = "loading"
+    private const val KEY_FOOTER_ERROR = "error"
 
     @OnCreateChildren
     fun onCreateChildren(c: SectionContext,

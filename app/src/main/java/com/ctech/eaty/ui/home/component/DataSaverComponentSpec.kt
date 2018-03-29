@@ -10,6 +10,7 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.facebook.litho.Border
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
@@ -27,7 +28,7 @@ import com.facebook.yoga.YogaJustify
 object DataSaverComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext): Component {
 
         return Column.create(c)
                 .child(

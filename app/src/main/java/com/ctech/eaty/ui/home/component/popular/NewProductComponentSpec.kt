@@ -12,6 +12,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -29,7 +30,7 @@ object NewProductComponentSpec {
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext,
                        @Prop viewModel: ProductItemViewModel,
-                       @Prop store: Store<HomeState>): ComponentLayout {
+                       @Prop store: Store<HomeState>): Component {
 
         val resources = c.resources
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_horizontal_product_height)

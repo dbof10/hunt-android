@@ -28,7 +28,7 @@ class ColorUtils private constructor() {
             return modifyAlpha(color, (255f * alpha).toInt())
         }
 
-        @Lightness fun isDark(palette: Palette): Long {
+        @Lightness fun isDark(palette: Palette): Int {
             val mostPopulous = getMostPopulousSwatch(palette) ?: return LIGHTNESS_UNKNOWN
             return if (isDark(mostPopulous.hsl)) IS_DARK else IS_LIGHT
         }

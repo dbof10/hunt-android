@@ -10,6 +10,7 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.UpcomingProductItemProps
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.FromEvent
@@ -40,7 +41,7 @@ object UpcomingProductsComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, SNAP_TO_CENTER)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop products: UpcomingProducts): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop products: UpcomingProducts): Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

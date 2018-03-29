@@ -5,6 +5,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.entity.User
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -19,7 +20,7 @@ import com.facebook.yoga.YogaEdge
 object TopUsersComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop users: List<User>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop users: List<User>): Component {
 
 
         val size = c.resources.getDimensionPixelSize(R.dimen.top_user_avatar_size)

@@ -7,6 +7,7 @@ import com.ctech.eaty.entity.Job
 import com.ctech.eaty.ui.home.model.Jobs
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.FromEvent
@@ -35,7 +36,7 @@ object JobsComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_NONE)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop jobs: Jobs): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop jobs: Jobs): Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

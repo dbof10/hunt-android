@@ -7,6 +7,7 @@ import com.ctech.eaty.ui.user.view.UserActivity
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.litho.ClickEvent
+import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
@@ -25,7 +26,7 @@ object HeaderComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): Component {
         val controller = Fresco.newDraweeControllerBuilder()
                 .setUri(viewModel.userImageUrl)
                 .build()
