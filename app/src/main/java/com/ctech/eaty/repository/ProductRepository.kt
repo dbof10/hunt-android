@@ -122,7 +122,6 @@ class ProductRepository @Inject constructor(
                 .map {
                     cardMapper.toCard(type, it.data()!!)
                 }
-
     }
 
 

@@ -41,6 +41,7 @@ class HomeCardMapper @Inject constructor(private val productMapper: ProductMappe
         return handledNodes.first {
             it.type == type
         }
+
     }
 
     private fun toCollection(edge: HomeCardsQuery.Edge): CollectionCard {

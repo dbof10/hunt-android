@@ -6,7 +6,7 @@ def versions = [
 ]
 
 def build = [
-        buildToolsVersion: '27.0.1',
+        buildToolsVersion: '27.0.2',
         compileSdkVersion: 27,
         ci               : 'true' == System.getenv('CI'),
         minSdkVersion    : 21,
@@ -137,9 +137,9 @@ def autodispose = [
 ]
 
 def graphql = [
-        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.4-SNAPSHOT",
-        "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.4.3',
-        "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.4.3'
+        "apollo"     : "com.apollographql.apollo:apollo-runtime:0.4.4",
+        "apolloCache": 'com.apollographql.apollo:apollo-http-cache:0.4.4',
+        "apolloRx"   : 'com.apollographql.apollo:apollo-rx2-support:0.4.4'
 ]
 
 ext.deps = [
