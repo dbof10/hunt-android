@@ -179,6 +179,7 @@ dependencies {
 
     //React
     implementation deps.react.core
+
     implementation deps.react.gif
 
 
@@ -208,12 +209,14 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'org.mockito:mockito-android:2.7.19'
 
     configurations.all {
         exclude group: 'com.facebook.yoga', module: 'yoga'
+        exclude group: 'com.facebook.infer.annotation', module: 'infer-annotation'
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
+
     }
 
 

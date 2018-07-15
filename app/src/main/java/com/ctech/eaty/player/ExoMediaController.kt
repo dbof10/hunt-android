@@ -3,13 +3,11 @@ package com.ctech.eaty.player
 import android.app.Activity
 import android.net.Uri
 import android.os.Handler
-import android.util.Log
-import android.view.View
+import com.ctech.eaty.R
 import com.ctech.eaty.util.EventLogger
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.dash.DashMediaSource
@@ -19,12 +17,16 @@ import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView
-import com.google.android.exoplayer2.upstream.*
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+import com.google.android.exoplayer2.upstream.HttpDataSource
 import com.google.android.exoplayer2.util.Util
 import io.reactivex.Completable
 
-class ExoMediaController(private val context: Activity) : MediaController<SimpleExoPlayerView> {
+class ExoMediaController(private val context: Activity) : MediaController<PlayerView> {
 
     private var player: SimpleExoPlayer
     private val bandwidthMeter = DefaultBandwidthMeter()
@@ -32,6 +34,7 @@ class ExoMediaController(private val context: Activity) : MediaController<Simple
     private val mainHandler: Handler
     private val eventLogger: EventLogger
     private var currentTrackUri = Uri.EMPTY
+    private var manifestDataSourceFactory: DataSource.Factory? = null
 
     init {
         val trackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
@@ -39,6 +42,8 @@ class ExoMediaController(private val context: Activity) : MediaController<Simple
         player = ExoPlayerFactory.newSimpleInstance(context, trackSelector)
         mainHandler = Handler()
         eventLogger = EventLogger(trackSelector)
+        manifestDataSourceFactory = DefaultDataSourceFactory(
+                context, Util.getUserAgent(context, context.getString(R.string.app_name)))
     }
 
     override fun play(uri: Uri): Completable {
@@ -73,28 +78,26 @@ class ExoMediaController(private val context: Activity) : MediaController<Simple
         player.release()
     }
 
-    override fun takeView(view: SimpleExoPlayerView) {
+    override fun takeView(view: PlayerView) {
 
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {
-        val type = Util.inferContentType(uri)
+        @C.ContentType val type = Util.inferContentType(uri)
         return when (type) {
-            C.TYPE_SS -> SsMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
-                    DefaultSsChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger)
-
-            C.TYPE_DASH -> DashMediaSource(uri, buildDataSourceFactory(bandwidthMeter),
-                    DefaultDashChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger)
-
-            C.TYPE_HLS -> HlsMediaSource(uri, mediaDataSourceFactory, mainHandler, eventLogger)
-
-            C.TYPE_OTHER -> ExtractorMediaSource(uri, mediaDataSourceFactory, DefaultExtractorsFactory(), mainHandler, eventLogger)
-
-            else -> {
-                throw IllegalStateException("Unsupported type: " + type)
-            }
+            C.TYPE_DASH -> DashMediaSource.Factory(
+                    DefaultDashChunkSource.Factory(mediaDataSourceFactory),
+                    manifestDataSourceFactory)
+                    .createMediaSource(uri)
+            C.TYPE_SS -> SsMediaSource.Factory(
+                    DefaultSsChunkSource.Factory(mediaDataSourceFactory), manifestDataSourceFactory)
+                    .createMediaSource(uri)
+            C.TYPE_HLS -> HlsMediaSource.Factory(mediaDataSourceFactory).createMediaSource(uri)
+            C.TYPE_OTHER -> ExtractorMediaSource.Factory(mediaDataSourceFactory).createMediaSource(uri)
+            else -> throw IllegalStateException("Unsupported type: $type")
         }
     }
+
 
     private fun buildDataSourceFactory(bandwidthMeter: DefaultBandwidthMeter): DataSource.Factory {
         return DefaultDataSourceFactory(context, bandwidthMeter,

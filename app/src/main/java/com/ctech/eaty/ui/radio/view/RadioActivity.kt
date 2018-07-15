@@ -13,7 +13,7 @@ import com.ctech.eaty.player.MediaController
 import com.ctech.eaty.ui.radio.state.MediaPlayerState
 import com.ctech.eaty.ui.radio.viewmodel.RadioViewModel
 import com.ctech.eaty.util.glide.GlideImageLoader
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView
+import com.google.android.exoplayer2.ui.PlayerView
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -38,7 +38,7 @@ class RadioActivity : BaseActivity(), HasSupportFragmentInjector {
     lateinit var viewModel: RadioViewModel
 
     @Inject
-    lateinit var radioController: MediaController<SimpleExoPlayerView>
+    lateinit var radioController: MediaController<PlayerView>
 
     companion object {
 

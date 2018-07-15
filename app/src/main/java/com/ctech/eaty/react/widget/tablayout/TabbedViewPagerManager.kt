@@ -15,10 +15,10 @@ class TabbedViewPagerManager : ViewGroupManager<TabbedViewPager>() {
 
     companion object {
         const val REACT_CLASS = "TabbedViewPager"
+        private const val COMMAND_SET_PAGE = 1
+        private const val COMMAND_SET_PAGE_WITHOUT_ANIMATION = 2
     }
 
-    private val COMMAND_SET_PAGE = 1
-    private val COMMAND_SET_PAGE_WITHOUT_ANIMATION = 2
 
     override fun getName(): String {
         return REACT_CLASS

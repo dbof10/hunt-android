@@ -8,6 +8,7 @@ import com.ctech.eaty.R
 import com.ctech.eaty.util.setPaddingBottom
 import com.facebook.ads.AdError
 import com.facebook.ads.NativeAd
+import com.facebook.ads.NativeAdBase
 import com.facebook.ads.NativeAdScrollView
 import com.facebook.ads.NativeAdView
 import com.facebook.ads.NativeAdsManager
@@ -40,7 +41,7 @@ class HorizontalAdsView(context: Context) : FrameLayout(context) {
             }
         })
 
-        adsManager.loadAds(NativeAd.MediaCacheFlag.ALL)
+        adsManager.loadAds(NativeAdBase.MediaCacheFlag.ALL)
 
         if (!adsManager.isLoaded) {
             progressBar.visibility = View.VISIBLE

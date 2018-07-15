@@ -1,8 +1,7 @@
 def versions = [
         support    : '27.1.1',
-        litho      : '0.14.0',
+        litho      : '0.17.0',
         autodispose: '0.8.0',
-        firebase   : '15.0.2',
         store: '3.0.1',
         glide : '4.7.1'
 ]
@@ -23,7 +22,7 @@ def support = [
         customtab   : "com.android.support:customtabs:${versions.support}",
         palette     : "com.android.support:palette-v7:${versions.support}",
         annotation  : "com.android.support:support-annotations:${versions.support}",
-        constraint  : 'com.android.support.constraint:constraint-layout:1.0.2'
+        constraint  : 'com.android.support.constraint:constraint-layout:1.1.0'
 ]
 
 def dagger = [
@@ -52,11 +51,11 @@ def test = [
 ]
 
 def exo = [
-        core           : 'com.google.android.exoplayer:exoplayer-core:2.7.1',
-        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.7.1',
-        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.7.1',
-        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.7.1',
-        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.7.1'
+        core           : 'com.google.android.exoplayer:exoplayer-core:2.8.2',
+        ui             : 'com.google.android.exoplayer:exoplayer-ui:2.8.2',
+        dash           : 'com.google.android.exoplayer:exoplayer-dash:2.8.2',
+        hls            : 'com.google.android.exoplayer:exoplayer-hls:2.8.2',
+        smoothstreaming: 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.8.2'
 ]
 
 def network = [
@@ -83,11 +82,11 @@ def store = [
 ]
 
 def firebase = [
-        core     : "com.google.firebase:firebase-core:${versions.firebase}",
-        perf     : "com.google.firebase:firebase-perf:15.2.0",
-        indexing : "com.google.firebase:firebase-appindexing:15.0.0",
-        ads      : "com.google.firebase:firebase-ads:15.0.0",
-        messaging: "com.google.firebase:firebase-messaging:${versions.firebase}"
+        core     : "com.google.firebase:firebase-core:16.0.1",
+        perf     : "com.google.firebase:firebase-perf:16.0.0",
+        indexing : "com.google.firebase:firebase-appindexing:16.0.1",
+        ads      : "com.google.firebase:firebase-ads:15.0.1",
+        messaging: "com.google.firebase:firebase-messaging:17.1.0"
 ]
 
 def leakcanary = [

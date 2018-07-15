@@ -12,7 +12,7 @@ import com.ctech.eaty.ui.radio.state.RadioState
 import com.ctech.eaty.ui.radio.view.RadioActivity
 import com.ctech.eaty.ui.radio.viewmodel.RadioViewModel
 import com.ctech.eaty.util.rx.ThreadScheduler
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView
+import com.google.android.exoplayer2.ui.PlayerView
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,14 +36,14 @@ class RadioModule {
 
     @ActivityScope
     @Provides
-    fun provideRadioController(context: RadioActivity): MediaController<SimpleExoPlayerView> {
+    fun provideRadioController(context: RadioActivity): MediaController<PlayerView> {
         return ExoMediaController(context)
 
     }
 
     @ActivityScope
     @Provides
-    fun provideRadioViewModel(store: Store<RadioState>, radioController: MediaController<SimpleExoPlayerView>): RadioViewModel {
+    fun provideRadioViewModel(store: Store<RadioState>, radioController: MediaController<PlayerView>): RadioViewModel {
         val state = store.state
                 .observeOn(AndroidSchedulers.mainThread())
         return RadioViewModel(state, radioController)
