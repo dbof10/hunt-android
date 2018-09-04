@@ -104,7 +104,7 @@ def ui = [
 
 def react = [
         "core": "com.facebook.react:react-native:+",
-        "gif" : "com.facebook.fresco:animated-gif:1.5.0"
+        "gif" : "com.facebook.fresco:animated-gif:1.9.0"
 
 ]
 

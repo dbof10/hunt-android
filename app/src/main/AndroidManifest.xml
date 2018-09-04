@@ -58,17 +58,14 @@
 
         <activity
             android:name=".ui.login.view.LoginActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Translucent.Overlap.Login" />
 
         <activity
             android:name=".ui.login.view.FacebookActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Translucent" />
 
         <activity
             android:name=".ui.login.view.TwitterActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Translucent" />
 
         <activity
@@ -109,7 +106,6 @@
 
         <activity
             android:name=".ui.productdetail.view.ProductDetailActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Translucent.Overlap" />
 
         <activity
@@ -174,7 +170,6 @@
 
         <activity
             android:name=".ui.noti.view.NotificationActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <activity

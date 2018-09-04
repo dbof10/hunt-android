@@ -179,7 +179,6 @@ dependencies {
 
     //React
     implementation deps.react.core
-
     implementation deps.react.gif
 
 
@@ -213,6 +212,7 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:2.7.19'
 
     configurations.all {
+        exclude group: 'com.facebook.fresco', module: 'animated-gif'
         exclude group: 'com.facebook.yoga', module: 'yoga'
         exclude group: 'com.facebook.infer.annotation', module: 'infer-annotation'
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
