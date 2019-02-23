@@ -62,11 +62,6 @@ The best way to submit feedback and report bugs is to open a GitHub issue. Pleas
 ## Code of Conduct
 We aim to share our knowledge and findings as we work daily to improve our product, for our community, in a safe and open space. We work as we live, as kind and considerate human beings who learn and grow from giving and receiving positive, constructive feedback. We reserve the right to delete or ban any behavior violating this base foundation of respect.
 
-## Want to financial support?
-
-BTC wallet **1HX42mCUEPui3MJHGiJYfq2B2Gb1Y8DBdb**
-
-ETH wallet **0x26A08128e34F7c9cb783a41E76EDd5D6fD036b07**
 
 License
 -------
